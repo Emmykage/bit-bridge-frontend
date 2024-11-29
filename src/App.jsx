@@ -8,13 +8,13 @@ function App() {
   
 
   return (
-    <>
+    <div className='bg-gray-200'>
     <Routes>
       <Route path='/' element={<Home/>} />
     </Routes>
     
 
-    </>
+    </div>
   )
 }
 
