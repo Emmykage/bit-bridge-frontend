@@ -35,7 +35,7 @@ const ExclusiveDeals = () => {
                 {items.map(item => (
                 <div key={item.id}>
                     <div className="h-72 rounded overflow-hidden">
-                        <img src={item.img} alt={item.promo} className="h-full w-full object-contain md:object-fill" />
+                        <img src={item.img} alt={item.promo} className="h-full w-full object-cover md:object-fill" />
 
                     </div>
                     <div className="py-10">
