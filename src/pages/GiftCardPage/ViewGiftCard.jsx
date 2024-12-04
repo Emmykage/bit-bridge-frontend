@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom"
-import providerData from '../../data/serviceProviderData.json'
+import giftCardData from '../../data/giftCardData.json'
+import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
-import { pickLogo } from "../../utils/ImagePicer"
 import ProductCard from "../../compnents/product-card/ProductCard"
-const ViewMobileTopUp = () => {
+const ViewGiftCard = () => {
     const {provider} = useParams()
 
-    const selectedProvider = providerData.find(item => item.provider == provider)
+    const selectedProvider = giftCardData.find(item => item.provider == provider)
 
-
+    console.log(selectedProvider)
 
   return (
     <div>
@@ -17,7 +17,7 @@ const ViewMobileTopUp = () => {
 
         <div className="grid grid-cols-2 gap-10 max-w-6xl m-auto py-10">
             <div className="p-10 bg-gray-200 flex justify-center items-center">
-                <img src={pickLogo(selectedProvider.provider)} alt="provider image"/>
+                <img src={selectedProvider?.image} alt="provider image"/>
             </div>
             <div>
 
@@ -59,7 +59,7 @@ const ViewMobileTopUp = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {providerData.map(({id, provider, provision }) => (
+                {serviceProviderData.map(({id, provider, provision }) => (
                     <ProductCard key={id} id={id} provider={provider} provision={provision} />
                 ))}
 
@@ -71,4 +71,4 @@ const ViewMobileTopUp = () => {
   )
 }
 
-export default ViewMobileTopUp
+export default ViewGiftCard

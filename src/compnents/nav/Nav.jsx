@@ -46,16 +46,16 @@ const Nav = ({ open, setToggle }) => {
       />
       <ul className="flex px-5 md:px-0 py-10 md:py-5 bg-red-4 flex-col md:flex-row hidde gap-5 text-lg font-semibold">
         <li to="#" className="font-medium">
-          <NavLink>Gift Cards</NavLink>
+          <NavLink to={"/gift-cards"}>Gift Cards</NavLink>
         </li>
         <li>
           <NavLink to={"/phone-top-up"}>Phone Top Ups</NavLink>
         </li>
         <NavLink>Crypto Exchange</NavLink>
         <li>
-          <NavLink to={"#"}>Utility & Services       {open.toString()}
-          </NavLink>
+          <NavLink to={"/utility-services"}>Utility & Services      </NavLink>
         </li>
+        
       </ul>
     </div>
   );
