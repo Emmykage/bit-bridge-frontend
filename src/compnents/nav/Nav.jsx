@@ -45,17 +45,15 @@ const Nav = ({ open, setToggle }) => {
         icon={<CloseOutlined />}
       />
       <ul className="flex px-5 md:px-0 py-10 md:py-5 bg-red-4 flex-col md:flex-row hidde gap-5 text-lg font-semibold">
-        <li className="font-medium">
+        <li to="#" className="font-medium">
           <NavLink>Gift Cards</NavLink>
         </li>
         <li>
-          <NavLink>Phone Top Up</NavLink>
+          <NavLink to={"/phone-top-up"}>Phone Top Ups</NavLink>
         </li>
         <NavLink>Crypto Exchange</NavLink>
         <li>
-        {open}
-
-          <NavLink>Utility & Services       {open.toString()}
+          <NavLink to={"#"}>Utility & Services       {open.toString()}
           </NavLink>
         </li>
       </ul>
