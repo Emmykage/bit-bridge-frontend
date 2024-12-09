@@ -8,7 +8,16 @@ import ViewMobileTopUp from './pages/PhoneTopUp/ViewMobileTopUp'
 import GiftCardPAge from './pages/GiftCardPage'
 import UtilityServices from './pages/UtilityServicesPage'
 import ViewGiftCard from './pages/GiftCardPage/ViewGiftCard'
-import Footer from './compnents/footer/Footer'
+import CryptoExchangePage from './pages/cryptoExchangePage'
+import HomeDashboard from './pages/dashboard'
+import DashboardLayout from './layouts/Dashboard'
+import Account from './pages/dashboard/account'
+import GiftCards from './pages/dashboard/gift-card'
+import Transactions from './pages/dashboard/transactions'
+import CryptoSell from './pages/dashboard/cryptosell'
+import Orders from './pages/dashboard/transactions/Orders'
+import Trades from './pages/dashboard/transactions/Trades'
+import Withdrawals from './pages/dashboard/transactions/Withdrawals'
 
 function App() {
 
@@ -23,11 +32,28 @@ function App() {
     <Route path='/utility-services' element={<UtilityServices/>} />
     <Route path='/utility-services/:provider' element={<UtilityServices/>} />
     <Route path='/gift-cards' element={<GiftCardPAge/>} />
+    <Route path='/crypto-exchange' element={<CryptoExchangePage/>} />
     <Route path='/gift-cards/:provider' element={<ViewGiftCard/>} />
+    <Route path='/crypto-exchange/:provider' element={<ViewGiftCard/>} />
+      
+    <Route path='/dashboard' element={<DashboardLayout/>} >
+      <Route path='home' element={<HomeDashboard/>} />
+      <Route path='wallet' element={<Account/>} />
+      <Route path='gift-cards' element={<GiftCards/>} />
+      <Route path='transactions' element={<Transactions/>}>
+        <Route path='orders' element={<Orders/>} />
+        <Route path='trades' element={<Trades/>} />
+        <Route path='withdrawals' element={<Withdrawals/>} />
+
+      </Route>
+      <Route path='crypto-sell' element={<CryptoSell/>} />
+
+
+    </Route>
+
       
     </Routes>
     
-    <Footer/>
 
     </div>
   )

@@ -24,8 +24,9 @@ const Header = () => {
           </NavLink>
           <SearchField className={"w-full max-w-md flex-"}/>
 
-          <div className='flex'>
-            <NavLink className={"font-semibold"}>Login</NavLink>
+          <div className='flex gap-4'>
+            <NavLink to={"/dashboard/account"} className={"font-semibold"}>Login</NavLink>
+            <NavLink to={"/dashboard/home"}>Account</NavLink>
           </div>
 
          

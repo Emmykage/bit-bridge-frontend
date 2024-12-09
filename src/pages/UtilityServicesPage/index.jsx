@@ -3,6 +3,7 @@ import serviceProviderData from "../../data/serviceProviderData.json"
 import Header from "../../compnents/header/Header"
 import { useNavigate } from "react-router-dom"
 import {StarOutlined} from "@ant-design/icons"
+import HeroBanner from "../../compnents/hero/Hero"
 
 const UtilityServices = () => {
     const navigate = useNavigate()
@@ -11,12 +12,7 @@ const UtilityServices = () => {
     <div>
         
         <Header/>
-        
-<div className='h-72 bg-gray-700 flex justify-center items-center'>
- <h2 className="text-4xl max-w-5xl font-semibold text-center text-white">
-   Top up prepaid mobile phones with Bitcoin and other cryptocurrencies from anywhere in the world
-   </h2>
-</div>
+      <HeroBanner text={"Pay Utility bills with Bitcoin and other cryptocurrencies from anywhere in the world"}/>
 
 <section className="py-10">
 

@@ -51,7 +51,9 @@ const Nav = ({ open, setToggle }) => {
         <li>
           <NavLink to={"/phone-top-up"}>Phone Top Ups</NavLink>
         </li>
-        <NavLink>Crypto Exchange</NavLink>
+        <NavLink 
+        to={"/crypto-exchange"}
+        >Crypto Exchange</NavLink>
         <li>
           <NavLink to={"/utility-services"}>Utility & Services      </NavLink>
         </li>
