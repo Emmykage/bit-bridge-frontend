@@ -14,10 +14,12 @@ import DashboardLayout from './layouts/Dashboard'
 import Account from './pages/dashboard/account'
 import GiftCards from './pages/dashboard/gift-card'
 import Transactions from './pages/dashboard/transactions'
-import CryptoSell from './pages/dashboard/cryptosell'
 import Orders from './pages/dashboard/transactions/Orders'
 import Trades from './pages/dashboard/transactions/Trades'
 import Withdrawals from './pages/dashboard/transactions/Withdrawals'
+import Bitcoin from './pages/dashboard/crypto-exchange/Bitcoin'
+import Dogecoin from './pages/dashboard/crypto-exchange/Dogecoin'
+import CryptoSell from './pages/dashboard/crypto-exchange'
 
 function App() {
 
@@ -46,7 +48,10 @@ function App() {
         <Route path='withdrawals' element={<Withdrawals/>} />
 
       </Route>
-      <Route path='crypto-sell' element={<CryptoSell/>} />
+      <Route path='crypto-sell' element={<CryptoSell/>}>
+      <Route path='bitcoin' element={<Bitcoin/>} />
+      <Route path='dogecoin' element={<Dogecoin/>} />
+      </Route>
 
 
     </Route>

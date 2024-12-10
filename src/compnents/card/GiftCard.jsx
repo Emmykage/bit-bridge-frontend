@@ -1,5 +1,5 @@
-import React from 'react'
 import NavButton from '../button/NavButton'
+import PropTypes from 'prop-types'
 
 const GiftCard = ({image, title}) => {
   return (
@@ -12,6 +12,12 @@ const GiftCard = ({image, title}) => {
         </div>
     </div>
   )
+}
+
+GiftCard.propTypes = {
+    image: PropTypes.string,
+    title: PropTypes.string,
+    
 }
 
 export default GiftCard

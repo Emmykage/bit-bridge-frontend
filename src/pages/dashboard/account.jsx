@@ -58,7 +58,24 @@ const Account = () => {
                                 {/* make conditional statement  here  */}
                             {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
 
-                        
+                            <tr>
+                                <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
+
+                                <p className="font-medium text-gray-600 leading-5"> </p>
+                                <p className=" text-xs text-gray-500 leading-5"> </p>
+                                </td>
+                                <td className="whitespace-nowrap  border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-900 font-normal sm:table-cell capitalize"></td>
+                                
+                                <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td>
+                                <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 lg:table-cell text-sm text-gray-600/90 font-normal"></td>
+
+                                <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm font-normal text-gray-600/90 "><span className="flex items-center"> <p className="font-normal">Completed</p> </span></td>
+
+                                <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-right text-sm sm:pr-8 lg:pr-8">
+
+                                </td>
+                                </tr>
+
                     
                         </tbody>     
                     </table>

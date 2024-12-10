@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Withdrawals = () => {
   return (
     <div className='lg:p-10 bg-black py-4 px-2 text-white'>
