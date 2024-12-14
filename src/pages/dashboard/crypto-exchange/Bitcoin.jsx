@@ -29,6 +29,14 @@ const Bitcoin = () => {
                 <p className='my-8'>Payment Address</p>
                 <NavButton>Generate Address </NavButton>
             </div>
+
+            <div>
+                <p> Note: </p>
+                <ul className='list-disc list-inside max-w-md'>
+                    <li>Send only BITCOIN to this address. Sending any other coin or token to this address may result in the loss of your deposit.</li>
+                    <li>Your Deposit will automatically be credited to your account after 3 confirmations on the blockchain.                        </li> 
+                </ul>
+            </div>
         </div>
         
     </div>

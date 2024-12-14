@@ -1,9 +1,6 @@
-// import React from 'react'
-
 
 import serviceProviderData from "../../data/serviceProviderData.json"
 import Header from "../../compnents/header/Header"
-import { useNavigate } from "react-router-dom"
 import ProductCard from "../../compnents/product-card/ProductCard"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
@@ -20,7 +17,7 @@ const PhoneTopUp = () => {
 
         <section className="py-10 px-4">
 
-          <div className="grid gap-3 grid-cols-3 max-w-7xl m-auto">
+          <div className="grid gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
             {serviceProviderData.map(({id, provider, provision})  => (

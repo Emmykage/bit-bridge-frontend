@@ -1,16 +1,18 @@
+
 import { useParams } from "react-router-dom"
-import giftCardData from '../../data/giftCardData.json'
-import serviceProviderData from '../../data/serviceProviderData.json'
+import utilityData from '../../data/utilityData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
-const ViewGiftCard = () => {
+import ServiceCard from "../../compnents/product-card/ServiceCard"
+const UtilityView = () => {
     const {provider} = useParams()
 
-    const selectedProvider = giftCardData.find(item => item.provider == provider)
+    const selectedProvider = utilityData.find(item => item.provider.trim() === provider.trim())
 
-    console.log(selectedProvider)
+
+    console.log(provider, utilityData[0].provider, selectedProvider)
     const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
 
 
@@ -58,7 +60,7 @@ const ViewGiftCard = () => {
                     <p>Data &gt; {provider}</p>
                 </div>
 
-                <h3 className="text-2xl font-medium">NTEL Refil</h3>
+                <h3 className="text-2xl font-medium">{selectedProvider.provider}</h3>
                 
                 <div className="notice border rounded-xl my-2 p-2 px-3">
                     <p className="text-sm text-gray-700">
@@ -120,8 +122,8 @@ const ViewGiftCard = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {serviceProviderData.map(({id, provider, provision }) => (
-                    <ProductCard key={id} id={id} provider={provider} provision={provision} />
+                {utilityData.map(({id, provider, image, provision }) => (
+                    <ServiceCard key={id} id={id} image={image} provider={provider} provision={provision} />
                 ))}
 
             </div>
@@ -138,4 +140,4 @@ const ViewGiftCard = () => {
   )
 }
 
-export default ViewGiftCard
+export default UtilityView

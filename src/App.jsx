@@ -20,6 +20,9 @@ import Withdrawals from './pages/dashboard/transactions/Withdrawals'
 import Bitcoin from './pages/dashboard/crypto-exchange/Bitcoin'
 import Dogecoin from './pages/dashboard/crypto-exchange/Dogecoin'
 import CryptoSell from './pages/dashboard/crypto-exchange'
+import MainLayout from './layouts'
+import UtilityView from './pages/UtilityServicesPage/UtilityView'
+import LoginPage from './pages/auth/Login'
 
 function App() {
 
@@ -29,14 +32,14 @@ function App() {
     <div className='bg-gray-200/10'>
     <Routes>
     <Route path='/' element={<Home/>} />
-    <Route path='/phone-top-up' element={<PhoneTopUp/>} />
-    <Route path='/phone-top-up/:provider' element={<ViewMobileTopUp/>} />
-    <Route path='/utility-services' element={<UtilityServices/>} />
-    <Route path='/utility-services/:provider' element={<UtilityServices/>} />
-    <Route path='/gift-cards' element={<GiftCardPAge/>} />
-    <Route path='/crypto-exchange' element={<CryptoExchangePage/>} />
-    <Route path='/gift-cards/:provider' element={<ViewGiftCard/>} />
-    <Route path='/crypto-exchange/:provider' element={<ViewGiftCard/>} />
+    <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
+    <Route path='/phone-top-up/:provider' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
+    <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
+    <Route path='/utility-services/:provider' element={<MainLayout><UtilityView/></MainLayout>} />
+    <Route path='/gift-cards' element={<MainLayout><GiftCardPAge/></MainLayout>} />
+    <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
+    <Route path='/gift-cards/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
+    <Route path='/crypto-exchange/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
       
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>} />
@@ -55,6 +58,8 @@ function App() {
 
 
     </Route>
+
+    <Route path='/login' element={<LoginPage/>}/>
 
       
     </Routes>

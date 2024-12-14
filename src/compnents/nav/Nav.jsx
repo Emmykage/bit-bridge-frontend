@@ -6,32 +6,35 @@ import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
 const Nav = ({ open, setToggle }) => {
-  const navRef = useRef(null);
+  const navRef = useRef();
+  
   const closeNav = (e) => {
-    console.log(e.target, open);
-    console.log("just clicked so should be false now")
-
-    // setToggle(false)
     if ( navRef.current && !navRef.current.contains(e.target)) {
-      setToggle(false);
-      console.log("close triggered");
+      console.log(open)
+  if(open){
+    setToggle(false);
+    console.log(open, "close triggered"); }
+      
     }
+
+    
   };
 
   useEffect(() => {
+
+    document.addEventListener("mousedown", closeNav);
+
     
-    if(open){
-        document.addEventListener("click", closeNav);
-
-    }
-
 
     return () => {
-      document.removeEventListener("click", closeNav);
+      document.removeEventListener("mousedown", closeNav);
     };
-  }, []); // Add `open` as a dependency
+  }, [navRef, closeNav]); // Add `open` as a dependency
 
   return (
+
+    <div>
+
     <div
       ref={navRef}
       className={`md:my-0 fixed md:static h-screen md:h-auto top-0 shadow md:shadow-none rounded transition-all duration-150 ease-linear ${
@@ -46,20 +49,28 @@ const Nav = ({ open, setToggle }) => {
       />
       <ul className="flex px-5 md:px-0 py-10 md:py-5 bg-red-4 flex-col md:flex-row hidde gap-5 text-lg font-semibold">
         <li to="#" className="font-medium">
-          <NavLink to={"/gift-cards"}>Gift Cards</NavLink>
+          <NavLink className={({isActive}) => isActive ? "active" : ""} to={"/gift-cards"}>Gift Cards</NavLink>
         </li>
         <li>
-          <NavLink to={"/phone-top-up"}>Phone Top Ups</NavLink>
+          <NavLink className={({isActive}) => isActive ? "active" : ""} to={"/phone-top-up"}>Phone Top Ups</NavLink>
         </li>
+        <li>
         <NavLink 
+        className={({isActive}) => isActive ? "active" : ""}
         to={"/crypto-exchange"}
         >Crypto Exchange</NavLink>
-        <li>
-          <NavLink to={"/utility-services"}>Utility & Services      </NavLink>
         </li>
+ 
+        <li>
+          <NavLink
+          className={({isActive}) => isActive ? "active" : ""}
+           to={"/utility-services"}>Utility & Services </NavLink>
+        </li> 
         
       </ul>
     </div>
+    </div>
+
   );
 };
 

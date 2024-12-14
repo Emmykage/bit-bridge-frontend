@@ -9,10 +9,10 @@ const CryptoExchangePage = () => {
     <div>        
       <Header/>
       <section>
-        <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid grid-cols-2">
+        <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
           <div>
             <h2 className="text-5xl  font-bold text-gray-700">
-            Sell  your crypto with Ease
+            Sell your crypto with Ease
 
             </h2>
             <p className="my-4 text-lg font-medium text-gray-600 text-lef">
@@ -31,7 +31,7 @@ const CryptoExchangePage = () => {
         <div className=" max-w-7xl m-auto">
         <h3 className="text-lg font-medium">Cash Back!</h3>
 
-          <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-4">
+          <div className="grid bg-gray-50 gap-x-3 gap-y-20 lg:grid-cols-4">
 
 
           {serviceProviderData.slice(0, 4).map(({id, provider, provision, image, value})  => (
@@ -48,7 +48,7 @@ const CryptoExchangePage = () => {
 
         <div className="max-w-7xl m-auto">
           <h2 className="text-2xl font-semibold">All gift cards</h2>
-          <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-3 ">
+          <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-2 lg:grid-cols-3 ">
 
 
           {serviceProviderData.map(({id, provider, provision, image, value})  => (

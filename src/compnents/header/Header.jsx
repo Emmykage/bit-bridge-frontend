@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import SearchField from '../serachField/SearchField'
 import Nav from '../nav/Nav'
-import { MenuUnfoldOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 import logo from "../../assets/logos/logo-mod.png"
 import { Button } from 'antd';
@@ -24,9 +24,19 @@ const Header = () => {
           </NavLink>
           <SearchField className={"w-full max-w-md flex-"}/>
 
-          <div className='flex gap-4'>
-            <NavLink to={"/dashboard/home"} className={"font-semibold"}>Login</NavLink>
-            <NavLink to={"/dashboard/home"}>Account</NavLink>
+          <div className='flex items-center gap-4'>
+            <NavLink to={"/"} className={"font-semibold hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl"}>
+              <QuestionCircleOutlined />
+              Help
+            </NavLink>
+
+            <NavLink className={"#"}>
+              <ShoppingCartOutlined />
+            </NavLink>
+
+
+              <NavLink to={"/dashboard/home"} className={"font-semibold"}>Login</NavLink>
+              <NavLink to={"/dashboard/home"}>Account</NavLink>
           </div>
 
          

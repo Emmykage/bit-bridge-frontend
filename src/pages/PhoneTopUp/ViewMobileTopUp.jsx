@@ -3,6 +3,7 @@ import providerData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import { pickLogo } from "../../utils/ImagePicer"
 import ProductCard from "../../compnents/product-card/ProductCard"
+import SelectInput from "../../compnents/select/Select"
 const ViewMobileTopUp = () => {
     const {provider} = useParams()
 
@@ -45,9 +46,9 @@ const ViewMobileTopUp = () => {
         <Header/>
         <section className="px-4">
 
-        <div className="grid grid-cols-2 gap-10 max-w-6xl m-auto py-10">
-            <div className="p-10 h-96 sticky top-5 bottom-5 bg-gray-200 flex justify-center items-center">
-                <img src={pickLogo(selectedProvider.provider)} alt="provider image"/>
+        <div className="grid lg:grid-cols-2 gap-10 max-w-6xl m-auto py-10">
+            <div className="p-10 h-96 lg:sticky top-5 bottom-5 bg-gray-200 flex justify-center items-center">
+                <img src={pickLogo(selectedProvider?.provider)} alt="provider image"/>
             </div>
             <div>
 
@@ -68,9 +69,13 @@ const ViewMobileTopUp = () => {
 
 <div className="flex flex-col gap-0">
 
-        <select name="" id="" className="flex-1 rounded-lg border-gray-300 border-2  py-3 px-2">
+        {/* <select name="" id="" className="flex-1 rounded-lg w-full border-gray-300 border-2  py-3 px-2">
             <option value="10"> 10NGN</option>
-        </select>
+        </select> */}
+
+        <SelectInput
+        defaultValue={{value: 10, label: "10NGN"}} options={[{value: 10, label: "10NGN"}]}/>
+
 
 
         <div className="flex-1 text-sm mt-2 from-gray-800">

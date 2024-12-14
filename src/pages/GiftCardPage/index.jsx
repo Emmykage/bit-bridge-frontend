@@ -2,8 +2,10 @@ import serviceProviderData from "../../data/giftCardData.json"
 import Header from "../../compnents/header/Header"
 
 import GiftCard from "../../compnents/product-card/GiftCard"
+import scrollToTop from "../../utils/scrollToTop"
 
 const GiftCardPAge = () => {
+  scrollToTop()
 
   return (
     <div>        
@@ -13,7 +15,7 @@ const GiftCardPAge = () => {
         <div className=" max-w-7xl m-auto">
         <h3 className="text-lg font-medium">Cash Back!</h3>
 
-          <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-4">
+          <div className="grid bg-gray-50 gap-x-3 gap-y-20 sm:grid-cols-2 lg:grid-cols-4">
 
 
           {serviceProviderData.slice(0, 4).map(({id, provider, provision, image, value})  => (
