@@ -23,6 +23,7 @@ import CryptoSell from './pages/dashboard/crypto-exchange'
 import MainLayout from './layouts'
 import UtilityView from './pages/UtilityServicesPage/UtilityView'
 import LoginPage from './pages/auth/Login'
+import SignUp from './pages/auth/SignUp'
 
 function App() {
 
@@ -60,7 +61,8 @@ function App() {
     </Route>
 
     <Route path='/login' element={<LoginPage/>}/>
-
+    <Route path='/signup' element={<SignUp/>}/>
+    
       
     </Routes>
     

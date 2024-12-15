@@ -35,7 +35,7 @@ const Header = () => {
             </NavLink>
 
 
-              <NavLink to={"/dashboard/home"} className={"font-semibold"}>Login</NavLink>
+              <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
               <NavLink to={"/dashboard/home"}>Account</NavLink>
           </div>
 

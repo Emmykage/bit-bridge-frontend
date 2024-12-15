@@ -13,7 +13,7 @@ import {
     ProFormCheckbox,
     ProFormText,
   } from '@ant-design/pro-components';
-  import { Button, Divider, Space, Tabs, message, theme } from 'antd';
+  import { Button, ConfigProvider, Divider, Space, Tabs, message, theme } from 'antd';
   import { useState } from 'react';
   import "./style.scss"
   import logo from "../../assets/logos/2.png"
@@ -23,10 +23,12 @@ import {
     verticalAlign: 'middle',
     cursor: 'pointer',
   };
+  import enUS from "antd/es/locale/en_US"
   
   const LoginPage = () => {
-    const [loginType, setLoginType] = useState('phone');
+    const [loginType, setLoginType] = useState('account');
     const { token } = theme.useToken();
+    console.log(token)
     return (
       <div
         style={{
@@ -35,6 +37,9 @@ import {
         }}
       >
         <LoginFormPage
+        onFinish={(values) => {
+          console.log(values)
+        }}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           logo={logo}
           backgroundVideoUrl="https://gw.alipayobjects.com/v/huamei_gcee1x/afts/video/jXRBRK_VAwoAAAAAAAAAAAAAK4eUAQBr"
@@ -45,7 +50,7 @@ import {
             // color: "white"
           }}
 
-          className='login-page yankee'
+          className='login-page'
           subTitle="Login "
           style={{
             color: 'white'
@@ -146,13 +151,13 @@ import {
             activeKey={loginType}
             onChange={(activeKey) => setLoginType(activeKey)}
           >
-            <Tabs.TabPane key={'account'} tab={'Login with account and password"'} />
+            <Tabs.TabPane key={'account'} tab={'Login with account'} />
             <Tabs.TabPane key={'phone'} tab={'Login with phone number'} />
           </Tabs>
           {loginType === 'account' && (
             <>
               <ProFormText
-                name="username"
+                name="email"
                 fieldProps={{
                   size: 'large',
                   prefix: (
@@ -164,7 +169,7 @@ import {
                     />
                   ),
                 }}
-                placeholder={'用户名: admin or user'}
+                placeholder={'username or email'}
                 rules={[
                   {
                     required: true,
@@ -185,7 +190,7 @@ import {
                     />
                   ),
                 }}
-                placeholder={'Password: ant.design'}
+                placeholder={'Password'}
                 rules={[
                   {
                     required: true,
@@ -280,9 +285,13 @@ import {
   
   export  const App =  () => {
     return (
+      <ConfigProvider locale={enUS}>
+
       <ProConfigProvider dark>
         <LoginPage />
       </ProConfigProvider>
+      </ConfigProvider>
+
     );
   };
 
