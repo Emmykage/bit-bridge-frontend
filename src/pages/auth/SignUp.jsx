@@ -15,11 +15,17 @@ import enUS from "antd/es/locale/en_US"
 
 import { ConfigProvider, Space, Tabs, theme } from 'antd';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import logo from "../../assets/logos/2.png"
+import { useDispatch } from 'react-redux';
+import { userSignUp } from '../../redux/actions/auth';
+import { SET_LOADING } from '../../redux/app';
 
 export const Signup = () => {
   const { token } = theme.useToken();
   const [loginType, setLoginType] = useState('phone');
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const iconStyles = {
     marginInlineStart: '16px',
@@ -34,9 +40,22 @@ export const Signup = () => {
       <div style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
         onFinish={(values) => {
+          dispatch(userSignUp({user: values})).then(result =>
+            {
+              if(userSignUp.fulfilled.match(result)){
+                dispatch(SET_LOADING(false))
+                navigate("/dashboard/home")
+              }
+              else  if(userSignUp.rejected.match(result)){
+                dispatch(SET_LOADING(false))
+              }
+            }
+  
+        
+            )
           console.log(values)
         }}
-          logo="https://github.githubassets.com/favicons/favicon.png"
+          logo={logo}
           title="BitBridge Global"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
@@ -70,7 +89,7 @@ export const Signup = () => {
             <Tabs.TabPane key={'account'} tab={'Signup with email and password'} />
           </Tabs>
           <>
-            <ProFormText
+            {/* <ProFormText
               name="firstName"
               fieldProps={{
                 size: 'large',
@@ -97,7 +116,7 @@ export const Signup = () => {
                   message: 'Please enter your last name!',
                 },
               ]}
-            />
+            /> */}
             <ProFormText
               name="email"
               fieldProps={{

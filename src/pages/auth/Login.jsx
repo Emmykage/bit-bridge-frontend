@@ -14,7 +14,7 @@ import {
     ProFormText,
   } from '@ant-design/pro-components';
   import { Button, ConfigProvider, Divider, Space, Tabs, message, theme } from 'antd';
-  import { useState } from 'react';
+  import { useEffect, useState } from 'react';
   import "./style.scss"
   import logo from "../../assets/logos/2.png"
   const iconStyles = {
@@ -24,11 +24,30 @@ import {
     cursor: 'pointer',
   };
   import enUS from "antd/es/locale/en_US"
+import useSelection from 'antd/lib/table/hooks/useSelection';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../../redux/actions/auth';
+import { SET_LOADING } from '../../redux/app';
   
   const LoginPage = () => {
+
+    const {user, logged, loading} = useSelection(state => state.auth)
     const [loginType, setLoginType] = useState('account');
+    const dispatch = useDispatch()
     const { token } = theme.useToken();
-    console.log(token)
+
+
+    const navigate = useNavigate()
+    useEffect(()=> {
+
+    }, [])
+
+
+
+    if(!logged){
+
+    
     return (
       <div
         style={{
@@ -38,7 +57,24 @@ import {
       >
         <LoginFormPage
         onFinish={(values) => {
+          console.log("first")
+          dispatch(SET_LOADING(true))
           console.log(values)
+
+          dispatch(userLogin({user: values})).then(result =>
+          {
+            if(userLogin.fulfilled.match(result)){
+              dispatch(SET_LOADING(false))
+              navigate("/dashboard/home")
+            }
+            else  if(userLogin.rejected.match(result)){
+              dispatch(SET_LOADING(false))
+            }
+          }
+
+      
+          )
+
         }}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           logo={logo}
@@ -74,8 +110,9 @@ import {
                   color: token.colorPrimary,
                   width: 120,
                 }}
+                onClick={()=> navigate("/signup")}
               >
-                Login
+                Sign Up
               </Button>
             ),
           }}
@@ -281,6 +318,10 @@ import {
         </LoginFormPage>
       </div>
     );
+  }
+  else{
+    navigate("/dashboard/home")
+  }
   };
   
   export  const App =  () => {

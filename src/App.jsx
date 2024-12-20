@@ -1,7 +1,6 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-// import Home from './pages/home'
 import PhoneTopUp from './pages/PhoneTopUp'
 import Home from './pages/HomePage'
 import ViewMobileTopUp from './pages/PhoneTopUp/ViewMobileTopUp'
@@ -25,14 +24,23 @@ import UtilityView from './pages/UtilityServicesPage/UtilityView'
 import LoginPage from './pages/auth/Login'
 import SignUp from './pages/auth/SignUp'
 
-function App() {
+import PaymentMenthod from './pages/checkout/PaymentMenthod'
 
+import Loader from './compnents/modal/Loader'
+import { useSelector } from 'react-redux'
+import userInitializeData from './hooks/userInitializer'
+
+function App() {
+  const {isLoading} = useSelector(state => state.app)
+
+
+  userInitializeData()
   
 
   return (
-    <div className='bg-gray-200/10'>
+    <div className='bg-gray-100'>
     <Routes>
-    <Route path='/' element={<Home/>} />
+    <Route path='/' element={<MainLayout><Home/></MainLayout>} />
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
     <Route path='/phone-top-up/:provider' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
@@ -41,7 +49,8 @@ function App() {
     <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
     <Route path='/gift-cards/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/crypto-exchange/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
-      
+    <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
+
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>} />
       <Route path='wallet' element={<Account/>} />
@@ -60,13 +69,18 @@ function App() {
 
     </Route>
 
+    {/* <Route path='/auth'> */}
+
     <Route path='/login' element={<LoginPage/>}/>
     <Route path='/signup' element={<SignUp/>}/>
     
+    {/* </Route> */}
+
       
     </Routes>
-    
 
+    
+    <Loader isLoaderOpen={isLoading}/>
     </div>
   )
 }

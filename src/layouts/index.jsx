@@ -4,6 +4,7 @@ import Footer from '../compnents/footer/Footer'
 const MainLayout = ({children}) => {
   return (
     <div>
+
         {children}
         <Footer/>
 

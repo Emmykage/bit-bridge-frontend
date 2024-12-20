@@ -3,12 +3,12 @@ import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const CartButton = ({text}) => {
+const CartButton = ({text, children, onClick}) => {
     const [size] = useState("large")
   return (
     <div>
-            <Button className='py-5 max-w-lg w-full text-white bg-primary hover:bg-primary/80' shape="round" icon={<ShoppingCartOutlined />} size={size}>
-            Download {text}
+            <Button onClick={onClick} className='py-5 max-w-lg w-full text-white bg-primary hover:bg-primary/80' shape="round" icon={<ShoppingCartOutlined />} size={size}>
+            {children}
           </Button>
     </div>
   )
@@ -16,7 +16,8 @@ const CartButton = ({text}) => {
 
 
 CartButton.propTypes = {
-    text: PropTypes.string
+  text: PropTypes.string,
+  children: PropTypes.node
 }
 
 export default CartButton

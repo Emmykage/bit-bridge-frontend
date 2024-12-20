@@ -1,0 +1,13 @@
+.add-fund{
+    .ant-row{ 
+    label{
+        @apply text-white !important;
+    }
+    .ant-input-number{
+        width: 100%;
+    }
+    .ant-input, .ant-input-number-input{
+        @apply border border-alt bg-zinc-900 text-white py-3
+    }
+}
+}

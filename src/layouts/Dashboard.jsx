@@ -2,14 +2,27 @@ import { DollarOutlined, GiftOutlined, HomeOutlined, WalletOutlined } from '@ant
 import PropTypes from 'prop-types'
 import { NavLink, Outlet } from 'react-router-dom'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getWallet } from '../redux/actions/wallet';
 const DashboardLayout = () => {
+
+    const dispatch = useDispatch()
+    const {wallet} = useSelector(state => state.wallet)
     const normal = "flex justify-center items-center flex-col"
     const active = "flex text-alt justify-center items-center flex-col"
+
+    useEffect(()=>{
+        dispatch(getWallet())
+    }, [])
+
+
+    console.log(wallet)
   return (
     <div className='relative bg-gray-00 min-h-screen bg-black/90'>
         <div className='max-w-[1500px] m-auto'>
 
-        <header className='flex justify-between bg-black rounded py-10 px-7 sticky top-0'>
+        <header className='flex justify-between bg-black rounded py-10 px-7  top-0'>
             <NavLink className={"text-3xl text-white"}>
                 BitBridge
             </NavLink>

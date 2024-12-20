@@ -1,18 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { userSignUp } from "../actions/auth"
+import { userLogin, userProfile, userSignUp } from "../actions/auth"
 
 const initialState = {
     user: {},
-    logged: false
+    logged: false,
+    loading: false
 }
 
 const AuthSlice = createSlice({
     initialState,
     name: "auth",
     reducers: {
-        resetUser: () =>  {
+        resetUser: (state) =>  {
             return{
-                user: {}
+                ...state,
+                user: {},
+
 
             }
         }
@@ -21,21 +24,70 @@ const AuthSlice = createSlice({
     extraReducers: (builder) =>  {
         builder
         .addCase(userSignUp.fulfilled, (state, action) => {
+            console.log(action.payload)
             return{
                 ...state,
-                user: action.payload.data
+                user: action.payload.data,
+                logged: true,
+                loading: false
             }
         })
         .addCase(userSignUp.rejected, (state, action) => {
             return{
                 ...state,
-                message: action.payload.message
+                message: action.payload.message,
+                loading: false
             }
         })
         .addCase(userSignUp.pending, (state) => {
             return{
                 ...state,
                 loading: true,
+            }
+        })
+        .addCase(userLogin.fulfilled, (state, action) => {
+            return{
+                ...state,
+                user: action.payload.data,
+                logged: true,
+                loading: false
+
+            }
+        })
+        .addCase(userLogin.rejected, (state, action) => {
+            return{
+                ...state,
+                message: action.payload.message,
+                loading: false
+
+            }
+        })
+        .addCase(userLogin.pending, (state) => {
+            return{
+                ...state,
+                loading: true,
+            }
+        })
+        .addCase(userProfile.fulfilled, (state, action) => {
+            console.log(action.payload)
+            return{
+                ...state,
+                user: action.payload.data,
+                logged: true,
+                loading: false
+            }
+        })  .addCase(userProfile.pending, (state) => {
+               return{
+                ...state,
+                loading: true
+            }
+        })
+        .addCase(userProfile.rejected, (state, action) => {
+            return{
+                ...state,
+                message: action.payload.message,
+                logged: false,
+                loading: false
             }
         })
     }

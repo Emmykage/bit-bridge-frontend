@@ -6,11 +6,22 @@ import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from
 import logo from "../../assets/logos/logo-mod.png"
 import { Button } from 'antd';
 import { useState } from 'react';
+import DrawerModal from '../drawer/Drawer';
+import Carts from '../carts/Carts';
+import  items from "../../data/cartItems.json"
 const Header = () => {
   const [toggleNav, setToggle] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className=' py-4 bg-white px-0 relative'>
+    <>
+    
+
+    <DrawerModal open={open} onClose={()=> {setOpen(!open)}}>
+      <Carts items={items} />
+    </DrawerModal>
+    
+    <header className=' py-4 bg-white px-0 relative shadow'>
       <div className='max-w-app-layout m-auto px-4 '>
 
 
@@ -30,9 +41,9 @@ const Header = () => {
               Help
             </NavLink>
 
-            <NavLink className={"#"}>
+            <button className={"rounded-full h-8 bg-gray-200 w-8"} onClick={() => setOpen(true)} >
               <ShoppingCartOutlined />
-            </NavLink>
+            </button>
 
 
               <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
@@ -48,6 +59,9 @@ const Header = () => {
 
 
     </header>
+
+    </>
+
   )
 }
 

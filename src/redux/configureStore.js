@@ -1,10 +1,13 @@
 import { applyMiddleware, combineReducers, configureStore } from "@reduxjs/toolkit";
-import { AuthReducer } from ".";
+import { AppReducer, AuthReducer, TransactionReducer, WalletReducer } from ".";
 import { thunk } from "redux-thunk";
 import logger from "redux-logger";
 
 const rootReducer = combineReducers({
-    auth: AuthReducer
+    auth: AuthReducer,
+    app: AppReducer,
+    transaction: TransactionReducer,
+    wallet: WalletReducer
 })
 
 

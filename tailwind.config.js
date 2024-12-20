@@ -15,7 +15,9 @@ export default {
         "app-layout": "1500px"
       },
       gridTemplateColumns: {
-        "home-grid": "auto 400px"
+        "home-grid": "auto 400px",
+        "checkout": "1fr 2fr",
+         "wallet": " auto 400px"
       }
     },
   },
