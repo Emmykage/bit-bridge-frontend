@@ -2,12 +2,29 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { apiRoute, baseUrl } from "../baseUrl"
 import { fetchToken } from "../../hooks/localStorage"
+import { toast } from "react-toastify"
 
 const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWithValue}) => {
     try {
         const response = await axios.post(`${baseUrl}signup`, data)
         const result =  response.data
 
+        const authorizationHeader = response.headers.authorization;
+
+        let accessToken = null;
+
+        // If the authorization header is present, extract the token
+        if (authorizationHeader) {
+            if (authorizationHeader.startsWith('Bearer ')) {
+                accessToken = authorizationHeader.split(' ')[1];  // Split to get the token part
+            } else {
+                console.warn('Unexpected format for Authorization header:', authorizationHeader);
+            }
+        } else {
+            console.warn('Authorization header not found');
+        }
+
+        localStorage.setItem("bitglobal", JSON.stringify(accessToken));
         return result
     } catch (error) {
         if(error.response){
@@ -17,6 +34,42 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
 
     }
 })
+
+
+// const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithValue}) => {
+//     try {
+//         const response = await axios.post(`${baseUrl}login`, data);
+
+//         const result = response.data;
+
+//         // Access the access token from the response headers
+//         const authorizationHeader = response.headers.authorization;
+
+//         let accessToken = null;
+
+//         // If the authorization header is present, extract the token
+//         if (authorizationHeader) {
+//             if (authorizationHeader.startsWith('Bearer ')) {
+//                 accessToken = authorizationHeader.split(' ')[1];  // Split to get the token part
+//             } else {
+//                 console.warn('Unexpected format for Authorization header:', authorizationHeader);
+//             }
+//         } else {
+//             console.warn('Authorization header not found');
+//         }
+
+//         localStorage.setItem("bitglobal", JSON.stringify(accessToken));
+
+//         return result;
+//     } catch (error) {
+//         if (error.response) {
+//             return rejectWithValue({ message: error.response.data.message });
+//         }
+//         console.error(error);
+//         return rejectWithValue({ message: "Something went wrong" });
+//     }
+// });
+
 
 
 
@@ -77,6 +130,34 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
+
+
+
+export const userLogout = createAsyncThunk("logout/user-logout", async(_, {rejectWithValue}) => {
+    try {
+        console.log("first")
+
+        const response = await axios.delete(`${baseUrl}logout`,{
+            headers: {
+                "Authorization":  `Bearer ${fetchToken()}`
+            }
+        });
+
+        const {data} = response.data;
+
+        localStorage.removeItem("bitglobal");
+        toast(data, {type: "success"})
+
+        return data;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
 
 
 

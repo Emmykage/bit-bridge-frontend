@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, InputNumber } from 'antd';
+import "./styles.scss"
 const FormInput = ({
+
     placeholder,
+    onChange,
     name, 
     className, 
-    layout, 
+    value,
     type="text", 
+    required=true,
     label}) => {
   
   return (
   <>
   
       <Form.Item
-      className={className}
+      className={`${className} formInput`}
       name={name}
       rules={[
         {
-          required: true,
+          required: required,
           message: `Please input ${label}!`,
         },
       ]}
        label={label}
        type={type}>
-       { type== "text" ?  <Input placeholder={placeholder} /> :  <InputNumber placeholder={placeholder} /> }
-        {/* <Input placeholder={placeholder} /> */}
+       { type== "text" ?  <Input
+       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full py-3`} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full p-3 font-medium`} /> }
       </Form.Item>
-     
-      {/* <Form.Item>
-        <Button type="primary">Submit</Button>
-      </Form.Item> */}
+
       </>
   );
 };

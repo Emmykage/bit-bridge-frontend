@@ -5,12 +5,17 @@ import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
+import { useDispatch } from "react-redux"
+import { ADD_TO_CART } from "../../redux/app"
+import FormInput from "../../compnents/formInput/FormInput"
+import { useState } from "react"
 const ViewGiftCard = () => {
+    const dispatch = useDispatch()
     const {provider} = useParams()
-
+    const [value, setValue] = useState("")
     const selectedProvider = giftCardData.find(item => item.provider == provider)
 
-    console.log(selectedProvider)
+    // console.log(selectedProvider)
     const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
 
 
@@ -42,6 +47,29 @@ const ViewGiftCard = () => {
                         Read the full list on cherrycredits.com/Games
                `}
 
+
+               const handleCart = () => {
+                console.log(value)
+                if(!value ){
+                    console.error("Value is required and cannot be empty.");
+
+                    return
+                }
+
+                dispatch(ADD_TO_CART({
+                    id: selectedProvider.id, 
+                    provision: selectedProvider.provision,
+                    provider: selectedProvider.provider,
+                    image: selectedProvider.provider,
+                    value: value
+                })
+            )
+                
+
+               }
+
+               console.log(value)
+
   return (
     <div>
         <Header/>
@@ -71,9 +99,11 @@ const ViewGiftCard = () => {
 
                 <div className="flex flex-col gap-0">
 
-                        <select name="" id="" className="flex-1 rounded-lg border-gray-300 border-2  py-3 px-2">
-                            <option value="10"> 10NGN</option>
-                        </select>
+                        <FormInput type="nubmer"
+                        value={value}
+                        onChange={(input)=> {setValue(input)}}
+                        placeholder={"Enter Value"}
+                        className={""}/>
 
 
                         <div className="flex-1 text-sm mt-2 from-gray-800">
@@ -88,13 +118,13 @@ const ViewGiftCard = () => {
                 <div>
 
                     <div className="my-3">
-                        <CartButton/>
+                        <CartButton onClick={() => handleCart(selectedProvider)}>Add To Cart</CartButton>
                     </div>
                     
-                    <div className="my-4">
+                    {/* <div className="my-4">
                         <label htmlFor="phone_no my-2">Number to Top-Up</label>
                         <input className="p-4 block border w-full rounded" placeholder="0801230456 7890"/>
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="bg-gray-600 flex items-center gap-3 rounded-lg text-white p-4">

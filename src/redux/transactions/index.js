@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { createTransaction, getTransactions } from "../actions/transaction"
 
 const initialState = {
-    user: {},
+    transactions: [],
     logged: false,
     loading: false
 }
@@ -42,6 +42,7 @@ const AuthSlice = createSlice({
                 ...state,
                 deposit: action.payload.data,
                 withdrawal: action.payload.data,
+                transactions: action.payload.data,
                 loading: false
             }
         })

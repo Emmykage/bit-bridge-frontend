@@ -6,10 +6,10 @@ const AddFund = ({
     handleSubmit
 }) => {
     const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState('vertical');
-  const onFormLayoutChange = ({ layout }) => {
-    setFormLayout(layout);
-  };
+  const [formLayout] = useState('vertical');
+  // const onFormLayoutChange = ({ layout }) => {
+  //   setFormLayout(layout);
+  // };
 
 
   return (

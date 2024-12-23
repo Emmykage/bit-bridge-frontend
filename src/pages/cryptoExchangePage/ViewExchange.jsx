@@ -88,7 +88,7 @@ const ViewGiftCard = () => {
                 <div>
 
                     <div className="my-3">
-                        <CartButton/>
+                        <CartButton> Add to Cart</CartButton>
                     </div>
                     
                     <div className="my-4">

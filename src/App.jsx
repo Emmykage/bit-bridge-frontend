@@ -29,6 +29,14 @@ import PaymentMenthod from './pages/checkout/PaymentMenthod'
 import Loader from './compnents/modal/Loader'
 import { useSelector } from 'react-redux'
 import userInitializeData from './hooks/userInitializer'
+import { AppToast } from './compnents/toast'
+
+import AdminHome from './pages/admin'
+import AdminDashboardLayout from './layouts/AdminDashBoard'
+import Purchases from './pages/admin/purchases/purchases'
+import Products from './pages/admin/products/Products'
+import Services from './pages/admin/services/Services'
+import AddProduct from './pages/admin/AddProducts'
 
 function App() {
   const {isLoading} = useSelector(state => state.app)
@@ -39,6 +47,8 @@ function App() {
 
   return (
     <div className='bg-gray-100'>
+    <AppToast/>
+
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
@@ -65,18 +75,27 @@ function App() {
       <Route path='bitcoin' element={<Bitcoin/>} />
       <Route path='dogecoin' element={<Dogecoin/>} />
       </Route>
-
-
     </Route>
 
-    {/* <Route path='/auth'> */}
+
 
     <Route path='/login' element={<LoginPage/>}/>
     <Route path='/signup' element={<SignUp/>}/>
     
-    {/* </Route> */}
+    
+  <Route path="/admin" element={<AdminDashboardLayout/>}>
+  <Route path='dashboard' element={<AdminHome/>}/>
+  <Route path='purchases' element={<Purchases/>}/>
+  <Route path='products' element={<Products/>}/>
+  <Route path='services' element={<Services/>}/>
+  <Route path='add-product' element={<AddProduct/>}/>
 
-      
+  
+
+  </Route>
+        
+
+      {/* </Route> */}
     </Routes>
 
     

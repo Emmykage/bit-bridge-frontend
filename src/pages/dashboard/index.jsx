@@ -16,7 +16,7 @@ const HomeDashboard = () => {
                 <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                 
                         
-            <div className="flex my-10">
+            <div className="flex overflow-x-scroll my-10">
         <div className="pr-6 border-r border-gray-700 ">
 
     <div className="flex py-8 gap-3">
@@ -85,7 +85,7 @@ const HomeDashboard = () => {
         </div>
 
         <div className="bg-black p-10 min-h-96">
-            <div className="flex justify-between">
+            <div className="flex flex-col gap-3 md:flex-row justify-between">
                 <h4 className="text-alt text-3xl font-medium">recent order</h4>
                 <ul className="flex gap-3">
                 <li><NavButton to="#" className={"bg-alt text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>

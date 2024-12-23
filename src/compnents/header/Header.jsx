@@ -5,20 +5,28 @@ import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from
 
 import logo from "../../assets/logos/logo-mod.png"
 import { Button } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DrawerModal from '../drawer/Drawer';
 import Carts from '../carts/Carts';
-import  items from "../../data/cartItems.json"
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_CART } from '../../redux/app';
+import { userLogout } from '../../redux/actions/auth';
 const Header = () => {
   const [toggleNav, setToggle] = useState(false)
+  const {cartItems, totalAmount} = useSelector(state => state.app)
   const [open, setOpen] = useState(false);
+  const {user, logged} = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  useEffect(()=> {
+    dispatch(GET_CART())
+  },[])
 
   return (
     <>
     
 
     <DrawerModal open={open} onClose={()=> {setOpen(!open)}}>
-      <Carts items={items} />
+      <Carts items={cartItems} />
     </DrawerModal>
     
     <header className=' py-4 bg-white px-0 relative shadow'>
@@ -45,9 +53,16 @@ const Header = () => {
               <ShoppingCartOutlined />
             </button>
 
+              {user ? 
+                  <NavLink onClick={() => 
+                    dispatch(userLogout())}
+                  to={"/"} className={"font-semibold"}>Log Out</NavLink>
+                  :
+                  <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
 
-              <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
-              <NavLink to={"/dashboard/home"}>Account</NavLink>
+              }
+                  <NavLink to={"/dashboard/home"}>Account</NavLink>
+
           </div>
 
          
