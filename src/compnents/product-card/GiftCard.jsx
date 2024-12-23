@@ -15,7 +15,7 @@ const GiftCard = ({id, provider, provision, image, value, feature }) => {
 
             }
         <div  className="h-52">
-        <img src={image} alt="" className="w-full h-full" />
+        <img src={`/images/providers/${provider}.webp`} alt="" className="w-full h-full" />
 
         </div>
         <div className="flex justify-between px-2">

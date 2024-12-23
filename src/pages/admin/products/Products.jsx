@@ -9,7 +9,7 @@ const Products = () => {
 
     dispatch(getProducts())
   },[])
-  console.log(products)
+  // console.log(products)
 
   return (
     <div className='bg-gray-100 p-4'>           

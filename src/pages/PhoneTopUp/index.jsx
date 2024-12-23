@@ -1,12 +1,19 @@
 
-import serviceProviderData from "../../data/serviceProviderData.json"
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getProducts } from "../../redux/actions/product"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {mobileProviders} = useSelector(state => state.product)
+  useEffect(()=> {
+    dispatch(getProducts())
+  },[])
   return (
     <div>
-              <Header/>
+      <Header/>
 
         
         <div className='h-72 bg-gray-700 flex justify-center items-center'>
@@ -20,7 +27,7 @@ const PhoneTopUp = () => {
           <div className="grid gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
-            {serviceProviderData.map(({id, provider, provision})  => (
+            {mobileProviders.map(({id, provider, provision})  => (
 
               <ProductCard key={id} id={id} provider={provider} provision={provision}/>
 
