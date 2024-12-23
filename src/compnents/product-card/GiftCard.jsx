@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 const GiftCard = ({id, provider, provision, image, value, feature }) => {
 
+    const giftcardImage = provider.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
     const navigate = useNavigate()
 
   return (
@@ -15,13 +16,14 @@ const GiftCard = ({id, provider, provision, image, value, feature }) => {
 
             }
         <div  className="h-52">
-        <img src={`/images/providers/${provider}.webp`} alt="" className="w-full h-full" />
+        <img src={`/images/providers/${giftcardImage}.webp`} alt="" className="w-full h-full" />
 
         </div>
         <div className="flex justify-between px-2">
         <div>
-            <p className="text-lg font-medium">{provision}</p>
-            <p className="text-base font-medium text-gray-600">{value}</p>
+        <p className="text-lg font-medium capitalize">{provider}</p>
+        <p className="text-lg font-medium">{provision}</p>
+        <p className="text-base font-medium text-gray-600">{value}</p>
         </div>
         <div className="flex gap-3">
             <span className="font-semibold">4.7</span>
