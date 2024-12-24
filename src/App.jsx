@@ -55,7 +55,7 @@ function App() {
     <div className='bg-gray-100'>
     <Suspense fallback={<LoaderPage />}>
 
-    <AppToast/>
+    {/* <AppToast/> */}
 
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
