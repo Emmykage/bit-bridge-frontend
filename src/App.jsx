@@ -12,7 +12,6 @@ import Trades from './pages/dashboard/transactions/Trades'
 import Withdrawals from './pages/dashboard/transactions/Withdrawals'
 import Bitcoin from './pages/dashboard/crypto-exchange/Bitcoin'
 import Dogecoin from './pages/dashboard/crypto-exchange/Dogecoin'
-import CryptoSell from './pages/dashboard/crypto-exchange'
 import MainLayout from './layouts'
 import UtilityView from './pages/UtilityServicesPage/UtilityView'
 import LoginPage from './pages/auth/Login'
@@ -35,6 +34,7 @@ import ALogin from './pages/auth/admin/Login'
 import ASignup from './pages/auth/admin/SignUp'
 import { lazy, Suspense } from 'react'
 import LoaderPage from './compnents/loader/LOaderPage'
+import CryptoSell from './pages/dashboard/crypto-exchange'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
