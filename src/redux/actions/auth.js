@@ -52,8 +52,6 @@ export const userProfile = createAsyncThunk("auth/user-profile", async(data, {re
         return result
     } catch (error) {
         if(error.response){
-            toast(error.response.data, {type: "error"})
-
             return rejectWithValue({message: error.response.message})
         }
 

@@ -34,7 +34,7 @@ import ALogin from './pages/auth/admin/Login'
 import ASignup from './pages/auth/admin/SignUp'
 import { lazy, Suspense } from 'react'
 import LoaderPage from './compnents/loader/LoaderPage'
-import CryptoSell from './pages/dashboard/crypto-exchange'
+import CryptoSell from './pages/dashboard/crypto-exchange/CryptoSell'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
