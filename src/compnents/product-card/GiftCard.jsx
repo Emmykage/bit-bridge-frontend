@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import {StarOutlined} from "@ant-design/icons"
 import PropTypes from 'prop-types'
 
-const GiftCard = ({id, provider, provision, image, value, feature }) => {
+const GiftCard = ({id, provider, provision, value, feature }) => {
 
     const giftcardImage = provider.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
     const navigate = useNavigate()

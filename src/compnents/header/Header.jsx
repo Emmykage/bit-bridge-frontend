@@ -13,9 +13,9 @@ import { GET_CART } from '../../redux/app';
 import { userLogout } from '../../redux/actions/auth';
 const Header = () => {
   const [toggleNav, setToggle] = useState(false)
-  const {cartItems, totalAmount} = useSelector(state => state.app)
+  const {cartItems} = useSelector(state => state.app)
   const [open, setOpen] = useState(false);
-  const {user, logged} = useSelector(state => state.auth)
+  const {user} = useSelector(state => state.auth)
   const dispatch = useDispatch()
   useEffect(()=> {
     dispatch(GET_CART())

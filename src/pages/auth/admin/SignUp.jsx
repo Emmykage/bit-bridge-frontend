@@ -16,10 +16,11 @@ import enUS from "antd/es/locale/en_US"
 import { ConfigProvider, Space, Tabs, theme } from 'antd';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import logo from "../../assets/logos/2.png"
+import logo from "../../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
-import { userSignUp } from '../../redux/actions/auth';
-import { SET_LOADING } from '../../redux/app';
+
+import { userSignUp } from '../../../redux/actions/auth';
+import { SET_LOADING } from '../../../redux/app';
 
 export const AdminSignup = () => {
   const { token } = theme.useToken();

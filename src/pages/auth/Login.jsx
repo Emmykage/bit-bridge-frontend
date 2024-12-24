@@ -32,7 +32,7 @@ import { toast } from 'react-toastify';
   
   const LoginPage = () => {
 
-    const {user, logged, loading} = useSelector(state => state.auth)
+    const { logged, loading} = useSelector(state => state.auth)
     const [loginType, setLoginType] = useState('account');
     const dispatch = useDispatch()
     const { token } = theme.useToken();

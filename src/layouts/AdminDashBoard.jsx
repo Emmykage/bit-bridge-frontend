@@ -1,26 +1,37 @@
 import { BellOutlined,  InboxOutlined, MenuOutlined } from '@ant-design/icons'
-import PropTypes from 'prop-types'
-import { NavLink, Outlet } from 'react-router-dom'
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getWallet } from '../redux/actions/wallet';
 import img from "../assets/images/user_img.jpg"
 import "./styles.scss"
+import LoaderPage from '../compnents/loader/LOaderPage';
 const AdminDashboardLayout = () => {
     const [toggleNav, setToggleNav] = useState(false)
-
+    const {user, loading } = useSelector(state => state.auth)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {wallet} = useSelector(state => state.wallet)
-    const normal = "flex justify-center items-center flex-col"
-    const active = "flex text-alt justify-center items-center flex-col"
 
-    useEffect(()=>{
-        dispatch(getWallet())
-    }, [])
 
+    useEffect(() => {
+        dispatch(getWallet());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (user && user.role !== "admin") {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     // console.log(wallet)
+
+    if(loading){
+        return(
+            <LoaderPage/>
+        )
+    }
+
   return (
     <div className='admin relative flex h-screen'>
         <aside className={`${toggleNav ? "w-72" : "w-0 md:w-28"} h-full overflow-hidden px-0 transition-all ease-linear duration-150 shrink-0`}>
@@ -72,6 +83,7 @@ const AdminDashboardLayout = () => {
 
   )
 }
+
 // AdminDashboardLayout.propTypes = {
 //     children: PropTypes.node
 // }
