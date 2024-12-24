@@ -33,6 +33,8 @@ ProductCard.propTypes = {
     id: PropTypes.string,
     provider: PropTypes.string,
     provision: PropTypes.string,
+    min_value: PropTypes.string,
+    max_value: PropTypes.string,
     
 }
 

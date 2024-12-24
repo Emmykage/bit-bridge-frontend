@@ -20,6 +20,7 @@ import logo from "../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignUp } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
+import { userLogin } from '../../../redux/actions/auth';
 
 export const AdminLogin = () => {
   const { token } = theme.useToken();
@@ -40,14 +41,14 @@ export const AdminLogin = () => {
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
-                loading={loading}
+        loading={loading}
 
         onFinish={(values) => {
-          dispatch(userSignUp({user: values})).then(result =>
+          dispatch(userLogin({user: values})).then(result =>
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
-                navigate("/dashboard/home")
+                navigate("/admin/dashboard")
               }
               else  if(userSignUp.rejected.match(result)){
                 dispatch(SET_LOADING(false))
