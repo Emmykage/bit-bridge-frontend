@@ -11,6 +11,7 @@ const PhoneTopUp = () => {
   useEffect(()=> {
     dispatch(getProducts())
   },[])
+  console.log(mobileProviders)
   return (
     <div>
       <Header/>
@@ -27,9 +28,9 @@ const PhoneTopUp = () => {
           <div className="grid gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
-            {mobileProviders.map(({id, provider, provision})  => (
+            {mobileProviders.map(({id, provider, provision, min_value, max_value})  => (
 
-              <ProductCard key={id} id={id} provider={provider} provision={provision}/>
+              <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={provider} provision={provision}/>
 
                 
              ))}

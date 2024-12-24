@@ -28,8 +28,10 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         return result
     } catch (error) {
         if(error.response){
+            toast(error.response.data, {type: "error"})
             return rejectWithValue({message: error.response.message})
         }
+
         return rejectWithValue({message: "something went wrong"})
 
     }
@@ -87,8 +89,12 @@ export const userProfile = createAsyncThunk("auth/user-profile", async(data, {re
         return result
     } catch (error) {
         if(error.response){
+            console.log(error,"ssfsfsfdsfdfdfsdfsdfsdfd")
+            toast(error.response.data, {type: "error"})
+
             return rejectWithValue({message: error.response.message})
         }
+
         return rejectWithValue({message: "something went wrong"})
 
     }
@@ -124,7 +130,8 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
         return result;
     } catch (error) {
         if (error.response) {
-            return rejectWithValue({ message: error.response.data.message });
+            toast(error.response.data, {type: "error"})
+            return rejectWithValue({ message: error.response.data });
         }
         console.error(error);
         return rejectWithValue({ message: "Something went wrong" });

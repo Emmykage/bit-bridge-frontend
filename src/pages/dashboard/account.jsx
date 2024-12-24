@@ -1,10 +1,11 @@
-import { WalletOutlined } from "@ant-design/icons"
+import { TransactionOutlined, WalletOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
 import AppModal from "../../compnents/modal/Modal"
 import { useState } from "react";
 import AddFund from "../../compnents/addFund/AddFund";
 import { useDispatch, useSelector } from "react-redux";
 import { createTransaction } from "../../redux/actions/transaction";
+import { RiUserReceived2Line } from "react-icons/ri";
 
 
 const Account = () => {
@@ -186,15 +187,15 @@ const Account = () => {
             <div className="text-white flex justify-between bg--100 px-6">
                 <div onClick={()=> setIsModalOpen(true)} className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center">
                 <WalletOutlined />
-                <span>Add funds</span>
+                <span className="text-center">Add Funds</span>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                <WalletOutlined />
-                <span>Add funds</span>
+                <RiUserReceived2Line  />
+                <span className="text-center">Recieve Funds</span>
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                <WalletOutlined />
-                <span>Add funds</span>
+                <TransactionOutlined />
+                <span className="text-center">Transfer Funds</span>
                 </div>
             </div>
 

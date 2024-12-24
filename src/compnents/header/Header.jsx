@@ -61,7 +61,8 @@ const Header = () => {
                   <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
 
               }
-                  <NavLink to={"/dashboard/home"}>Account</NavLink>
+                {user &&   <NavLink to={"/dashboard/home"}>Account</NavLink>}
+                {/* <NavLink to={"/dashboard/home"}>Account</NavLink> */}
 
           </div>
 

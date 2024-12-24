@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSignUp } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
 
-export const Signup = () => {
+export const AdminSignup = () => {
   const { token } = theme.useToken();
   const {loading} = useSelector(state => state.auth)
   const [loginType, setLoginType] = useState('phone');
@@ -92,34 +92,7 @@ export const Signup = () => {
             <Tabs.TabPane key={'account'} tab={'Signup with email and password'} />
           </Tabs>
           <>
-            {/* <ProFormText
-              name="firstName"
-              fieldProps={{
-                size: 'large',
-                prefix: <UserOutlined className={'prefixIcon'} />,
-              }}
-              placeholder={'John'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter your first name!',
-                },
-              ]}
-            />
-            <ProFormText
-              name="lastName"
-              fieldProps={{
-                size: 'large',
-                prefix: <UserOutlined className={'prefixIcon'} />,
-              }}
-              placeholder={'Doe'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter your last name!',
-                },
-              ]}
-            /> */}
+          
             <ProFormText
               name="email"
               fieldProps={{
@@ -186,16 +159,7 @@ export const Signup = () => {
               marginBlockEnd: 24,
             }}
           >
-            {/* <ProFormCheckbox noStyle name="autoLogin">
-            Auto-login
-            </ProFormCheckbox>
-            <a
-              style={{
-                float: 'right',
-              }}
-            >
-              Forgot password
-            </a> */}
+         
           </div>
         </LoginForm>
       </div>
@@ -203,10 +167,10 @@ export const Signup = () => {
   );
 };
 
-const App = () => (
+const ASignup = () => (
   <ConfigProvider locale={enUS}>
-    <Signup />
+    <AdminSignup />
   </ConfigProvider>
 );
 
-export default App;
+export default ASignup;

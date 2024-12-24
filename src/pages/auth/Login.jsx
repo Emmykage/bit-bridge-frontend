@@ -24,25 +24,23 @@ import {
     cursor: 'pointer',
   };
   import enUS from "antd/es/locale/en_US"
-import useSelection from 'antd/lib/table/hooks/useSelection';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
+import { toast } from 'react-toastify';
   
   const LoginPage = () => {
 
-    const {user, logged, loading} = useSelection(state => state.auth)
+    const {user, logged, loading} = useSelector(state => state.auth)
     const [loginType, setLoginType] = useState('account');
     const dispatch = useDispatch()
     const { token } = theme.useToken();
-
 
     const navigate = useNavigate()
     useEffect(()=> {
 
     }, [])
-
 
 
     if(!logged){
@@ -56,19 +54,22 @@ import { SET_LOADING } from '../../redux/app';
         }}
       >
         <LoginFormPage
+        loading={loading}
         onFinish={(values) => {
-          console.log("first")
           dispatch(SET_LOADING(true))
-          console.log(values)
 
           dispatch(userLogin({user: values})).then(result =>
           {
             if(userLogin.fulfilled.match(result)){
               dispatch(SET_LOADING(false))
+
               navigate("/dashboard/home")
             }
             else  if(userLogin.rejected.match(result)){
-              dispatch(SET_LOADING(false))
+              dispatch(SET_LOADING(false) )
+              console.log("first", result)
+              toast(result.payload.message, {type: "error"})
+
             }
           }
 
@@ -124,6 +125,7 @@ import { SET_LOADING } from '../../redux/app';
                 alignItems: 'center',
                 flexDirection: 'column',
               }}
+
             >
               <Divider plain>
                 <span
@@ -315,6 +317,15 @@ import { SET_LOADING } from '../../redux/app';
               Forgot Password
             </a>
           </div>
+          {/* <Button
+          type="primary"
+          htmlType="submit"
+          block
+          loading={true} // Show loading spinner when isLoading is true
+          size="large"
+        >
+          Login
+        </Button> */}
         </LoginFormPage>
       </div>
     );
