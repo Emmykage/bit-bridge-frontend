@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { getWallet } from '../redux/actions/wallet';
 import img from "../assets/images/user_img.jpg"
 import "./styles.scss"
-import LoaderPage from '../compnents/loader/LOaderPage';
+import LoaderPage from '../compnents/loader/LoaderPage';
 const AdminDashboardLayout = () => {
     const [toggleNav, setToggleNav] = useState(false)
     const {user, loading } = useSelector(state => state.auth)
