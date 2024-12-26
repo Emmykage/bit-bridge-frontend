@@ -14,7 +14,7 @@ const Products = () => {
   return (
     <div className='bg-gray-100 p-4'>           
         
-        <h3 className='px-2'>Products</h3>
+        <h3  className='font-semibold text-xl text-gray-900'>Products</h3>
 
         <div className="mt-4 px-0 bg-gray-100 overflow-x-auto flow-root">
                 <div className="mx-1 my-2 sm:mx-2 lg:mx-0">

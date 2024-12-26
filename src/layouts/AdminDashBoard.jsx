@@ -1,4 +1,4 @@
-import { BellOutlined,  InboxOutlined, MenuOutlined } from '@ant-design/icons'
+import { BellOutlined,  InboxOutlined, MenuOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -6,6 +6,10 @@ import { getWallet } from '../redux/actions/wallet';
 import img from "../assets/images/user_img.jpg"
 import "./styles.scss"
 import LoaderPage from '../compnents/loader/LoaderPage';
+import { SiMoneygram } from 'react-icons/si';
+import { MdMiscellaneousServices, MdProductionQuantityLimits } from 'react-icons/md';
+import { LuLayoutDashboard } from 'react-icons/lu';
+import { IoPricetagOutline } from 'react-icons/io5';
 const AdminDashboardLayout = () => {
     const [toggleNav, setToggleNav] = useState(false)
     const {user, loading } = useSelector(state => state.auth)
@@ -18,11 +22,11 @@ const AdminDashboardLayout = () => {
     }, [dispatch]);
 
 
-    useEffect(() => {
-        if (user && user.role !== "admin") {
-            navigate("/");
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (user && user.role !== "admin") {
+    //         navigate("/");
+    //     }
+    // }, [user, navigate]);
 
     // console.log(wallet)
 
@@ -44,12 +48,33 @@ const AdminDashboardLayout = () => {
             </div>
 
             
-            <ul className='text-white mt-10 px-1'>
-                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/dashboard"}> Dashboard </NavLink>       </li>
-                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/purchases"}> Purchases </NavLink>       </li>
-                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/products"}>  Products </NavLink>       </li>
-            <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/services"}> Services </NavLink>       </li> 
-            </ul>
+            <ul className='text-white font-semibold mt-10 px-1'>
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/dashboard"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-2 justify-center items-center`}> 
+                <LuLayoutDashboard  className='text-2xl'/>
+                <span>
+                Dashboard
+                </span>
+
+                 </NavLink>       </li>
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/purchases"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}>
+                <MdProductionQuantityLimits className='text-2xl' />
+                Purchases </NavLink>       </li>
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/products"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+                <IoPricetagOutline className='text-2xl'/>
+                 Products </NavLink>       </li>
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/services"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+                <MdMiscellaneousServices className='text-2xl'/>
+                Services </NavLink>       </li> 
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/transactions"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+                <SiMoneygram className='text-2xl'/>
+                Deposits </NavLink>       </li> 
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/users"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+
+                <UsergroupAddOutlined className='text-2xl'/>
+                <span>Users</span>
+                
+                 </NavLink>       </li> 
+                </ul>
 
         </aside>
         <div className='relative  w-full m-0'>

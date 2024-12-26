@@ -22,7 +22,7 @@ import PaymentMenthod from './pages/checkout/PaymentMenthod'
 import Loader from './compnents/modal/Loader'
 import { useSelector } from 'react-redux'
 import userInitializeData from './hooks/userInitializer'
-import { AppToast } from './compnents/toast'
+// import { AppToast } from './compnents/toast'
 
 import AdminHome from './pages/admin'
 import AdminDashboardLayout from './layouts/AdminDashBoard'
@@ -35,6 +35,8 @@ import ASignup from './pages/auth/admin/SignUp'
 import { lazy, Suspense } from 'react'
 import LoaderPage from './compnents/loader/LoaderPage'
 import CryptoSell from './pages/dashboard/crypto-exchange/CryptoSell'
+import AdminTransactions from './pages/admin/transactions/deposits'
+import Users from './pages/admin/users/Users'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -98,15 +100,11 @@ function App() {
     <Route path='products' element={<Products/>}/>
     <Route path='services' element={<Services/>}/>
     <Route path='add-product' element={<AddProduct/>}/>
-
-
-    
+    <Route path='transactions' element={<AdminTransactions/>}/>
+    <Route path='users' element={<Users/>}/>
 
   </Route>
-        
-
-      {/* </Route> */}
-    </Routes>
+  </Routes>
 
     
     <Loader isLoaderOpen={isLoading}/>

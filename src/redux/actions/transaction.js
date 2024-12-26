@@ -46,15 +46,18 @@ export const updateTransaction = createAsyncThunk("transaction/update-transactio
     }
 });
 
-export const getTransactions = createAsyncThunk("transaction/update-transaction", async(data, {rejectWithValue}) => {
+export const getTransactions = createAsyncThunk("transaction/get-transactions", async(_, {rejectWithValue}) => {
     try {
-        const response = await axios.patch(`${baseUrl + apiRoute}transactions`, data, {
+        const response = await axios.get(`${baseUrl + apiRoute}transactions`, {
             headers: {
-                "Authorization": JSON.parse(localStorage.getItem("bitglobal"))
+                "Authorization": `Bearer ${fetchToken()}`
             }
         });
 
-        const result = response.data;      
+
+        const result = response.data;    
+        console.log(result)
+  
 
         return result;
     } catch (error) {
