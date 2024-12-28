@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 
 const NavButton = ({
     children, 
-    onclick,
+    onClick,
     className}
     
 ) => {
   return (
     <Button
-        onclick={onclick}
+        onClick={onClick}
         
     className={`${className} button font-medium h-10 text-black bg-alt border-none` } classNames={"hello"} shape="round" >
     {children}
@@ -20,7 +20,7 @@ const NavButton = ({
 
 NavButton.propTypes = {
     children: PropTypes.node,
-    onclick: PropTypes.func,
+    onClick: PropTypes.func,
     className: PropTypes.string
 }
 export default NavButton

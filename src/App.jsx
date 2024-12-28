@@ -22,7 +22,7 @@ import PaymentMenthod from './pages/checkout/PaymentMenthod'
 import Loader from './compnents/modal/Loader'
 import { useSelector } from 'react-redux'
 import userInitializeData from './hooks/userInitializer'
-// import { AppToast } from './compnents/toast'
+import { AppToast } from './compnents/toast'
 
 import AdminHome from './pages/admin'
 import AdminDashboardLayout from './layouts/AdminDashBoard'
@@ -37,6 +37,7 @@ import LoaderPage from './compnents/loader/LoaderPage'
 import CryptoSell from './pages/dashboard/crypto-exchange/CryptoSell'
 import AdminTransactions from './pages/admin/transactions/deposits'
 import Users from './pages/admin/users/Users'
+import Deposits from './pages/dashboard/transactions/Deposits'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -49,7 +50,6 @@ const CryptoExchangePage = lazy(() => import('./pages/cryptoExchangePage'));
 function App() {
   const {isLoading} = useSelector(state => state.app)
 
-
   userInitializeData()
   
 
@@ -57,7 +57,7 @@ function App() {
     <div className='bg-gray-100'>
     <Suspense fallback={<LoaderPage />}>
 
-    {/* <AppToast/> */}
+    <AppToast/>
 
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
@@ -78,6 +78,7 @@ function App() {
       <Route path='transactions' element={<Transactions/>}>
         <Route path='orders' element={<Orders/>} />
         <Route path='trades' element={<Trades/>} />
+        <Route path='deposits' element={<Deposits/>} />
         <Route path='withdrawals' element={<Withdrawals/>} />
 
       </Route>

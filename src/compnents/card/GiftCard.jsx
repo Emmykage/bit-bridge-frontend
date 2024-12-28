@@ -1,14 +1,18 @@
 import NavButton from '../button/NavButton'
 import PropTypes from 'prop-types'
 
-const GiftCard = ({image, title}) => {
+const GiftCard = ({image, onClick, id, provider, title}) => {
+  console.log(provider)
+
+  const giftcardImage = provider.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
+
   return (
     <div className='border border-gray-100/20 rounded p-4'>
-        <img src={image} alt="gift card one" className='borde rounded-lg'/>
+        <img src={`/images/providers/${giftcardImage}.webp` } alt="gift card one" className='borde rounded-lg'/>
 
         <div className='text-center'>
             <h5 className='text-lg font-semibold text-white my-5'>{title}</h5>
-            <NavButton className='text-gray-200'> Buy gift card</NavButton>
+            <NavButton onClick={onClick} className='text-gray-200'> Buy gift card</NavButton>
         </div>
     </div>
   )
@@ -17,6 +21,7 @@ const GiftCard = ({image, title}) => {
 GiftCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
+    provider: PropTypes.string,
     
 }
 

@@ -1,17 +1,41 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import BreadCrunbs from '../../../compnents/Breadcrumbs/BreadCrunbs'
-import { getTransactions } from '../../../redux/actions/transaction'
+import { getTransactions, updateTransaction } from '../../../redux/actions/transaction'
 import AppModal from '../../../compnents/modal/Modal'
+import ClickButton from '../../../compnents/button/Button'
+import { toast } from 'react-toastify'
+import dateFormater from '../../../utils/dateFormat'
+import statusStyle from '../../../utils/statusStyle'
 
 const AdminDepositTransactions = () => {
     const {transactions} = useSelector(state => state.transaction)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
-    const [selctedId, setSelectedId] = useState(null)
+    const [selectedId, setSelectedId] = useState(null)
+    console.log(selectedId)
     useEffect(()=> {
             dispatch(getTransactions())
     }, [])
+
+
+    const handleTransactionUpdate = (task) => {
+        dispatch(updateTransaction({
+            id: selectedId,
+            data:{ status: task}
+        })).then(result => {
+            if(updateTransaction.fulfilled.match(result)){
+                toast(result.message, {type: "success"})
+                dispatch(getTransactions())
+
+            }
+            else{
+                toast(result.message, {type: "error"})
+
+            }
+        })
+    }
+
 
   return (
     <div>
@@ -19,7 +43,7 @@ const AdminDepositTransactions = () => {
 
 
         <div className="px-4 sm:px-6 lg:px-8  hover:border-gray-900">
-            <div className="mt-4 flow-root overflow-y-hidde overflow-x-auto">
+            <div className="mt-4 flow-root overflow-x-auto">
                 <div className="lg:mx-8">
                     <div className="inline-block min-w-full py-2 align-middle">
                         <table className="min-w-full bg-gray-300 border border-gray-200 rounded-md border-separate border-spacing-0 table-auto">
@@ -27,7 +51,7 @@ const AdminDepositTransactions = () => {
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter">Amount</th>
 
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  status</th>
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-20">  status</th>
                                     {/* <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Type</th> */}
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold  backdrop-blur backdrop-filter sm:table-cell">Address</th>
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Time </th>
@@ -43,27 +67,30 @@ const AdminDepositTransactions = () => {
 
                                     {/* make conditional statement  here  */}
                                 {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                { transactions?.map(item => (
+                                { transactions?.map(({id, status, address, created_at, amount}) => (
 
-                                <tr key={item?.id}>
-                                                                        <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{item.amount}</p></td>
+                                <tr key={id}>
+                                <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{amount}</p></td>
 
-                                    <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                        {item?.status}
+                                    <td className="relative whitespace-nowrap border-b  border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
+                                        <span className={`${statusStyle(status)} py-1 w-full max-w-[200px] block  text-center px-3 border rounded-3xl`}>
+                                        {status}
+
+                                        </span>
 
                                     </td>
 
                                   <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
-                                        {item?.address ?? "Not Available"}
+                                        {address ?? "Not Available"}
 
                                     </td> 
                                     <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                        {item?.created_at}
+                                        {dateFormater(created_at)}
 
                                     </td>
 
                                     <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                        <BreadCrunbs setSelectedId={setSelectedId} setOpen={setOpen} open={open}/>
+                                        <BreadCrunbs id={id} setSelectedId={setSelectedId} setOpen={setOpen} open={open}/>
 
                                     </td>
 
@@ -81,7 +108,15 @@ const AdminDepositTransactions = () => {
         </div>
 
 
-        <AppModal isModalOpen={open}>
+        <AppModal handleCancel={() => setOpen(false)} isModalOpen={open} title={"Approve Deposit"}>
+            <div className='flex my-6 justify-between'>
+            <ClickButton
+            onClick={() =>handleTransactionUpdate("declined")}
+             btnType="decline">Decline</ClickButton>
+            <ClickButton
+            onClick={() => handleTransactionUpdate("approved")}>Approve</ClickButton>
+                
+            </div>
 
 
 

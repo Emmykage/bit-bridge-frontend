@@ -48,7 +48,7 @@ export const AdminLogin = () => {
         onFinish={(values) => {
           dispatch(userLogin({user: values})).then(result =>
             {
-              if(userSignUp.fulfilled.match(result)){
+              if(userLogin.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
                 navigate("/admin/dashboard")
               }
@@ -62,7 +62,7 @@ export const AdminLogin = () => {
           console.log(values)
         }}
           logo={logo}
-          title="BitBridge Global"
+          title="BitBridge Global Admin Login"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
             backdropFilter: 'blur(4px)',
@@ -72,17 +72,17 @@ export const AdminLogin = () => {
             justifyContent: "center"
           }}
           subTitle="Nigerians Largest trading and exchange platform"
-          actions={
-            <Space>
-              Already have an account? <NavLink to={"/login"}>Login</NavLink> 
-              <AlipayCircleOutlined style={iconStyles} />
-              <TaobaoCircleOutlined style={iconStyles} />
-              <WeiboCircleOutlined style={iconStyles} />
-            </Space>
-          }
+          // actions={
+          //   <Space>
+          //     Already have an account? <NavLink to={"/login"}>Login</NavLink> 
+          //     <AlipayCircleOutlined style={iconStyles} />
+          //     <TaobaoCircleOutlined style={iconStyles} />
+          //     <WeiboCircleOutlined style={iconStyles} />
+          //   </Space>
+          // }
           submitter={{
             searchConfig: {
-              submitText: 'Sign Up', // Change button text to Sign Up
+              submitText: 'Admin Login', // Change button text to Sign Up
             },
           }}
 

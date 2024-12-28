@@ -10,6 +10,7 @@ import { SiMoneygram } from 'react-icons/si';
 import { MdMiscellaneousServices, MdProductionQuantityLimits } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPricetagOutline } from 'react-icons/io5';
+import { toast } from 'react-toastify';
 const AdminDashboardLayout = () => {
     const [toggleNav, setToggleNav] = useState(false)
     const {user, loading } = useSelector(state => state.auth)
@@ -22,13 +23,12 @@ const AdminDashboardLayout = () => {
     }, [dispatch]);
 
 
-    // useEffect(() => {
-    //     if (user && user.role !== "admin") {
-    //         navigate("/");
-    //     }
-    // }, [user, navigate]);
-
-    // console.log(wallet)
+    useEffect(() => {
+        if (user && !user.admin) {
+            toast("No Authorization", {type: "error"})
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     if(loading){
         return(

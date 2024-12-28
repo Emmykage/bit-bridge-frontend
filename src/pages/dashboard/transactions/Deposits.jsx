@@ -2,14 +2,14 @@ import { useSelector } from "react-redux"
 import dateFormater from "../../../utils/dateFormat"
 import { nairaFormat } from "../../../utils/nairaFormat"
 
-const Withdrawals = () => {
+const Deposits = () => {
   const {wallet} = useSelector(state => state.wallet)
 
   return (
     <div className='lg:p-10 bg-black py-4 px-2 text-white'>
-        <h4 className='text-2xl font-medium text-alt'>Recent Withdrawals</h4>
-        <div className='min-h-56'>
-        <div className="px-4 sm:px-6 lg:px-8 hover:border-gray-900">
+    <h4 className='text-2xl font-medium text-alt'>Recent Trades</h4>
+    <div className='min-h-56'>
+    <div className="px-4 sm:px-6 lg:px-8 hover:border-gray-900">
             <div className="mt-4 flow-root">
                 <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle">
@@ -56,10 +56,9 @@ const Withdrawals = () => {
                 </div>
             </div>
         </div>
-
-        </div>
     </div>
-      )
+</div>
+ )
 }
 
-export default Withdrawals
+export default Deposits

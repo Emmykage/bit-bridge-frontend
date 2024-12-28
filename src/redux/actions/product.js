@@ -30,8 +30,6 @@ export const getProducts = createAsyncThunk("product/get-products", async(_, {re
         });
 
         const result = response.data;
-        console.log(result)      
-
         return result;
     } catch (error) {
         if (error.response) {

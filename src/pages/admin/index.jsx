@@ -1,10 +1,10 @@
 import { UserAddOutlined } from '@ant-design/icons'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import BreadCrunbs from '../../compnents/Breadcrumbs/BreadCrunbs'
 import { getTransactions } from '../../redux/actions/transaction'
 import { nairaFormat } from '../../utils/nairaFormat'
+import statusStyle from '../../utils/statusStyle'
 
 const AdminHome = () => {
     const dispatch = useDispatch()
@@ -55,7 +55,7 @@ const AdminHome = () => {
                                             <tr>
                                                 <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter"></th>
 
-                                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  TOTAL AMOUNT</th>
+                                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8 text-nowrap">  TOTAL AMOUNT</th>
                                                 <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">STATUS</th>
                                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">ADDRESS</th>
                                                 <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">TIME </th>
@@ -69,7 +69,7 @@ const AdminHome = () => {
 
                                                 {/* make conditional statement  here  */}
                                             {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                            { transactions?.map(item => (
+                                            { transactions?.slice(0, 6).map(item => (
 
                                             <tr key={item?.id}>
                                                 <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
@@ -78,7 +78,10 @@ const AdminHome = () => {
                                                     <p className="font-medium text-gray-600 leading-5">{nairaFormat(item.amount)} </p>
                                                 </td>
                                                  <td className="whitespace-nowrap  border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-900 font-normal sm:table-cell capitalize">
-                                                    {item.status}
+                                                    <span className={`${statusStyle(item?.status)} py-1 w-full max-w-[200px] block  text-center px-3 border rounded-3xl`}>
+                                                    {(item.status)}
+
+                                                    </span>
                                                 </td> 
                                                 {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
                                                 <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-center text-gray-900 text-sm sm:pr-8 lg:pr-8">

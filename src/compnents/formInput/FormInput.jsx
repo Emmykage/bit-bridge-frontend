@@ -9,7 +9,7 @@ const FormInput = ({
     className, 
     value,
     type="text", 
-    required=true,
+    required=false,
     label}) => {
   
   return (
@@ -27,7 +27,7 @@ const FormInput = ({
        label={label}
        type={type}>
        { type== "text" ?  <Input
-       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full py-3`} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full p-3 font-medium`} /> }
+       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full `} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium`} /> }
       </Form.Item>
 
       </>

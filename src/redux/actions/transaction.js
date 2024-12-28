@@ -4,13 +4,30 @@ import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
 
 export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
-    console.log(data)
+
+    const formData = new FormData()
+
+    formData.append("transaction[address]",  data.address)
+    formData.append("transaction[amount]",  data.amount)
+    formData.append("transaction[transaction_type]",  data.transaction_type)
+
+    if(data.proof && data.proof[0]){
+        formData.append("transaction[proof]",  data.proof[0].originFileObj)
+
+    }
+
+
+    console.log(data, Object.fromEntries(formData))
     try {
         console.log(fetchToken())
 
-        const response = await axios.post(`${baseUrl + apiRoute}transactions`, data, {
+        const response = await axios.post(`${baseUrl + apiRoute}transactions`, 
+            formData
+            , {
             headers: {
-                "Authorization": `Bearer ${fetchToken()}`
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "multipart/form-data", 
+
             }
         });
 
@@ -26,11 +43,11 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
     }
 });
 
-export const updateTransaction = createAsyncThunk("transaction/update-transaction", async(data, {rejectWithValue}) => {
+export const updateTransaction = createAsyncThunk("transaction/update-transaction", async({id, data}, {rejectWithValue}) => {
     try {
-        const response = await axios.patch(`${baseUrl + apiRoute}transactions`, data, {
+        const response = await axios.patch(`${baseUrl + apiRoute}transactions/${id}`, data, {
             headers: {
-                "Authorization": JSON.parse(localStorage.getItem("bitglobal"))
+                "Authorization": `Bearer ${fetchToken()}`
             }
         });
 

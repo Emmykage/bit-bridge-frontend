@@ -10,7 +10,7 @@ const FormInputArea = ({
     className, 
     value,
 
-    required=true,
+    required=false,
     label}) => {
   
   return (

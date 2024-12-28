@@ -1,18 +1,33 @@
 import { TransactionOutlined, WalletOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
 import AppModal from "../../compnents/modal/Modal"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddFund from "../../compnents/addFund/AddFund";
 import { useDispatch, useSelector } from "react-redux";
 import { createTransaction } from "../../redux/actions/transaction";
 import { RiUserReceived2Line } from "react-icons/ri";
+import { converter } from "../../api/currencyConverter";
+import dateFormater from "../../utils/dateFormat";
 
 
 const Account = () => {
     const {wallet} = useSelector(state => state.wallet)
+    const [converedAmount, setConvertedAmount] = useState(null)
 
 
-    console.log(wallet)
+    useEffect(()=> {
+        const fetchConversion = async() => {
+
+            const result = await converter("USD", wallet?.balance)
+            setConvertedAmount(result)
+        }
+
+        fetchConversion()
+    },[wallet?.balance])
+
+
+
+    console.log( converedAmount)
 
 
      const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,9 +35,9 @@ const Account = () => {
     const handleSubmit = (values) => {
         console.log(values)
         dispatch (createTransaction({
-            transaction: {...values,
-                transaction_type: "deposit"
-            }
+            ...values,
+            transaction_type: "deposit"
+            
         }))
 
     }
@@ -35,7 +50,7 @@ const Account = () => {
             <div className="flex bg-black text-gray-100 p-10 rounded justify-between">
                 <div className="">
                     <h4 className="text-xl font-semibold text-gray-500">USDT Wallet</h4>
-                    <p className="text-4xl font-medium">USDT {0}</p>
+                    <p className="text-4xl font-medium">USDT {converedAmount}</p>
                     <p className="my-4 font-medium">{nairaFormat(wallet?.balance)}</p>
                     <h6>Rate</h6>
                     <p className="text-sm font-bold text-gray-500">
@@ -73,9 +88,10 @@ const Account = () => {
                                 <tr>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  transaction</th>
                                     {/* <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Type</th> */}
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Address</th>
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Time </th>
+                                    <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Address</th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Amount</th>
+                                    <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Time </th>
+
 
                         
                             </tr>
@@ -104,7 +120,7 @@ const Account = () => {
                                     <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount)}</p></td>
 
                                     <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                        {item?.created_at}
+                                        {dateFormater(item?.created_at)}
 
                                     </td>
 

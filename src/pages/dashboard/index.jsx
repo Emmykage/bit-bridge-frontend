@@ -7,7 +7,7 @@ import NavButton from "../../compnents/button/NavButton"
 const HomeDashboard = () => {
   return (
     <div className="text-white w-full">
-        <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col justify-between ">
+        <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">
             <div className="overflow-hidden">
                 <h3 className="text-xl">Wallet balance</h3>
                 <div>
@@ -17,7 +17,7 @@ const HomeDashboard = () => {
                  </div>
 
                         
-                <div className="flex overflow-x-scroll w-full my-10">
+                <div className="flex overflow-x-auto w-full my-10">
                     <div className="pr-6 border-r border-gray-700 ">
 
                         <div className="flex py-8 gap-3">

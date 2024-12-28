@@ -6,6 +6,8 @@ const FormSelect = ({
     className, 
     options, 
     required=false,
+    placeholder,
+
     label}) => {
   
   return (
@@ -23,11 +25,12 @@ const FormSelect = ({
        label={label}
        >
         <Select
+        placeholder={placeholder}
         className='h-12'
         name={name}
-        
-        defaultValue={options[0]}
         onChange={onChange}
+        loading={true}
+        
         options={options}>
         </Select>      
         </Form.Item>

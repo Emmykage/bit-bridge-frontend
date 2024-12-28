@@ -24,7 +24,7 @@ const DashboardLayout = () => {
         <div className='max-w-[1500px] m-auto'>
 
         <header className='flex justify-between items-center bg-black rounded py-10 px-7  top-0'>
-            <span onClick={()=> seTShowMenu(prev => !prev)}>
+            <span className='lg:hidden ' onClick={()=> seTShowMenu(prev => !prev)}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
             <NavLink className={"text-3xl text-white"}>

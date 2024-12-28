@@ -5,55 +5,62 @@ import "./style.scss"
 import FormSelect from '../formSelect/FormSelect';
 import paymentDetails from '../../data/walletAddres.json'
 import { PlusOutlined } from '@ant-design/icons';
-const AddFund = ({
-  handleSubmit
+import FormInputArea from '../formInputArea/FormInput';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+const SellGiftCard = ({
+    handleSubmit
 }) => {
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
- 
-  const normFile = (e) => {
+  const {loading} = useSelector(state => state.order);
 
+  const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
     }
-    return e?.fileList || [];
+    return e?.fileList;
   };
   return (
     <Form
+    className='sellCard'
       layout={formLayout}
       onFinish={(values) =>{
-        // const uploadedFile = values.proof?.[0]?.originFileObj;
-  
-        // console.log(values)
             handleSubmit(values)
-
       }}
       form={form}
       initialValues={{
-        amount: "",
-        address: "",
-        proof: null
+        total_amount: "",
+        proof: null,
+        order_type: "",
+        extra_info: ""
       }}
+      
       style={{
         color: "white",
         maxWidth: formLayout === 'inline' ? 'none' : 600,
       }}
     >
-        <FormInput className="add-fund" name="amount" type='number' label={"Amount(USDT value)"}/>
-        <FormSelect className="add-fund" name="address"  label={"Address"} options={paymentDetails}/>
+        <FormSelect required={true}  name="order_type" type='number' label={"Type"} options={[{value: "sell", label: "Sell"},{value: "buy", label: "Buy"}]}/>
+        <FormSelect required={true} className="card" placeholder="select card" name="card"  label={"Select card"}  options={[{value: "generic", label: "generic"}]}/>
+        <FormInput required={true} className="ad" name="total_amount" type='number'  label={"Total amount"} placeHolder="total amount" />
+        <FormInputArea className="" name="extra_info" label={"Extra Information(optional)"} placeHolder="" />
+        
 
         <Form.Item 
+        name={"proof"}
         label="payment receipt" 
         valuePropName="fileList" 
         className='text-white add-fund' 
-        name="proof" 
-
-        getValueFromEvent={normFile}
-        >
+        rules={[
+          {
+            required: true,
+            message: `Please input image receipt!`,
+          },
+        ]}
+        getValueFromEvent={normFile}>
           <Upload 
-            // name="proof" 
-
-          beforeUpload={(file)=> {
+           beforeUpload={(file)=> {
             const isImage = file.type.startsWith("image/")
             if(!isImage){
               message.error("You can only upload image files!");
@@ -63,7 +70,7 @@ const AddFund = ({
             return false}
           }          
           maxCount={1}
-    
+          name="proof"
           listType="picture-card"
           >
             <button
@@ -87,7 +94,7 @@ const AddFund = ({
         </Form.Item>
         <Form.Item label={null}>
 
-        <Button type="primary" htmlType="submit">
+        <Button loading={loading} type="primary" htmlType="submit">
             Submit
         </Button>
     </Form.Item>
@@ -96,4 +103,8 @@ const AddFund = ({
   )
 }
 
-export default AddFund
+SellGiftCard.propTypes = {
+  handleSubmit: PropTypes.func
+}
+
+export default SellGiftCard

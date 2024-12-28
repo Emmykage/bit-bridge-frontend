@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
+import { useEffect, useRef, useState } from 'react'
 
-const BreadCrunbs = ({id,setSelectedId, open, setOpen}) => {
+const BreadCrunbs = ({id,setSelectedId, setOpen}) => {
   const dropDownRef = useRef(null)
   const [toggle, setToggle] = useState(false)
-  const handleDropdown = () => {
+  // const handleDropdown = () => {
 
-    console.log("first")
-  }
+  //   console.log("first")
+  // }
   useEffect(() => {
 
     const closeDropDown = (e) => {
-      if(!dropDownRef.current.contains(e.target)){
+      if( dropDownRef && !dropDownRef.current.contains(e.target)){
         console.log("first")
         setToggle(false)
       }
@@ -21,21 +22,20 @@ const BreadCrunbs = ({id,setSelectedId, open, setOpen}) => {
   return (
     <div className='relative' ref={dropDownRef}>
 
-      <span className='cursor-pointer' onClick={()=> setToggle(prev => !prev)}>
+      <span className='cursor-pointer relative bg-red-200' onClick={()=> setToggle(prev => !prev)}>
       ...
 
-      </span>
-        <div className={`absolute bottom-full rounded z-10 -left-full p-4 bg-white ${toggle ? "block" : "hidden"}`}>
+        <div style={{right: "calc(100% + 10px)"}} className={`absolute bottom-0 rounded z-10  p-4 bg-white ${toggle ? "block" : "hidden"}`}>
             <ul>
               <li className='my-2'>
                 <span className=''>View</span>
               </li>
               <li className='my-2'>
                 <span className=''
-                // onClick={()=> {
-                //   setOpen(open)
-                //   setSelectedId(id)
-                // }}
+                onClick={()=> {
+                  setOpen(prev => !prev)
+                  setSelectedId(id)
+                }}
                 >update</span>
               </li>
               <li className='my-2'>
@@ -44,8 +44,17 @@ const BreadCrunbs = ({id,setSelectedId, open, setOpen}) => {
             </ul>
 
         </div>
+        </span>
+
     </div>
   )
+}
+
+BreadCrunbs.propTypes = {
+  id: PropTypes.string,
+  setSelectedId: PropTypes.func, 
+  open: PropTypes.bool, 
+  setOpen: PropTypes.func
 }
 
 export default BreadCrunbs

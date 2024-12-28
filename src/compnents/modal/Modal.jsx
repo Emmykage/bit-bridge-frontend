@@ -14,7 +14,8 @@ const AppModal = ({
   return (
     <>
 
-      <Modal open={isModalOpen} 
+      <Modal 
+      open={isModalOpen} 
       title={title}
       onOk={handleOk} 
       onCancel={handleCancel}

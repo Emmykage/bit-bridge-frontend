@@ -9,4 +9,8 @@
         // @apply bg-primary;
         @apply bg-primary text-white !important;
     }
+    &.decline{
+        background: red;
+        color: white;
+    }
 }
