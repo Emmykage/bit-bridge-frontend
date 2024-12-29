@@ -86,3 +86,27 @@ export const getTransactions = createAsyncThunk("transaction/get-transactions", 
     }
 });
 
+export const getUserTransactions = createAsyncThunk("transaction/get-user-transactions", async({type}, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}transactions/user?transaction_type=${type}`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+
+        const result = response.data;    
+        console.log(result)
+  
+
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+

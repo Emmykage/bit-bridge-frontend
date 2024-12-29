@@ -6,14 +6,23 @@ import { fetchToken } from "../../hooks/localStorage";
 export const createOrder = createAsyncThunk("order/creaet-order", async(data, {rejectWithValue}) => {
     const formData = new FormData()
 
-    formData.append("order_detail[order_type]", data.order_type)
-    // formData.append("order_detail[card]", data.card)
-    formData.append("order_detail[total_amount]", data.total_amount)
-    formData.append("order_detail[extra_info]", data.extra_info)
+    data?.order_type && formData.append("order_detail[order_type]", data.order_type)
+    data?.total_amount && formData.append("order_detail[total_amount]", data?.total_amount)
+    data.extra_info && formData.append("order_detail[extra_info]", data?.extra_info)
+    data.order_items_attributes.forEach((item, index) => {
+        formData.append(`order_detail[order_items_attributes][${index}][product_id]`, item?.product_id);
+        formData.append(`order_detail[order_items_attributes][${index}][amount]`, item?.amount);
+        item?.provision_id && formData.append(`order_detail[order_items_attributes][${index}][provision_id]`, item?.provision_id);
+        item?.quantity && formData.append(`order_detail[order_items_attributes][${index}][quantity]`, item?.quantity);
+        
+
+      });  
 
     if(data.proof && data.proof[0]?.originFileObj){
         formData.append("order_detail[proof]", data.proof[0].originFileObj)
     }
+
+    console.log(Object.fromEntries(formData))
     try {
         const response = await axios.post(`${baseUrl + apiRoute}order_details`,formData, {
             headers: {
@@ -21,6 +30,7 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
         });
 
         const result = response.data; 
+        console.log("order details result:",result)
         return result;
     } catch (error) {
         if (error.response) {

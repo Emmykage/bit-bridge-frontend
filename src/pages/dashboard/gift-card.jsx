@@ -1,5 +1,4 @@
 
-import giftCards from "../../data/cardSales.json"
 import GiftCard from '../../compnents/card/GiftCard'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -9,11 +8,14 @@ import SellFund from "../../compnents/sellCard/SellCArd"
 import { createOrder } from "../../redux/actions/order"
 import { toast } from "react-toastify"
 const GiftCards = () => {
+  const [selectedItem, setSelectedItem] = useState({ provider: "", product_id: ""})
   const {giftcards} = useSelector(state => state.product)
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
+
+  console.log(selectedItem, giftcards)
+
   const handleSubmit = (values) => {
-    console.log(values)
     dispatch(createOrder(values)).then(result => {
       if(createOrder.fulfilled.match(result)){
         setOpen(false)
@@ -39,16 +41,24 @@ const GiftCards = () => {
 
         <div  className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {giftcards.map(({image, provider, name, id}) => (
-                <GiftCard onClick={() => {setOpen(prev => !prev)}} key={id} provider={provider} title={name} image={image}/>
+                <GiftCard onClick={() => {
+                  setSelectedItem({
+                    ...selectedItem,
+                    product_id: id,
+                    provider: provider
+                  })
+                  setOpen(prev => !prev)}
+                }
+                key={id} provider={provider} title={name} image={image}/>
             ))}
 
         </div>
     </div>
     </section>
 
-    <AppModal title="Sell GiftCard" handleCancel={()=> setOpen(false)} isModalOpen={open}>
+    <AppModal title={`Sell ${selectedItem.provider} GiftCard `} handleCancel={()=> setOpen(false)} isModalOpen={open}>
       <div>
-        <SellFund handleSubmit={handleSubmit}/>
+        <SellFund handleSubmit={handleSubmit} selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
 
       </div>
 

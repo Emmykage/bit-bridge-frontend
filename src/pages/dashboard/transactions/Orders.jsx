@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUserOrders } from "../../../redux/actions/order"
 import { nairaFormat } from "../../../utils/nairaFormat"
 import dateFormater from "../../../utils/dateFormat"
+import statusStyle from "../../../utils/statusStyle"
 
 const Orders = () => {
   const dispatch = useDispatch()
@@ -26,8 +27,8 @@ const Orders = () => {
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  id</th>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  type</th>
-                                <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Status</th>
-                                    <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Amount</th>
+                                <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 md:px-10 text-center text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Status</th>
+                                    <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5 md:px-0  text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Amount</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Time </th>
                                     {/* <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Amount</th> */}
 
@@ -40,21 +41,25 @@ const Orders = () => {
 
                                     {/* make conditional statement  here  */}
                                 {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                { orders?.map(item => (
+                                { orders.length > 0 ? orders?.map(item => (
 
                                 <tr key={item?.id}>
-                                    <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
+                                    <td className="whitespace-nowrap border-b max-w-40 border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
                                         <p className="font-medium text-gray-600 leading-5">{item.id} </p>
                                     </td>
                                     <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm  sm:pl-6 lg:pl-8">
                                         <p className="font-bold text-gray-600 leading-5 capitalize font- ">{item.order_type} </p>
                                     </td>
-                                    <td className="whitespace-nowrap  border-b border-gray-200 hidden px-3 py-4 text-sm text-gray-900 font-normal sm:table-cell capitalize">
-                                        {item.status}
-                                    </td> 
+                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 text-center flex justify-center items-center text-gray-900 text-sm">
+                                        <span className={`${statusStyle(item?.status)} py-1 w-full max-w-[200px] block  text-center px-3 border rounded-3xl`}>
+                                        {item?.status }
+                                        </span>
+                                        
+
+                                    </td>  
                                     
                                     {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
-                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-center text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                    <td className="relative whitespace-nowrap border-b  border-gray-200 py-3  text-center text-gray-900 text-sm">
                                         {nairaFormat(item?.total_amount)}
 
                                     </td> 
@@ -66,7 +71,14 @@ const Orders = () => {
 
                        
                                     </tr>
-                                                                    ))}
+                                    )) :
+                                    <tr>
+                                        <td className="text-black text-center">
+                                            No Orders
+                                        </td>
+                                    </tr>
+
+                                }
 
 
                         

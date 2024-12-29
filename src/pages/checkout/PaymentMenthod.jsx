@@ -20,7 +20,8 @@ const PaymentMenthod = () => {
         {
             quantity: 1,
             amount: item.value,
-            product_id: item.id
+            product_id: item.id,
+            // provision: null 
 
         }
     ))
@@ -29,12 +30,13 @@ const PaymentMenthod = () => {
 
     const handlePayment = () => {
         dispatch(createOrder({
-            order_detail: {
+        
+                order_type: "buy",
                 total_amount: totalAmount,
                 order_items_attributes: refineCart
             }
 
-        })).then(result => {
+        )).then(result => {
 
   
             if(createOrder.fulfilled.match(result)) {

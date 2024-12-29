@@ -3,13 +3,14 @@ import  { useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
 import FormSelect from '../formSelect/FormSelect';
-import paymentDetails from '../../data/walletAddres.json'
 import { PlusOutlined } from '@ant-design/icons';
 import FormInputArea from '../formInputArea/FormInput';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 const SellGiftCard = ({
-    handleSubmit
+    handleSubmit,
+    setSelectedItem,
+    selectedItem
 }) => {
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
@@ -26,14 +27,28 @@ const SellGiftCard = ({
     className='sellCard'
       layout={formLayout}
       onFinish={(values) =>{
-            handleSubmit(values)
+            handleSubmit({
+          
+              extra_info: values.extra_info,
+              proof: values.proof,
+              order_type: values.order_type,
+              order_items_attributes: [
+                {
+                  product_id: selectedItem.product_id,
+                  provision_id: values.provision,
+                  amount: values.amount
+                }
+        ]
+            })
       }}
       form={form}
       initialValues={{
-        total_amount: "",
+        
+        amount: "",
         proof: null,
         order_type: "",
-        extra_info: ""
+        extra_info: "",
+        provision: ""
       }}
       
       style={{
@@ -42,8 +57,8 @@ const SellGiftCard = ({
       }}
     >
         <FormSelect required={true}  name="order_type" type='number' label={"Type"} options={[{value: "sell", label: "Sell"},{value: "buy", label: "Buy"}]}/>
-        <FormSelect required={true} className="card" placeholder="select card" name="card"  label={"Select card"}  options={[{value: "generic", label: "generic"}]}/>
-        <FormInput required={true} className="ad" name="total_amount" type='number'  label={"Total amount"} placeHolder="total amount" />
+        <FormSelect  className="card" onChange={({value}) => setSelectedItem({...selectedItem, provision_id: value})} placeholder="select card" name="card"  label={"Select card"} />
+        <FormInput required={true} className="ad" name="amount" type='number'  label={"Total amount"} placeHolder="amount" />
         <FormInputArea className="" name="extra_info" label={"Extra Information(optional)"} placeHolder="" />
         
 
@@ -104,7 +119,9 @@ const SellGiftCard = ({
 }
 
 SellGiftCard.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  setSelectedItem: PropTypes.func,
+    selectedItem: PropTypes.object
 }
 
 export default SellGiftCard

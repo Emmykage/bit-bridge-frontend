@@ -1,21 +1,17 @@
 import {
-  AlipayCircleOutlined,
   LockOutlined,
-  TaobaoCircleOutlined,
   UserOutlined,
-  WeiboCircleOutlined,
 } from '@ant-design/icons';
 import {
   LoginForm,
   ProConfigProvider,
   ProFormText,
-  setAlpha,
-} from '@ant-design/pro-components';
+  } from '@ant-design/pro-components';
 import enUS from "antd/es/locale/en_US"
 
-import { ConfigProvider, Space, Tabs, theme } from 'antd';
+import { ConfigProvider, Tabs, theme } from 'antd';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import logo from "../../../assets/logos/2.png"
 import logo from "../../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,13 +27,6 @@ export const AdminLogin = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const iconStyles = {
-    marginInlineStart: '16px',
-    color: setAlpha(token.colorTextBase, 0.2),
-    fontSize: '24px',
-    verticalAlign: 'middle',
-    cursor: 'pointer',
-  };
 
   return (
     <ProConfigProvider hashed={false}>
@@ -72,14 +61,7 @@ export const AdminLogin = () => {
             justifyContent: "center"
           }}
           subTitle="Nigerians Largest trading and exchange platform"
-          // actions={
-          //   <Space>
-          //     Already have an account? <NavLink to={"/login"}>Login</NavLink> 
-          //     <AlipayCircleOutlined style={iconStyles} />
-          //     <TaobaoCircleOutlined style={iconStyles} />
-          //     <WeiboCircleOutlined style={iconStyles} />
-          //   </Space>
-          // }
+    
           submitter={{
             searchConfig: {
               submitText: 'Admin Login', // Change button text to Sign Up
