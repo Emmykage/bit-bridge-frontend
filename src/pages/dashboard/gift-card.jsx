@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProducts } from "../../redux/actions/product"
 import AppModal from "../../compnents/modal/Modal"
-import SellFund from "../../compnents/sellCard/SellCArd"
+import SellFund from "../../compnents/sellCard/SellCard"
 import { createOrder } from "../../redux/actions/order"
 import { toast } from "react-toastify"
 const GiftCards = () => {

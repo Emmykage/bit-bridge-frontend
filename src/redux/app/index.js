@@ -59,7 +59,7 @@ const AppSlice = createSlice({
 export default AppSlice.reducer 
 export const {
     SET_LOADING, 
-     ADD_TO_CART, 
+     ADD_TO_CART,
      DELETE_CART, 
      UPDATE_CART
     } = AppSlice.actions
