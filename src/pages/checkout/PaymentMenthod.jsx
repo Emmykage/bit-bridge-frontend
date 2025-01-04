@@ -5,7 +5,7 @@ import { createOrder } from '../../redux/actions/order'
 import { toast } from 'react-toastify'
 import { nairaFormat } from '../../utils/nairaFormat'
 import { useEffect } from 'react'
-import { DELETE_CART, GET_CART } from '../../redux/app'
+import { DELETE_CART } from '../../redux/app'
 import { getWallet } from '../../redux/actions/wallet'
 
 const PaymentMenthod = () => {
@@ -13,7 +13,7 @@ const PaymentMenthod = () => {
     const {totalAmount, cartItems} = useSelector(state => state.app)
     const {wallet} = useSelector(state => state.wallet)
     useEffect(() => {
-        dispatch(GET_CART())
+        // dispatch(GET_CART())
         dispatch(getWallet())
     }, [])
     const refineCart = cartItems.map(item => (

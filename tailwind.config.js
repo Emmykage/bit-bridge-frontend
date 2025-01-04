@@ -11,6 +11,9 @@ export default {
         // alt: "#695d2f",
        alt: " rgb(255 204 0)"
       },
+      width: {
+         "app-width": "1500px"
+      },
       maxWidth: {
         "app-layout": "1500px"
       },

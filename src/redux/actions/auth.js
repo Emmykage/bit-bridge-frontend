@@ -27,7 +27,7 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         return result
     } catch (error) {
         if(error.response){
-            toast(error.response.data, {type: "error"})
+            toast(error.response.message, {type: "error"})
             return rejectWithValue({message: error.response.message})
         }
 
