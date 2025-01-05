@@ -1,15 +1,20 @@
 import { DollarOutlined, GiftOutlined, HomeOutlined, LoginOutlined, MenuUnfoldOutlined, WalletOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getWallet } from '../redux/actions/wallet';
 import { userLogout } from '../redux/actions/auth';
+import DropDown from '../compnents/dropDown/DropDown';
+import logo from "../assets/logos/logo-mod.png"
+
 const DashboardLayout = () => {
 
     const dispatch = useDispatch()
     const {wallet} = useSelector(state => state.wallet)
+    const {user, loading} = useSelector(state => state.auth)
+    const navigate = useNavigate()
     const normal = "flex justify-center items-center flex-col"
     const active = "flex text-alt justify-center items-center flex-col"
     const [showMenu, seTShowMenu] = useState(false)
@@ -17,8 +22,13 @@ const DashboardLayout = () => {
         dispatch(getWallet())
     }, [])
 
-
+    useEffect(()=> {
+       if(!loading && !user){
+        navigate('/login')
+       }
+    },[user, loading])
     console.log(wallet)
+
   return (
     <div className='relative bg-gray-00 min-h-screen bg-black/90'>
         <div className='max-w-[1500px] m-auto'>
@@ -27,29 +37,24 @@ const DashboardLayout = () => {
             <span className='lg:hidden ' onClick={()=> seTShowMenu(prev => !prev)}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
-            <NavLink className={"text-3xl text-white"}>
-                BitBridge
+            <NavLink className={"text-3xl text-white flex1"}>
+                <img src={logo} alt='logo' className='h-14 w- object-cover border' />
             </NavLink>
-        <div className='md:block hidden w-ful bg-back text-gray-200  '>
+        <div className='md:flex flex- w-full max-w-3xl  items-center justify-between hidden w-ful  bg-back text-gray-200  '>
             <ul className='flex gap-9'>
                 <li><NavLink to={"/dashboard/home"} className={({isActive})=>  isActive ? active : normal}><HomeOutlined className='text-2xl' /> Home</NavLink></li>
                 <li><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
                 <li><NavLink to={"/dashboard/gift-cards"} className={({isActive})=>  isActive ? active : normal}><GiftOutlined className='text-2xl'/> Gift Card</NavLink></li>
                 <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})=>  isActive ? active : normal}><SignalCellularAltIcon className='text-6xl' />Transaction</NavLink></li>
-                <li><NavLink to={"/dashboard/crypto-sell"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl' /> Crypto Sell</NavLink></li>
+                <li><NavLink to={"/dashboard/crypto-sell"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl text-nowrap' /> Crypto Sell</NavLink></li>
 
             </ul>
             
-
+            <DropDown/>
         </div>
 
         <div className='flex gap-4 '>
-            {/* <NavLink className={"text-nowrap"}>
-                Withdraw now
-            </NavLink>
-            <span>
-                User
-            </span> */}
+        
         </div>
         </header>
         <div className='min-h-96 flex overflow-hidden'>

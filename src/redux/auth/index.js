@@ -4,7 +4,7 @@ import { userLogin, userLogout, userProfile, userSignUp } from "../actions/auth"
 const initialState = {
     user: null,
     logged: false,
-    loading: false
+    loading: true
 }
 
 const AuthSlice = createSlice({

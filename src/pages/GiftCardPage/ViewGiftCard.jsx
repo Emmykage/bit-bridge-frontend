@@ -1,5 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
-import giftCardData from '../../data/giftCardData.json'
+import { useParams } from "react-router-dom"
 import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"

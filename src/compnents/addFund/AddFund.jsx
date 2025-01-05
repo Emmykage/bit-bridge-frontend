@@ -5,6 +5,7 @@ import "./style.scss"
 import FormSelect from '../formSelect/FormSelect';
 import paymentDetails from '../../data/walletAddres.json'
 import { PlusOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
 const AddFund = ({
   handleSubmit
 }) => {
@@ -96,4 +97,7 @@ const AddFund = ({
   )
 }
 
+AddFund.propTypes = {
+  handleSubmit: PropTypes.func
+}
 export default AddFund

@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apiRoute, baseUrl } from "../baseUrl";
 import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
+import { toast } from "react-toastify";
 
 export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
 
@@ -17,7 +18,7 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
     }
 
 
-    console.log(data, Object.fromEntries(formData))
+    // console.log(data, Object.fromEntries(formData))
     try {
         console.log(fetchToken())
 
@@ -31,11 +32,15 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
             }
         });
 
-        const result = response.data;      
+        const result = response.data;   
+        toast(result.message || "Order created successfully", { type: "success" });        toast(result, {type: "success"})
+        console.log(result)
 
         return result;
     } catch (error) {
         if (error.response) {
+            toast(error.response.data.message, {type: "error"})   
+
             return rejectWithValue({ message: error.response.data.message });
         }
         console.error(error);

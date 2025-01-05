@@ -95,16 +95,16 @@ function App() {
     
     <Route path='/admin/login' element={<ALogin/>}/>
     <Route path='/admin/signup' element={<ASignup/>}/>
-  <Route path="/admin" element={<AdminDashboardLayout/>}>
-    <Route path='dashboard' element={<AdminHome/>}/>
-    <Route path='purchases' element={<Purchases/>}/>
-    <Route path='products' element={<Products/>}/>
-    <Route path='services' element={<Services/>}/>
-    <Route path='add-product' element={<AddProduct/>}/>
-    <Route path='transactions' element={<AdminTransactions/>}/>
-    <Route path='users' element={<Users/>}/>
+    <Route path="/admin" element={<AdminDashboardLayout/>}>
+      <Route path='dashboard' element={<AdminHome/>}/>
+      <Route path='purchases' element={<Purchases/>}/>
+      <Route path='products' element={<Products/>}/>
+      <Route path='services' element={<Services/>}/>
+      <Route path='add-product' element={<AddProduct/>}/>
+      <Route path='transactions' element={<AdminTransactions/>}/>
+      <Route path='users' element={<Users/>}/>
 
-  </Route>
+    </Route>
   </Routes>
 
     

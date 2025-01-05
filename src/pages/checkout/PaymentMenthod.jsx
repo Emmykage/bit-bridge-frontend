@@ -32,7 +32,7 @@ const PaymentMenthod = () => {
     console.log(wallet?.balance)
 
     const handlePayment = () => {
-        // totalAmount < wallet?.balance ? 
+        totalAmount < wallet?.balance ? 
         dispatch(createOrder({
         
                 order_type: "buy",
@@ -52,7 +52,7 @@ const PaymentMenthod = () => {
         }
         )
 
-        // : setAlertText(true)
+        : setAlertText(true)
 
     }
 

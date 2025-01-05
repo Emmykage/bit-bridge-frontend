@@ -18,7 +18,7 @@ const Account = () => {
     useEffect(()=> {
         const fetchConversion = async() => {
 
-            const result = await converter("USD", wallet?.balance)
+            const result = await converter({fromCurr: "ngn", toCurr: "usd", amount: wallet?.balance})
             setConvertedAmount(result)
         }
 
@@ -27,7 +27,7 @@ const Account = () => {
 
 
 
-    console.log( converedAmount)
+    console.log( wallet?.balance, wallet)
 
 
      const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +39,11 @@ const Account = () => {
             transaction_type: "deposit"
             
         }))
+        .then(result => {
+            if(createTransaction.fulfilled.match(result)){
+                setIsModalOpen(false)
+            }
+        })
 
     }
 
