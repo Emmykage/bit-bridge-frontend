@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apiRoute, baseUrl } from "../baseUrl";
 import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
+import { toast } from "react-toastify";
 
 export const createOrder = createAsyncThunk("order/creaet-order", async(data, {rejectWithValue}) => {
     const formData = new FormData()
@@ -22,7 +23,7 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
         formData.append("order_detail[proof]", data.proof[0].originFileObj)
     }
 
-    console.log(Object.fromEntries(formData))
+    // console.log(Object.fromEntries(formData))
     try {
         const response = await axios.post(`${baseUrl + apiRoute}order_details`,formData, {
             headers: {
@@ -30,10 +31,12 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
         });
 
         const result = response.data; 
+        toast(result.message, {type: "success"})
         console.log("order details result:",result)
         return result;
     } catch (error) {
         if (error.response) {
+            toast(error.response.message, {type: "error"})
             return rejectWithValue({ message: error.response.data.message });
         }
         console.error(error);

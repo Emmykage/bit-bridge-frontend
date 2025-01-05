@@ -4,16 +4,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createOrder } from '../../redux/actions/order'
 import { toast } from 'react-toastify'
 import { nairaFormat } from '../../utils/nairaFormat'
-import { useEffect } from 'react'
-import { DELETE_CART } from '../../redux/app'
+import { useEffect, useState } from 'react'
+import { DELETE_CART, GET_CART } from '../../redux/app'
 import { getWallet } from '../../redux/actions/wallet'
+import { splitString } from '../../utils'
 
 const PaymentMenthod = () => {
     const dispatch = useDispatch()
     const {totalAmount, cartItems} = useSelector(state => state.app)
     const {wallet} = useSelector(state => state.wallet)
+    const {user, loading} = useSelector(state => state.auth)
+    const [alertText, setAlertText] = useState(false)
     useEffect(() => {
-        // dispatch(GET_CART())
+        dispatch(GET_CART())
         dispatch(getWallet())
     }, [])
     const refineCart = cartItems.map(item => (
@@ -29,6 +32,7 @@ const PaymentMenthod = () => {
     console.log(wallet?.balance)
 
     const handlePayment = () => {
+        // totalAmount < wallet?.balance ? 
         dispatch(createOrder({
         
                 order_type: "buy",
@@ -47,16 +51,19 @@ const PaymentMenthod = () => {
             }
         }
         )
+
+        // : setAlertText(true)
+
     }
 
-    console.log(totalAmount, cartItems)
+    console.log(alertText)
 
   return (
 
     <div className='m-auto '>
      <Header/>
     
-    <div className='py-2 px-4 my-10 max-w-7xl  shadow-sm p-2 m-auto'>
+    <div className='py-2 px-4 my-10 max-w-7xl bg-white shadow-sm p-2 m-auto'>
         <div className='grid md:grid-cols-checkout gap-20 '>
             <div className='bg-white p-4'>
                 <h3 className='text-2xl mb-10 font-semibold'>order summary</h3>
@@ -64,7 +71,7 @@ const PaymentMenthod = () => {
                 {cartItems.map(item => (
                         <div key={item?.id} className='flex my-3 gap-4'>
                         <div className='w-16 h-16 md:w-24 shrink-0 md:h-24 border rounded'>
-                            <img src={item.image} alt={item.provider} />
+                            <img src={`/images/providers/${splitString(item.provider)}.webp`} alt={item.provider} />
                         </div>
                         <div className='flex-1'>
                         <p className='text-base font-semibold'>{item?.provider}</p>
@@ -94,15 +101,16 @@ const PaymentMenthod = () => {
             
         </div>
 
-        <div className=' p-4'>
+        <div className='shadow p-4'>
         <div className='p-4 bg-white font-medium'>
             <h4 className='text-xl font-semibold md:text-3xl my-2 '>  select payment method  </h4>
-            <h3>Account Balance: </h3>
+            <h3>Account Balance:  {user ? nairaFormat(wallet.balance) : "Not Available"} </h3>
+            <p >{ !loading && !user && <span className='text-red-400 text-sm'>Sign up to proceed</span>} </p>
             <div>
                 <p className='text-2xl font-bold text-green-950'>NGN</p>
-               <p> {nairaFormat(0)}</p> 
-               {totalAmount > wallet?.balance }
-               <p className='opacity-40'>Not Enough balance</p>
+               <p> {nairaFormat(totalAmount)}</p> 
+               {totalAmount > wallet?.balance &&  <p className={`opacity-4 text-gray-500 ${alertText && "text-red-500"}`}>Not Enough balance</p>  }
+             
             </div>
 
             <div className='py-6'>

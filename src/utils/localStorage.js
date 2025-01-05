@@ -1,19 +1,28 @@
 import { toast } from "react-toastify"
 
 export const getCartItems = () => {
+  try {
+      const stored = localStorage.getItem("G_BRIDGE_CART");
+      
+      // Check if stored is null or not a valid JSON
+      if (!stored) {
+          return []; // Return an empty array if there's no stored cart
+      }
 
-    try {
-        const stored = localStorage.getItem("G_BRIDGE_CART")
-        const storedCart = JSON.parse(stored)
-        return storedCart
+      const storedCart = JSON.parse(stored);
 
-        
-    } catch (error) {
-        console.log(error)
+      // Optionally handle if storedCart is null or not an array
+      if (!Array.isArray(storedCart)) {
+          return []; // Return an empty array if the parsed cart isn't a valid array
+      }
 
-        toast(error?.message)
-        return []
-    }
+      return storedCart;
+
+  } catch (error) {
+      console.log(error);
+      toast(error?.message || "An error occurred while fetching cart items");
+      return [];
+  }
 }
 
 export const processCart = (items) => {
@@ -80,6 +89,7 @@ export const addToCartItems = (cartData) => {
 
   export const calculateTotal = () => {
     let amount = 0
+
     const cart_items = getCartItems()
     for(const item of cart_items){
        amount += item?.value ?? 0

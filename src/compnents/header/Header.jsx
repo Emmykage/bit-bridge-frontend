@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import DrawerModal from '../drawer/Drawer';
 import Carts from '../carts/Carts';
 import { useDispatch, useSelector } from 'react-redux';
-// import { GET_CART } from '../../redux/app';
+import { GET_CART } from '../../redux/app';
 import { userLogout } from '../../redux/actions/auth';
 const Header = () => {
   const [toggleNav, setToggle] = useState(false)
@@ -17,9 +17,9 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const {user} = useSelector(state => state.auth)
   const dispatch = useDispatch()
-  // useEffect(()=> {
-  //   dispatch(GET_CART())
-  // },[])
+  useEffect(()=> {
+    dispatch(GET_CART())
+  },[])
 
   return (
     <>

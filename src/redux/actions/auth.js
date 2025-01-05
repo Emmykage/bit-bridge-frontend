@@ -86,6 +86,8 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
         }
 
         localStorage.setItem("bitglobal", JSON.stringify(accessToken));
+        toast(result.message, {type: "success"})
+
 
         return result;
     } catch (error) {

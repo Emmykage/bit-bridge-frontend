@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { DeleteOutlined } from '@ant-design/icons'
 import { DELETE_CART } from '../../redux/app'
+import { splitString } from '../../utils'
 
 const Carts = ({items}) => {
     const navigate = useNavigate()
@@ -17,7 +18,7 @@ const Carts = ({items}) => {
         {items.map(({id,provider, provision, value, image }) => (
             <div key={id} className='flex  my-6 py-4 bg-yellow px-2 border-b '>
                 <div className='w-28 h-28  border rounded'>
-                    <img src={image} alt="" className='w-full h-full'/>
+                    <img src={`/images/providers/${splitString(provider)}.webp`} alt="" className='w-full h-full'/>
 
                 </div>
                 <div className='px-3 flex-1'>

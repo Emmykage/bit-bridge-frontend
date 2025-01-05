@@ -1,52 +1,33 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import giftCardData from '../../data/giftCardData.json'
 import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { ADD_TO_CART } from "../../redux/app"
 import FormInput from "../../compnents/formInput/FormInput"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { converter } from "../../api/currencyConverter"
+import { getProducts } from "../../redux/actions/product"
 const ViewGiftCard = () => {
     const dispatch = useDispatch()
     const {provider} = useParams()
-    const [value, setValue] = useState("")
-    const selectedProvider = giftCardData.find(item => item.provider == provider)
+    const [value, setValue] = useState(0)
+    const {giftcards} =  useSelector(state => state.product)
+    const [btcValue, setBtcValue] = useState()
+    console.log(giftcards)
 
-    // console.log(selectedProvider)
-    const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
+    const selectedProvider = giftcards?.find(item => item.provider == provider)
 
+    const giftcardImage =  provider?.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
+    console.log(selectedProvider)
 
-                        Steam and Ubisoft Store
-                        On Steam, redeem Cherry Credits for Steam Wallet Codes, which work like game activation codes, giving you access to over 1,800 game titles and a community of 75 million active users.
-
-
-                        Cherry Credits can be used to buy Steam Wallet Codes in the following countries: Australia, Bahrain, Brunei, Cambodia, East Timor, Hong Kong, Indonesia, India, Kuwait, Laos, Malaysia, Myanmar, Oman, Philippines, Qatar, Saudi Arabia, Singapore, Thailand, Turkey, United Arab Emirates (UAE), Vietnam, Korea, Nepal, Taiwan, China, Pakistan, and Macau.
-
-
-                        On Ubisoft, use Cherry Credits as a payment method to purchase games via the Uplay Launcher or Ubisoft Web Store. Cherry Credits simplifies the process of accessing a wide range of games and digital content on these popular platforms, all while enjoying the benefits of virtual currency.
-
-
-                        You can find the instructions on how to redeem Cherry Credits on Steam and Ubisoft Store below:
-
-                        Buy Steam Wallet Codes Credits
-                        Buy Ubisoft Credits
-
-                        Supported games
-                        Black Desert SEA
-                        Dragon Nest SEA
-                        Travian: Legends
-                        Ragnarok Online
-                        World of Tanks
-                        Conquer Online
-                        Elsword
-                        Habbo Hotel
-                        And many more...
-                        Read the full list on cherrycredits.com/Games
-               `}
-
+    useEffect(()=> {
+        dispatch(getProducts())
+    },[])
+ 
 
                const handleCart = () => {
                 console.log(value)
@@ -69,7 +50,20 @@ const ViewGiftCard = () => {
                }
 
                console.log(value)
-
+               useEffect(() => {
+                const fetchBtcValue = async () => {
+                    try {
+                        const btcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                        setBtcValue(btcValue);
+                        console.log("bitcoin value", btcValue); // Logs the converted value
+                    } catch (error) {
+                        console.error("Error fetching BTC value:", error.message);
+                    }
+                };
+            
+                fetchBtcValue();
+            }, [value])
+            
   return (
     <div>
         <Header/>
@@ -77,23 +71,25 @@ const ViewGiftCard = () => {
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-6xl m-auto py-10">
             <div className="p-10 bg-gray-200 flex justify-center items-center h-96">
-                <img src={selectedProvider?.image} alt="provider image"/>
+                <img src={`/images/providers/${giftcardImage}.webp`} alt="provider image"/>
 
             </div>
             <div>
 
                 <div className="text-sm my-2 text-gray-600 font-medium">
-                    <p>Data &gt; {provider}</p>
+                    <p>Gift Card &gt; {selectedProvider?.provider}</p>
                 </div>
 
-                <h3 className="text-2xl font-medium">NTEL Refil</h3>
+                <h3 className="text-2xl font-medium">{selectedProvider?.provision}</h3>
                 
                 <div className="notice border rounded-xl my-2 p-2 px-3">
                     <p className="text-sm text-gray-700">
-                    This gift card is redeemable on the e-commerce platform & at the physical store
+                    {selectedProvider?.info}    
                     </p>
                 </div>
-                <p className="my-3">Use Bitcoin, ETH or Crypto on NTEL. Pay with Bitcoin, Lightning, Ethereum, Binance Pay, USDT, USDC, Dogecoin, Litecoin, Dash. Instant email delivery. No account required. Start living on crypto!</p>
+                <p className="my-3">
+                    {selectedProvider?.header_info}   
+                 </p>
                 <div>
                     <h3 className="text-xl font-semibold">Enter Amount </h3>
 
@@ -107,7 +103,7 @@ const ViewGiftCard = () => {
 
 
                         <div className="flex-1 text-sm mt-2 from-gray-800">
-                            Estimated price 0.0000BTC
+                            Estimated price {btcValue}BTC
                         </div> 
 
 
@@ -138,7 +134,7 @@ const ViewGiftCard = () => {
                     <h3 className="text-2xl my-6 font-medium"> Description  </h3>
 
 
-                        <div dangerouslySetInnerHTML={description} />
+                        <div dangerouslySetInnerHTML={{__html: selectedProvider?.description}} />
 
                      </div>
             </div>

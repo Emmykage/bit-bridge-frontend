@@ -48,7 +48,17 @@ const AppSlice = createSlice({
                 cartItems: getCartItems()
             }
         },
+        GET_CART: (state)=> {
+            const cart_items = getCartItems()
+     
+
+            return{
+                ...state,
+                cartItems: cart_items,
+                totalAmount: calculateTotal()
+            }
     
+        },
 
     
     }
@@ -57,9 +67,4 @@ const AppSlice = createSlice({
 
 
 export default AppSlice.reducer 
-export const {
-    SET_LOADING, 
-     ADD_TO_CART,
-     DELETE_CART, 
-     UPDATE_CART
-    } = AppSlice.actions
+export const {SET_LOADING, GET_CART, ADD_TO_CART, DELETE_CART, UPDATE_CART} = AppSlice.actions

@@ -14,7 +14,8 @@ const GiftCardPAge = () => {
 
   scrollToTop()
 
-  console.log(mobileProviders, "hehhhhh")
+  // console.log("first")
+  console.log("dfdfd", mobileProviders,giftcards, "hehhhhh")
 
   return (
     <div>        
