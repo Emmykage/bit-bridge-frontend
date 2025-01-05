@@ -1,111 +1,144 @@
 import { useParams } from "react-router-dom"
-import providerData from '../../data/serviceProviderData.json'
+import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
-import { pickLogo } from "../../utils/ImagePicer"
 import ProductCard from "../../compnents/product-card/ProductCard"
-import SelectInput from "../../compnents/select/Select"
+import CartButton from "../../compnents/button/CartButton"
+import { ExclamationOutlined } from "@ant-design/icons"
+import { useDispatch, useSelector } from "react-redux"
+import { ADD_TO_CART } from "../../redux/app"
+import FormInput from "../../compnents/formInput/FormInput"
+import { useEffect, useState } from "react"
+import { converter } from "../../api/currencyConverter"
+import { getProducts } from "../../redux/actions/product"
+import { splitString } from "../../utils"
 const ViewMobileTopUp = () => {
+    const dispatch = useDispatch()
     const {provider} = useParams()
+    const [value, setValue] = useState(0)
+    const {mobileProviders, giftcards} = useSelector(state => state.product)
 
-    const selectedProvider = providerData.find(item => item.provider == provider)
+    const [btcValue, setBtcValue] = useState()
+    console.log(giftcards)
 
-    const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
+    const selectedProvider = mobileProviders?.find(item => item.provider == provider)
 
+    const giftcardImage = splitString(provider)
+    console.log(selectedProvider)
 
-        Steam and Ubisoft Store
-        On Steam, redeem Cherry Credits for Steam Wallet Codes, which work like game activation codes, giving you access to over 1,800 game titles and a community of 75 million active users.
+    useEffect(()=> {
+        dispatch(getProducts())
+    },[])
+ 
 
+               const handleCart = () => {
+                console.log(value)
+                if(!value ){
+                    console.error("Value is required and cannot be empty.");
 
-        Cherry Credits can be used to buy Steam Wallet Codes in the following countries: Australia, Bahrain, Brunei, Cambodia, East Timor, Hong Kong, Indonesia, India, Kuwait, Laos, Malaysia, Myanmar, Oman, Philippines, Qatar, Saudi Arabia, Singapore, Thailand, Turkey, United Arab Emirates (UAE), Vietnam, Korea, Nepal, Taiwan, China, Pakistan, and Macau.
+                    return
+                }
 
+                dispatch(ADD_TO_CART({
+                    id: selectedProvider.id, 
+                    provision: selectedProvider.provision,
+                    provider: selectedProvider.provider,
+                    image: selectedProvider.provider,
+                    value: value
+                })
+            )
+                
 
-        On Ubisoft, use Cherry Credits as a payment method to purchase games via the Uplay Launcher or Ubisoft Web Store. Cherry Credits simplifies the process of accessing a wide range of games and digital content on these popular platforms, all while enjoying the benefits of virtual currency.
+               }
 
-
-        You can find the instructions on how to redeem Cherry Credits on Steam and Ubisoft Store below:
-
-        Buy Steam Wallet Codes Credits
-        Buy Ubisoft Credits
-
-        Supported games
-        Black Desert SEA
-        Dragon Nest SEA
-        Travian: Legends
-        Ragnarok Online
-        World of Tanks
-        Conquer Online
-        Elsword
-        Habbo Hotel
-        And many more...
-        Read the full list on cherrycredits.com/Games
-`}
-
-
+               console.log(value)
+               useEffect(() => {
+                const fetchBtcValue = async () => {
+                    try {
+                        const btcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                        setBtcValue(btcValue);
+                        console.log("bitcoin value", btcValue); // Logs the converted value
+                    } catch (error) {
+                        console.error("Error fetching BTC value:", error.message);
+                    }
+                };
+            
+                fetchBtcValue();
+            }, [value])
+            
   return (
     <div>
         <Header/>
         <section className="px-4">
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-6xl m-auto py-10">
-            <div className="p-10 h-96 lg:sticky top-5 bottom-5 bg-gray-200 flex justify-center items-center">
-                <img src={pickLogo(selectedProvider?.provider)} alt="provider image"/>
+            <div className="p-10 bg-gray-200 flex justify-center items-center h-96">
+                <img src={`/images/providers/${giftcardImage}.webp`} alt="provider image"/>
+
             </div>
             <div>
 
-<div className="text-sm my-2 text-gray-600 font-medium">
-    <p>Data &gt; {provider}</p>
-</div>
+                <div className="text-sm my-2 text-gray-600 font-medium">
+                    <p className="capitalize">Gift Card &gt; {selectedProvider?.provider}</p>
+                </div>
 
-<h3 className="text-2xl font-medium">NTEL Refil</h3>
+                <h3 className="text-2xl font-medium">{selectedProvider?.provision}</h3>
+                
+                <div className="notice border rounded-xl my-2 p-2 px-3">
+                    <p className="text-sm text-gray-700">
+                    {selectedProvider?.info}    
+                    </p>
+                </div>
+                <p className="my-3">
+                    {selectedProvider?.header_info}   
+                 </p>
+                <div>
+                    <h3 className="text-xl font-semibold">Enter Amount </h3>
 
-<div className="notice border rounded-xl my-2 p-2 px-3">
-    <p className="text-sm text-gray-700">
-    This gift card is redeemable on the e-commerce platform & at the physical store
-    </p>
-</div>
-<p className="my-3">Use Bitcoin, ETH or Crypto on NTEL. Pay with Bitcoin, Lightning, Ethereum, Binance Pay, USDT, USDC, Dogecoin, Litecoin, Dash. Instant email delivery. No account required. Start living on crypto!</p>
-<div>
-    <h3 className="text-xl font-semibold">Enter Amount </h3>
+                <div className="flex flex-col gap-0">
 
-<div className="flex flex-col gap-0">
-
-        {/* <select name="" id="" className="flex-1 rounded-lg w-full border-gray-300 border-2  py-3 px-2">
-            <option value="10"> 10NGN</option>
-        </select> */}
-
-        <SelectInput
-        defaultValue={{value: 10, label: "10NGN"}} options={[{value: 10, label: "10NGN"}]}/>
-
-
-
-        <div className="flex-1 text-sm mt-2 from-gray-800">
-            Estimated price 0.0000BTC
-        </div> 
+                        <FormInput type="nubmer"
+                        value={value}
+                        onChange={(input)=> {setValue(input)}}
+                        placeholder={"Enter Value"}
+                        className={""}/>
 
 
-
-    </div>
-    </div>
-
-<div>
-    
-    <div className="my-4">
-        <label htmlFor="phone_no my-2">Number to Top-Up</label>
-        <input className="p-4 block border w-full rounded" placeholder="0801230456 7890"/>
-    </div>
-
-</div>
-<div className="bg-gray-600 rounded-lg text-white p-4">
-    <p className="text-sm font-medium">We are currently out of stock on this product</p>
-</div>
-<div>
-    <h3 className="text-2xl my-6 font-medium"> Description  </h3>
+                        <div className="flex-1 text-sm mt-2 from-gray-800">
+                            Estimated price {btcValue}BTC
+                        </div> 
 
 
-        <div dangerouslySetInnerHTML={description} />
 
-     </div>
-</div>
+                    </div>
+                    </div>
+
+                <div>
+
+                    <div className="my-3">
+                        <CartButton onClick={() => handleCart(selectedProvider)}>Add To Cart</CartButton>
+                    </div>
+                    
+                    {/* <div className="my-4">
+                        <label htmlFor="phone_no my-2">Number to Top-Up</label>
+                        <input className="p-4 block border w-full rounded" placeholder="0801230456 7890"/>
+                    </div> */}
+
+                </div>
+                <div className="bg-gray-600 flex items-center gap-3 rounded-lg text-white p-4">
+                    <span className="border rounded-full flex justify-center shrink-0">
+                    <ExclamationOutlined />
+
+                    </span>
+                    <p className="text-sm font-medium">We are currently out of stock on this product</p>
+                </div>
+                <div>
+                    <h3 className="text-2xl my-6 font-medium"> Description  </h3>
+
+
+                        <div dangerouslySetInnerHTML={{__html: selectedProvider?.description}} />
+
+                     </div>
+            </div>
         </div>
         </section>
 
@@ -114,13 +147,19 @@ const ViewMobileTopUp = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {providerData.map(({id, provider, provision }) => (
-                    <ProductCard key={id} id={id} provider={provider} provision={provision} />
+                {giftcards.map(({id, provider,min_value, max_value, provision }) => (
+                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={provider} provision={provision} />
                 ))}
 
             </div>
             </div>
 
+        </section>
+        <section className="px-4 py-20">
+            <h2 className="text-3xl font-semibold">How gift card work</h2>
+            <div>
+                
+            </div>
         </section>
     </div>
   )

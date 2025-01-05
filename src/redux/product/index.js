@@ -42,7 +42,7 @@ const productSlice = createSlice({
             
             const filteredGiftCards = products.filter(item => item.category === "gift card")
             const filteredMobileProvider = products.filter(item => item.category === "mobile provider")
-            console.log(filteredMobileProvider)
+            console.log(filteredMobileProvider, products)
             return{
                 ...state,
                 products: action.payload.data,

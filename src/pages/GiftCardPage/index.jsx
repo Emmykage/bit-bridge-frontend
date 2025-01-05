@@ -7,15 +7,12 @@ import { getProducts } from "../../redux/actions/product"
 
 const GiftCardPAge = () => {
   const dispatch = useDispatch()
-  const {giftcards, mobileProviders} =  useSelector(state => state.product)
+  const {giftcards} =  useSelector(state => state.product)
   useEffect(()=>{
     dispatch(getProducts())
   },[])
 
   scrollToTop()
-
-  // console.log("first")
-  console.log("dfdfd", mobileProviders,giftcards, "hehhhhh")
 
   return (
     <div>        

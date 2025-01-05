@@ -4,7 +4,7 @@ import Nav from '../nav/Nav'
 import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 import logo from "../../assets/logos/logo-mod.png"
-import { Button } from 'antd';
+import { Badge, Button } from 'antd';
 import { useEffect, useState } from 'react';
 import DrawerModal from '../drawer/Drawer';
 import Carts from '../carts/Carts';
@@ -48,11 +48,9 @@ const Header = () => {
               <QuestionCircleOutlined />
               Help
             </NavLink>
-
-            <button className={"rounded-full h-8 bg-gray-200 w-8"} onClick={() => setOpen(true)} >
-              <ShoppingCartOutlined />
-            </button>
-
+            <Badge count={cartItems.length} showZero>
+                    <Button onClick={() => setOpen(true)} type="default" shape="circle" icon={<ShoppingCartOutlined />} size="middle" />
+          </Badge>
               {user ? 
                   <NavLink onClick={() => 
                     dispatch(userLogout())}
