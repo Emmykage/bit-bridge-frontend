@@ -5,16 +5,21 @@ import { createOrder } from '../../redux/actions/order'
 import { toast } from 'react-toastify'
 import { nairaFormat } from '../../utils/nairaFormat'
 import { useEffect, useState } from 'react'
-import { DELETE_CART, GET_CART } from '../../redux/app'
+import {  GET_CART } from '../../redux/app'
 import { getWallet } from '../../redux/actions/wallet'
-import { splitString } from '../../utils'
+import OrderSummary from '../../compnents/orderSummary/OrderSummary'
+import { useNavigate } from 'react-router-dom'
 
 const PaymentMenthod = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const {totalAmount, cartItems} = useSelector(state => state.app)
+    const [alertText, setAlertText] = useState(false)
+
     const {wallet} = useSelector(state => state.wallet)
     const {user, loading} = useSelector(state => state.auth)
-    const [alertText, setAlertText] = useState(false)
+
     useEffect(() => {
         dispatch(GET_CART())
         dispatch(getWallet())
@@ -29,7 +34,6 @@ const PaymentMenthod = () => {
         }
     ))
 
-    console.log(wallet?.balance)
 
     const handlePayment = () => {
         totalAmount < wallet?.balance ? 
@@ -45,6 +49,7 @@ const PaymentMenthod = () => {
   
             if(createOrder.fulfilled.match(result)) {
                 toast(result.message,{type: "success"})
+                navigate(`/confirmation-order?orderId=${result.data.id}`)
             }else{
                 toast(result?.message,{type: "error"})
 
@@ -56,8 +61,6 @@ const PaymentMenthod = () => {
 
     }
 
-    console.log(alertText)
-
   return (
 
     <div className='m-auto '>
@@ -65,41 +68,7 @@ const PaymentMenthod = () => {
     
     <div className='py-2 px-4 my-10 max-w-7xl bg-white shadow-sm p-2 m-auto'>
         <div className='grid md:grid-cols-checkout gap-20 '>
-            <div className='bg-white p-4'>
-                <h3 className='text-2xl mb-10 font-semibold'>order summary</h3>
-          
-                {cartItems.map(item => (
-                        <div key={item?.id} className='flex my-3 gap-4'>
-                        <div className='w-16 h-16 md:w-24 shrink-0 md:h-24 border rounded'>
-                            <img src={`/images/providers/${splitString(item.provider)}.webp`} alt={item.provider} />
-                        </div>
-                        <div className='flex-1'>
-                        <p className='text-base font-semibold'>{item?.provider}</p>
-                        <p className='text-base font-semibold'>{item?.provision}</p>
-                        <p className='font-medium text-gray-700'>{nairaFormat(item?.value)}</p>
-                        </div>
-                        <div className=''>
-                            <div className='flex gap-4'>
-                            <p>{item?.quantity ?? 1}</p>
-                            <span onClick={() => dispatch(DELETE_CART(item?.id))}>
-                            <DeleteTwoTone />
-                            </span>
-
-                            </div>
-                        </div>
-                    </div>
-                ))}
-        
-            <div className='flex justify-between my-5 border-t py-5'>
-                <span className='text-base font-semibold text-gray-900 '>
-                    Total
-                </span>
-                <span className='font-semibold text-lg'>
-                    {nairaFormat(totalAmount)}
-                </span>
-            </div>
-            
-        </div>
+        <OrderSummary totalAmount={totalAmount} cartItems={cartItems}/>
 
         <div className='shadow p-4'>
         <div className='p-4 bg-white font-medium'>

@@ -19,8 +19,8 @@ const ProductCard = ({id, min_value, max_value, provider, provision }) => {
     </div>
     <div className="flex justify-between px-2">
       <div>
-        <p className="text-lg font-medium">{provision}</p>
-        <p className="text-base font-medium text-gray-600">{nairaFormat(min_value) +  " - " + nairaFormat(max_value)}</p>
+      <p className="text-lg font-medium">{provision}</p>
+      <p className="text-base font-medium text-gray-600">{nairaFormat(min_value) +  " - " + nairaFormat(max_value)}</p>
       </div>
       <div className="flex gap-3">
         <span className="font-semibold">4.7</span>

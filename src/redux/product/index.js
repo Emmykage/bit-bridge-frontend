@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createProduct, getProducts } from "../actions/product"
+import { createProduct, fetchProduct, getProduct, getProducts } from "../actions/product"
 
 const initialState = {
     product: {},
@@ -42,11 +42,13 @@ const productSlice = createSlice({
             
             const filteredGiftCards = products.filter(item => item.category === "gift card")
             const filteredMobileProvider = products.filter(item => item.category === "mobile provider")
+            const filteredServices = products.filter(item => item.category === "service")
             console.log(filteredMobileProvider, products)
             return{
                 ...state,
                 products: action.payload.data,
                 giftcards: filteredGiftCards,
+                services: filteredServices,
                 mobileProviders: filteredMobileProvider,
                 loading: false
             }
@@ -62,6 +64,26 @@ const productSlice = createSlice({
             return{
                 ...state,
                 loading: true,
+            }
+        })
+        .addCase(fetchProduct.fulfilled, (state, action) => {
+            return{
+                ...state,
+                product: action.payload.data,
+                loading: false
+            }
+        })
+        .addCase(fetchProduct.pending, (state) => {
+            return{
+                ...state,
+                loading: true
+            }
+        })
+        .addCase(fetchProduct.rejected, (state, action) => {
+            return{
+                ...state,
+                message: action.payload?.message,
+                loading: false
             }
         })
        

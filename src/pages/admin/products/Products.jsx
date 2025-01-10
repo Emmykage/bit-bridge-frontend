@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../redux/actions/product'
+import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
 
 const Products = () => {
   const {products} = useSelector(state => state.product)
@@ -26,17 +27,14 @@ const Products = () => {
                                     <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Provision</th>
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Currency</th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">NGN</th>
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">TIME </th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell bg-gray-500"> </th>
 
-                        
-                            </tr>
+                           </tr>
 
                             </thead>
                                 
                             <tbody>
 
-                                    {/* make conditional statement  here  */}
-                                {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
                                 { products?.map(item => (
 
                                 <tr key={item?.id}>
@@ -47,8 +45,7 @@ const Products = () => {
                                         {item.provision}
                                     </td>
                                     
-                                    {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
-                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-center text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 px-6  text-left text-gray-900 text-sm sm:pr-8 ">
                                         {item?.currency}
 
                                     </td> 
@@ -56,11 +53,11 @@ const Products = () => {
                                     {item?.min_value + " - " +  item?.max_value}
 
                                     </td>
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{item.amount}</p></td>
+                                    <td className="whitespace-nowrap bg-gray-200 border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold"><OptionDropDown id={item.id} handleDel={()=> {}}/>  </p></td>
 
                        
                                     </tr>
-                                                                    ))}
+                                 ))}
 
 
                         

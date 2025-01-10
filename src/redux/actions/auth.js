@@ -47,7 +47,6 @@ export const userProfile = createAsyncThunk("auth/user-profile", async(data, {re
           "Authorization": `Bearer ${fetchToken()}`
       }})
         const result =  response.data
-        console.log(result)
 
         return result
     } catch (error) {

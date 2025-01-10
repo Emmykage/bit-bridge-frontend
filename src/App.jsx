@@ -38,6 +38,8 @@ import CryptoSell from './pages/dashboard/crypto-exchange/CryptoSell'
 import AdminTransactions from './pages/admin/transactions/deposits'
 import Users from './pages/admin/users/Users'
 import Deposits from './pages/dashboard/transactions/Deposits'
+import ConfirmOrder from './pages/ConfirmOrder'
+import ViewProduct from './pages/admin/products/View'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -70,6 +72,7 @@ function App() {
     <Route path='/gift-cards/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/crypto-exchange/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
+    <Route path='/confirmation-order/:id' element={<MainLayout><ConfirmOrder/></MainLayout>} />
 
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>} />
@@ -99,6 +102,7 @@ function App() {
       <Route path='dashboard' element={<AdminHome/>}/>
       <Route path='purchases' element={<Purchases/>}/>
       <Route path='products' element={<Products/>}/>
+      <Route path='products/:id' element={<ViewProduct/>}/>
       <Route path='services' element={<Services/>}/>
       <Route path='add-product' element={<AddProduct/>}/>
       <Route path='transactions' element={<AdminTransactions/>}/>

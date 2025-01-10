@@ -12,10 +12,11 @@ import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPricetagOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 const AdminDashboardLayout = () => {
+    const dispatch = useDispatch()
+
     const [toggleNav, setToggleNav] = useState(false)
     const {user, loading } = useSelector(state => state.auth)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -24,9 +25,10 @@ const AdminDashboardLayout = () => {
 
 
     useEffect(() => {
-        if (user && !user.admin) {
+        if ((!loading && !user) || (user && !user.admin)) {
+            console.log("second")
             toast("No Authorization", {type: "error"})
-            navigate("/");
+            navigate("/admin/login");
         }
     }, [user, navigate]);
 

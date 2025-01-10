@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
@@ -78,7 +77,7 @@ const ViewMobileTopUp = () => {
             <div>
 
                 <div className="text-sm my-2 text-gray-600 font-medium">
-                    <p className="capitalize">Gift Card &gt; {selectedProvider?.provider}</p>
+                    <p className="capitalize">Utility & Services &gt; {selectedProvider?.provider}</p>
                 </div>
 
                 <h3 className="text-2xl font-medium">{selectedProvider?.provision}</h3>

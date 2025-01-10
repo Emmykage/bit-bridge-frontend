@@ -24,7 +24,6 @@ const AuthSlice = createSlice({
     extraReducers: (builder) =>  {
         builder
         .addCase(userSignUp.fulfilled, (state, action) => {
-            console.log(action.payload)
             return{
                 ...state,
                 user: action.payload.data,
@@ -69,7 +68,6 @@ const AuthSlice = createSlice({
             }
         })
         .addCase(userProfile.fulfilled, (state, action) => {
-            console.log(action.payload)
             return{
                 ...state,
                 user: action.payload.data,

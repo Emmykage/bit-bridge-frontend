@@ -27,7 +27,7 @@ const FormInput = ({
        label={label}
        type={type}>
        { type== "text" ?  <Input
-       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full `} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium`} /> }
+       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full p-2.5 `} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium p-2.5`} /> }
       </Form.Item>
 
       </>

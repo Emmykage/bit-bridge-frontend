@@ -1,9 +1,18 @@
-import utilityService from "../../data/utilityData.json"
 import Header from "../../compnents/header/Header"
 import HeroBanner from "../../compnents/hero/Hero"
 import ServiceCard from "../../compnents/product-card/ServiceCard"
+import { useEffect } from "react"
+import { getProducts } from "../../redux/actions/product"
+import { useDispatch, useSelector } from "react-redux"
 
 const UtilityServices = () => {
+  const dispatch = useDispatch()
+  const {services} =  useSelector(state => state.product)
+  useEffect(()=> {
+    dispatch(getProducts())
+  },[])
+
+  console.log(services)
 
   return (
     <div>
@@ -16,7 +25,7 @@ const UtilityServices = () => {
       <div className="grid gap-3 grid-cols-3 max-w-7xl m-auto">
 
 
-      {utilityService.map(({id, value, provider,image, provision})  => (
+      {services.map(({id, value, provider,image, provision})  => (
 
         <ServiceCard key={id} linkTo={`utility-services`} value={value} provider={provider} image={image} provision={provision} />
 

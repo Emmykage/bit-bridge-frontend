@@ -29,7 +29,7 @@ const CryptoExchangePage = () => {
       
       <section className="py-10 px-4">
         <div className=" max-w-7xl m-auto">
-        <h3 className="text-lg font-medium">Cash Back!</h3>
+        <h3 className="text-lg font-medium">Top Features!</h3>
 
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 lg:grid-cols-4">
 

@@ -21,6 +21,24 @@ export const createProduct = createAsyncThunk("product/creaet-product", async(da
     }
 });
 
+export const updateProduct = createAsyncThunk("product/update-product", async({id, data}, {rejectWithValue}) => {
+    try {
+        const response = await axios.patch(`${baseUrl + apiRoute}products${id}`,data, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`}
+        });
+
+        const result = response.data; 
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
 export const getProducts = createAsyncThunk("product/get-products", async(_, {rejectWithValue}) => {
     try {
         const response = await axios.get(`${baseUrl + apiRoute}products`, {
@@ -39,3 +57,53 @@ export const getProducts = createAsyncThunk("product/get-products", async(_, {re
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
+
+export const getProduct = createAsyncThunk("product/get-user-product", async(_, {rejectWithValue}) => {
+
+    console.log("gotton producdfdsfdfsfsdfsdfsdfsdt: ", id)
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}products/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+
+        const result = response.data;
+        console.log(result)
+        return result;
+    } catch (error) {
+        console.error(error)
+
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message || "Failed to get Product" });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+export const fetchProduct = createAsyncThunk("product/fetch-product", async(id, {rejectWithValue})=> {
+    console.log("gotton: ", id)
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}products/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+
+        const result = response.data;
+        console.log(result)
+        return result;
+    } catch (error) {
+        console.error(error)
+
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.errors || "Failed to get Product" });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+})
+

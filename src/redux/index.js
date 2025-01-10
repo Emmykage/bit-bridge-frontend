@@ -4,3 +4,4 @@ export { default as TransactionReducer} from "./transactions"
 export { default as WalletReducer} from "./wallet"
 export { default as OrderReducer} from "./order"
 export { default as ProductReducer} from "./product"
+export {default as ProvisionReducer} from './provision'

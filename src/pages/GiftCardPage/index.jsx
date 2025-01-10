@@ -1,6 +1,6 @@
 import Header from "../../compnents/header/Header"
 import GiftCard from "../../compnents/product-card/GiftCard"
-import scrollToTop from "../../utils/scrollToTop"
+import scrollToTop from "../../hooks/scrollToTop"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getProducts } from "../../redux/actions/product"
@@ -20,7 +20,7 @@ const GiftCardPAge = () => {
       
       <section className="py-10 px-4">
         <div className=" max-w-7xl m-auto">
-        <h3 className="text-lg font-medium">Cash Back!</h3>
+        <h3 className="text-lg font-medium">Top Features!</h3>
 
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 sm:grid-cols-2 lg:grid-cols-4">
 
