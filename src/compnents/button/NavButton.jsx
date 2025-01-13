@@ -10,6 +10,7 @@ const NavButton = ({
 ) => {
   return (
     <Button
+    
         onClick={onClick}
         
     className={`${className} button font-medium h-10 text-black bg-alt border-none` } classNames={"hello"} shape="round" >

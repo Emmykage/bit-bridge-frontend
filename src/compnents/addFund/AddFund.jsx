@@ -7,6 +7,7 @@ import paymentDetails from '../../data/walletAddres.json'
 import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 const AddFund = ({
+  address,
   handleSubmit
 }) => {
     const [form] = Form.useForm();
@@ -32,7 +33,7 @@ const AddFund = ({
       form={form}
       initialValues={{
         amount: "",
-        address: "",
+        address: address,
         proof: null
       }}
       style={{
@@ -41,7 +42,7 @@ const AddFund = ({
       }}
     >
         <FormInput className="add-fund" name="amount" type='number' label={"Amount(USDT value)"}/>
-        <FormSelect className="add-fund" name="address"  label={"Address"} options={paymentDetails}/>
+        <FormInput className="add-fund" name="address"  label={"Address"} disabled={true} options={paymentDetails}/>
 
         <Form.Item 
         label="payment receipt" 

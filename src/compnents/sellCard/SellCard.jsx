@@ -16,12 +16,47 @@ const SellGiftCard = ({
   const [formLayout] = useState('vertical');
   const {loading} = useSelector(state => state.order);
 
+  const options = selectedItem.provisions.map(item => ({
+    label: item.name, value: item.id
+  }))
+  console.log(options)
+
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
     }
     return e?.fileList;
   };
+
+  const currencyOptions = {
+    usd: [{
+      value: 10, label: "USD 10",
+    },
+    {
+      value: 15, label: "USD 15",
+    },   {
+      value: 20, label: "USD 20",
+    },   {
+      value: 25, label: "USD 25",
+    },
+    {
+      value: 50, label: "USD 50",
+    }
+  ],
+eur: [{
+        value: 5, label: "EUR 10",
+      },
+      {
+        value: 15, label: "EUR 15",
+      },   {
+        value: 20, label: "EUR 20",
+      },   {
+        value: 25, label: "EUR 25",
+      },
+      {
+        value: 50, label: "EUR 50",
+      }]
+  }
   return (
     <Form
     className='sellCard'
@@ -43,10 +78,9 @@ const SellGiftCard = ({
       }}
       form={form}
       initialValues={{
-        
+        order_type:"buy",
         amount: "",
         proof: null,
-        order_type: "",
         extra_info: "",
         provision: ""
       }}
@@ -56,9 +90,10 @@ const SellGiftCard = ({
         maxWidth: formLayout === 'inline' ? 'none' : 600,
       }}
     >
-        <FormSelect required={true}  name="order_type" type='number' label={"Type"} options={[{value: "sell", label: "Sell"},{value: "buy", label: "Buy"}]}/>
-        <FormSelect  className="card" onChange={({value}) => setSelectedItem({...selectedItem, provision_id: value})} placeholder="select card" name="card"  label={"Select card"} />
-        <FormInput required={true} className="ad" name="amount" type='number'  label={"Total amount"} placeHolder="amount" />
+        <FormSelect required={true} disabled name="order_type" type='number' label={"Type"} options={[{value: "sell", label: "Sell"},{value: "buy", label: "Buy"}]}/>
+        <FormSelect  className="card" onChange={({value}) => setSelectedItem({...selectedItem, provision_id: value})} placeholder="select card" name="provision"  label={"Select card"} options={options}/>
+        <FormSelect  className="card" onChange={({value}) => setSelectedItem({...selectedItem, provision_id: value})} placeholder="Amount card" name="amount"  label={"Amount/Value"} required={true} options={currencyOptions["eur"]}/>
+        {/* <FormInput required={true} className="ad" name="amount" type='number'  label={"Total amount"} placeHolder="amount" /> */}
         <FormInputArea className="" name="extra_info" label={"Extra Information(optional)"} placeHolder="" />
         
 

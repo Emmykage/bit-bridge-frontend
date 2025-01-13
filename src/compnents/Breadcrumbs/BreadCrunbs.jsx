@@ -1,18 +1,16 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
+import { MdMoreHoriz } from 'react-icons/md'
 
 const BreadCrunbs = ({id,setSelectedId, setOpen}) => {
   const dropDownRef = useRef(null)
   const [toggle, setToggle] = useState(false)
-  // const handleDropdown = () => {
 
-  //   console.log("first")
-  // }
   useEffect(() => {
 
     const closeDropDown = (e) => {
       if( dropDownRef && !dropDownRef.current.contains(e.target)){
-        console.log("first")
+
         setToggle(false)
       }
     }
@@ -20,12 +18,12 @@ const BreadCrunbs = ({id,setSelectedId, setOpen}) => {
     document.addEventListener("click", closeDropDown)
   },[])
   return (
-    <div className='relative' ref={dropDownRef}>
+    <div className='relative z-50' ref={dropDownRef}>
 
-      <span className='cursor-pointer relative bg-red-200' onClick={()=> setToggle(prev => !prev)}>
-      ...
+      <span className='cursor-pointer relative z-50' onClick={()=> setToggle(prev => !prev)}>
+        <MdMoreHoriz className='text-lg' />
 
-        <div style={{right: "calc(100% + 10px)"}} className={`absolute bottom-0 rounded z-10  p-4 bg-white ${toggle ? "block" : "hidden"}`}>
+        <div style={{right: "calc(100% + 10px)"}} className={`absolute bottom-0 rounded z-10  p-2 px-4 bg-white ${toggle ? "block" : "hidden"}`}>
             <ul>
               <li className='my-2'>
                 <span className=''>View</span>

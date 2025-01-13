@@ -7,7 +7,7 @@ const FormSelect = ({
     options, 
     required=false,
     placeholder,
-
+    disabled,
     label}) => {
   
   return (
@@ -30,6 +30,7 @@ const FormSelect = ({
         name={name}
         onChange={onChange}
         loading={true}
+        disabled={disabled}
         
         options={options}>
         </Select>      

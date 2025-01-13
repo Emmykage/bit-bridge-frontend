@@ -1,16 +1,39 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../../../redux/actions/product'
+import { delProduct, getProducts } from '../../../redux/actions/product'
 import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
+import AppModal from '../../../compnents/modal/Modal'
+import ClickButton from '../../../compnents/button/Button'
+import { toast } from 'react-toastify'
+import { getTransactions } from '../../../redux/actions/transaction'
 
 const Products = () => {
+    const [open, setOpen] = useState(false)
+    const [selectedId, setSelectedId] = useState()
   const {products} = useSelector(state => state.product)
   const dispatch = useDispatch()
   useEffect(()=> {
 
     dispatch(getProducts())
   },[])
-  // console.log(products)
+
+
+      const handleDelete = (id) => {
+          dispatch(delProduct(id)).then(result => {
+              if(delProduct.fulfilled.match(result)){
+                console.log(result)
+                  toast(result.payload.message, {type: "success"})
+                  dispatch(getProducts())
+                  setOpen(false)
+  
+              }
+              else{
+                  toast(result.message, {type: "error"})
+  
+              }
+          })
+      }
+  
 
   return (
     <div className='bg-gray-100 p-4'>           
@@ -53,7 +76,10 @@ const Products = () => {
                                     {item?.min_value + " - " +  item?.max_value}
 
                                     </td>
-                                    <td className="whitespace-nowrap bg-gray-200 border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold"><OptionDropDown id={item.id} handleDel={()=> {}}/>  </p></td>
+                                    <td className="whitespace-nowrap bg-gray-200 border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold"><OptionDropDown id={item.id} handleDel={()=> {
+                                        setOpen(true)
+                                        setSelectedId(item.id)
+                                    }}/>  </p></td>
 
                        
                                     </tr>
@@ -66,6 +92,16 @@ const Products = () => {
                     </div>     
                 </div>
             </div>
+                <AppModal handleCancel={() => setOpen(false)} isModalOpen={open} title={"Delete Product"}>
+                        <div className='flex my-6 justify-between'>
+                        <ClickButton
+                        onClick={() => setOpen(false)}
+                         btnType="decline">Cancel</ClickButton>
+                        <ClickButton
+                        onClick={() => handleDelete(selectedId)}>Delete</ClickButton>
+                            
+                        </div>
+               </AppModal>
 
         
     </div>

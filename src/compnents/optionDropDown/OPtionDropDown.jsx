@@ -1,5 +1,3 @@
-import React from 'react';
-import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import { MdMoreHoriz } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
@@ -17,7 +15,7 @@ const items = [
   },
   {
     label: (
-      <a onClick={handleDel} target="_blank" rel="noopener noreferrer">
+      <a onClick={handleDel}  rel="noopener noreferrer">
         Delete
       </a>
     ),

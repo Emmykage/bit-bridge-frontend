@@ -145,6 +145,14 @@ options={[{value: "NGN", label: "NGN"},
        required={true}       
        
        />
+
+      <FormInputArea
+            placeholder={"Notice info"}
+            name={"notice_info"}
+            label={"notice_info"}
+            required={true}       
+            
+            />
     
         <Form.Item name={"Submit"}>
           <Button  htmlType="submit" className='w-full bg-primary text-white font-semibold py-6'>Submit</Button>

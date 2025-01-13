@@ -3,16 +3,45 @@ import { nairaFormat } from "../../utils/nairaFormat"
 import wallet from '../../assets/pngs/wallet.png'
 
 import NavButton from "../../compnents/button/NavButton"
+import { converter } from "../../api/currencyConverter"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Outlet, useNavigate } from "react-router-dom"
+import SelectInput from "../../compnents/select/Select"
 
 const HomeDashboard = () => {
+    const {wallet} = useSelector(state => state.wallet)
+
+    const navigate = useNavigate()
+    const [convertedAmount, setConvertedAmount] = useState(null)
+    const [activeCurrency, setActiveCurrency] = useState("usd")
+
+
+    useEffect(()=> {
+        const fetchConversion = async() => {
+
+            const result = await converter({fromCurr: "usd", toCurr: activeCurrency, amount: wallet?.balance})
+            console.log(result)
+            setConvertedAmount(result)
+        }
+
+        fetchConversion()
+    },[wallet?.balance, activeCurrency])
+
+console.log(activeCurrency)
   return (
-    <div className="text-white w-full">
+    <div className="homeDashboard text-white w-full">
         <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">
             <div className="overflow-hidden">
+                <div className="flex gap-10">
                 <h3 className="text-xl">Wallet balance</h3>
+                <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/>
+
+                </div>
+           
                 <div>
-                    <p className="text-5xl font-semibold "> {nairaFormat(0)}</p>
-                    <p className="my-3">  {nairaFormat(0)} 0.00</p>
+                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "usd")}</p>
+                    <p className="my-3">  {nairaFormat(convertedAmount?.calc, activeCurrency)}</p>
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 
@@ -28,7 +57,7 @@ const HomeDashboard = () => {
                                 Total Trades
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(0)}</p>
+                        <p className="text-2xl ">  {nairaFormat(0,activeCurrency )}</p>
 
                     </div>
                     <div className="px-6 border-r border-gray-700 ">
@@ -41,7 +70,7 @@ const HomeDashboard = () => {
                                 Total bought 
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(0)}</p>
+                        <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
 
                     </div>
 
@@ -55,7 +84,7 @@ const HomeDashboard = () => {
                             Total Withdrawals
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0)}</p>
+                    <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
 
                     </div>
 
@@ -69,7 +98,7 @@ const HomeDashboard = () => {
                             Total Sold
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0)}</p>
+                    <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
 
                     </div>
 
@@ -84,21 +113,20 @@ const HomeDashboard = () => {
 
         </div>
 
-        <div className="bg-black px-4 lg:p-10 min-h-96">
+        <div className="bg-black p-4 lg:p-10 min-h-96">
             <div className="flex flex-col gap-3 md:flex-row justify-between">
                 <h4 className="text-alt text-3xl font-medium">recent order</h4>
                 <ul className="flex gap-3">
-                <li><NavButton to="#" className={"bg-alt text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>
-                <li><NavButton to="#" className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>
-                <li><NavButton to="#" className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>
+                <li><NavButton onClick={()=> navigate("/dashboard/home/orders-transaction?type=buy")} className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Buy Crypto</NavButton></li>
+
+                <li><NavButton to="/dashboard/home/orders-transaction?type=sell" className={"bg-alt text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>
+                <li><NavButton to="/dashboard/home/orders-transaction?type=crypto" className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Buy Gift Cards</NavButton></li>
                 </ul>
             </div>
             <div className="flex justify-center items-center h-full">
                 
 
-                <p>
-                    No record found
-                </p>
+                <Outlet  />
 
 
             </div>

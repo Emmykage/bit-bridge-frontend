@@ -27,7 +27,7 @@ const DashboardLayout = () => {
         navigate('/login')
        }
     },[user, loading])
-    console.log(wallet)
+    // console.log(wallet)
 
   return (
     <div className='relative bg-gray-00 min-h-screen bg-black/90'>

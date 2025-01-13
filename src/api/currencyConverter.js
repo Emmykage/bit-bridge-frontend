@@ -20,8 +20,9 @@ const getRate = () => {
     
 }
   
-  const converter = async ({ fromCurr = "ngn", amount = 1, toCurr = "usd" }) => {
+  const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
             const api = "https://api.coingecko.com/api/v3/exchange_rates";
+            console.log(api)
             try {
 
 
@@ -44,11 +45,14 @@ const getRate = () => {
                         throw new Error(`Failed to fetch exchange rates: ${res.status}`);
                     }
     
-                    currencyRates = await res.json();
+                    const rawRates = await res.json();
+
+                    currencyRates = rawRates.rates
+
                     // const currentTime = new Date().getTime()
     
     
-                    localStorage.setItem('currencyRate', JSON.stringify(currencyRates.rates));
+                    localStorage.setItem('currencyRate', JSON.stringify(currencyRates));
                     localStorage.setItem('rateTimestamp', currentTime);
                     
                 }
@@ -68,7 +72,10 @@ const getRate = () => {
 
                 const calc = ((toRate / fromRate) * amount).toFixed(8);
                 console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);
-                return calc;
+                return {calc: Number(calc).toFixed(2), 
+                    dollarRate: Number ( currencyRates["usd"].value/currencyRates["ngn"].value )?.toFixed(2),
+                    nairaRate: Number(currencyRates["ngn"].value / currencyRates["usd"].value)?.toFixed(2)
+                };
             } catch (error) {
                 console.error("Error fetching exchange rates:", error.message);
                 throw error;

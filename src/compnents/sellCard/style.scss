@@ -11,6 +11,13 @@
         background: none;
         .ant-select-selection-item{
             color: white;
+            .ant-select-selection-search-input, input{
+                color: white !important;
+                &::placeholder{
+                    color: white; // Replace with your desired color
+
+                }
+            }
         }
 
     }
@@ -20,6 +27,7 @@
     .ant-input, .ant-input-number-input{
         @apply border border-alt bg-zinc-900 text-white py-3
     }
+   
 }
 }
 

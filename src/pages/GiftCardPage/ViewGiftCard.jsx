@@ -10,6 +10,7 @@ import FormInput from "../../compnents/formInput/FormInput"
 import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
 import { getProducts } from "../../redux/actions/product"
+import FormSelect from "../../compnents/formSelect/FormSelect"
 const ViewGiftCard = () => {
     const dispatch = useDispatch()
     const {provider} = useParams()
@@ -52,9 +53,9 @@ const ViewGiftCard = () => {
                useEffect(() => {
                 const fetchBtcValue = async () => {
                     try {
-                        const btcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                        const btcValueFig = await converter({ fromCurr: "usd", amount: value, toCurr: "btc" });
                         setBtcValue(btcValue);
-                        console.log("bitcoin value", btcValue); // Logs the converted value
+                        console.log("bitcoin value", btcValueFig); // Logs the converted value
                     } catch (error) {
                         console.error("Error fetching BTC value:", error.message);
                     }
@@ -94,15 +95,24 @@ const ViewGiftCard = () => {
 
                 <div className="flex flex-col gap-0">
 
-                        <FormInput type="nubmer"
+                        <FormSelect type="nubmer"
                         value={value}
                         onChange={(input)=> {setValue(input)}}
                         placeholder={"Enter Value"}
+                        options={[{
+                            value: 20, label: "USD 20",
+                          },
+                          {
+                            value: 50, label: "USD 50",
+                          },
+                          {
+                            value: 70, label: "USD 70",
+                          }]}
                         className={""}/>
 
 
                         <div className="flex-1 text-sm mt-2 from-gray-800">
-                            Estimated price {btcValue}BTC
+                            Estimated price {btcValue?.calc}BTC
                         </div> 
 
 

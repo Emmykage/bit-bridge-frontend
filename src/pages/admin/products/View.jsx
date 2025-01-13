@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import ButtonCall from '../../../compnents/button/ButtonCall'
 import AppModal from '../../../compnents/modal/Modal'
 import AddProvision from '../../../compnents/addProvision/AddProvision'
-import { fetchProduct, getProduct, updateProduct } from '../../../redux/actions/product'
+import { fetchProduct, updateProduct } from '../../../redux/actions/product'
 import { nairaFormat } from '../../../utils/nairaFormat'
 import dateFormater from '../../../utils/dateFormat'
 
@@ -62,22 +62,15 @@ const ViewProduct = () => {
        }}
        initialValues={{
         ...product,
-        // provider: product.provider,
-    //   provision: "",
-    //   min_value: 0,
-    //   max_value: 50000.0,
-    //   currency: "NGN",
-    //   rate: 5,
-    //   image: "",
-    //   description: "",
-    //   info: "",
-    //   category: ""
+
        }}
         layout="vertical"
         
       >
     
 <FormSelect
+name={"category"}
+label={"Category"}
 options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift Card"},
 {value: "Mobille Service", label: "Mobile Service"}]}
 />

@@ -58,11 +58,10 @@ export const getProducts = createAsyncThunk("product/get-products", async(_, {re
     }
 });
 
-export const getProduct = createAsyncThunk("product/get-user-product", async(_, {rejectWithValue}) => {
+export const delProduct = createAsyncThunk("product/delete-product", async(id, {rejectWithValue}) => {
 
-    console.log("gotton producdfdsfdfsfsdfsdfsdfsdt: ", id)
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}products/${id}`, {
+        const response = await axios.delete(`${baseUrl + apiRoute}products/${id}`, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }

@@ -8,17 +8,20 @@ import { createTransaction } from "../../redux/actions/transaction";
 import { RiUserReceived2Line } from "react-icons/ri";
 import { converter } from "../../api/currencyConverter";
 import dateFormater from "../../utils/dateFormat";
+import { message } from "antd";
 
 
 const Account = () => {
     const {wallet} = useSelector(state => state.wallet)
-    const [converedAmount, setConvertedAmount] = useState(null)
+    const [convertedAmount, setConvertedAmount] = useState(null)
+    const [address, setAddress] = useState("TSZs4bJnfg9cReQi8FkDzEKWiftPvTbR1f")
 
 
     useEffect(()=> {
         const fetchConversion = async() => {
 
-            const result = await converter({fromCurr: "ngn", toCurr: "usd", amount: wallet?.balance})
+            const result = await converter({fromCurr: "usd", toCurr: "usd", amount: wallet?.balance})
+            console.log(wallet?.balance)
             setConvertedAmount(result)
         }
 
@@ -27,7 +30,7 @@ const Account = () => {
 
 
 
-    console.log( wallet?.balance, wallet)
+    // console.log( wallet, wallet)
 
 
      const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,17 +58,17 @@ const Account = () => {
             <div className="flex bg-black text-gray-100 p-10 rounded justify-between">
                 <div className="">
                     <h4 className="text-xl font-semibold text-gray-500">USDT Wallet</h4>
-                    <p className="text-4xl font-medium">USDT {converedAmount}</p>
-                    <p className="my-4 font-medium">{nairaFormat(wallet?.balance)}</p>
-                    <h6>Rate</h6>
+                    <p className="text-4xl font-medium">USDT {convertedAmount?.calc}</p>
+                    {/* <p className="my-4 font-medium">{nairaFormat(wallet?.balance)}</p> */}
+                    {/* <h6>Rate</h6>
                     <p className="text-sm font-bold text-gray-500">
-                    1560.19 NGN/USDT
+                    {convertedAmount?.nairaRate} NGN/USDT
 
-                    </p>
+                    </p> */}
 
                 </div>
 
-                <div className="">
+                {/* <div className="">
                     <h4 className="text-xl font-semibold text-gray-500">Tron Wallet Wallet</h4>
                     <p className="text-4xl font-medium">TRX {0}</p>
                     <p className="my-4 font-medium">{nairaFormat(0)}</p>
@@ -75,7 +78,7 @@ const Account = () => {
 
                     </p>
 
-                </div>
+                </div> */}
 
             
             </div>
@@ -122,7 +125,7 @@ const Account = () => {
                                         {item?.address ?? "Not Available"}
 
                                     </td> 
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount)}</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount, "usd")}</p></td>
 
                                     <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                         {dateFormater(item?.created_at)}
@@ -225,9 +228,13 @@ const Account = () => {
             </div>
 
             <div>
-                <p>copy destination address </p>
+                <p className="text-alt text-center">click to copy USDT destination address </p>
 
-                <p className="text-white bg-zinc-900 rounded-lg p-4">TSZs4bJnfg9cReQi8FkDzEKWiftPvTbR1f</p>
+                <p onClick={()=> navigator.clipboard.writeText(address)
+                    .then(() => message.success("copied to clipboard"))
+                    .catch(()=> message.error("Failed to copy"))
+                } className="text-white bg-zinc-900 rounded-lg p-4 cursor-pointer">{address}</p>
+
             </div>
 
             </div>
@@ -239,7 +246,7 @@ const Account = () => {
 
     <AppModal title={"Fund Wallet"}  isModalOpen={isModalOpen} handleOk={()=> {}} handleCancel={()=> {setIsModalOpen(false)}}  >
         <div className="bg-purple- p-10">
-            <AddFund handleSubmit={handleSubmit}/>
+            <AddFund handleSubmit={handleSubmit} address={address}/>
         </div>
     </AppModal>
 

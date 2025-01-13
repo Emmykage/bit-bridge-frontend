@@ -9,6 +9,7 @@ const FormInput = ({
     className, 
     value,
     type="text", 
+    disabled,
     required=false,
     label}) => {
   
@@ -26,7 +27,7 @@ const FormInput = ({
       ]}
        label={label}
        type={type}>
-       { type== "text" ?  <Input
+       { type== "text" ?  <Input disabled={disabled}
        style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full p-2.5 `} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium p-2.5`} /> }
       </Form.Item>
 

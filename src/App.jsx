@@ -40,6 +40,7 @@ import Users from './pages/admin/users/Users'
 import Deposits from './pages/dashboard/transactions/Deposits'
 import ConfirmOrder from './pages/ConfirmOrder'
 import ViewProduct from './pages/admin/products/View'
+import OrderTransact from './pages/dashboard/components/Orders'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -75,7 +76,9 @@ function App() {
     <Route path='/confirmation-order/:id' element={<MainLayout><ConfirmOrder/></MainLayout>} />
 
     <Route path='/dashboard' element={<DashboardLayout/>} >
-      <Route path='home' element={<HomeDashboard/>} />
+      <Route path='home' element={<HomeDashboard/>}>
+        <Route path="orders-transaction" element={<OrderTransact/>}/>
+      </Route>
       <Route path='wallet' element={<Account/>} />
       <Route path='gift-cards' element={<GiftCards/>} />
       <Route path='transactions' element={<Transactions/>}>

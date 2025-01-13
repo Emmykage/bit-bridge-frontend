@@ -65,7 +65,7 @@ export const getOrder = createAsyncThunk("order/get-order", async(id, {rejectWit
 });
 export const getOrders = createAsyncThunk("order/get-orders", async(_, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}orders`, {
+        const response = await axios.get(`${baseUrl + apiRoute}order_details`, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }
@@ -91,7 +91,8 @@ export const getUserOrders = createAsyncThunk("order/get-user-orders", async(dat
             }
         });
 
-        const result = response.data;      
+        const result = response.data;     
+        console.log(result) 
 
         return result;
     } catch (error) {

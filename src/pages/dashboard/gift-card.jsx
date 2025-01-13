@@ -13,9 +13,10 @@ const GiftCards = () => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
-  console.log(selectedItem, giftcards)
+  console.log(giftcards)
 
   const handleSubmit = (values) => {
+    console.log(values)
     dispatch(createOrder(values)).then(result => {
       if(createOrder.fulfilled.match(result)){
         setOpen(false)
@@ -40,12 +41,13 @@ const GiftCards = () => {
         <h4  className="text-lg my-5 text-alt font-semibold">Categories</h4>
 
         <div  className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {giftcards.map(({image, provider, name, id}) => (
+            {giftcards.map(({image, provider, name, id, provisions}) => (
                 <GiftCard onClick={() => {
                   setSelectedItem({
                     ...selectedItem,
                     product_id: id,
-                    provider: provider
+                    provider: provider,
+                    provisions
                   })
                   setOpen(prev => !prev)}
                 }
