@@ -8,14 +8,56 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Outlet, useNavigate } from "react-router-dom"
 import SelectInput from "../../compnents/select/Select"
+import OrderTransact from "./components/Orders"
+import DepositTransaction from "./components/DepositsTransaction"
+import WithdrawalTransactions from "./components/WithdrawalTransaction"
 
 const HomeDashboard = () => {
     const {wallet} = useSelector(state => state.wallet)
+
+    const [selectedItem, setSelectedItem] = useState("gift-cards")
 
     const navigate = useNavigate()
     const [convertedAmount, setConvertedAmount] = useState(null)
     const [activeCurrency, setActiveCurrency] = useState("usd")
 
+
+    const items = [
+        {
+            label: "Gift Cards Orders",
+            name: "gift-cards",
+            render: <OrderTransact/>,
+            btn: "Gift Card"
+        },
+        {
+            label: "Bought Exchange Orders",
+            name: "buy-crypto",
+            render: <DepositTransaction/>,
+            btn: "Sell Crpto"
+
+        },
+        {
+            label: "Sold Exchange Orders",
+            name: "sell-crypto",
+            render: <WithdrawalTransactions/>,
+            btn: "Buy Crypto"
+
+        }
+    ]
+
+
+    const {label} = items.find(item => item.name === selectedItem)
+
+    // const pickHeader = (name) => {
+    //     switch (name) {
+    //         case value:
+                
+    //             break;
+        
+    //         default:
+    //             break;
+    //     }
+    // }
 
     useEffect(()=> {
         const fetchConversion = async() => {
@@ -70,7 +112,7 @@ console.log(activeCurrency)
                                 Total bought 
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
+                        <p className="text-2xl ">  {nairaFormat(0, "gbp")}</p>
 
                     </div>
 
@@ -115,15 +157,23 @@ console.log(activeCurrency)
 
         <div className="bg-black p-4 lg:p-10 min-h-96">
             <div className="flex flex-col gap-3 md:flex-row justify-between">
-                <h4 className="text-alt text-3xl font-medium">recent order</h4>
+                <h4 className="text-alt text-3xl font-medium">{label}</h4>
                 <ul className="flex gap-3">
-                <li><NavButton onClick={()=> navigate("/dashboard/home/orders-transaction?type=buy")} className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Buy Crypto</NavButton></li>
+                    {items.map(item => (
+                        <li key={item.label}><NavButton onClick={()=>setSelectedItem(item.name)} className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  {item.btn}</NavButton></li>
 
-                <li><NavButton to="/dashboard/home/orders-transaction?type=sell" className={"bg-alt text-black block  py-2 px-3 rounded-xl"}>  Sell Crypto</NavButton></li>
-                <li><NavButton to="/dashboard/home/orders-transaction?type=crypto" className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  Buy Gift Cards</NavButton></li>
-                </ul>
+                    ))
+                }
+               </ul>
             </div>
             <div className="flex justify-center items-center h-full">
+
+                {items.map(item => {
+                   if(item.name === selectedItem) {
+                    return (
+                        item.render
+                    )}
+                })}
                 
 
                 <Outlet  />

@@ -8,10 +8,16 @@ const Transactions = () => {
   return (
     <div>
       <div className="px-4">
+        {/* <ul className="flex gap-5 px-2">
+        <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})  => isActive ? active : normal }>Order</NavLink>    </li>
+        <li><NavLink to={"/dashboard/transactions/deposits"} className={({isActive})  => isActive ? active : normal }>Deposits</NavLink>    </li>
+        <li><NavLink to={"/dashboard/transactions/withdrawals"} className={({isActive})  => isActive ? active : normal }>Withdrawals</NavLink>    </li>
+   
+        </ul> */}
+
         <ul className="flex gap-5 px-2">
         <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})  => isActive ? active : normal }>Order</NavLink>    </li>
         <li><NavLink to={"/dashboard/transactions/deposits"} className={({isActive})  => isActive ? active : normal }>Deposits</NavLink>    </li>
-        {/* <li><NavLink to={"/dashboard/transactions/trades"} className={({isActive})  => isActive ? active : normal }>Trades</NavLink>    </li> */}
         <li><NavLink to={"/dashboard/transactions/withdrawals"} className={({isActive})  => isActive ? active : normal }>Withdrawals</NavLink>    </li>
    
         </ul>

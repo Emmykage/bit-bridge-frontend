@@ -11,21 +11,90 @@ import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
 import { getProducts } from "../../redux/actions/product"
 import FormSelect from "../../compnents/formSelect/FormSelect"
+import { getProvisions } from "../../redux/actions/provision"
+import { splitString } from "../../utils"
+
+const  selectCurrencyOptions = (curr) => {
+    switch (curr) {
+        case "usd":
+            return [{
+                value: 10, label: "USD 10",
+              },
+              {
+                value: 15, label: "USD 15",
+              },   {
+                value: 20, label: "USD 20",
+              },   {
+                value: 25, label: "USD 25",
+              },
+              {
+                value: 50, label: "USD 50",
+              }
+            ]
+        case "eur": 
+            return [{
+                value: 5, label: "EUR 10",
+              },
+              {
+                value: 15, label: "EUR 15",
+              },   {
+                value: 20, label: "EUR 20",
+              },   {
+                value: 25, label: "EUR 25",
+              },
+              {
+                value: 50, label: "EUR 50",
+              }]
+
+              case "gbp": 
+              return [{
+                  value: 5, label: "GBP 10",
+                },
+                {
+                  value: 15, label: "GBP 15",
+                },   {
+                  value: 20, label: "GBP 20",
+                },   {
+                  value: 25, label: "GBP 25",
+                },
+                {
+                  value: 50, label: "GBP 50",
+                }]
+  
+
+        default:
+            return  [{
+                value: 10, label: "USD 10",
+              },
+              {
+                value: 15, label: "USD 15",
+              },   {
+                value: 20, label: "USD 20",
+              },   {
+                value: 25, label: "USD 25",
+              },
+              {
+                value: 50, label: "USD 50",
+              }
+            ]
+    }
+}
 const ViewGiftCard = () => {
     const dispatch = useDispatch()
-    const {provider} = useParams()
+    const {id} = useParams()
     const [value, setValue] = useState(0)
-    const {giftcards} =  useSelector(state => state.product)
+    const {giftcards, mobileProviders} =  useSelector(state => state.provision)
     const [btcValue, setBtcValue] = useState()
     console.log(giftcards)
 
-    const selectedProvider = giftcards?.find(item => item.provider == provider)
+    const selectedProvider = giftcards?.find(item => item.id == id)
 
-    const giftcardImage =  provider?.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
-    console.log(selectedProvider)
+    const giftcardImage =  splitString(selectedProvider?.product?.provider)
+
+    console.log(giftcardImage, selectedProvider)
 
     useEffect(()=> {
-        dispatch(getProducts())
+        dispatch(getProvisions())
     },[])
  
 
@@ -54,7 +123,7 @@ const ViewGiftCard = () => {
                 const fetchBtcValue = async () => {
                     try {
                         const btcValueFig = await converter({ fromCurr: "usd", amount: value, toCurr: "btc" });
-                        setBtcValue(btcValue);
+                        setBtcValue(btcValueFig);
                         console.log("bitcoin value", btcValueFig); // Logs the converted value
                     } catch (error) {
                         console.error("Error fetching BTC value:", error.message);
@@ -77,18 +146,18 @@ const ViewGiftCard = () => {
             <div>
 
                 <div className="text-sm my-2 text-gray-600 font-medium">
-                    <p>Gift Card &gt; {selectedProvider?.provider}</p>
+                    <p>Gift Card &gt; {selectedProvider?.product?.provider}</p>
                 </div>
 
-                <h3 className="text-2xl font-medium">{selectedProvider?.provision}</h3>
+                <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
                 
                 <div className="notice border rounded-xl my-2 p-2 px-3">
                     <p className="text-sm text-gray-700">
-                    {selectedProvider?.info}    
+                    {selectedProvider?.product?.info}    
                     </p>
                 </div>
                 <p className="my-3">
-                    {selectedProvider?.header_info}   
+                    {selectedProvider?.product?.header_info}   
                  </p>
                 <div>
                     <h3 className="text-xl font-semibold">Enter Amount </h3>
@@ -99,15 +168,7 @@ const ViewGiftCard = () => {
                         value={value}
                         onChange={(input)=> {setValue(input)}}
                         placeholder={"Enter Value"}
-                        options={[{
-                            value: 20, label: "USD 20",
-                          },
-                          {
-                            value: 50, label: "USD 50",
-                          },
-                          {
-                            value: 70, label: "USD 70",
-                          }]}
+                        options={selectCurrencyOptions(selectedProvider?.currency)}
                         className={""}/>
 
 
@@ -117,7 +178,7 @@ const ViewGiftCard = () => {
 
 
 
-                    </div>
+                </div>
                     </div>
 
                 <div>
@@ -143,7 +204,7 @@ const ViewGiftCard = () => {
                     <h3 className="text-2xl my-6 font-medium"> Description  </h3>
 
 
-                        <div dangerouslySetInnerHTML={{__html: selectedProvider?.description}} />
+                        <div dangerouslySetInnerHTML={{__html: selectedProvider?.product?.description}} />
 
                      </div>
             </div>
@@ -155,8 +216,8 @@ const ViewGiftCard = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {serviceProviderData.map(({id, provider, provision }) => (
-                    <ProductCard key={id} id={id} provider={provider} provision={provision} />
+                {mobileProviders.map(({id, provider, min_value, max_value, provision }) => (
+                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={provider} provision={provision} />
                 ))}
 
             </div>

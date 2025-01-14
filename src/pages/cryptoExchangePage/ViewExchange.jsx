@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom"
 import giftCardData from '../../data/giftCardData.json'
-import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
+import { useSelector } from "react-redux"
 const ViewGiftCard = () => {
-    const {provider} = useParams()
+    const {id} = useParams()
 
-    const selectedProvider = giftCardData.find(item => item.provider == provider)
+    const {giftcards} = useSelector(state => state.provision)
+
+    const selectedProvider = giftcards.find(item => item.id == id)
 
     console.log(selectedProvider)
     const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
@@ -55,7 +57,7 @@ const ViewGiftCard = () => {
             <div>
 
                 <div className="text-sm my-2 text-gray-600 font-medium">
-                    <p>Data &gt; {provider}</p>
+                    <p>Data &gt; {selectedProvider.product.provider}</p>
                 </div>
 
                 <h3 className="text-2xl font-medium">NTEL Refil</h3>
@@ -120,8 +122,8 @@ const ViewGiftCard = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {serviceProviderData.map(({id, provider, provision }) => (
-                    <ProductCard key={id} id={id} provider={provider} provision={provision} />
+                {selectedProvider.map(({id, product, name }) => (
+                    <ProductCard key={id} id={id} provider={product.provider} provision={name} />
                 ))}
 
             </div>

@@ -20,7 +20,7 @@ const OrderTransact = () => {
   return (
     <div className="px-4 sm:px-6 bg-rd-400 w-full lg:px-8 hover:border-gray-900">
     <div className="mt-4 flow-root">
-        <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+        <div className="mx-4 my-2 sm:mx-6 lg:mx-8">
             <div className="inline-block min-w-full py-2 align-middle">
                 <table className="min-w-full bg-gray-300 border border-gray-200 rounded-md border-separate border-spacing-0 table-auto overflow-hidden">
                     <thead>

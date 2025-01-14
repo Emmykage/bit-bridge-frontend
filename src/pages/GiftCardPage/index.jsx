@@ -4,13 +4,17 @@ import scrollToTop from "../../hooks/scrollToTop"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getProducts } from "../../redux/actions/product"
+import { getProvisions } from "../../redux/actions/provision"
 
 const GiftCardPAge = () => {
   const dispatch = useDispatch()
-  const {giftcards} =  useSelector(state => state.product)
+  const {giftcards} =  useSelector(state => state.provision)
   useEffect(()=>{
-    dispatch(getProducts())
+    dispatch(getProvisions())
   },[])
+
+
+  console.log(giftcards)
 
   scrollToTop()
 
@@ -25,8 +29,8 @@ const GiftCardPAge = () => {
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 sm:grid-cols-2 lg:grid-cols-4">
 
 
-          {giftcards.slice(0, 4).map(({id, provider, provision, image, value})  => (
-          <GiftCard key={id} provider={provider} provision={provision} image={image} value={value}/>
+          {giftcards.slice(0, 4).map(({id, product, name, image, value})  => (
+          <GiftCard key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
           ))}
 
 
@@ -42,8 +46,8 @@ const GiftCardPAge = () => {
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-3 ">
 
 
-          {giftcards.map(({id, provider, provision, image, value})  => (
-          <GiftCard key={id} provider={provider} provision={provision} image={image} value={value}/>
+          {giftcards.map(({id, product, name, image, value})  => (
+          <GiftCard key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
           ))}
 
 

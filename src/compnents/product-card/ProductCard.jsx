@@ -11,7 +11,7 @@ const ProductCard = ({id, min_value, max_value, provider, provision }) => {
     const imagePic = splitString(provider)
 
   return (
-    <div key={id} onClick={()=> {navigate(`/phone-top-up/${provider}`)} } className="border rounded pb-2 bg-white overflow-hidden">
+    <div key={id} onClick={()=> {navigate(`/phone-top-up/${id}`)} } className="border rounded pb-2 bg-white overflow-hidden">
 
     <div  className="h-52">
       <img src={`/images/providers/${imagePic}.webp`} alt="" className="w-full object-contain  h-full" />

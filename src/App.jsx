@@ -65,13 +65,13 @@ function App() {
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
-    <Route path='/phone-top-up/:provider' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
+    <Route path='/phone-top-up/:id' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
-    <Route path='/utility-services/:provider' element={<MainLayout><UtilityView/></MainLayout>} />
+    <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>} />
     <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
     <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
-    <Route path='/gift-cards/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
-    <Route path='/crypto-exchange/:provider' element={<MainLayout><ViewGiftCard/></MainLayout>} />
+    <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
+    <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
     <Route path='/confirmation-order/:id' element={<MainLayout><ConfirmOrder/></MainLayout>} />
 

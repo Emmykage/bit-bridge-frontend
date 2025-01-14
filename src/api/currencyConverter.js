@@ -1,24 +1,24 @@
-const getRate = () => {
-    const storedRate = localStorage.getItem('currencyRate')
-    const rateTimeStamp = localStorage.getItem('rateTimestamp')
+// const getRate = () => {
+//     const storedRate = localStorage.getItem('currencyRate')
+//     const rateTimeStamp = localStorage.getItem('rateTimestamp')
 
 
-    const currentTime = new Date().getTime()
-    const rateExpiresin = 60 * 60 *1000
+//     const currentTime = new Date().getTime()
+//     const rateExpiresin = 60 * 60 *1000
 
 
-    if(storedRate && rateTimeStamp && (currentTime - rateTimeStamp < rateExpiresin) ){
-        return JSON.parse(storedRate)
-    }
+//     if(storedRate && rateTimeStamp && (currentTime - rateTimeStamp < rateExpiresin) ){
+//         return JSON.parse(storedRate)
+//     }
 
-    console.log(new Date().getDay())
-    console.log(new Date(currentTime).toString())
-    console.log(new Date(currentTime).toDateString())
-    console.log(new Date(currentTime).toLocaleString())
-    console.log(new Date(currentTime).toISOString())
+//     console.log(new Date().getDay())
+//     console.log(new Date(currentTime).toString())
+//     console.log(new Date(currentTime).toDateString())
+//     console.log(new Date(currentTime).toLocaleString())
+//     console.log(new Date(currentTime).toISOString())
 
     
-}
+// }
   
   const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
             const api = "https://api.coingecko.com/api/v3/exchange_rates";
@@ -72,7 +72,7 @@ const getRate = () => {
 
                 const calc = ((toRate / fromRate) * amount).toFixed(8);
                 console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);
-                return {calc: Number(calc).toFixed(2), 
+                return {calc: toCurr === "btc" ? calc : Number(calc).toFixed(2), 
                     dollarRate: Number ( currencyRates["usd"].value/currencyRates["ngn"].value )?.toFixed(2),
                     nairaRate: Number(currencyRates["ngn"].value / currencyRates["usd"].value)?.toFixed(2)
                 };

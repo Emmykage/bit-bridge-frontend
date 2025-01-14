@@ -46,77 +46,80 @@ const AddProduct = () => {
       provision: "",
       min_value: 0,
       max_value: 50000.0,
-      currency: "NGN",
+      currency: "usd",
       rate: 5,
       image: "",
       description: "",
       info: "",
-      category: ""
+      category: "gift card"
        }}
         layout="vertical"
         
       >
     
 <FormSelect
-options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift Card"},
-{value: "Mobille Service", label: "Mobile Service"}]}
+name={"category"}
+options={[{label: "service", value: "service"},{value: "gift card", label: "Gift Card"},
+{value: "mobile provider", label: "Mobile Service"}]}
 />
 
 <div className=''>
   <div className='flex gap-4'>
 
-<FormInput
-       placeholder={"provider"}
-       name={"provider"}
-       label={"Provider"}
-       required={true}  
-       className={" w-full"}
-       
-       />
-        <FormInput
-       placeholder={"provision"}
-       name={"provision"}
-       label={"provision"}
-       required={true}     
-       className={"w-full"}  
-       
-       />
+    <FormInput
+          placeholder={"provider"}
+          name={"provider"}
+          label={"Provider"}
+          required={true}  
+          className={" w-full"}
+          
+          />
+            <FormInput
+          placeholder={"provision"}
+          name={"provision"}
+          label={"provision"}
+          required={true}     
+          className={"w-full"}  
+          
+          />
          </div>
 
 <div className='flex gap-4'>
   
-<FormInput
-       placeholder={"min value"}
-       name={"min_value"}
-       label={"min value"}
-       required={true}    
-       className={"flex-1"}   
-       type='number'
-       
-       />
-       <FormInput
-       placeholder={"max value"}
-       name={"max_value"}
-       label={"min value"}
-       required={true}    
-       className={"flex-1"}   
-       type='number'
+    <FormInput
+          placeholder={"min value"}
+          name={"min_value"}
+          label={"min value"}
+          required={true}    
+          className={"flex-1"}   
+          type='number'
+          
+          />
+          <FormInput
+          placeholder={"max value"}
+          name={"max_value"}
+          label={"min value"}
+          required={true}    
+          className={"flex-1"}   
+          type='number'
 
-       
-       />
+          
+          />
       
 
-</div>
-<FormSelect
-label={"currency"}
-name={"currency"}
-required={true}
-options={[{value: "NGN", label: "NGN"},
-{value: "USD", label: "USD"}]}
-/>
+    </div>
+    <FormSelect
+    label={"currency"}
+    name={"currency"}
+    required={true}
+    options={[{value: "ngn", label: "NGN"},
+      {value: "usd", label: "USD"},
+      {value: "gbp", label: "GBP"}
+      ]}
+    />
 <FormInputArea
        placeholder={"header_info"}
-       name={"info"}
+       name={"header_info"}
        label={"header_info"}
        required={true}    
        className={"flex-1"}   
@@ -132,9 +135,9 @@ options={[{value: "NGN", label: "NGN"},
        
        />
         <FormInputArea
-       placeholder={"notice_info"}
-       name={"notice_info"}
-       label={"notice_info"}
+       placeholder={"info"}
+       name={"info"}
+       label={"info"}
        required={true}       
        
        />

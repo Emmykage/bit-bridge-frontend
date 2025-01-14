@@ -1,9 +1,18 @@
-import serviceProviderData from "../../data/giftCardData.json"
+// import serviceProviderData from "../../data/giftCardData.json"
 import Header from "../../compnents/header/Header"
 
 import GiftCard from "../../compnents/product-card/GiftCard"
 import sellCrypto from "../../assets/images/banners/original-size.webp"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getProducts } from "../../redux/actions/product"
+import { getProvisions } from "../../redux/actions/provision"
 const CryptoExchangePage = () => {
+  const {giftcards} = useSelector(state => state.provision)
+  const dispatch = useDispatch()
+  useEffect(()=> {
+    dispatch(getProvisions())
+  },[])
 
   return (
     <div>        
@@ -34,8 +43,8 @@ const CryptoExchangePage = () => {
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 lg:grid-cols-4">
 
 
-          {serviceProviderData.slice(0, 4).map(({id, provider, provision, image, value})  => (
-          <GiftCard key={id} provider={provider} provision={provision} image={image} value={value}/>
+          {giftcards.slice(0, 4).map(({id, product, name, value})  => (
+          <GiftCard key={id} id={id} provider={product.provider} provision={name} value={value}/>
           ))}
 
 
@@ -51,8 +60,8 @@ const CryptoExchangePage = () => {
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-2 lg:grid-cols-3 ">
 
 
-          {serviceProviderData.map(({id, provider, provision, image, value})  => (
-          <GiftCard key={id} provider={provider} provision={provision} image={image} value={value}/>
+          {giftcards.map(({id, product, name, image, value})  => (
+          <GiftCard key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
           ))}
 
 

@@ -3,13 +3,13 @@ import {StarOutlined} from "@ant-design/icons"
 import PropTypes from 'prop-types'
 import { splitString } from '../../utils'
 
-const GiftCard = ({id, provider, provision, value, feature }) => {
+const GiftCard = ({id, provider, provision, value, feature, rate }) => {
 
     const giftcardImage = splitString(provider)
     const navigate = useNavigate()
 
   return (
-        <div className='relative border rounded shadow hover:shadow-none overflow-hidden'  key={id} onClick={()=> {navigate(`/gift-cards/${provider}`)} }>
+        <div className='relative border rounded shadow hover:shadow-none overflow-hidden'  key={id} onClick={()=> {navigate(`/gift-cards/${id}`)} }>
 
             {feature && 
 
@@ -27,7 +27,7 @@ const GiftCard = ({id, provider, provision, value, feature }) => {
             <p className="text-base font-medium text-gray-600">{value}</p>
             </div>
             <div className="flex gap-3">
-                <span className="font-semibold">4.7</span>
+                <span className="font-semibold">{rate ?? 4.7}</span>
                 <span><StarOutlined /></span>
             </div>
             </div>

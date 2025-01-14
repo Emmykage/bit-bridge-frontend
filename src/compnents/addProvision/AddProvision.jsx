@@ -40,7 +40,7 @@ const AddProvision = ({productID, setIsOpen}) => {
         min_value: 0,
         max_value: 50000.0,
         value: 110,
-        currency: "NGN",
+        currency: "usd",
         description: "",
        }}
         layout="vertical"
@@ -69,13 +69,35 @@ const AddProvision = ({productID, setIsOpen}) => {
                     label={"currency"}
                     name={"currency"}
                     required={true}
-                    options={[{value: "NGN", label: "NGN"},
-                    {value: "USD", label: "USD"}]}
+                    options={[{value: "ngn", label: "NGN"},
+                        {value: "usd", label: "USD"},
+                        {value: "gbp", label: "GBP"}
+                        ]}
                 />
-                <FormInput
+                {/* <FormInput
                     placeholder={"Value"}
                     name={"value"}
                     label={"value"}
+                    required={false}    
+                    className={"flex-1"}   
+                    type='number'        
+                /> */}
+                </div>
+
+                <div className='flex gap-4'>                    
+              
+                  <FormInput
+                    placeholder={"Min Value"}
+                    name={"min_value"}
+                    label={"Min value"}
+                    required={false}    
+                    className={"flex-1"}   
+                    type='number'        
+                />
+                <FormInput
+                    placeholder={"Max Value"}
+                    name={"max_value"}
+                    label={"Max value"}
                     required={false}    
                     className={"flex-1"}   
                     type='number'        

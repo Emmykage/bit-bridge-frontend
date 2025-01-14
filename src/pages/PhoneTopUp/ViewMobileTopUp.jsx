@@ -10,22 +10,25 @@ import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
 import { getProducts } from "../../redux/actions/product"
 import { splitString } from "../../utils"
+import FormSelect from "../../compnents/formSelect/FormSelect"
+import selectCurrencyOptions from "../../utils/selectCurrencyOption"
+import { getProvisions } from "../../redux/actions/provision"
 const ViewMobileTopUp = () => {
     const dispatch = useDispatch()
-    const {provider} = useParams()
+    const {id} = useParams()
     const [value, setValue] = useState(0)
-    const {mobileProviders, giftcards} = useSelector(state => state.product)
+    const {mobileProviders, giftcards} = useSelector(state => state.provision)
 
     const [btcValue, setBtcValue] = useState()
     console.log(giftcards)
 
-    const selectedProvider = mobileProviders?.find(item => item.provider == provider)
+    const selectedProvider = mobileProviders?.find(item => item.id === id)
 
-    const giftcardImage = splitString(provider)
+    const giftcardImage = splitString(selectedProvider?.product?.provider)
     console.log(selectedProvider)
 
     useEffect(()=> {
-        dispatch(getProducts())
+        dispatch(getProvisions())
     },[])
  
 
@@ -39,9 +42,9 @@ const ViewMobileTopUp = () => {
 
                 dispatch(ADD_TO_CART({
                     id: selectedProvider.id, 
-                    provision: selectedProvider.provision,
-                    provider: selectedProvider.provider,
-                    image: selectedProvider.provider,
+                    provision: selectedProvider.name,
+                    provider: selectedProvider.product.provider,
+                    image: selectedProvider.product.provider,
                     value: value
                 })
             )
@@ -53,8 +56,8 @@ const ViewMobileTopUp = () => {
                useEffect(() => {
                 const fetchBtcValue = async () => {
                     try {
-                        const btcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
-                        setBtcValue(btcValue);
+                        const conversion = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                        setBtcValue(conversion);
                         console.log("bitcoin value", btcValue); // Logs the converted value
                     } catch (error) {
                         console.error("Error fetching BTC value:", error.message);
@@ -77,33 +80,33 @@ const ViewMobileTopUp = () => {
             <div>
 
                 <div className="text-sm my-2 text-gray-600 font-medium">
-                    <p className="capitalize">Utility & Services &gt; {selectedProvider?.provider}</p>
+                    <p className="capitalize">Utility & Services &gt; {selectedProvider?.product?.provider}</p>
                 </div>
 
-                <h3 className="text-2xl font-medium">{selectedProvider?.provision}</h3>
+                <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
                 
                 <div className="notice border rounded-xl my-2 p-2 px-3">
                     <p className="text-sm text-gray-700">
-                    {selectedProvider?.info}    
+                    {selectedProvider?.product?.info}    
                     </p>
                 </div>
                 <p className="my-3">
-                    {selectedProvider?.header_info}   
+                    {selectedProvider?.product?.header_info}   
                  </p>
                 <div>
                     <h3 className="text-xl font-semibold">Enter Amount </h3>
 
                 <div className="flex flex-col gap-0">
-
-                        <FormInput type="nubmer"
+                    <FormSelect type="nubmer"
                         value={value}
                         onChange={(input)=> {setValue(input)}}
                         placeholder={"Enter Value"}
-                        className={""}/>
-
+                        options={selectCurrencyOptions(selectedProvider?.currency)}
+                        className={""}
+                        />
 
                         <div className="flex-1 text-sm mt-2 from-gray-800">
-                            Estimated price {btcValue}BTC
+                            Estimated price {btcValue?.calc}BTC
                         </div> 
 
 
@@ -146,8 +149,8 @@ const ViewMobileTopUp = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {giftcards.map(({id, provider,min_value, max_value, provision }) => (
-                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={provider} provision={provision} />
+                {giftcards.map(({id, product ,min_value, max_value, name }) => (
+                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={product.provider} provision={name} />
                 ))}
 
             </div>
