@@ -1,84 +1,18 @@
 import { useParams } from "react-router-dom"
-import serviceProviderData from '../../data/serviceProviderData.json'
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux"
 import { ADD_TO_CART } from "../../redux/app"
-import FormInput from "../../compnents/formInput/FormInput"
 import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
-import { getProducts } from "../../redux/actions/product"
 import FormSelect from "../../compnents/formSelect/FormSelect"
 import { getProvisions } from "../../redux/actions/provision"
 import { splitString } from "../../utils"
+import selectCurrencyOptions from "../../utils/selectCurrencyOption"
 
-const  selectCurrencyOptions = (curr) => {
-    switch (curr) {
-        case "usd":
-            return [{
-                value: 10, label: "USD 10",
-              },
-              {
-                value: 15, label: "USD 15",
-              },   {
-                value: 20, label: "USD 20",
-              },   {
-                value: 25, label: "USD 25",
-              },
-              {
-                value: 50, label: "USD 50",
-              }
-            ]
-        case "eur": 
-            return [{
-                value: 5, label: "EUR 10",
-              },
-              {
-                value: 15, label: "EUR 15",
-              },   {
-                value: 20, label: "EUR 20",
-              },   {
-                value: 25, label: "EUR 25",
-              },
-              {
-                value: 50, label: "EUR 50",
-              }]
 
-              case "gbp": 
-              return [{
-                  value: 5, label: "GBP 10",
-                },
-                {
-                  value: 15, label: "GBP 15",
-                },   {
-                  value: 20, label: "GBP 20",
-                },   {
-                  value: 25, label: "GBP 25",
-                },
-                {
-                  value: 50, label: "GBP 50",
-                }]
-  
-
-        default:
-            return  [{
-                value: 10, label: "USD 10",
-              },
-              {
-                value: 15, label: "USD 15",
-              },   {
-                value: 20, label: "USD 20",
-              },   {
-                value: 25, label: "USD 25",
-              },
-              {
-                value: 50, label: "USD 50",
-              }
-            ]
-    }
-}
 const ViewGiftCard = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
@@ -107,10 +41,11 @@ const ViewGiftCard = () => {
                 }
 
                 dispatch(ADD_TO_CART({
-                    id: selectedProvider.id, 
-                    provision: selectedProvider.provision,
-                    provider: selectedProvider.provider,
-                    image: selectedProvider.provider,
+                    provision_id: selectedProvider.id, 
+                    product_id: selectedProvider.product.id,
+                    provision: selectedProvider.name,
+                    provider: selectedProvider.product.provider,
+                    image: selectedProvider.product.provider,
                     value: value
                 })
             )
@@ -216,8 +151,8 @@ const ViewGiftCard = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {mobileProviders.map(({id, provider, min_value, max_value, provision }) => (
-                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={provider} provision={provision} />
+                {mobileProviders.map(({id, product, min_value, max_value, name }) => (
+                    <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={product.provider} provision={name} />
                 ))}
 
             </div>

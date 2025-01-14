@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { FaCheck } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-// import { nairaFormat } from '../utils/nairaFormat';
-// import { getOrder } from '../redux/actions/orders';
-// import DiscoverBtn from '../components/buttons/DiscoverBtn';
+
 import ScrollToTop from '../hooks/scrollToTop';
 import OrderSummary from '../compnents/orderSummary/OrderSummary';
 import DiscoverBtn from '../compnents/button/DiscoverBtn';
@@ -18,6 +16,7 @@ const ConfirmOrder = () => {
   const orderId = query.get('orderId');
   const dispatch = useDispatch();
   const { order, status, loading } = useSelector((state) => state.order);
+  console.log(order?.total_amount)
   ScrollToTop();
   useEffect(() => {
     dispatch(getOrder(orderId));
@@ -57,7 +56,7 @@ const ConfirmOrder = () => {
             <p className="text-base font-medium text-gray-500">Mode</p>
             <p className="text-lg capitalize">{order?.payment_method}</p>
           </div>
-          <div className="border rounded-lg p-4">
+          {/* <div className="border rounded-lg p-4">
             <div>
               <p className="text-lg text-gray-500">Name</p>
               <p className="text-xl">{order?.billing_address?.name}</p>
@@ -84,19 +83,20 @@ const ConfirmOrder = () => {
               <p className="text-lg text-gray-500">Delivery Fee</p>
               <p className="text-xl">{nairaFormat(order?.delivery_fee)}</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="my-4">
             <span className="text-lg uppercase">Items</span>
             {Object.keys(order)?.length > 0 ? order?.order_items?.map((item) => (
-              <div className="flex justify-between border my-2 rounded-xl py-4 px-4 gap-3">
+              <div key={item.id} className="flex justify-between border my-2 rounded-xl py-4 px-4 gap-3">
                 <div className="w-16 h-16 border rounded p-1">
                   <img src={item?.photo_url ? item?.photo_url : item?.product?.image} alt="" className="w-full h-full object-contain" />
 
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium">{item?.product?.name}</p>
-                  <p>
+                <p className="text-sm font-medium">{item?.product?.provider}</p>
+                <p className="text-sm font-medium">{item?.provision?.name}</p>
+                <p>
                     Quantity:
                     {item?.quantity}
                   </p>
@@ -104,7 +104,7 @@ const ConfirmOrder = () => {
                 </div>
                 <div>
                   <p className="text-base font-semibold">
-                    {nairaFormat(item?.product?.price)}
+                    {nairaFormat(item?.amount, "usd")}
                   </p>
                 </div>
 
@@ -126,8 +126,7 @@ const ConfirmOrder = () => {
           </div>
 
         </div>
-        {/* {order?.delivery_fee} */}
-        <OrderSummary amount={Number(order?.total_amount)} shippingFee={Number(order?.delivery_fee)} counter={order?.order_items?.length} />
+        <OrderSummary totalAmount={Number(order?.total_amount)} cartItems={order?.order_items} counter={order?.order_items?.length} />
       </div>
 
     </section>

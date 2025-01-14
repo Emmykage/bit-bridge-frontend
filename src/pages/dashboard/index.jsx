@@ -1,6 +1,5 @@
 import { LoginOutlined, TrophyOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
-import wallet from '../../assets/pngs/wallet.png'
 
 import NavButton from "../../compnents/button/NavButton"
 import { converter } from "../../api/currencyConverter"

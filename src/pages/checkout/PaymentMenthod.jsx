@@ -1,4 +1,3 @@
-import { DeleteTwoTone } from '@ant-design/icons'
 import Header from '../../compnents/header/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { createOrder } from '../../redux/actions/order'
@@ -9,6 +8,7 @@ import {  GET_CART } from '../../redux/app'
 import { getWallet } from '../../redux/actions/wallet'
 import OrderSummary from '../../compnents/orderSummary/OrderSummary'
 import { useNavigate } from 'react-router-dom'
+import { clearCartItems } from '../../utils/localStorage'
 
 const PaymentMenthod = () => {
     const dispatch = useDispatch()
@@ -28,8 +28,8 @@ const PaymentMenthod = () => {
         {
             quantity: 1,
             amount: item.value,
-            product_id: item.id,
-            // provision: null 
+            product_id: item.product_id,
+            provision_id: item.provision_id 
 
         }
     ))
@@ -48,8 +48,8 @@ const PaymentMenthod = () => {
 
   
             if(createOrder.fulfilled.match(result)) {
-                toast(result.message,{type: "success"})
-                navigate(`/confirmation-order?orderId=${result.data.id}`)
+                clearCartItems()                
+                navigate(`/confirmation-order?orderId=${result.payload.data.id}`)
             }else{
                 toast(result?.message,{type: "error"})
 
@@ -73,11 +73,11 @@ const PaymentMenthod = () => {
         <div className='shadow p-4'>
         <div className='p-4 bg-white font-medium'>
             <h4 className='text-xl font-semibold md:text-3xl my-2 '>  select payment method  </h4>
-            <h3>Account Balance:  {user ? nairaFormat(wallet.balance) : "Not Available"} </h3>
+            <h3>Account Balance:  {user ? nairaFormat(wallet.balance, "usd") : "Not Available"} </h3>
             <p >{ !loading && !user && <span className='text-red-400 text-sm'>Sign up to proceed</span>} </p>
             <div>
-                <p className='text-2xl font-bold text-green-950'>NGN</p>
-               <p> {nairaFormat(totalAmount)}</p> 
+                <p className='text-2xl font-bold text-green-950'>USD</p>
+               <p> {nairaFormat(totalAmount, "usd")}</p> 
                {totalAmount > wallet?.balance &&  <p className={`opacity-4 text-gray-500 ${alertText && "text-red-500"}`}>Not Enough balance</p>  }
              
             </div>

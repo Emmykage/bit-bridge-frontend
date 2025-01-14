@@ -73,7 +73,7 @@ function App() {
     <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
-    <Route path='/confirmation-order/:id' element={<MainLayout><ConfirmOrder/></MainLayout>} />
+    <Route path='/confirmation-order' element={<MainLayout><ConfirmOrder/></MainLayout>} />
 
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>}>

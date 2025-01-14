@@ -52,6 +52,17 @@ export const deleteCartItem = (id) => {
     }
 }
 
+export const clearCartItems = () => {
+
+
+  try {
+      localStorage.removeItem("G_BRIDGE_CART")      
+  } catch (error) {
+      console.log(error)
+      return []
+  }
+}
+
 export const addToCartItems = (cartData) => {
     const existingCartItems = getCartItems();
   

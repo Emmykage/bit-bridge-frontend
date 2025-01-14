@@ -5,6 +5,7 @@ import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
 
 export const createOrder = createAsyncThunk("order/creaet-order", async(data, {rejectWithValue}) => {
+    console.log(data)
     const formData = new FormData()
 
     data?.order_type && formData.append("order_detail[order_type]", data.order_type)
@@ -46,14 +47,13 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
 
 export const getOrder = createAsyncThunk("order/get-order", async(id, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}orders/${id}`, {
+        const response = await axios.get(`${baseUrl + apiRoute}order_details/${id}`, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }
         });
 
         const result = response.data;      
-
         return result;
     } catch (error) {
         if (error.response) {
