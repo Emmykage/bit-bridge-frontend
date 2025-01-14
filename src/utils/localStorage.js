@@ -77,14 +77,15 @@ export const addToCartItems = (cartData) => {
   
       // Check if the item already exists in the cart and update it, otherwise keep it unchanged.
       const updatedCartItems = existingCartItems.map((item) => {
-        if (item.id === cartData.id) {
+        if (item.provision_id === cartData.provision_id) {
           return { ...item, ...cartData }; // Merge existing item with new data.
         }
         return item;
       });
   
       // Check if the item was updated; if not, add it to the cart.
-      const isItemInCart = existingCartItems.some(item => item.id === cartData.id);
+      const isItemInCart = existingCartItems.some(item => item.provision_id === cartData.provision_id);
+      console.log(isItemInCart)
       if (!isItemInCart) {
         updatedCartItems.push(cartData);
       }

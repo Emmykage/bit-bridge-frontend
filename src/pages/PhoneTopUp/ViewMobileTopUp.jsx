@@ -5,10 +5,8 @@ import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux"
 import { ADD_TO_CART } from "../../redux/app"
-import FormInput from "../../compnents/formInput/FormInput"
 import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
-import { getProducts } from "../../redux/actions/product"
 import { splitString } from "../../utils"
 import FormSelect from "../../compnents/formSelect/FormSelect"
 import selectCurrencyOptions from "../../utils/selectCurrencyOption"
@@ -20,12 +18,10 @@ const ViewMobileTopUp = () => {
     const {mobileProviders, giftcards} = useSelector(state => state.provision)
 
     const [btcValue, setBtcValue] = useState()
-    console.log(giftcards)
 
     const selectedProvider = mobileProviders?.find(item => item.id === id)
 
     const giftcardImage = splitString(selectedProvider?.product?.provider)
-    console.log(selectedProvider)
 
     useEffect(()=> {
         dispatch(getProvisions())
@@ -41,7 +37,8 @@ const ViewMobileTopUp = () => {
                 }
 
                 dispatch(ADD_TO_CART({
-                    id: selectedProvider.id, 
+                    provision_id: selectedProvider.id, 
+                    product_id: selectedProvider.product.id,
                     provision: selectedProvider.name,
                     provider: selectedProvider.product.provider,
                     image: selectedProvider.product.provider,
