@@ -17,7 +17,6 @@ const AddProvision = ({productID, setIsOpen}) => {
     <div className='provision'>
     <Form
        onFinish={(values) => {
-        console.log(values)
         dispatch(createProvision({
             provision:{
                 product_id: productID,
@@ -25,7 +24,8 @@ const AddProvision = ({productID, setIsOpen}) => {
             }})).then(result => {
           if(createProvision.fulfilled.match(result)){
             form.resetFields()
-            toast(result.payload.message, {type: "success"})
+            console.log(result.payload)
+            toast(result.payload.message ?? "Provission has been created", {type: "success"})
             setIsOpen(false)
           }else if(createProvision.rejected.match(result)){
             console.log(result.message)
@@ -42,6 +42,8 @@ const AddProvision = ({productID, setIsOpen}) => {
         value: 110,
         currency: "usd",
         description: "",
+        // info: "",
+        notice: ""
        }}
         layout="vertical"
         
@@ -104,8 +106,21 @@ const AddProvision = ({productID, setIsOpen}) => {
                 />
                 </div>
 
-        
-        <FormInputArea
+{/*         
+                <FormInputArea
+            placeholder={"Info"}
+            name={"info"}
+            label={"Info"}
+            required={true}       
+            
+            />    */}
+             <FormInputArea
+            placeholder={"Notice"}
+            name={"notice"}
+            label={"Notice"}
+            // required={true}       
+            
+            />    <FormInputArea
             placeholder={"description"}
             name={"description"}
             label={"description"}

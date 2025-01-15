@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Button, Form } from 'antd'
+import { Button, Form, Switch } from 'antd'
 import FormInput from '../../../compnents/formInput/FormInput'
 import FormInputArea from '../../../compnents/formInputArea/FormInput'
 import FormSelect from '../../../compnents/formSelect/FormSelect'
@@ -12,15 +12,14 @@ import AppModal from '../../../compnents/modal/Modal'
 import AddProvision from '../../../compnents/addProvision/AddProvision'
 import { fetchProduct, updateProduct } from '../../../redux/actions/product'
 import { nairaFormat } from '../../../utils/nairaFormat'
-import dateFormater from '../../../utils/dateFormat'
 
 const ViewProduct = () => {
     const dispatch = useDispatch()
     const {product, loading} = useSelector(state => state .product)
+    const [disableForm, setDisableForm ] = useState(true)
+    const [check, setCheck ] = useState(false)
     const {id} = useParams()
     const [isOpen, setIsOpen] = useState(false)
-
-    const {form} = Form.useForm()
 
 
     useEffect(()=> {
@@ -36,22 +35,29 @@ const ViewProduct = () => {
             <div>Loading...</div>
         )
     }
+    const onChange = () => {
+      setDisableForm(prev => !prev)
+    };
 
-    // console.log(product)
+
   return (
     <>
 
-    <div className='p-10'>
-        <ButtonCall
+    <div className='md:p-10'>
+      <div className='flex justify-between items-center'>
+      <ButtonCall
         handleClick={() => setIsOpen(true)}>Add Provision </ButtonCall>
+
+        <Switch defaultChecked={!disableForm} onChange={onChange} />
+      </div>
+    
         
          <Form
-         disabled={true}
+         disabled={disableForm}
        onFinish={(values) => {
         console.log(values)
-        dispatch(updateProduct(values)).then(result => {
+        dispatch(updateProduct({id, data: values})).then(result => {
           if(updateProduct.fulfilled.match(result)){
-            form.resetFields()
             toast(result.payload.message, {type: "success"})
           }else if(updateProduct.rejected.match(result)){
             console.log(result)
@@ -86,17 +92,17 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
        className={" w-full"}
        
        />
-        <FormInput
+        {/* <FormInput
        placeholder={"provision"}
        name={"provision"}
        label={"provision"}
        required={true}     
        className={"w-full"}  
        
-       />
+       /> */}
          </div>
 
-<div className='flex gap-4'>
+{/* <div className='flex gap-4'>
   
 <FormInput
        placeholder={"min value"}
@@ -119,14 +125,14 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
        />
       
 
-</div>
-    <FormSelect
+</div> */}
+    {/* <FormSelect
         label={"currency"}
         name={"currency"}
         required={true}
         options={[{value: "NGN", label: "NGN"},
         {value: "USD", label: "USD"}]}
-    />
+    /> */}
     <FormInputArea
         placeholder={"header_info"}
         name={"info"}
@@ -176,8 +182,9 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                         <table className="min-w-full bg-gray-300 border border-gray-200 rounded-md border-separate border-spacing-0 table-auto overflow-hidden">
                             <thead>
                                 <tr>
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6"> Provision</th>
-                                    <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Min Value</th>
+                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter md:pl-4"> Provision</th>
+                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6"> Currency</th>
+                                <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 pl-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Min Value</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Max Value</th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-0 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Description</th>
 
@@ -194,13 +201,16 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                                 { product?.provisions?.map(item => (
 
                                 <tr key={item?.id}>
-                                    <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
+                                    <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal md:pl-4">
                                         <p className="font-medium text-gray-600 leading-5">{item.name} </p>
+                                    </td>
+                                    <td className="whitespace-nowrap border-b text-left border-gray-200 py-2 pl-3 pr-3 text-sm font-normal uppercase sm:pl-6 lg:pl-8">
+                                        <p className="font-medium text-gray-600 leading-5">{item.currency} </p>
                                     </td>
 
 
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-0 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.min_value)}</p></td>
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-0 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.min_value)}</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 pl-1 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.min_value, item.currency)}</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-1 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.max_value, item.currency)}</p></td>
 
                                     <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-0 text-gray-900  text-sm sm:pr-8 ">
                                         {(item?.description)}

@@ -23,7 +23,7 @@ export const createProduct = createAsyncThunk("product/creaet-product", async(da
 
 export const updateProduct = createAsyncThunk("product/update-product", async({id, data}, {rejectWithValue}) => {
     try {
-        const response = await axios.patch(`${baseUrl + apiRoute}products${id}`,data, {
+        const response = await axios.patch(`${baseUrl + apiRoute}products/${id}`,data, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`}
         });

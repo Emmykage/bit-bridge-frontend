@@ -74,17 +74,17 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
           className={" w-full"}
           
           />
-            <FormInput
+            {/* <FormInput
           placeholder={"provision"}
           name={"provision"}
           label={"provision"}
           required={true}     
           className={"w-full"}  
           
-          />
+          /> */}
          </div>
 
-<div className='flex gap-4'>
+{/* <div className='flex gap-4'>
   
     <FormInput
           placeholder={"min value"}
@@ -107,8 +107,8 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
           />
       
 
-    </div>
-    <FormSelect
+    </div> */}
+    {/* <FormSelect
     label={"currency"}
     name={"currency"}
     required={true}
@@ -116,7 +116,7 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
       {value: "usd", label: "USD"},
       {value: "gbp", label: "GBP"}
       ]}
-    />
+    /> */}
 <FormInputArea
        placeholder={"header_info"}
        name={"header_info"}
