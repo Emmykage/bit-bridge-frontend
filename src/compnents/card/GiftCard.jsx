@@ -2,8 +2,8 @@ import NavButton from '../button/NavButton'
 import PropTypes from 'prop-types'
 
 const GiftCard = ({image, onClick, id, provider, title}) => {
-  console.log(provider)
 
+  
   const giftcardImage = provider.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
 
   return (

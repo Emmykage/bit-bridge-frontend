@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { createProvision } from '../../redux/actions/provision'
 import "./style.scss"
+import PropTypes from 'prop-types'
 
 const AddProvision = ({productID, setIsOpen}) => {
 
     const dispatch = useDispatch()
     const [form] = Form.useForm()
-    console.log(productID)
 
   return (
     <div className='provision'>
@@ -24,11 +24,9 @@ const AddProvision = ({productID, setIsOpen}) => {
             }})).then(result => {
           if(createProvision.fulfilled.match(result)){
             form.resetFields()
-            console.log(result.payload)
             toast(result.payload.message ?? "Provission has been created", {type: "success"})
             setIsOpen(false)
           }else if(createProvision.rejected.match(result)){
-            console.log(result.message)
             toast(result.payload.message, {type: "error"})
           }
         })
@@ -138,6 +136,11 @@ const AddProvision = ({productID, setIsOpen}) => {
       </div>
 
   )
+}
+
+AddProvision.propTypes = {
+  productID: PropTypes.string,
+  setIsOpen: PropTypes.func
 }
 
 export default AddProvision

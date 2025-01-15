@@ -26,7 +26,7 @@ const AdminDashboardLayout = () => {
 
     useEffect(() => {
         if ((!loading && !user) || (user && !user.admin)) {
-            console.log("second")
+
             toast("No Authorization", {type: "error"})
             navigate("/admin/login");
         }

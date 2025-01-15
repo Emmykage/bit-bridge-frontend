@@ -29,13 +29,13 @@ const AddProduct = () => {
 
        <Form
        onFinish={(values) => {
-        console.log(values)
+
         dispatch(createProduct(values)).then(result => {
           if(createProduct.fulfilled.match(result)){
             form.resetFields()
             toast(result.payload.message, {type: "success"})
           }else if(createProduct.rejected.match(result)){
-            console.log(result)
+
             toast(result.payload.message, {type: "error"})
           }
         })

@@ -6,8 +6,7 @@ export const setToken = (token) => {
     if (refresh) {
       return token ? token?.refresh_token : token;
     }
-    // console.log(token)
-    // return token ? token?.access_token : token;
+
     return token
   };
   

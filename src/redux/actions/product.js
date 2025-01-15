@@ -16,7 +16,6 @@ export const createProduct = createAsyncThunk("product/creaet-product", async(da
         if (error.response) {
             return rejectWithValue({ message: error.response.data });
         }
-        console.error(error);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
@@ -34,7 +33,6 @@ export const updateProduct = createAsyncThunk("product/update-product", async({i
         if (error.response) {
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
@@ -69,7 +67,7 @@ export const delProduct = createAsyncThunk("product/delete-product", async(id, {
 
 
         const result = response.data;
-        console.log(result)
+
         return result;
     } catch (error) {
         console.error(error)
@@ -77,7 +75,6 @@ export const delProduct = createAsyncThunk("product/delete-product", async(id, {
         if (error.response) {
             return rejectWithValue({ message: error.response.data.message || "Failed to get Product" });
         }
-        console.error(error);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });

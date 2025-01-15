@@ -36,7 +36,6 @@ const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
                 }
             
                 
-                console.log(currencyRates)
                 const fromRate = currencyRates[fromCurr].value;
                 const toRate =  currencyRates[toCurr].value;
                 const naira =  currencyRates["ngn"].value;

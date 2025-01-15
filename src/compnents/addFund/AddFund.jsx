@@ -24,9 +24,6 @@ const AddFund = ({
     <Form
       layout={formLayout}
       onFinish={(values) =>{
-        // const uploadedFile = values.proof?.[0]?.originFileObj;
-  
-        // console.log(values)
             handleSubmit(values)
 
       }}
