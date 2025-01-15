@@ -17,13 +17,11 @@ const ViewProduct = () => {
     const dispatch = useDispatch()
     const {product, loading} = useSelector(state => state .product)
     const [disableForm, setDisableForm ] = useState(true)
-    const [check, setCheck ] = useState(false)
     const {id} = useParams()
     const [isOpen, setIsOpen] = useState(false)
 
 
     useEffect(()=> {
-        // console.log("call product", id)
         dispatch(fetchProduct(id))
 
 

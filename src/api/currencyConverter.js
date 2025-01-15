@@ -1,28 +1,6 @@
-// const getRate = () => {
-//     const storedRate = localStorage.getItem('currencyRate')
-//     const rateTimeStamp = localStorage.getItem('rateTimestamp')
-
-
-//     const currentTime = new Date().getTime()
-//     const rateExpiresin = 60 * 60 *1000
-
-
-//     if(storedRate && rateTimeStamp && (currentTime - rateTimeStamp < rateExpiresin) ){
-//         return JSON.parse(storedRate)
-//     }
-
-//     console.log(new Date().getDay())
-//     console.log(new Date(currentTime).toString())
-//     console.log(new Date(currentTime).toDateString())
-//     console.log(new Date(currentTime).toLocaleString())
-//     console.log(new Date(currentTime).toISOString())
-
-    
-// }
-  
-  const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
+const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
             const api = "https://api.coingecko.com/api/v3/exchange_rates";
-            console.log(api)
+
             try {
 
 
@@ -58,23 +36,23 @@
                 }
             
                 
-
-                // Ensure both currencies exist in the rates
-                // if (!currencyRates.rates[fromCurr] || !currencyRates.rates[toCurr]) {
-                //     throw new Error(`Currency not supported: ${fromCurr} or ${toCurr}`);
-                // }
-
-
                 console.log(currencyRates)
                 const fromRate = currencyRates[fromCurr].value;
                 const toRate =  currencyRates[toCurr].value;
+                const naira =  currencyRates["ngn"].value;
+                const usd =  currencyRates["usd"].value;
 
 
                 const calc = ((toRate / fromRate) * amount).toFixed(8);
                 console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);
+
+                const currArrays = Object.values(currencyRates)
+                console.log(currArrays)
                 return {calc: toCurr === "btc" ? calc : Number(calc).toFixed(2), 
                     dollarRate: Number ( currencyRates["usd"].value/currencyRates["ngn"].value )?.toFixed(2),
-                    nairaRate: Number(currencyRates["ngn"].value / currencyRates["usd"].value)?.toFixed(2)
+                    nairaRate: Number(currencyRates["ngn"].value / currencyRates["usd"].value)?.toFixed(2),
+                    naira,
+                    usd
                 };
             } catch (error) {
                 console.error("Error fetching exchange rates:", error.message);

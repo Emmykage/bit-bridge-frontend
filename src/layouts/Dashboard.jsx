@@ -12,7 +12,7 @@ import logo from "../assets/logos/logo-mod.png"
 const DashboardLayout = () => {
 
     const dispatch = useDispatch()
-    const {wallet} = useSelector(state => state.wallet)
+    // const {wallet} = useSelector(state => state.wallet)
     const {user, loading} = useSelector(state => state.auth)
     const navigate = useNavigate()
     const normal = "flex justify-center items-center flex-col"
@@ -46,7 +46,7 @@ const DashboardLayout = () => {
                 <li><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
                 <li><NavLink to={"/dashboard/gift-cards"} className={({isActive})=>  isActive ? active : normal}><GiftOutlined className='text-2xl'/> Gift Card</NavLink></li>
                 <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})=>  isActive ? active : normal}><SignalCellularAltIcon className='text-6xl' />Transaction</NavLink></li>
-                <li><NavLink to={"/dashboard/crypto-sell"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl text-nowrap' /> Crypto Sell</NavLink></li>
+                <li><NavLink to={"/dashboard/crypto-sell/bitcoin"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl text-nowrap' /> Crypto Sell</NavLink></li>
 
             </ul>
             
@@ -76,10 +76,7 @@ const DashboardLayout = () => {
 
             </div>
         </div>     
-        <div className='h-10 w-full bg-black'>
-            {/* hhshd */}
-
-        </div>
+      
     </div>
     </div>
 

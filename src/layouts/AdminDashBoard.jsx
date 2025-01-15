@@ -101,7 +101,7 @@ const AdminDashboardLayout = () => {
             </div>
 
         </header>
-        <div className=' bg-gray-200 overflow-y-scroll pt-40 min-h-96 justify-between h-full px-4 md:px-10'>
+        <div className=' bg-gray-100 overflow-y-scroll pt-40 min-h-96 justify-between h-full px-4 md:px-10'>
             <Outlet/>
         </div>     
         
