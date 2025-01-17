@@ -63,7 +63,7 @@ const AuthSlice = createSlice({
         })
         .addCase(getUserTransactions.fulfilled, (state, action) => {
 
-            const rawData = action.payload.data
+            // const rawData = action.payload.data
 
             return{
                 ...state,

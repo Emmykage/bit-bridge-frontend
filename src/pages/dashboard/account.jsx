@@ -10,6 +10,7 @@ import { converter } from "../../api/currencyConverter";
 import dateFormater from "../../utils/dateFormat";
 import { message } from "antd";
 import statusStyle from "../../utils/statusStyle";
+import { getWallet } from "../../redux/actions/wallet";
 
 
 const Account = () => {
@@ -23,7 +24,6 @@ const Account = () => {
         const fetchConversion = async() => {
 
             const result = await converter({fromCurr: "usd", toCurr: "usd", amount: wallet?.balance})
-            console.log(wallet?.balance)
             setConvertedAmount(result)
         }
 
@@ -48,6 +48,7 @@ const Account = () => {
         .then(result => {
             if(createTransaction.fulfilled.match(result)){
                 setIsModalOpen(false)
+                dispatch(getWallet())
             }
         })
 
@@ -75,12 +76,7 @@ const Account = () => {
                 <div className="">
                     <h4 className="text-xl font-semibold text-gray-500">USDT Wallet</h4>
                     <p className="text-4xl font-medium">USDT {convertedAmount?.calc}</p>
-                    {/* <p className="my-4 font-medium">{nairaFormat(wallet?.balance)}</p> */}
-                    {/* <h6>Rate</h6>
-                    <p className="text-sm font-bold text-gray-500">
-                    {convertedAmount?.nairaRate} NGN/USDT
-
-                    </p> */}
+                    <p className="my-2 text-2xl font-medium">{nairaFormat(wallet?.balance, "usd")}</p>    
 
                 </div>
 

@@ -68,10 +68,11 @@ const AdminDepositTransactions = () => {
 
                                     {/* make conditional statement  here  */}
                                 {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                { transactions?.map(({id, status, address, created_at, amount}) => (
+                                { transactions?.map(({id, status, transaction_type, address, created_at, amount}) => (
 
                                 <tr key={id}>
                                 <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{amount}</p></td>
+                                <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{transaction_type}</p></td>
 
                                     <td className="relative whitespace-nowrap border-b  border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                         <span className={`${statusStyle(status)} py-1 w-full max-w-[200px] block  text-center px-3 border rounded-3xl`}>
