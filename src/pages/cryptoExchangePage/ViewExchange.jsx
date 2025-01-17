@@ -122,8 +122,8 @@ const ViewGiftCard = () => {
             <div className="max-w-7xl m-auto bg-red-40">
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
-                {selectedProvider.map(({id, product, name }) => (
-                    <ProductCard key={id} id={id} provider={product.provider} provision={name} />
+                {selectedProvider.map(({id, product, name, min_value, max_value, currency }) => (
+                    <ProductCard key={id} id={id} provider={product.provider} currency={currency} provision={name} min_value={min_value} max_value={max_value} />
                 ))}
 
             </div>

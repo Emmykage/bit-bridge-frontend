@@ -2,17 +2,21 @@ import { Button, Form, message, Upload } from 'antd'
 import  { useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
-import FormSelect from '../formSelect/FormSelect';
-import paymentDetails from '../../data/walletAddres.json'
+// import paymentDetails from '../../data/walletAddres.json'
+import coinType from '../../data/coinType.json'
 import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
+import FormSelect from '../formSelect/FormSelect';
 const AddFund = ({
   address,
-  handleSubmit
+  handleSubmit,
+  disableAddress= true,
+  coin_type
 }) => {
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
  
+  console.log(disableAddress)
   const normFile = (e) => {
 
     if (Array.isArray(e)) {
@@ -30,16 +34,18 @@ const AddFund = ({
       form={form}
       initialValues={{
         amount: "",
-        address: address,
-        proof: null
-      }}
+        address: !disableAddress ? "" : address ,
+        proof: null,
+        coin_type: coin_type
+        }}
       style={{
         color: "white",
         maxWidth: formLayout === 'inline' ? 'none' : 600,
       }}
     >
         <FormInput className="add-fund" name="amount" type='number' label={"Amount(USDT value)"}/>
-        <FormInput className="add-fund" name="address"  label={"Address"} disabled={true} options={paymentDetails}/>
+        <FormInput className="add-fund" name="address"  label={"Address"} disabled={disableAddress} />
+        <FormSelect className="add-fund" name="coin_type"  label={"Type"} disabled={true} options={coinType}/>
 
         <Form.Item 
         label="payment receipt" 
@@ -96,6 +102,9 @@ const AddFund = ({
 }
 
 AddFund.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  address: PropTypes.func,
+  coin_type: PropTypes.func,
+  disableAddress: PropTypes.bool
 }
 export default AddFund

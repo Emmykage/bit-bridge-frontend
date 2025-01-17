@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react'
 import NavButton from '../../../compnents/button/NavButton'
 import { converter } from '../../../api/currencyConverter'
+import { useDispatch } from 'react-redux'
+import { createTransaction } from '../../../redux/actions/transaction'
+import AppModal from '../../../compnents/modal/Modal'
+import AddFund from '../../../compnents/addFund/AddFund'
 
 const Dogecoin = () => {
     const [currencyConversion, setCurrencyConversion] = useState()
-    console.log("first")
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const coinType = "dogecoin"
+    const address = "sdasffdfddggfh"
+
+    const dispatch = useDispatch()
     useEffect(()=> {
 
         ( async () => {
@@ -20,7 +28,24 @@ const Dogecoin = () => {
  
 
     },[])
+
+           const handleSubmit = (values) => {
+                dispatch (createTransaction({
+                    ...values,
+                    transaction_type: "deposit"
+                    
+                }))
+                .then(result => {
+                    if(createTransaction.fulfilled.match(result)){
+                        setIsModalOpen(false)
+                    }
+                })
+        
+            }
+
+     
   return (
+    <>
     <div className='p-4 text-white min-h-96 sm:p-6 lg:p-10'>
     <h2 className='text- font-medium text-2xl text-center'>Sell Dogecoin</h2>
     <div>
@@ -45,11 +70,17 @@ const Dogecoin = () => {
         </div>
         <div className='text-center'>
             <p className='my-8'>Payment Address</p>
-            <NavButton>Generate Address </NavButton>
+            <p className='my-8'> Address</p>
+
+                <NavButton onClick={() => setIsModalOpen(prev => !prev)}>Send Proof Payment  </NavButton>
         </div>
     </div>
     
-</div>  )
+</div> 
+    <AppModal isModalOpen={isModalOpen} handleCancel={()=> {setIsModalOpen(false)}}>
+        <AddFund coin_type={coinType} handleSubmit={handleSubmit} address={address}/>
+    </AppModal>
+    </> )
 }
 
 export default Dogecoin

@@ -80,7 +80,7 @@ export const delProduct = createAsyncThunk("product/delete-product", async(id, {
 });
 
 export const fetchProduct = createAsyncThunk("product/fetch-product", async(id, {rejectWithValue})=> {
-    console.log("gotton: ", id)
+
     try {
         const response = await axios.get(`${baseUrl + apiRoute}products/${id}`, {
             headers: {
@@ -90,7 +90,6 @@ export const fetchProduct = createAsyncThunk("product/fetch-product", async(id, 
 
 
         const result = response.data;
-        console.log(result)
         return result;
     } catch (error) {
         console.error(error)

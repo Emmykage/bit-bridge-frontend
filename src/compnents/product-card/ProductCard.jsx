@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { nairaFormat } from "../../utils/nairaFormat"
 import { splitString } from "../../utils"
-const ProductCard = ({id, min_value, max_value, provider, provision }) => {
+const ProductCard = ({id, min_value, currency, max_value, provider, provision }) => {
     const navigate = useNavigate()
 
     console.log("first", min_value)
@@ -20,7 +20,7 @@ const ProductCard = ({id, min_value, max_value, provider, provision }) => {
     <div className="flex justify-between px-2">
       <div>
       <p className="text-lg font-medium">{provision}</p>
-      <p className="text-base font-medium text-gray-600">{nairaFormat(min_value) +  " - " + nairaFormat(max_value)}</p>
+      <p className="text-base font-medium text-gray-600">{nairaFormat(min_value, currency) +  " - " + nairaFormat(max_value, currency)}</p>
       </div>
       <div className="flex gap-3">
         <span className="font-semibold">4.7</span>
@@ -37,6 +37,7 @@ ProductCard.propTypes = {
     provision: PropTypes.string,
     min_value: PropTypes.string,
     max_value: PropTypes.string,
+    currency: PropTypes.string,
     
 }
 

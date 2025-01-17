@@ -3,7 +3,6 @@ import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getProducts } from "../../redux/actions/product"
 import { getProvisions } from "../../redux/actions/provision"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
@@ -29,9 +28,9 @@ const PhoneTopUp = () => {
           <div className="grid gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
-            {mobileProviders.map(({id, product, name, min_value, max_value})  => (
+            {mobileProviders.map(({id, product, name, min_value, currency, max_value})  => (
 
-              <ProductCard key={id} id={id} min_value={min_value} max_value={max_value} provider={product?.provider} provision={name}/>
+              <ProductCard key={id} id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
 
                 
              ))}

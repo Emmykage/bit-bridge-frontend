@@ -63,7 +63,7 @@ const DashboardLayout = () => {
                 <li><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
                 <li><NavLink to={"/dashboard/gift-cards"} className={({isActive})=>  isActive ? active : normal}><GiftOutlined className='text-2xl'/> Gift Card</NavLink></li>
                 <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})=>  isActive ? active : normal}><SignalCellularAltIcon className='text-6xl' />Transaction</NavLink></li>
-                <li><NavLink to={"/dashboard/crypto-sell"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl' /> Crypto Sell</NavLink></li>
+                <li><NavLink to={"/dashboard/crypto-sell/bitcoin"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl' /> Crypto Sell</NavLink></li>
                 <li><NavLink onClick={() => 
                                     dispatch(userLogout())} to={"/"} className={({isActive})=>  isActive ? active : normal}><LoginOutlined className='text-2xl' /> Log Out</NavLink></li>
 

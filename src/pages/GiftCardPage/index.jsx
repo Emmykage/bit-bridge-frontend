@@ -46,8 +46,8 @@ const GiftCardPAge = () => {
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-2 md:grid-cols-3 ">
 
 
-          {giftcards.map(({id, product, name, image, value})  => (
-          <GiftCard key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
+          {giftcards.map(({id, product, currency, name, image, min_value, max_value})  => (
+          <GiftCard key={id} id={id} provider={product?.provider} currency={currency} provision={name} image={image} min_value={min_value} max_value={max_value}/>
           ))}
 
 

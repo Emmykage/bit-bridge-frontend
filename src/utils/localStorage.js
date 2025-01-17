@@ -19,7 +19,6 @@ export const getCartItems = () => {
       return storedCart;
 
   } catch (error) {
-      console.log(error);
       toast(error?.message || "An error occurred while fetching cart items");
       return [];
   }
@@ -32,7 +31,7 @@ export const processCart = (items) => {
         localStorage.setItem("G_BRIDGE_CART", itemsToSave)   
 
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return []
     }
 }
@@ -85,7 +84,7 @@ export const addToCartItems = (cartData) => {
   
       // Check if the item was updated; if not, add it to the cart.
       const isItemInCart = existingCartItems.some(item => item.provision_id === cartData.provision_id);
-      console.log(isItemInCart)
+
       if (!isItemInCart) {
         updatedCartItems.push(cartData);
       }

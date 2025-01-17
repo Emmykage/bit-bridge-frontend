@@ -7,7 +7,7 @@ import ClickButton from '../../../compnents/button/Button'
 import { toast } from 'react-toastify'
 import dateFormater from '../../../utils/dateFormat'
 import statusStyle from '../../../utils/statusStyle'
-import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
+// import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
 
 const AdminDepositTransactions = () => {
     const {transactions} = useSelector(state => state.transaction)
@@ -26,12 +26,12 @@ const AdminDepositTransactions = () => {
             data:{ status: task}
         })).then(result => {
             if(updateTransaction.fulfilled.match(result)){
-                toast(result.message, {type: "success"})
+                toast(result?.payload?.message || `transaction ${task}`, {type: "success"})
                 dispatch(getTransactions())
 
             }
             else{
-                toast(result.message, {type: "error"})
+                toast(result?.payload?.message, {type: "error"})
 
             }
         })

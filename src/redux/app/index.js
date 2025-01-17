@@ -16,7 +16,6 @@ const AppSlice = createSlice({
     reducers:   {
         SET_LOADING: (state, action) => {
 
-            console.log("action payload", action.payload)
             return{
             ...state,
             isLoading: action.payload
@@ -24,7 +23,7 @@ const AppSlice = createSlice({
         }},
     
         ADD_TO_CART: (state, action)=> {
-            console.log("cart added")
+
             const item  = action.payload
              addToCartItems(item)
             return {

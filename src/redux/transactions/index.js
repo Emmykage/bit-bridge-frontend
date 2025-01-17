@@ -64,8 +64,7 @@ const AuthSlice = createSlice({
         .addCase(getUserTransactions.fulfilled, (state, action) => {
 
             const rawData = action.payload.data
-            console.log(rawData)
-            // const deposit = rawData.filter(trans => trans.transaction_type == "deposit")
+
             return{
                 ...state,
                 deposits: action.payload.data,

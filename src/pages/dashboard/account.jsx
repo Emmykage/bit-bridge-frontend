@@ -15,7 +15,8 @@ import statusStyle from "../../utils/statusStyle";
 const Account = () => {
     const {wallet} = useSelector(state => state.wallet)
     const [convertedAmount, setConvertedAmount] = useState(null)
-    const [address, setAddress] = useState("TSZs4bJnfg9cReQi8FkDzEKWiftPvTbR1f")
+    const address = "TSZs4bJnfg9cReQi8FkDzEKWiftPvTbR1f"
+    const coinType ="usdt"
 
 
     useEffect(()=> {
@@ -34,8 +35,9 @@ const Account = () => {
     // console.log( wallet, wallet)
 
 
-     const [isModalOpen, setIsModalOpen] = useState(false);
-     const dispatch = useDispatch()
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isWithdrawModalOpened, setIsWithdrawalModalOpen] = useState(false);
+    const dispatch = useDispatch()
     const handleSubmit = (values) => {
         console.log(values)
         dispatch (createTransaction({
@@ -46,6 +48,19 @@ const Account = () => {
         .then(result => {
             if(createTransaction.fulfilled.match(result)){
                 setIsModalOpen(false)
+            }
+        })
+
+    }
+    const handleWithdrawalSubmit = (values) => {
+        dispatch (createTransaction({
+            ...values,
+            transaction_type: "withdrawal"
+            
+        }))
+        .then(result => {
+            if(createTransaction.fulfilled.match(result)){
+                setIsWithdrawalModalOpen(false)
             }
         })
 
@@ -254,11 +269,11 @@ const Account = () => {
             <div className="text-white flex justify-between bg--100 px-6">
                 <div onClick={()=> setIsModalOpen(true)} className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center">
                 <WalletOutlined />
-                <span className="text-center">Add Funds</span>
+                <span  className="text-center">Add Funds</span>
                 </div>
-                <div className="flex flex-col items-center justify-center">
+                <div onClick={()=> setIsWithdrawalModalOpen(true)} className="flex flex-col items-center justify-center">
                 <RiUserReceived2Line  />
-                <span className="text-center">Recieve Funds</span>
+                <span className="text-center">Withdraw Funds</span>
                 </div>
                 <div className="flex flex-col items-center justify-center">
                 <TransactionOutlined />
@@ -285,7 +300,13 @@ const Account = () => {
 
     <AppModal title={"Fund Wallet"}  isModalOpen={isModalOpen} handleOk={()=> {}} handleCancel={()=> {setIsModalOpen(false)}}  >
         <div className="bg-purple- p-10">
-            <AddFund handleSubmit={handleSubmit} address={address}/>
+            <AddFund handleSubmit={handleSubmit} coin_type={coinType} address={address}/>
+        </div>
+    </AppModal>
+
+    <AppModal title={"Withdraw Funds"}  isModalOpen={isWithdrawModalOpened} handleOk={()=> {}} handleCancel={()=> {setIsWithdrawalModalOpen(false)}}  >
+        <div className="bg-purple- p-10">
+            <AddFund handleSubmit={handleWithdrawalSubmit} coin_type={coinType} disableAddress={false} address={address}/>
         </div>
     </AppModal>
 

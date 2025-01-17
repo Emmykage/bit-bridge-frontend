@@ -11,14 +11,13 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
     formData.append("transaction[address]",  data.address)
     formData.append("transaction[amount]",  data.amount)
     formData.append("transaction[transaction_type]",  data.transaction_type)
+    formData.append("transaction[coin_type]",  data.coin_type)
 
     if(data.proof && data.proof[0]){
         formData.append("transaction[proof]",  data.proof[0].originFileObj)
 
     }
 
-
-    // console.log(data, Object.fromEntries(formData))
     try {
         console.log(fetchToken())
 
@@ -34,16 +33,14 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
 
         const result = response.data;   
         toast(result.message || "Order created successfully", { type: "success" });        toast(result, {type: "success"})
-        console.log(result)
 
         return result;
     } catch (error) {
-        if (error.response) {
+        if (error?.response) {
             toast(error.response.data.message, {type: "error"})   
 
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
@@ -60,10 +57,9 @@ export const updateTransaction = createAsyncThunk("transaction/update-transactio
 
         return result;
     } catch (error) {
-        if (error.response) {
+        if (error?.response) {
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
@@ -78,15 +74,13 @@ export const getTransactions = createAsyncThunk("transaction/get-transactions", 
 
 
         const result = response.data;    
-        console.log(result)
-  
 
         return result;
     } catch (error) {
         if (error.response) {
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
+
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
@@ -101,15 +95,12 @@ export const getUserTransactions = createAsyncThunk("transaction/get-user-transa
 
 
         const result = response.data;    
-        console.log(result)
-  
-
         return result;
     } catch (error) {
-        if (error.response) {
+        if (error?.response) {
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
+
         return rejectWithValue({ message: "Something went wrong" });
     }
 });

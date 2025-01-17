@@ -2,10 +2,26 @@
 import { useEffect, useState } from 'react'
 import NavButton from '../../../compnents/button/NavButton'
 import { converter } from '../../../api/currencyConverter'
-
+import AppModal from '../../../compnents/modal/Modal'
+import { useDispatch } from 'react-redux'
+import { createTransaction } from '../../../redux/actions/transaction'
+import AddFund from '../../../compnents/addFund/AddFund'
 const Bitcoin = () => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const coinType = "bitcoin"
+    const address = "sdasffdfddggfh"
+
+    const dispatch = useDispatch()
+   
+    // const normFile = (e) => {
+  
+    //   if (Array.isArray(e)) {
+    //     return e;
+    //   }
+    //   return e?.fileList || [];
+    // };
     const [currencyConversion, setCurrencyConversion] = useState()
-    console.log("first")
     useEffect(()=> {
 
         ( async () => {
@@ -21,7 +37,24 @@ const Bitcoin = () => {
  
 
     },[])
+
+        const handleSubmit = (values) => {
+            dispatch (createTransaction({
+                ...values,
+                transaction_type: "deposit"
+                
+            }))
+            .then(result => {
+                if(createTransaction.fulfilled.match(result)){
+                    setIsModalOpen(false)
+                }
+            })
+    
+        }
+    
   return (
+    <>
+    
     <div className='text-white min-h-96 p-4 sm:p-6 lg:p-10'>
         <h2 className='text- font-medium text-2xl text-center'>Sell Bitcoin</h2>
         <div>
@@ -45,8 +78,10 @@ const Bitcoin = () => {
 
             </div>
             <div className='text-center'>
-                <p className='my-8'>Payment Address</p>
-                <NavButton>Generate Address </NavButton>
+            <p className='my-8'>Payment Address</p>
+            <p className='my-8'> Address</p>
+                
+                <NavButton onClick={() => setIsModalOpen(prev => !prev)}>Send Payment Proof </NavButton>
             </div>
 
             <div>
@@ -59,6 +94,11 @@ const Bitcoin = () => {
         </div>
         
     </div>
+
+    <AppModal isModalOpen={isModalOpen} handleCancel={()=> {setIsModalOpen(false)}}>
+        <AddFund coin_type={coinType} handleSubmit={handleSubmit} address={address}/>
+    </AppModal>
+    </>
   )
 }
 

@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
 import dateFormater from "../../../utils/dateFormat"
 import { nairaFormat } from "../../../utils/nairaFormat"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { getUserTransactions } from "../../../redux/actions/transaction"
 import statusStyle from "../../../utils/statusStyle"
+import AppModal from "../../../compnents/modal/Modal"
 
 const Deposits = () => {
+    const [toggle, setToggle] = useState(false)
+    const [viewImage, setViewImage] = useState(null)
   const {transactions} = useSelector(state => state.transaction)
     console.log(transactions)
   const dispatch = useDispatch()
@@ -13,6 +16,8 @@ const Deposits = () => {
     dispatch(getUserTransactions({type: "deposit"}))
   }, [])
   return (
+    <>
+
     <div className='lg:p-10 bg-black py-4 px-2 text-white'>
     <h4 className='text-2xl font-medium text-alt'>Recent Trades</h4>
     <div className='h-[500px] overflow-y-auto relative'>
@@ -28,6 +33,7 @@ const Deposits = () => {
                                     {/* <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">  transaction</th> */}
                                     <th scope="col" className="sticky  top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Address</th>
                                     <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 md:px-10 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Status</th>
+                                    <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 md:px-10 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">payment</th>
 
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Time </th>
 
@@ -50,6 +56,17 @@ const Deposits = () => {
                                     <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
                                         <span className={`${statusStyle(item?.status)} py-1 w-full max-w-[200px] block  text-center px-3 border rounded-3xl`}>
                                         {item?.status }
+                                        </span>
+                                        
+
+                                    </td> 
+                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                        <span className={` py-1 inline-block text-center px-3 border rounded-3xl`}>
+                                            <img onClick={()=> {
+                                                setToggle(true)
+                                                setViewImage(item?.proof_url)
+                                            }} src= {item?.proof_url} className="w-20 h-20" alt="" />
+                                       
                                         </span>
                                         
 
@@ -84,6 +101,16 @@ const Deposits = () => {
         </div>
     </div>
 </div>
+{/* <ImageViewer/> */}
+
+<AppModal isModalOpen={toggle}  handleCancel={()=> setToggle(false)}>
+<div className="max-w-lg bg-white h-[500px] w-full">
+                                 <img src={viewImage} alt=""  className="h-full w-full"/>
+
+</div>
+
+</AppModal>
+</>
  )
 }
 
