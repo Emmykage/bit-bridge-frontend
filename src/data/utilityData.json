@@ -1,27 +1,10 @@
-[{
-    "id": 1,
-    "provider": "Vortech Engineering ",
-    "provision": "Solar installation",
-    "value": "50000NGN",
-    "image": "/images/services/installing-solar-panels.webp",
-    "rate": 4.7
-},
-{
-    "id": 2,
-
-    "provider": "HPVC Consulatancy",
-    "provision": "Design and Development of Apartmentd",
-    "value": "50000NGN",
-    "rate": 4.7,
-    "image": "/images/services/engineering-consultancy.png"
-
-},
+[
 {
     "id": 3,
 
     "info": "buy prepaid and post paid electric token ",
     "header_info": "Seamlessly get postpaid and prepared electric voucher from the comfort of your home",
-    "provider": "Buy Power",
+    "provider": "electric -Buy Power",
     "provision": "Get electricity ",
     "value": "50000NGN",
     "rate": 4.7,

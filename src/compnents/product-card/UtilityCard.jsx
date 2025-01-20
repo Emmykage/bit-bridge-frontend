@@ -18,7 +18,7 @@ const UtilityCard = ({id, provider, provision, currency, min_value, max_value, f
 
             }
             <div  className="h-52">
-            <img src={`/images/providers/${giftcardImage}.webp`} alt="" className="w-full h-full" />
+            <img src={`/images/providers/${giftcardImage}.jpg`} alt="" className="w-full h-full" />
 
             </div>
             <div className="px-2">

@@ -3,42 +3,17 @@ import Header from "../../../compnents/header/Header"
 import ProductCard from "../../../compnents/product-card/ProductCard"
 
 import { useDispatch, useSelector } from "react-redux"
-import { ADD_TO_CART } from "../../../redux/app"
-import FormInput from "../../../compnents/formInput/FormInput"
-import { useEffect, useState } from "react"
-import { converter } from "../../../api/currencyConverter"
+
+import { useEffect } from "react"
 import powerDistributions from "../../../data/powerDistributions.json"
-import utilityData from "../../../data/utilityData.json"
-import { splitString } from "../../../utils"
-import FormSelect from "../../../compnents/formSelect/FormSelect"
 import { getProvisions } from "../../../redux/actions/provision"
-import { Button, Form } from "antd"
-import DiscoverBtn from "../../../compnents/button/DiscoverBtn"
-import ClickButton from "../../../compnents/button/Button"
-import ClassicBtn from "../../../compnents/button/ClassicButton"
-import PropTypes from "prop-types"
 import ElectricCard from "../../../compnents/product-card/ElectricCard"
 
 const ViewBuyPower = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
-    const [value, setValue] = useState(0)
-    const [formValues, setFormValues] = useState(0)
-    const [step, setStep] = useState(1)
-    const {services,mobileProviders} =  useSelector(state => state.product)
-    const [btcValue, setBtcValue] = useState()
-    const {user} = useSelector(state => state.auth)
-
-    // const selectSlide = (step) => {
-    //     switch (step) {
-    //         case 0:
-    //             return  <PowerForm handleSubmit={handleForm}/>      
-    //         case 1:
-    //             return  <PurchaseDetails handleSubmit={handleForm}/>        
-    //         default:
-    //             break;
-    //     }
-    // }
+   
+    const {mobileProviders} =  useSelector(state => state.product)
  
     const selectedProvider =powerDistributions?.find(item => item.id == id)
 
@@ -47,19 +22,6 @@ const ViewBuyPower = () => {
         dispatch(getProvisions())
     },[])
  
-    useEffect(() => {
-    const fetchBtcValue = async () => {
-        try {
-            const calcbtcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
-            setBtcValue(calcbtcValue);
-
-        } catch (error) {
-            console.error("Error fetching BTC value:", error.message);
-        }
-    };
-
-    fetchBtcValue();
-}, [value])
             
   return (
     <div>
