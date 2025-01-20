@@ -41,6 +41,11 @@ import Deposits from './pages/dashboard/transactions/Deposits'
 import ConfirmOrder from './pages/ConfirmOrder'
 import ViewProduct from './pages/admin/products/View'
 import OrderTransact from './pages/dashboard/components/Orders'
+import BuyPower from './pages/UtilityServicesPage/BuyPower'
+import ViewBuyPower from './pages/UtilityServicesPage/buy-power/ViewBuyPower'
+import PowerForm from './pages/UtilityServicesPage/buy-power/PurchaseForm'
+import PurchaseDetails from './pages/UtilityServicesPage/buy-power/PurchaseDetails'
+import ComfirmPurchase from './pages/UtilityServicesPage/buy-power/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -74,7 +79,12 @@ function App() {
     <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
     <Route path='/confirmation-order' element={<MainLayout><ConfirmOrder/></MainLayout>} />
-
+    <Route path='/buy-power' element={<MainLayout><BuyPower/></MainLayout>}/>
+    <Route path='/buy-power/:id' element={<MainLayout><ViewBuyPower/></MainLayout>}>
+    <Route path='payment-form' element={<PowerForm/>}/>
+    <Route path='payment-details' element={<PurchaseDetails/>}/>
+    <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
+    </Route>
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>}>
         <Route path="orders-transaction" element={<OrderTransact/>}/>

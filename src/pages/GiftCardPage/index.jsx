@@ -3,7 +3,6 @@ import GiftCard from "../../compnents/product-card/GiftCard"
 import scrollToTop from "../../hooks/scrollToTop"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getProducts } from "../../redux/actions/product"
 import { getProvisions } from "../../redux/actions/provision"
 
 const GiftCardPAge = () => {
@@ -12,9 +11,6 @@ const GiftCardPAge = () => {
   useEffect(()=>{
     dispatch(getProvisions())
   },[])
-
-
-  console.log(giftcards)
 
   scrollToTop()
 

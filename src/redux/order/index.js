@@ -8,7 +8,7 @@ const initialState = {
     loading: false
 }
 
-const walletSlice = createSlice({
+const orderSlice = createSlice({
     initialState,
     name: "order",
 
@@ -101,5 +101,5 @@ const walletSlice = createSlice({
 })
 
 
-export default walletSlice.reducer 
+export default orderSlice.reducer 
 // export const {resetUser} = AuthSlice.actions

@@ -6,6 +6,7 @@ const initialState = {
     provisions: [],
     giftcards: [],
     mobileProviders: [],
+    services: [],
    
     loading: false
 }

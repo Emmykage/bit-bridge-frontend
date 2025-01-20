@@ -1,0 +1,34 @@
+[{
+    "id": 1,
+    "name": "Ikeja Electric Payment - IKEDC",
+    "description": "Prepaid and Postpaid IKEDC payment",
+    "image": "/images/power-providers/Ikeja-Electric-Payment-PHCN.jpg",
+    "serviceID": "abuja-electric"
+
+},
+{
+    "id": 2,
+    "name": "Abuja Electric Payment - AEDC",
+    "description": "Prepaid and Postpaid IKEDC payment",
+    "image": "/images/power-providers/Abuja-Electric.jpg",
+    "serviceID": "abuja-electric"
+
+},
+{
+    "id": 3,
+    "name": "Kano Electric Payment - KEDCO",
+    "description": "Prepaid and Postpaid IKEDC payment",
+    "image": "/images/power-providers/Kano-Electric.jpg",
+    "serviceID": "abuja-electric"
+
+
+},
+{
+    "id": 4,
+    "name": "Eko Electric Payment - EKEDC",
+    "description": "Prepaid and Postpaid IKEDC payment",
+    "image": "/images/power-providers/Eko-Electric-Payment-PHCN.jpg",
+    "serviceID": "abuja-electric"
+
+
+}]

@@ -1,10 +1,10 @@
 import Header from "../../compnents/header/Header"
 import HeroBanner from "../../compnents/hero/Hero"
-import ServiceCard from "../../compnents/product-card/ServiceCard"
 import { useEffect } from "react"
 import { getProducts } from "../../redux/actions/product"
 import { useDispatch, useSelector } from "react-redux"
-
+import utilityData from "../../data/utilityData.json"
+import UtilityCard from "../../compnents/product-card/UtilityCard"
 const UtilityServices = () => {
   const dispatch = useDispatch()
   const {services} =  useSelector(state => state.product)
@@ -12,7 +12,9 @@ const UtilityServices = () => {
     dispatch(getProducts())
   },[])
 
-  console.log(services)
+
+  const utility = [...services, ...utilityData]
+  console.log(utility)
 
   return (
     <div>
@@ -22,12 +24,12 @@ const UtilityServices = () => {
 
       <section className="py-10">
 
-      <div className="grid gap-3 grid-cols-3 max-w-7xl m-auto">
+      <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
 
 
-      {services.map(({id, value, provider,image, provision})  => (
+      {utility.map(({id, value, provider,image, provision})  => (
 
-        <ServiceCard key={id} linkTo={`utility-services`} value={value} provider={provider} image={image} provision={provision} />
+        <UtilityCard key={id} id={id} linkTo={`utility-services`} value={value} provider={provider} image={image} provision={provision} />
 
       ))}
 

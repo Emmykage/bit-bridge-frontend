@@ -1,15 +1,14 @@
-import React from 'react';
-import { DownOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Dropdown, message, Space, Tooltip } from 'antd';
+import {  LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import {  Dropdown, message, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../redux/actions/auth';
 
 const DropDown = () => {
   const dispatch = useDispatch()
 
-    const handleButtonClick = (e) => {
-        message.info('Click on left button.');
-      };
+    // const handleButtonClick = (e) => {
+    //     message.info('Click on left button.');
+    //   };
       const handleMenuClick = (e) => {
         switch (e.key) {
             case '1':
