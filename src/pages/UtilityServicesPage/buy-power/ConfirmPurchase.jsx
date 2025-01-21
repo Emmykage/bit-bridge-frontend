@@ -37,7 +37,7 @@ const ComfirmPurchase = () => {
       
         <div className="p-4 border rounded-lg">
         <div className="  md:flex-row flex-col flex gap-4">
-                <p className="md:w-60 border-b px-2 font-semibold">Tokenqwq</p>
+                <p className="md:w-60 border-b px-2 font-semibold">Token</p>
                 <p className="flex-1 border-b px-2 font-bold text-3xl">{purchaseOrder?.token}</p>
             </div>
             <div className="  md:flex-row my-4 flex-col flex gap-4">
@@ -67,6 +67,10 @@ const ComfirmPurchase = () => {
               <div className="gap-4 my-4 flex">
                 <p className="w-60 md:w-60 border-b px-2 font-semibold">Transaction ID</p>
                 <p className="flex-1 border-b px-2">{purchaseOrder?.transaction_id}</p>
+            </div>
+            <div className="gap-4 my-4 md:flex-row flex-col  flex">
+                <p className="w-60 border-b px-2  md:w-60 font-semibold">Status</p>
+                <p className="flex-1 border-b px-2 text-green-700">{purchaseOrder?.status}</p>
             </div>
             <div className="gap-4 my-4 md:flex-row flex-col  flex">
                 <p className="w-60 px-2 md:w-60 font-semibold">Purchase ID</p>
