@@ -37,13 +37,11 @@ const AddProvision = ({productID, setIsOpen}) => {
        initialValues={{
         product_id: "productID",
         provision: "",
-        // min_value: 0,
-        // max_value: 50000.0,
+   
         value: 110,
         currency: "usd",
         description: "",
         value_range: [],
-        // info: "",
         notice: ""
        }}
         layout="vertical"
