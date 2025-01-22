@@ -31,7 +31,7 @@ const BuyPower = () => {
 
         <section className="py-10 px-4 bg-white my-10">
 
-            <div className="max-w-7xl m-auto grid md:grid-cols-3 gap-10">
+            <div className="max-w-7xl m-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {powerDistributions.map(({id, description,name, image}) => (
                    <ElectricCard key={id} id={id} description={description} name={name} image={image} />
                 ))}

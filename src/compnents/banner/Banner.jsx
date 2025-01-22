@@ -8,7 +8,7 @@ const Banner = () => {
     <div className="z-10">
 
 <h2 className="md:text-4xl text-2xl max-w-5xl font-semibold text-center text-gray-100">
-Top up prepaidwsand post paid Utility bill with Bitcoin and other cryptocurrencies from anywhere in the world
+Top up prepaid and postpaid Utility bill with Bitcoin and other cryptocurrencies from anywhere in the world
 </h2>
 </div>
 

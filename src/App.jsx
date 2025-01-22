@@ -46,6 +46,7 @@ import ViewBuyPower from './pages/UtilityServicesPage/buy-power/ViewBuyPower'
 import PowerForm from './pages/UtilityServicesPage/buy-power/PurchaseForm'
 import PurchaseDetails from './pages/UtilityServicesPage/buy-power/PurchaseDetails'
 import ComfirmPurchase from './pages/UtilityServicesPage/buy-power/ConfirmPurchase'
+import ScrollToTop from './hooks/scrollToTop'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -60,7 +61,7 @@ function App() {
 
   userInitializeData()
   
-
+  ScrollToTop()
   return (
     <div className='bg-gray-100'>
     <Suspense fallback={<LoaderPage />}>

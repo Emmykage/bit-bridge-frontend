@@ -30,8 +30,8 @@ const ViewBuyPower = () => {
 
             <div className="max-w-7xl bg-white m-auto py-10 px-4 md:px-10">
 
-                <div className="flex md:flex-row flex-col  gap-3">
-                    <img src={selectedProvider?.image}  alt="" />
+                <div className="flex sm:flex-row flex-col  gap-3">
+                    <img src={selectedProvider?.image}  alt=""  className="max-w-40" />
                     <div>
 
                         <div>

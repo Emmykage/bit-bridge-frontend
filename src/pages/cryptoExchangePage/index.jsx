@@ -29,7 +29,7 @@ const CryptoExchangePage = () => {
             </p>
           </div>
           <div>
-              <div>
+              <div className="h-96">
                 <img src={sellCrypto} alt="" className="w-full h-full" />
               </div>
           </div>

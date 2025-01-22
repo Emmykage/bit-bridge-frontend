@@ -2,9 +2,11 @@ import {  LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import {  Dropdown, message, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../redux/actions/auth';
+import { useNavigate } from 'react-router-dom';
 
 const DropDown = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
     // const handleButtonClick = (e) => {
     //     message.info('Click on left button.');
@@ -15,15 +17,15 @@ const DropDown = () => {
               // Navigate to My Account
               message.info('Navigating to My Account...');
               console.log('Navigating to My Account');
-              // Example: navigate('/my-account'); // Use a routing library like react-router-dom
+              navigate('/'); // Use a routing library like react-router-dom
               break;
       
-            case '2':
-              // Navigate to Profile
-              message.info('Navigating to Profile...');
-              console.log('Navigating to Profile');
-              // Example: navigate('/profile');
-              break;
+            // case '2':
+            //   // Navigate to Profile
+            //   message.info('Navigating to Profile...');
+            //   console.log('Navigating to Profile');
+            //   // Example: navigate('/profile');
+            //   break;
       
             case '3':
               // Log out
@@ -42,15 +44,11 @@ const DropDown = () => {
     
 const items = [
     {
-      label: 'My Account',
+      label: 'Switch',
       key: '1',
       icon: <UserOutlined />,
     },
-    {
-      label: 'Profile',
-      key: '2',
-      icon: <UserOutlined />,
-    },
+
     {
       label: 'Log out',
       key: '3',

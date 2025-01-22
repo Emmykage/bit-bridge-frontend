@@ -58,7 +58,7 @@ const ComfirmPurchase = () => {
             </div>
             <div className="gap-4 my-4 md:flex-row flex-col flex">
                 <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Total PayableAmount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.amount ?? 0) + 200)}</p>
+                <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
             </div>
             {/* <div className="border-b my-4 md:flex-row flex-col  flex">
                 <p className="w-60 md:w-60 font-semibold">Transaction ID</p>

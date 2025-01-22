@@ -15,13 +15,12 @@ const UtilityServices = () => {
   const navigate = useNavigate()
 
   const utility = [...services]
-  console.log(utility)
 
   return (
     <div>
         
         <Header/>
-          <section>
+          <section className="py-10">
                 <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
                   <div>
                     <h2 onClick={() => navigate("/buy-power")} className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
@@ -33,28 +32,28 @@ const UtilityServices = () => {
                     </p>
                   </div>
                   <div>
-                      <div>
+                      <div className="h-96">
                         <img src={img} alt="" className="w-full h-full rounded-lg" />
                       </div>
                   </div>
                 </div>
               </section>
-        
-      <section className="py-10 px-4">
+                    
+              <section className="py-10 px-4">
 
-      <div className="grid max-w-7xl m-auto bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-
-
-      {utility.map(({id, value, provider,image, provision})  => (
-
-        <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={provider}  provision={provision} />
-
-      ))}
+                <div className="grid max-w-7xl m-auto bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
 
 
+                      {utility.map(({id, value, provider,image, provision})  => (
 
-</div>
-</section>
+                        <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={provider}  provision={provision} />
+
+                      ))}
+
+
+
+                </div>
+              </section>
     </div>
   )
 }

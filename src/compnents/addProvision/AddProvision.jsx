@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { createProvision } from '../../redux/actions/provision'
 import "./style.scss"
 import PropTypes from 'prop-types'
+import { fetchProduct } from '../../redux/actions/product'
 
 const AddProvision = ({productID, setIsOpen}) => {
 
@@ -24,6 +25,7 @@ const AddProvision = ({productID, setIsOpen}) => {
             }})).then(result => {
           if(createProvision.fulfilled.match(result)){
             form.resetFields()
+            dispatch(fetchProduct(productID))
             toast(result.payload.message ?? "Provission has been created", {type: "success"})
             setIsOpen(false)
           }else if(createProvision.rejected.match(result)){

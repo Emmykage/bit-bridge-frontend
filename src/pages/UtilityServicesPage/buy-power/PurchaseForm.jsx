@@ -8,11 +8,14 @@ import { useDispatch } from "react-redux";
 import { createPurchaseOrder } from "../../../redux/actions/purchasePower";
 import generateRequestId from "../../../utils/generateRequestID";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { CheckCircleOutlined } from "@ant-design/icons";
 
 const PowerForm = () => {
     const [id, serviceID] = useOutletContext()
     const [loading, setLoading] = useState(false)
-
+    const [message, setMessage] = useState()
+    const [err, setErr] = useState()
     generateRequestId()
 
     const navigate = useNavigate()
@@ -27,12 +30,17 @@ const PowerForm = () => {
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
+            console.log(data)
             setLoading(false)
             navigate(`/buy-power/${id}/payment-details?transaction_id=${data.id}`)
         }
         else{
-            console.log(result.payload.message)
             setLoading(false)
+            const data = result.payload.message
+            toast(data, {type: "error"})
+            setMessage(data)
+            setErr(true)
+
 
         }
        })
@@ -40,33 +48,45 @@ const PowerForm = () => {
     const [form] = Form.useForm();
 
     return (
+        <>
+         {message && 
+          <div className={`${err ? "bg-red-200" : "bg-green-200"} p-4 my-4`}>
+            <p className={`${err ? "text-red-800" : "text-green-800"} items-center flex gap-2 font-semibold text-center`}>
+
+            <CheckCircleOutlined />
+            {message}
+
+            </p>
+        </div>
+        }
+        
         <div>
         <Form
-        onFinish={handleFormSubmit}
-        form={form}
-        initialValues={{
-            amount: "0.00",
-            phone: "",
-            variation_code: "",
-            billersCode: "",
-            email: ""
+            onFinish={handleFormSubmit}
+            form={form}
+            initialValues={{
+                amount: "0.00",
+                phone: "",
+                variation_code: "",
+                billersCode: "",
+                email: ""
 
 
-        }}
+            }}
         layout="vertical"
         >
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormSelect placeholder={"Select Meter Type"} className="flex-1" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"variation_code"}/>
                 <FormInput className={"flex-1"} label={"Meter Number"} placeholder={"Enter Meter Number"} name={"billersCode"}/>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormInput className={"flex-1"} label={"Phone Number"} placeholder={"Enter Phone Number"} name={"phone"}/>
                 <FormInput className={"flex-1"} label={"Email"} placeholder={"Enter Meter Number"} name={"email"}/>
 
             </div>
-            <div className="w-1/2">
+            <div className="sm:w-1/2">
                 <FormInput className={"w-full"} label={"Amount"} placeholder={"Enter Amount"} type="Number" name={"amount"}/>
 
             </div>
@@ -76,6 +96,7 @@ const PowerForm = () => {
 
         </Form>
     </div>
+    </>
     )
 }
 

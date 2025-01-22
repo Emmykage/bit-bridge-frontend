@@ -5,6 +5,7 @@ import { confirmPurchase, getPurchaseOrder } from "../../../redux/actions/purcha
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { nairaFormat } from "../../../utils/nairaFormat"
 import { CheckCircleOutlined } from "@ant-design/icons"
+import { toast } from "react-toastify"
 
 const PurchaseDetails = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
@@ -22,7 +23,11 @@ const PurchaseDetails = () => {
                 if(confirmPurchase.fulfilled.match(result)){
                     const data  = result.payload.data 
                     navigate(`/buy-power/${id}/confirm-payment?transaction_id=${data?.id}`)
-                    console.log(data)
+                    console.log(result.payload)
+                }else{
+                    const data  = result.payload.data 
+                    toast(data?.message || "Failed to make purchase", {type: "error"})
+
                 }
             }
         )
@@ -66,7 +71,7 @@ const PurchaseDetails = () => {
             </div>
             <div className="gap-4 my-4 flex">
                 <p className="w-60 md:w-60 border-b px-2 font-semibold">Total PayableAmount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.amount ?? 0 + 200)}</p>
+                <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
             </div>
             <div className="gap-4 my-4 md:flex-row flex-col  flex">
                 <p className="w-60 border-b px-2  md:w-60 font-semibold">Status</p>
