@@ -37,11 +37,12 @@ const AddProvision = ({productID, setIsOpen}) => {
        initialValues={{
         product_id: "productID",
         provision: "",
-        min_value: 0,
-        max_value: 50000.0,
+        // min_value: 0,
+        // max_value: 50000.0,
         value: 110,
         currency: "usd",
         description: "",
+        value_range: [],
         // info: "",
         notice: ""
        }}
@@ -86,7 +87,25 @@ const AddProvision = ({productID, setIsOpen}) => {
                 /> */}
                 </div>
 
-                <div className='flex gap-4'>                    
+                
+            <div className='flex gap-4'>                    
+                <FormSelect
+                    className={"flex-1"}
+                    label={"value range"}
+                    name={"value_range"}
+                    required={true}
+                    mode="multiple"
+                    options={[{value: "10", label: "10"},
+                        {value: "20", label: "20"},
+                        {value: "25", label: "25"},
+                        {value: "50", label: "50"},
+                        {value: "75", label: "75"}
+                        ]}
+                />
+          
+                </div>
+
+                {/* <div className='flex gap-4'>                    
               
                   <FormInput
                     placeholder={"Min Value"}
@@ -104,7 +123,7 @@ const AddProvision = ({productID, setIsOpen}) => {
                     className={"flex-1"}   
                     type='number'        
                 />
-                </div>
+                </div> */}
 
 {/*         
                 <FormInputArea

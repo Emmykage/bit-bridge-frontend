@@ -184,7 +184,7 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6"> Currency</th>
                                 <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 pl-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Min Value</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Max Value</th>
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-0 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Description</th>
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-0 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Description</th>
 
 
                         
@@ -210,7 +210,7 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                                     <td className="whitespace-nowrap border-b border-gray-200 pl-1 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.min_value, item.currency)}</p></td>
                                     <td className="whitespace-nowrap border-b border-gray-200 px-1 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.max_value, item.currency)}</p></td>
 
-                                    <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-0 text-gray-900  text-sm sm:pr-8 ">
+                                    <td className="relative max-w-96 whitespace-wrap border-b text-left border-gray-200 py-3 pr-4 pl-0 text-gray-900  text-sm sm:pr-8 ">
                                         {(item?.description)}
 
                                     </td>

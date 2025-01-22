@@ -61,10 +61,10 @@ const Header = () => {
                   to={"/"} className={"font-semibold"}>Log Out</NavLink>
                   :
                   // <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
-                  <div className='relative '>
+                  <div className='relative z-10 '>
                       <button onClick={() => setShowLogin(prev => !prev)} to={"/login"} className={"font-semibold"}>Login</button>
                       <div className={`${showLogin ? "block" : "hidden"} absolute  py-4 w-60 group-hover:block right-0`}>
-                        <div className='p-2 bg-gradient-to-b from-gray-800 to-gray-900 -gray-900 rounded'>
+                        <div className='p-2 z-50 bg-gradient-to-b from-gray-800 to-gray-900 -gray-900 rounded'>
 
                         <Form
                         initialValues={{

@@ -7,6 +7,7 @@ const FormSelect = ({
     options, 
     required=false,
     placeholder,
+    mode,
     disabled,
     label}) => {
   
@@ -31,6 +32,8 @@ const FormSelect = ({
         onChange={onChange}
         loading={true}
         disabled={disabled}
+        mode={mode}
+
         
         options={options}>
         </Select>      
@@ -48,5 +51,8 @@ FormSelect.propTypes = {
   label: PropTypes.string,
   options: PropTypes.array,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  mode: PropTypes.string,
+  disabled: PropTypes.bool,
 }
 export default FormSelect;
