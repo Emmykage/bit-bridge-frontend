@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import SearchField from '../serachField/SearchField'
+// import SearchField from '../serachField/SearchField'
 import Nav from '../nav/Nav'
 import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-
+import "./style.scss"
 import logo from "../../assets/logos/logo-mod.png"
 import { Badge, Button, Form } from 'antd';
 import { useEffect, useState } from 'react';
@@ -33,27 +33,27 @@ const Header = () => {
       <Carts items={cartItems} />
     </DrawerModal>
     
-    <header className=' pt-4 bg-white px-0 relative shadow'>
-      <div className='max-w-app-layout m-auto px-4 '>
+    <header className='sticky top-0 z-10 left-0 pt-4 bg-gray-900 px-0 border-b border-gray-800/50  shadow'>
+      <div className=' max-w-app-layout m-auto px-4 '>
 
 
         <div className='flex gap-3 flex-wrap justify-between items-center'>
 
-        <Button onClick={() => setToggle(prev => !prev)} className='md:hidden ' shape="circle" icon={<MenuUnfoldOutlined />} />
+        <Button onClick={() => setToggle(prev => !prev)} className='md:hidden nav-btn' shape="circle" icon={<MenuUnfoldOutlined />} />
         
-          <NavLink className={"text-3xl font-semibold"}>
+          <NavLink to={"/"} className={"text-3xl font-semibold"}>
             <img src={logo} alt='logo' className='h-14 w- object-cover border' />
 
           </NavLink>
-          <SearchField className={"w-full max-w-md flex-"}/>
+          {/* <SearchField className={"w-full max-w-md flex-"}/> */}
 
-          <div className='flex items-center gap-4 md:justify-end justify-between w-full'>
-            <NavLink to={"/"} className={"font-semibold hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl"}>
-              <QuestionCircleOutlined />
+          <div className='flex items-center gap-4 md:justify-end justify-between'>
+            <NavLink to={"/"} className={"font-semibold text-alt hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl"}>
+              <QuestionCircleOutlined className='text-alt'/>
               Help
             </NavLink>
-            <Badge count={cartItems.length} showZero>
-                    <Button onClick={() => setOpen(true)} type="default" shape="circle" icon={<ShoppingCartOutlined />} size="middle" />
+            <Badge className='badge' count={cartItems.length} showZero>
+                    <Button className='bg-none' onClick={() => setOpen(true)} type="default" shape="circle" icon={<ShoppingCartOutlined className='text-alt'/>} size="middle" />
           </Badge>
               {user ? 
                   <NavLink onClick={() => 
@@ -62,7 +62,7 @@ const Header = () => {
                   :
                   // <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
                   <div className='relative z-10 '>
-                      <button onClick={() => setShowLogin(prev => !prev)} to={"/login"} className={"font-semibold"}>Login</button>
+                      <button onClick={() => setShowLogin(prev => !prev)} to={"/login"} className={"text-alt font-semibold"}>Login</button>
                       <div className={`${showLogin ? "block" : "hidden"} absolute  py-4 w-60 group-hover:block right-0`}>
                         <div className='p-2 z-50 bg-gradient-to-b from-gray-800 to-gray-900 -gray-900 rounded'>
 
@@ -91,7 +91,7 @@ const Header = () => {
                       
                           )                        }}>
                         <FormInput name={"email"} placeholder={"Email"}/>
-                        <FormInput name={"password"} placeholder={"**********"}/>
+                        <FormInput type='password' name={"password"} placeholder={"**********"}/>
                         <ClassicBtn htmlType={"submit"} className={"w-full"}>Sign In</ClassicBtn>
                         </Form>
                         <NavLink to={"/signup"} className='text-alt block text-center'>Sign up</NavLink>

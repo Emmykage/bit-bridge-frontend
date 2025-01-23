@@ -37,9 +37,9 @@ const Nav = ({ open, setToggle }) => {
 
     <div
       ref={navRef}
-      className={`md:my-0 fixed md:static h-screen md:h-auto top-0 shadow md:shadow-none rounded transition-all duration-150 ease-linear ${
+      className={`navslide md:my-0 bg-gray-900 fixed md:static h-screen md:h-auto top-0 shadow md:shadow-none rounded transition-all duration-150 ease-linear ${
         open ? "left-0" : "-left-full"
-      } bg-white z-50 max-w-sm md:max-w-7xl w-full`}
+      } bg-whit z-50 max-w-sm md:max-w-7xl w-full`}
     >
       <Button
         onClick={() => setToggle((prev) => !prev)}

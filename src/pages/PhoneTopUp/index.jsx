@@ -17,7 +17,7 @@ const PhoneTopUp = () => {
       <Header/>
 
         
-        <div className='h-72 bg-gray-700 flex justify-center items-center'>
+        <div className='h-72 bg-gray-900 flex justify-center items-center'>
          <h2 className="text-4xl max-w-5xl font-semibold text-center text-white">
            Top up prepaid mobile phones with Bitcoin and other cryptocurrencies from anywhere in the world
            </h2>

@@ -1,8 +1,9 @@
 ul{
     li{
         a{
-            // color: red;
-            position: relative;
+
+            @apply text-alt;
+                position: relative;
             padding: 4px 0;
             &:hover::after{
                 width: 100%;
@@ -27,5 +28,16 @@ ul{
             }
            
         }
+    }
+}
+
+.navslide{
+    .ant-btn{
+        background: none;
+        &:hover{
+            // background-color: purple !important;
+
+        }
+        @apply text-alt border border-alt hover:bg-primary;
     }
 }

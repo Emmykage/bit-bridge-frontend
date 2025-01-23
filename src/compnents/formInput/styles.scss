@@ -1,6 +1,23 @@
-.formInput{
+.formInput.ant-form-item{
+
     .ant-col{
 
+    
+        .ant-input-affix-wrapper,
+            input{
+                background: none;
+                @apply border border-alt text-white;
+
+                &::placeholder{
+                    @apply text-gray-500;
+                }
+
+                // height: 10px ;
+            }
+  
+
+        // }
+    
 
     }
     .ant-form-item-control{

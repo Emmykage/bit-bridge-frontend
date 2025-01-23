@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Button, Form, Input, InputNumber } from 'antd';
 import "./styles.scss"
 const FormInput = ({
@@ -6,7 +5,7 @@ const FormInput = ({
     placeholder,
     onChange,
     name, 
-    className, 
+    className="", 
     value,
     type="text", 
     disabled,
@@ -17,7 +16,7 @@ const FormInput = ({
   <>
   
       <Form.Item
-      className={`${className} formInput`}
+      className={`formInput`}
       name={name}
       rules={[
         {
@@ -27,8 +26,9 @@ const FormInput = ({
       ]}
        label={label}
        type={type}>
-       { type== "text" ?  <Input disabled={disabled}
-       style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full p-2.5 `} placeholder={placeholder} /> :  <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium p-2.5`} /> }
+       { type== "text" ?  <Input disabled={disabled} style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full p-2.5 `} placeholder={placeholder} /> :
+        type ==="password" ? <Input.Password placeholder={placeholder} className='py-2.5 ' /> : 
+         <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium p-2.5`} /> }
       </Form.Item>
 
       </>

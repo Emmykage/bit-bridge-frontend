@@ -1,0 +1,20 @@
+header{
+    .badge{
+        .ant-btn{
+            background: none;
+
+        }
+    }
+
+    .nav-btn{
+        &.ant-btn{
+            background: none;
+            &:hover{
+                // background-color: purple !important;
+    
+            }
+            @apply text-alt border border-alt hover:bg-primary;
+        }
+    }
+
+}

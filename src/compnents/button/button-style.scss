@@ -14,3 +14,7 @@
         color: white;
     }
 }
+.classic-btn{
+    @apply bg-none text-alt border-alt;
+    background: none;
+}
