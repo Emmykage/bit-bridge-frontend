@@ -19,7 +19,9 @@ const GiftCardPAge = () => {
       <Header/>
       
       <section className="py-10 px-4">
-        <div className=" max-w-7xl m-auto">
+        <div className=" max-w-7xl px-4 shadow rounded-lg bg-white m-auto">
+
+        <div className="">
         <h3 className="text-lg font-medium">Top Features!</h3>
 
           <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -33,11 +35,8 @@ const GiftCardPAge = () => {
 
           </div>
         </div>
-       
-      </section>
-      <section className="py-10 px-4">
 
-        <div className="max-w-7xl m-auto">
+        <div className="max-w-7xl py-10 m-auto">
           <h2 className="text-2xl font-semibold">All gift cards</h2>
           <div className="grid bg-gray-50 gap-x-3 gap-y-20 grid-cols-2 md:grid-cols-3 ">
 
@@ -49,6 +48,7 @@ const GiftCardPAge = () => {
 
 
           </div>
+        </div>
         </div>
 
      

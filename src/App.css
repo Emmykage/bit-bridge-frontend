@@ -1,3 +1,5 @@
 .bg{
-    background: linear-gradient(rgba(243, 244, 246, 0.801),rgba(243, 244, 246, 0.719)),url("/public/backgrounds/pattern_h.png") ;
+    background: linear-gradient(rgb(229 231 235),rgba(17, 24, 39, 0.103)),url("/public/backgrounds/pattern_h.png") ;
+
+    @apply bg-gray-200/50
 }

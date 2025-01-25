@@ -25,7 +25,7 @@ const PhoneTopUp = () => {
 
         <section className="py-10 px-4">
 
-          <div className="grid gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
+          <div className="grid bg-white p-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
             {mobileProviders.map(({id, product, name, min_value, currency, max_value})  => (

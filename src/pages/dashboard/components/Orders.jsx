@@ -2,6 +2,7 @@ import  { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrders } from '../../../redux/actions/order'
 import dateFormater from '../../../utils/dateFormat'
+import { nairaFormat } from '../../../utils/nairaFormat'
 
 const OrderTransact = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,8 @@ const OrderTransact = () => {
     useEffect(()=> {
         dispatch(getOrders())
     },[])
+
+    console.log(orders)
   return (
     <div className="px-1 md:px-4 sm:px-6 w-full lg:px-8 overflow-x-auto hover:border-gray-900">
     <div className="mt-4 flow-root">
@@ -50,10 +53,20 @@ const OrderTransact = () => {
                             
                             {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
                             <td className="relative whitespace-nowrap font-semibold border-b border-gray-200 py-3 md:pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
-                                {item?.order_items[0].amount ?? "Not Available"}
+                                {nairaFormat(item?.total_amount, "usd")}
 
                             </td> 
-                            <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{(item.order_items[0].provision?.name)}</p></td>
+                            <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold ">
+
+                                {item?.order_items.map(item => (
+                                    <div key={item?.id}>
+                                    <p className='font-bold text-gray-700 capitalize'>{item?.provision?.name }</p>
+
+                                    <p >{nairaFormat(item?.amount, item?.provision?.currency)}</p>
+
+                                    </div>
+                                ))}
+                            </td>
 
                             <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                 {dateFormater(item?.created_at)}
@@ -62,7 +75,7 @@ const OrderTransact = () => {
 
                
                             </tr>
-                                                            ))}
+                        ))}
 
 
                 

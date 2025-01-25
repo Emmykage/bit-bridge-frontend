@@ -33,11 +33,10 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
 
         const result = response.data; 
         toast(result.message, {type: "success"})
-        console.log("order details result:",result)
         return result;
     } catch (error) {
         if (error.response) {
-            toast(error.response.message, {type: "error"})
+            toast(error.response.data.message, {type: "error"})
             return rejectWithValue({ message: error.response.data.message });
         }
         console.error(error);

@@ -46,7 +46,8 @@ const ViewGiftCard = () => {
                     provision: selectedProvider.name,
                     provider: selectedProvider.product.provider,
                     image: selectedProvider.product.provider,
-                    value: value
+                    amount: value,
+                    currency: selectedProvider.currency
                 })
             )
                 

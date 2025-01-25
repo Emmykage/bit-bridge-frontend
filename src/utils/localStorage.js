@@ -1,4 +1,5 @@
 import { toast } from "react-toastify"
+import { converter } from "../api/currencyConverter";
 
 export const getCartItems = () => {
   try {
@@ -40,7 +41,7 @@ export const deleteCartItem = (id) => {
 
     try {
         const existingCartItems = getCartItems()
-        const newItems = existingCartItems.filter(item => item.id !== id)
+        const newItems = existingCartItems.filter(item => item.provision_id !== id)
        processCart(newItems)
        toast("Item deleted")
 
@@ -100,10 +101,24 @@ export const addToCartItems = (cartData) => {
 
   export const calculateTotal = () => {
     let amount = 0
-
     const cart_items = getCartItems()
     for(const item of cart_items){
-       amount += item?.value ?? 0
+       amount +=  item?.value ?? 0
     }
+
     return amount
+  }
+
+  export const calculateTotalUSD = async() => {
+    let convertedAmount = 0
+    const cart_items = getCartItems()
+
+
+    for(const item of cart_items){
+      const res = await converter({fromCurr: item?.currency, toCurr: "usd", amount: item?.value ?? 0})
+      convertedAmount += Number(res.calc);   
+    }
+
+   console.log("hggjggjgjggjgg =>", convertedAmount)
+    return convertedAmount
   }

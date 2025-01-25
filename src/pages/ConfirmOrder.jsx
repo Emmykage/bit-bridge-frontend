@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FaCheck } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,23 +9,57 @@ import OrderSummary from '../compnents/orderSummary/OrderSummary';
 import DiscoverBtn from '../compnents/button/DiscoverBtn';
 import { nairaFormat } from '../utils/nairaFormat';
 import { getOrder } from '../redux/actions/order';
+import { converter } from '../api/currencyConverter';
+import { calculateTotalUSD } from '../utils/localStorage';
 // import Loader from './Loader';
 
 const ConfirmOrder = () => {
   const [query] = useSearchParams();
   const orderId = query.get('orderId');
   const dispatch = useDispatch();
-  const { order, status, loading } = useSelector((state) => state.order);
+      const [conversions, setConversion] = useState([])
+      const [convertedTotal, setConvertedTotal] = useState(0)
+
+  const { order, status } = useSelector((state) => state.order);
   console.log(order?.total_amount)
   ScrollToTop();
   useEffect(() => {
     dispatch(getOrder(orderId));
   }, []);
+  const handleConversion = async(fromCurr, toCurr, amount)=> {
+    console.log(fromCurr, toCurr, amount)
+        const newvalue = await converter({fromCurr, toCurr, amount})
 
-  // if (loading) {
-  //   return (<Loader />);
-  // }  
+    console.log(newvalue?.calc)
 
+        return newvalue?.calc
+    
+    }
+  useEffect(()=> {
+
+    (async() => {
+        const _cartItems = await Promise.all( order?.order_items?.map(async(item) => ({
+            ...item,
+            usdConversion: await handleConversion(item?.currency,"usd", item?.value)
+        })))
+
+
+        setConversion(_cartItems)
+
+})()
+
+ console.log(conversions)
+}, [])
+   const fetchTotal = async() => {
+        const result = await  calculateTotalUSD()
+        setConvertedTotal(result)
+        console.log(result)
+    }
+    useEffect(()=> {
+        fetchTotal()
+     
+    
+    },[])
   return (
     <section className="py-10 px-4 sm:px-10 ">
 
@@ -56,38 +90,10 @@ const ConfirmOrder = () => {
             <p className="text-base font-medium text-gray-500">Mode</p>
             <p className="text-lg capitalize">{order?.payment_method}</p>
           </div>
-          {/* <div className="border rounded-lg p-4">
-            <div>
-              <p className="text-lg text-gray-500">Name</p>
-              <p className="text-xl">{order?.billing_address?.name}</p>
-            </div>
-            <div className="my-4">
-              <p className="text-lg text-gray-500">Email</p>
-              <p className="text-xl">{order?.billing_address?.email}</p>
-            </div>
-            <div className="my-4">
-              <p className="text-lg text-gray-500">Phone Number</p>
-              <p className="text-xl">{order?.billing_address?.phone_no}</p>
-            </div>
-            <div className="my-2">
-              <p className="text-lg text-gray-500">Address</p>
-              <p className="text-xl">
-                {order?.billing_address?.street}
-                {' '}
-                {order?.billing_address?.city}
-                {' '}
-                {order?.billing_address?.state}
-              </p>
-            </div>
-            <div className="my-4">
-              <p className="text-lg text-gray-500">Delivery Fee</p>
-              <p className="text-xl">{nairaFormat(order?.delivery_fee)}</p>
-            </div>
-          </div> */}
-
+      
           <div className="my-4">
             <span className="text-lg uppercase">Items</span>
-            {Object.keys(order)?.length > 0 ? order?.order_items?.map((item) => (
+            {conversions.map((item) => (
               <div key={item.id} className="flex justify-between border my-2 rounded-xl py-4 px-4 gap-3">
                 <div className="w-16 h-16 border rounded p-1">
                   <img src={item?.photo_url ? item?.photo_url : item?.product?.image} alt="" className="w-full h-full object-contain" />
@@ -109,7 +115,7 @@ const ConfirmOrder = () => {
                 </div>
 
               </div>
-            )) : <h2>No Items</h2>}
+            ))}
 
           </div>
 
@@ -126,7 +132,7 @@ const ConfirmOrder = () => {
           </div>
 
         </div>
-        <OrderSummary totalAmount={Number(order?.total_amount)} cartItems={order?.order_items} counter={order?.order_items?.length} />
+        <OrderSummary convertedTotal={convertedTotal} totalAmount={Number(order?.total_amount)} cartItems={order?.order_items} counter={order?.order_items?.length} />
       </div>
 
     </section>

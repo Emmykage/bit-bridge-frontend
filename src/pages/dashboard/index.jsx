@@ -5,7 +5,6 @@ import NavButton from "../../compnents/button/NavButton"
 import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Outlet, useNavigate } from "react-router-dom"
 import SelectInput from "../../compnents/select/Select"
 import OrderTransact from "./components/Orders"
 import DepositTransaction from "./components/DepositsTransaction"
@@ -16,7 +15,6 @@ const HomeDashboard = () => {
 
     const [selectedItem, setSelectedItem] = useState("gift-cards")
 
-    const navigate = useNavigate()
     const [convertedAmount, setConvertedAmount] = useState(null)
     const [activeCurrency, setActiveCurrency] = useState("usd")
 
@@ -47,29 +45,17 @@ const HomeDashboard = () => {
 
     const {label} = items.find(item => item.name === selectedItem)
 
-    // const pickHeader = (name) => {
-    //     switch (name) {
-    //         case value:
-                
-    //             break;
-        
-    //         default:
-    //             break;
-    //     }
-    // }
-
     useEffect(()=> {
         const fetchConversion = async() => {
 
             const result = await converter({fromCurr: "usd", toCurr: activeCurrency, amount: wallet?.balance})
-            console.log(result)
             setConvertedAmount(result)
         }
 
         fetchConversion()
     },[wallet?.balance, activeCurrency])
 
-console.log(activeCurrency)
+// console.log(activeCurrency)
   return (
     <div className="homeDashboard text-white w-full">
         <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">
@@ -175,7 +161,7 @@ console.log(activeCurrency)
                 })}
                 
 
-                <Outlet  />
+                {/* <Outlet  /> */}
 
 
             </div>

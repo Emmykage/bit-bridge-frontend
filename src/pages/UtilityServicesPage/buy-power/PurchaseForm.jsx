@@ -78,7 +78,7 @@ const PowerForm = () => {
 
             <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormSelect placeholder={"Select Meter Type"} className="flex-1" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"variation_code"}/>
-                <FormInput className={"flex-1"} label={"Meter Number"} placeholder={"Enter Meter Number"} name={"billersCode"}/>
+                <FormInput className={"flex-1 w-full"} label={"Meter Number"} placeholder={"Enter Meter Number"} name={"billersCode"}/>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:gap-4">

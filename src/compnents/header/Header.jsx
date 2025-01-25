@@ -58,7 +58,7 @@ const Header = () => {
               {user ? 
                   <NavLink onClick={() => 
                     dispatch(userLogout())}
-                  to={"/"} className={"font-semibold"}>Log Out</NavLink>
+                  to={"/"} className={"font-semibold text-alt"}>Log Out</NavLink>
                   :
                   // <NavLink to={"/login"} className={"font-semibold"}>Login</NavLink>
                   <div className='relative z-10 '>
@@ -103,7 +103,7 @@ const Header = () => {
                   </div>
 
               }
-                {user &&   <NavLink to={"/dashboard/home"}>Account</NavLink>}
+                {user &&   <NavLink to={"/dashboard/home"} className={"text-alt"}>Account</NavLink>}
                 {/* <NavLink to={"/dashboard/home"}>Account</NavLink> */}
 
           </div>

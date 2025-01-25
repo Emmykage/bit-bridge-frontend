@@ -25,7 +25,8 @@ const PurchaseDetails = () => {
                     navigate(`/buy-power/${id}/confirm-payment?transaction_id=${data?.id}`)
                     console.log(result.payload)
                 }else{
-                    const data  = result.payload.data 
+                    const data  = result.payload 
+                    console.log(data)
                     toast(data?.message || "Failed to make purchase", {type: "error"})
 
                 }

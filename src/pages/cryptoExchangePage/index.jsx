@@ -5,7 +5,6 @@ import GiftCard from "../../compnents/product-card/GiftCard"
 import sellCrypto from "../../assets/images/banners/original-size.webp"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getProducts } from "../../redux/actions/product"
 import { getProvisions } from "../../redux/actions/provision"
 const CryptoExchangePage = () => {
   const {giftcards} = useSelector(state => state.provision)
@@ -17,8 +16,11 @@ const CryptoExchangePage = () => {
   return (
     <div>        
       <Header/>
-      <section>
-        <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
+      <section className="p-10 ">
+        <div className="max-w-7xl m-auto bg-white p-4 rounded-lg shadow">
+
+
+        <div className="max-w-7xl bg-white px-4 m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
           <div>
             <h2 className="text-5xl  font-bold text-gray-700">
             Sell your crypto with Ease
@@ -34,10 +36,8 @@ const CryptoExchangePage = () => {
               </div>
           </div>
         </div>
-      </section>
       
-      <section className="py-10 px-4">
-        <div className=" max-w-7xl m-auto">
+        <div className=" my-10 m-auto">
         <h3 className="text-lg font-medium">Top Features!</h3>
 
           <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -51,11 +51,13 @@ const CryptoExchangePage = () => {
 
           </div>
         </div>
+        </div>
+
        
       </section>
       <section className="py-10 px-4">
 
-        <div className="max-w-7xl m-auto">
+        <div className="max-w-7xl m-auto p-4 shadow-sm rounded-lg bg-white">
           <h2 className="text-2xl font-semibold">All gift cards</h2>
           <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
 

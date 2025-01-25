@@ -13,6 +13,7 @@ const curr =  new Intl.NumberFormat("en-NG", {
     currency: currency,
     currencyDisplay: "narrowSymbol"
   })
+
   return curr.format(amount);
 }
 

@@ -8,7 +8,7 @@ import {  GET_CART } from '../../redux/app'
 import { getWallet } from '../../redux/actions/wallet'
 import OrderSummary from '../../compnents/orderSummary/OrderSummary'
 import { useNavigate } from 'react-router-dom'
-import { clearCartItems } from '../../utils/localStorage'
+import { calculateTotalUSD, clearCartItems } from '../../utils/localStorage'
 
 const PaymentMenthod = () => {
     const dispatch = useDispatch()
@@ -16,6 +16,7 @@ const PaymentMenthod = () => {
 
     const {totalAmount, cartItems} = useSelector(state => state.app)
     const [alertText, setAlertText] = useState(false)
+    const [convertedTotal, setConvertedTotal] = useState(0)
 
     const {wallet} = useSelector(state => state.wallet)
     const {user, loading} = useSelector(state => state.auth)
@@ -24,10 +25,11 @@ const PaymentMenthod = () => {
         dispatch(GET_CART())
         dispatch(getWallet())
     }, [])
+
     const refineCart = cartItems.map(item => (
         {
             quantity: 1,
-            amount: item.value,
+            amount: item.amount,
             product_id: item.product_id,
             provision_id: item.provision_id 
 
@@ -35,12 +37,26 @@ const PaymentMenthod = () => {
     ))
 
 
+    const fetchTotal = async() => {
+        const result = await  calculateTotalUSD()
+        setConvertedTotal(result)
+        console.log(result)
+    }
+    useEffect(()=> {
+        fetchTotal()
+     
+    
+    },[cartItems])
+
+
     const handlePayment = () => {
-        totalAmount < wallet?.balance ? 
+
+        console.log(convertedTotal)
+        convertedTotal < wallet?.balance ? 
         dispatch(createOrder({
         
                 order_type: "buy",
-                total_amount: totalAmount,
+                total_amount: convertedTotal,
                 order_items_attributes: refineCart
             }
 
@@ -48,7 +64,10 @@ const PaymentMenthod = () => {
 
   
             if(createOrder.fulfilled.match(result)) {
-                clearCartItems()                
+                clearCartItems()      
+
+                dispatch(getWallet())
+
                 navigate(`/confirmation-order?orderId=${result.payload.data.id}`)
             }else{
                 toast(result?.message,{type: "error"})
@@ -68,7 +87,7 @@ const PaymentMenthod = () => {
     
     <div className='py-2 px-4 my-10 max-w-7xl bg-white shadow-sm p-2 m-auto'>
         <div className='grid md:grid-cols-checkout gap-20 '>
-        <OrderSummary totalAmount={totalAmount} cartItems={cartItems}/>
+        <OrderSummary convertedTotal={convertedTotal} totalAmount={totalAmount} cartItems={cartItems}/>
 
         <div className='shadow p-4'>
         <div className='p-4 bg-white font-medium'>
@@ -77,7 +96,7 @@ const PaymentMenthod = () => {
             <p >{ !loading && !user && <span className='text-red-400 text-sm'>Sign up to proceed</span>} </p>
             <div>
                 <p className='text-2xl font-bold text-green-950'>USD</p>
-               <p> {nairaFormat(totalAmount, "usd")}</p> 
+               <p> {nairaFormat(convertedTotal, "usd")}</p> 
                {totalAmount > wallet?.balance &&  <p className={`opacity-4 text-gray-500 ${alertText && "text-red-500"}`}>Not Enough balance</p>  }
              
             </div>

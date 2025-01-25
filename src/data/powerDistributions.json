@@ -15,15 +15,6 @@
 
 },
 {
-    "id": 3,
-    "name": "Kano Electric Payment - KEDCO",
-    "description": "Prepaid and Postpaid IKEDC payment",
-    "image": "/images/power-providers/Kano-Electric.jpg",
-    "serviceID": "kano-electric"
-
-
-},
-{
     "id": 4,
     "name": "Enugu Electric - EEDC",
     "description": "Prepaid and Postpaid IKEDC payment",
@@ -48,7 +39,6 @@
     "image": "/images/power-providers/Port-Harcourt-Electric.jpg",
     "serviceID": "portharcourt-electric"
 
-
 },
 {
     "id": 7,
@@ -56,15 +46,6 @@
     "description": "Prepaid and Postpaid IKEDC payment",
     "image": "/images/power-providers/Eko-Electric-Payment-PHCN.jpg",
     "serviceID": "eko-electric"
-
-
-},
-{
-    "id": 8,
-    "name": "Kaduna Electric - KAEDCO",
-    "description": "KAEDCO - Kaduna Electricity Prepaid and Postpaid Payment",
-    "image": "/images/power-providers/Kaduna-Electric-KAEDCO.jpg",
-    "serviceID": "kaduna-electric"
 
 
 }]
