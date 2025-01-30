@@ -41,6 +41,7 @@ const AppSlice = createSlice({
         },
         DELETE_CART: (state, action)=> {
             const item  = action.payload
+            console.log(item)
             deleteCartItem(item)
             return {
                 ...state,

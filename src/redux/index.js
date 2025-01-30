@@ -5,5 +5,6 @@ export { default as WalletReducer} from "./wallet"
 export { default as OrderReducer} from "./order"
 export { default as ProductReducer} from "./product"
 export {default as ProvisionReducer} from './provision'
+export {default as orderTokenReducer} from './orderToken'
 
 export {default as purchaseReducer} from "./purchasePower"

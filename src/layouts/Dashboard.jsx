@@ -32,7 +32,7 @@ const DashboardLayout = () => {
     <div className='relative bg-gray-00 min-h-screen bg-black/90'>
         <div className='max-w-[1500px] m-auto'>
 
-        <header className='flex justify-between items-center bg-black rounded py-10 px-7  top-0'>
+        <header className='flex justify-between items-center bg-black gap-4 rounded py-10 px-7  top-0'>
             <span className='lg:hidden ' onClick={()=> seTShowMenu(prev => !prev)}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>

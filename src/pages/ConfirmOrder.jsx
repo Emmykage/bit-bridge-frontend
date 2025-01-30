@@ -11,6 +11,9 @@ import { nairaFormat } from '../utils/nairaFormat';
 import { getOrder } from '../redux/actions/order';
 import { converter } from '../api/currencyConverter';
 import { calculateTotalUSD } from '../utils/localStorage';
+import { updateCardToken } from '../redux/actions/orderToken';
+import { SET_LOADING } from '../redux/app';
+import { splitString } from '../utils';
 // import Loader from './Loader';
 
 const ConfirmOrder = () => {
@@ -21,7 +24,7 @@ const ConfirmOrder = () => {
       const [convertedTotal, setConvertedTotal] = useState(0)
 
   const { order, status } = useSelector((state) => state.order);
-  console.log(order?.total_amount)
+  console.log(order?.total_amount, order)
   ScrollToTop();
   useEffect(() => {
     dispatch(getOrder(orderId));
@@ -30,12 +33,16 @@ const ConfirmOrder = () => {
     console.log(fromCurr, toCurr, amount)
         const newvalue = await converter({fromCurr, toCurr, amount})
 
-    console.log(newvalue?.calc)
 
         return newvalue?.calc
     
     }
-  useEffect(()=> {
+
+
+
+
+console.log(order) 
+   useEffect(()=> {
 
     (async() => {
         const _cartItems = await Promise.all( order?.order_items?.map(async(item) => ({
@@ -66,13 +73,15 @@ const ConfirmOrder = () => {
       <div className="flex m-auto max-w-7xl gap-5 flex-col md:flex-row">
 
         <div className="flex-1 p-5 rounded-lg py-10  bg-white">
+        <p className='text-base font-medium text-gray-600'>Refresh browser to view Gift code</p>
+
           <div>
-            <p className="uppercase text-xl md:text-3xl">
+            {/* <p className="uppercase text-xl md:text-3xl">
               <span>Invoice </span>
               {' '}
               : #
               {order?.invoice_number}
-            </p>
+            </p> */}
           </div>
 
           {
@@ -88,15 +97,17 @@ const ConfirmOrder = () => {
 
           <div className="border p-4 my-4">
             <p className="text-base font-medium text-gray-500">Mode</p>
-            <p className="text-lg capitalize">{order?.payment_method}</p>
+            <p className="capitalize text-sm font-semibold text-gray-600">{order?.payment_method}</p>
           </div>
       
           <div className="my-4">
             <span className="text-lg uppercase">Items</span>
-            {conversions.map((item) => (
+            {order?.order_items?.map((item) => (
+              <>
+              
               <div key={item.id} className="flex justify-between border my-2 rounded-xl py-4 px-4 gap-3">
                 <div className="w-16 h-16 border rounded p-1">
-                  <img src={item?.photo_url ? item?.photo_url : item?.product?.image} alt="" className="w-full h-full object-contain" />
+                  <img src={item?.photo_url ? item?.photo_url : `/images/providers/${splitString(item?.product?.provider)}.webp`} alt="" className="w-full h-full object-contain" />
 
                 </div>
                 <div className="flex-1">
@@ -115,6 +126,42 @@ const ConfirmOrder = () => {
                 </div>
 
               </div>
+
+              {item?.card_token && (
+                <div className='border flex m-auto flex-col justify-between  h-40 max-w-[300px] w-full rounded-lg shadow p-4 px-2'>
+                  <div className='flex justify-between '>
+                  <p className='text-gray-800 font-semibold'>{item?.provision?.name}</p>
+                  <p>{nairaFormat(item?.amount, item?.currency)}</p>
+
+                  </div>
+                  <div>
+                    <button onClick={()=> {
+                      dispatch(SET_LOADING(true))
+                      dispatch(updateCardToken({id: item?.card_token?.id, data: {reveal: true}}))
+                      .then(result => {
+                        if(updateCardToken.fulfilled.match(result)){
+                          dispatch(getOrder(orderId))
+                          dispatch(SET_LOADING(false))
+
+
+                        }
+                        else{
+                          dispatch(SET_LOADING(false))
+  
+                        }
+                      })
+                    }} className='border m-auto block px-4 rounded-lg text-sm bg-alt font-semibold'>Reveal code</button>
+                  </div>
+                  <div>
+                    <small>GIft Card Code</small>
+
+                    <p className='bg-gray-300 text-center py-1'>{ item?.card_token?.reveal ?item?.card_token?.token : "************" }</p>
+
+                  </div>
+                </div>
+              )}
+
+              </>
             ))}
 
           </div>

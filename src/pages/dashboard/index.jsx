@@ -49,7 +49,7 @@ const HomeDashboard = () => {
         const fetchConversion = async() => {
 
             const result = await converter({fromCurr: "usd", toCurr: activeCurrency, amount: wallet?.balance})
-            setConvertedAmount(result)
+            setConvertedAmount(result.calc)
         }
 
         fetchConversion()
@@ -62,13 +62,14 @@ const HomeDashboard = () => {
             <div className="overflow-hidden">
                 <div className="flex gap-10">
                 <h3 className="text-xl">Wallet balance</h3>
-                <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/>
+                    <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/>
 
                 </div>
            
                 <div>
                     <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "usd")}</p>
-                    <p className="my-3">  {nairaFormat(convertedAmount?.calc, activeCurrency)}</p>
+                    {/* <p>{convertedAmount} </p> */}
+                    <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p>
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 

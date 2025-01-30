@@ -19,10 +19,10 @@ const GiftCardPAge = () => {
       <Header/>
       
       <section className="py-10 px-4">
-        <div className=" max-w-7xl px-4 shadow rounded-lg bg-white m-auto">
+        <div className=" max-w-7xl px-4 py-10 shadow rounded-lg bg-white m-auto">
 
         <div className="">
-        <h3 className="text-lg font-medium">Top Features!</h3>
+        <h3 className="text-lg font-medium text-gray-800">Top Features!</h3>
 
           <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
 

@@ -12,7 +12,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
     const dispatch = useDispatch()
     const [conversions, setConversion] = useState()
     
-    // console.log("Order summmary:", cartItems, totalAmount)
+    console.log("Order summmary:", convertedTotal)
 
     const VAT = totalAmount/100 * 10
 

@@ -26,6 +26,7 @@ const AddFund = ({
   };
   return (
     <Form
+    className='add-fund'
       layout={formLayout}
       onFinish={(values) =>{
             handleSubmit(values)
@@ -44,7 +45,7 @@ const AddFund = ({
       }}
     >
         <FormInput className="add-fund" name="amount" type='number' label={"Amount(USDT value)"}/>
-        <FormInput className="add-fund" name="address"  label={"Address"} disabled={disableAddress} />
+        <FormInput className="add-fund" name="address" type='text' label={"Address"} disabled={disableAddress} />
         <FormSelect className="add-fund" name="coin_type"  label={"Type"} disabled={true} options={coinType}/>
 
         <Form.Item 

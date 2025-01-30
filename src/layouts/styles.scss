@@ -35,4 +35,18 @@
             }
         }
     }
+
+
+    .ant-modal{
+        .ant-modal-content{
+            @apply bg-gray-100; 
+        }
+    
+        .ant-modal-header{
+            background: none;
+        }
+        .ant-modal-title{
+            @apply text-white
+        }
+    }
 }

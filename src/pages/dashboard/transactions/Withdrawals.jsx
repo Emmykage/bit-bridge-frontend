@@ -4,9 +4,10 @@ import { nairaFormat } from "../../../utils/nairaFormat"
 import statusStyle from "../../../utils/statusStyle"
 import { useEffect } from "react"
 import { getUserTransactions } from "../../../redux/actions/transaction"
+import Loading from "../../../compnents/loader/Loading"
 
 const Withdrawals = () => {
-  const {transactions} = useSelector(state => state.transaction)
+  const {transactions, loading} = useSelector(state => state.transaction)
     console.log(transactions)
   const dispatch = useDispatch()
   useEffect(()=> {
@@ -39,12 +40,24 @@ const Withdrawals = () => {
                             </thead>
                                 
                             <tbody>
+                            {loading ? 
+                                 <tr>
 
-                              
-                                {transactions.length > 0 ? transactions?.map(item => (
+                                    <td  className=" py-8 text-center justify-center " colSpan={6}>
+
+                                        <span>
+                                        <Loading/>
+
+                                        </span>
+
+                                    </td>
+
+                                </tr> 
+                                :
+                                transactions.length > 0 ? transactions?.map(item => (
 
                                 <tr key={item?.id}>
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount)}</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount, "usd")}</p></td>
                                     <td className="relative max-w-40 whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
                                         {item?.address ?? "Not Available"}
 

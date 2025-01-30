@@ -73,6 +73,26 @@ const AuthSlice = createSlice({
                 loading: false
             }
         })
+        .addCase(getUserTransactions.pending, (state) => {
+
+            // const rawData = action.payload.data
+
+            return{
+                ...state,
+             
+                loading: true
+            }
+        })
+        .addCase(getUserTransactions.rejected, (state) => {
+
+            // const rawData = action.payload.data
+
+            return{
+                ...state,
+
+                loading: false
+            }
+        })
 
         
         

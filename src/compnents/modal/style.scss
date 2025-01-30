@@ -24,6 +24,9 @@
 .ant-modal{
     .ant-modal-content{
         @apply bg-zinc-900; 
+        .ant-modal-close-x{
+            color: white;
+        }
     }
 
     .ant-modal-header{

@@ -45,6 +45,20 @@ const  selectCurrencyOptions = (curr) => {
                 {
                   value: 50, label: "GBP 50",
                 }]
+                case "ngn": 
+                return [{
+                    value: 5, label: "NGN 10",
+                  },
+                  {
+                    value: 15, label: "NGN 15",
+                  },   {
+                    value: 20, label: "NGN 20",
+                  },   {
+                    value: 25, label: "NGN 25",
+                  },
+                  {
+                    value: 50, label: "NGN 50",
+                  }]
   
 
         default:

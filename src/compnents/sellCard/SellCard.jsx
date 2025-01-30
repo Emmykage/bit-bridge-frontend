@@ -1,33 +1,26 @@
-import { Button, Form, message, Upload } from 'antd'
+import { Button, Form } from 'antd'
 import  { useState } from 'react'
-import FormInput from '../formInput/FormInput';
 import "./style.scss"
 import FormSelect from '../formSelect/FormSelect';
-import { PlusOutlined } from '@ant-design/icons';
 import FormInputArea from '../formInputArea/FormInput';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import selectCurrencyOptions from '../../utils/selectCurrencyOption';
 const SellGiftCard = ({
     handleSubmit,
-    setSelectedItem,
     selectedItem
 }) => {
     const [form] = Form.useForm();
-  const [formLayout] = useState('vertical');
-  const {loading} = useSelector(state => state.order);
+    const [formLayout] = useState('vertical');
+    const {loading} = useSelector(state => state.order);
 
-  // const options = selectedItem.provisions.map(item => ({
-  //   label: item.name, value: item.id
-  // }))
-  console.log(selectedItem)
 
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
+  // const normFile = (e) => {
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   return e?.fileList;
+  // };
 
 
   return (
@@ -70,7 +63,7 @@ const SellGiftCard = ({
         <FormInputArea className="" name="extra_info" label={"Extra Information(optional)"} placeHolder="" />
         
 
-        <Form.Item 
+        {/* <Form.Item 
         name={"proof"}
         label="payment receipt" 
         valuePropName="fileList" 
@@ -114,7 +107,7 @@ const SellGiftCard = ({
               </div>
             </button>
           </Upload>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label={null}>
 
         <Button loading={loading} type="primary" htmlType="submit">

@@ -47,6 +47,8 @@ import PowerForm from './pages/UtilityServicesPage/buy-power/PurchaseForm'
 import PurchaseDetails from './pages/UtilityServicesPage/buy-power/PurchaseDetails'
 import ComfirmPurchase from './pages/UtilityServicesPage/buy-power/ConfirmPurchase'
 import ScrollToTop from './hooks/scrollToTop'
+import ViewOrder from './pages/admin/purchases/ViewOrder'
+import GiftCardOrder from './pages/dashboard/GiftCardOrder'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -63,7 +65,7 @@ function App() {
   
   ScrollToTop()
   return (
-    <div className='bg-gray-100 bg'>
+    <div className='bg-gray-100 h-screen overflow-y-auto bg'>
     <Suspense fallback={<LoaderPage />}>
 
     <AppToast/>
@@ -90,6 +92,8 @@ function App() {
       <Route path='home' element={<HomeDashboard/>}>
         <Route path="orders-transaction" element={<OrderTransact/>}/>
       </Route>
+      
+      <Route path='approved-gift-cards' element={<GiftCardOrder/>} />
       <Route path='wallet' element={<Account/>} />
       <Route path='gift-cards' element={<GiftCards/>} />
       <Route path='transactions' element={<Transactions/>}>
@@ -115,6 +119,7 @@ function App() {
     <Route path="/admin" element={<AdminDashboardLayout/>}>
       <Route path='dashboard' element={<AdminHome/>}/>
       <Route path='purchases' element={<Purchases/>}/>
+      <Route path='purchases/:id' element={<ViewOrder/>}/>
       <Route path='products' element={<Products/>}/>
       <Route path='products/:id' element={<ViewProduct/>}/>
       <Route path='services' element={<Services/>}/>

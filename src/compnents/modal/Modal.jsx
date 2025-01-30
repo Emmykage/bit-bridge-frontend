@@ -8,6 +8,7 @@ const AppModal = ({
     isModalOpen,
     handleCancel,
     title,
+    className,
     // footer,
     handleOk}) => {
 
@@ -19,15 +20,19 @@ const AppModal = ({
       title={title}
       onOk={handleOk} 
       onCancel={handleCancel}
-      closeIcon={<CloseCircleFilled className='text-white'/>}
+      // closeIcon={<CloseCircleFilled className='text-white'/>}
       closable={true}
       centered={true}
       maskClosable={true}
       footer={ null}
+      className={className}
+      // style={{
+      //   backgroundColor: "white"
+      // }}
       >
        
        
-       <div className=''>
+       <div >
         {children}
 
        </div>

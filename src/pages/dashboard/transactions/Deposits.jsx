@@ -5,12 +5,13 @@ import { useEffect, useState } from "react"
 import { getUserTransactions } from "../../../redux/actions/transaction"
 import statusStyle from "../../../utils/statusStyle"
 import AppModal from "../../../compnents/modal/Modal"
+import Loading from "../../../compnents/loader/Loading"
 
 const Deposits = () => {
     const [toggle, setToggle] = useState(false)
     const [viewImage, setViewImage] = useState(null)
-  const {transactions} = useSelector(state => state.transaction)
-    console.log(transactions)
+  const {transactions, loading} = useSelector(state => state.transaction)
+    console.log(loading)
   const dispatch = useDispatch()
   useEffect(()=> {
     dispatch(getUserTransactions({type: "deposit"}))
@@ -44,11 +45,30 @@ const Deposits = () => {
                                 
                             <tbody>
 
+                                {loading ? 
+                                 <tr>
+
+                                    <td  className=" py-8 text-center justify-center " colSpan={6}>
+                                        {/* <Loading  */}
+                                        <span>
+                                        <Loading/>
+
+                                        </span>
+
+                                    </td>
+
+                                </tr> 
+
+                                : 
+                                
+                                
+                                
+
                               
-                                {transactions.length > 0 ? transactions?.map(item => (
+                                transactions.length > 0 ? transactions?.map(item => (
 
                                 <tr key={item?.id}>
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount)}</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(item.amount, "usd")}</p></td>
                                     <td className="relative max-w-40 whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
                                         {item?.address ?? "Not Available"}
 
@@ -61,11 +81,11 @@ const Deposits = () => {
 
                                     </td> 
                                     <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
-                                        <span className={` py-1 inline-block text-center px-3 border rounded-3xl`}>
+                                        <span className={` py-1 inline-block text-center px-3 rounded-3xl`}>
                                             <img onClick={()=> {
                                                 setToggle(true)
                                                 setViewImage(item?.proof_url)
-                                            }} src= {item?.proof_url} className="w-20 h-20" alt="" />
+                                            }} src= {item?.proof_url} className="w-20 border border-y-gray-400 h-20" alt="" />
                                        
                                         </span>
                                         

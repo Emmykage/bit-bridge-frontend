@@ -52,7 +52,8 @@ export const getOrder = createAsyncThunk("order/get-order", async(id, {rejectWit
             }
         });
 
-        const result = response.data;      
+        const result = response.data;   
+        console.log("get order:", result)   
         return result;
     } catch (error) {
         if (error.response) {

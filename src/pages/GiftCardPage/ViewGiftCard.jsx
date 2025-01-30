@@ -30,10 +30,9 @@ const ViewGiftCard = () => {
     useEffect(()=> {
         dispatch(getProvisions())
     },[])
- 
 
                const handleCart = () => {
-                console.log(value)
+
                 if(!value ){
                     console.error("Value is required and cannot be empty.");
 
@@ -76,7 +75,7 @@ const ViewGiftCard = () => {
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-6xl m-auto py-10">
             <div className="p-10 bg-gray-200 flex justify-center items-center h-96">
-                <img src={`/images/providers/${giftcardImage}.webp`} alt="provider image"/>
+                <img src={`/images/providers/${giftcardImage}.webp`} className="h-full" alt="provider image"/>
 
             </div>
             <div>

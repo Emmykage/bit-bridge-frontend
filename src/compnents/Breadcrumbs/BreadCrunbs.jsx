@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import { MdMoreHoriz } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
 
 const BreadCrunbs = ({id,setSelectedId, setOpen}) => {
   const dropDownRef = useRef(null)
   const [toggle, setToggle] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
 
@@ -26,7 +28,7 @@ const BreadCrunbs = ({id,setSelectedId, setOpen}) => {
         <div style={{right: "calc(100% + 10px)"}} className={`absolute bottom-0 rounded z-10  p-2 px-4 bg-white ${toggle ? "block" : "hidden"}`}>
             <ul>
               <li className='my-2'>
-                <span className=''>View</span>
+                <span className='' onClick={() => navigate(`/admin/purchases/${id}`)}>View</span>
               </li>
               <li className='my-2'>
                 <span className=''

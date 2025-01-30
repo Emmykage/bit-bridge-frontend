@@ -1,8 +1,9 @@
-import {  LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import {  GiftOutlined, LogoutOutlined, SettingOutlined, SwitcherOutlined, UserOutlined } from '@ant-design/icons';
 import {  Dropdown, message, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../redux/actions/auth';
 import { useNavigate } from 'react-router-dom';
+import "./style.scss"
 
 const DropDown = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,10 @@ const DropDown = () => {
               navigate('/'); // Use a routing library like react-router-dom
               break;
       
-            // case '2':
-            //   // Navigate to Profile
-            //   message.info('Navigating to Profile...');
-            //   console.log('Navigating to Profile');
-            //   // Example: navigate('/profile');
-            //   break;
+            case '2':
+             
+               navigate('/dashboard/approved-gift-cards');
+              break;
       
             case '3':
               // Log out
@@ -46,7 +45,14 @@ const items = [
     {
       label: 'Switch',
       key: '1',
-      icon: <UserOutlined />,
+      icon: <SwitcherOutlined />,
+    },
+    {
+      label: 'Gift Cards',
+      key: '2',
+      icon: <GiftOutlined />,
+      // danger: true
+      // disabled: true,
     },
 
     {
@@ -55,13 +61,7 @@ const items = [
       icon: <LogoutOutlined />,
       danger: true,
     },
-    // {
-    //   label: 'Settings',
-    //   key: '4',
-    //   icon: <SettingOutlined />,
-    //   danger: true,
-    //   disabled: true,
-    // },
+ 
   ];
 
   const menuProps = {

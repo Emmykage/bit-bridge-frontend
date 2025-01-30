@@ -59,7 +59,7 @@ const Orders = () => {
                                             {nairaFormat(item?.total_amount, "usd")}
 
                                                 </td> 
-                                        <td className="whitespace-nowrap border-b border-gray-200 text-center px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{(item.order_items[0].provision?.name)}</p></td>
+                                        <td className="whitespace-nowrap border-b border-gray-200 text-center px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{(item.order_items[0]?.provision?.name)}</p></td>
 
                                         <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                             {dateFormater(item?.created_at)}

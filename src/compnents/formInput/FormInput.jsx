@@ -27,9 +27,9 @@ const FormInput = ({
       ]}
        label={label}
        type={type}>
-       { type== "text" ?  <Input disabled={disabled} style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full bg-red-200 p-2.5 `} placeholder={placeholder} /> :
+       { type== "text" ?  <Input disabled={disabled} style={{width: "100%"}} value={value} onChange={onChange} className={`${className} w-full bg-red-800 p-2.5 `} placeholder={placeholder} /> :
         type ==="password" ? <Input.Password placeholder={placeholder} className='py-2.5 ' /> : 
-         <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium p-2.5`} /> }
+         <InputNumber value={value} placeholder={placeholder} onChange={onChange} className={`${className} w-full font-medium`} /> }
       </Form.Item>
 
       </>

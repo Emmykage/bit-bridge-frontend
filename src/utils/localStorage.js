@@ -1,5 +1,6 @@
 import { toast } from "react-toastify"
 import { converter } from "../api/currencyConverter";
+import { message } from "antd";
 
 export const getCartItems = () => {
   try {
@@ -20,7 +21,7 @@ export const getCartItems = () => {
       return storedCart;
 
   } catch (error) {
-      toast(error?.message || "An error occurred while fetching cart items");
+    message.error(error?.message || "An error occurred while fetching cart items");
       return [];
   }
 }
@@ -43,7 +44,8 @@ export const deleteCartItem = (id) => {
         const existingCartItems = getCartItems()
         const newItems = existingCartItems.filter(item => item.provision_id !== id)
        processCart(newItems)
-       toast("Item deleted")
+       console.log(id)
+       message.success("Item deleted")
 
         
     } catch (error) {
@@ -71,7 +73,8 @@ export const addToCartItems = (cartData) => {
       if (!existingCartItems || existingCartItems.length < 1) {
         const addedItems = [cartData];
         processCart(addedItems);
-        toast('Added to cart');
+        message.success("Added to cart" )
+        // toast('Added to cart');
         return;
       }
   
@@ -91,10 +94,10 @@ export const addToCartItems = (cartData) => {
       }
   
       processCart(updatedCartItems);
-      toast(isItemInCart ? 'Cart updated' : 'Added to cart', {type: "success"});
+      message.success(isItemInCart ? 'Cart update' : 'Added to cart', {type: "success"});
+      
     } catch (error) {
-      console.error(error);
-      toast(error?.message || 'An error occurred while adding to the cart');
+      message.error(error?.message || 'An error occurred while adding to the cart');
     }
   };
   
@@ -115,8 +118,9 @@ export const addToCartItems = (cartData) => {
 
 
     for(const item of cart_items){
-      const res = await converter({fromCurr: item?.currency, toCurr: "usd", amount: item?.value ?? 0})
+      const res = await converter({fromCurr: item?.currency, toCurr: "usd", amount: item?.amount ?? 0})
       convertedAmount += Number(res.calc);   
+
     }
 
    console.log("hggjggjgjggjgg =>", convertedAmount)

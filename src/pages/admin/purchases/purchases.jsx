@@ -6,6 +6,7 @@ import BreadCrunbs from '../../../compnents/Breadcrumbs/BreadCrunbs'
 import AppModal from '../../../compnents/modal/Modal'
 import ClickButton from '../../../compnents/button/Button'
 import { toast } from 'react-toastify'
+import { nairaFormat } from '../../../utils/nairaFormat'
 
 const Purchases = () => {
     const dispatch = useDispatch()
@@ -52,7 +53,7 @@ const Purchases = () => {
                             <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Amount</th>
                             <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Provision </th>
                             <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">Time </th>
-                            <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell bg-gray-500"> </th>
+                            <th scope="col" className=" top-0 z-0  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell bg-gray-500"> </th>
 
 
             
@@ -74,20 +75,23 @@ const Purchases = () => {
                             
                             {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
                             <td className="relative whitespace-nowrap font-semibold border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
-                                {item?.order_items.map((item, index) => (
-                                  <p key={index}>{ item.amount} </p> 
-                                ))}
+                            <p className="font-bold">{(nairaFormat(item?.total_amount, "usd"))}</p>
+
                                 {/* {item?.order_items[0].amount ?? "Not Available"} */}
 
                             </td> 
-                            <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{(item.order_items[0]?.provision?.name)}</p></td>
+                            <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold ">
+                            {item?.order_items?.map((item, index) => (
+                                  <p key={index}>{ item.provision?.name} </p> 
+                                ))}
+                            </td>
 
                             <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                 {dateFormater(item?.created_at)}
 
                             </td>
 
-                              <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
+                              <td className="relative z-0 whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                                                     <BreadCrunbs id={item.id} setSelectedId={setSelectedId} setOpen={setOpen} open={open}/>
                                                                     {/* <OptionDropDown id={id} handleDel={()=> {
                                                                                                             setOpen(true)

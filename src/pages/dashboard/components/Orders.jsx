@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOrders } from '../../../redux/actions/order'
 import dateFormater from '../../../utils/dateFormat'
 import { nairaFormat } from '../../../utils/nairaFormat'
+import Loading from '../../../compnents/loader/Loading'
 
 const OrderTransact = () => {
     const dispatch = useDispatch()
-    const {orders} = useSelector(state => state.order)
+    const {orders, loading} = useSelector(state => state.order)
 
     console.log(orders )
 
@@ -39,9 +40,12 @@ const OrderTransact = () => {
                         
                     <tbody>
 
-                            {/* make conditional statement  here  */}
-                        {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                        { orders?.map(item => (
+                            {loading ? <tr>
+                                <td colSpan="5" className='text-center py-10'>
+                                    <Loading/>
+                                </td>
+                            </tr> :
+                        orders?.map(item => (
 
                         <tr key={item?.id}>
                             <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">
