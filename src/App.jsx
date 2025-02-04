@@ -49,6 +49,10 @@ import ComfirmPurchase from './pages/UtilityServicesPage/buy-power/ConfirmPurcha
 import ScrollToTop from './hooks/scrollToTop'
 import ViewOrder from './pages/admin/purchases/ViewOrder'
 import GiftCardOrder from './pages/dashboard/GiftCardOrder'
+import ContactUs from './pages/contact-us/ContactUs'
+import AboutUs from './pages/about-us/AboutUs'
+import TermsCondintion from './pages/policies/TermsCondintion'
+import PrivacyPolicies from './pages/policies/PrivacyPolicies'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -72,6 +76,11 @@ function App() {
 
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
+    <Route path='/contact-us' element={<ContactUs/>}/>
+    <Route path='/terms-conditions' element={<TermsCondintion/>}/>
+    <Route path='/privacy-policy' element={<PrivacyPolicies/>}/>
+    <Route path='/about-us' element={<AboutUs/>}/>
+
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
     <Route path='/phone-top-up/:id' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
