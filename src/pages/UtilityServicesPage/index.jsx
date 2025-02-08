@@ -43,18 +43,29 @@ const UtilityServices = () => {
                     
               <section className="py-10 bg-white px-4">
 
-                <div className="grid max-w-7xl p-4 m-auto  gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="max-w-7xl m-auto p-4 bg-white">
+            <h3 className="font-medium text-xl">Utilities</h3>
 
 
 
-                      {utilities.length > 0 ?  utilities.map(({id, value, product,image})  => (
 
-                        <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
 
-                      ) ) : 
-                      <div className="py-5"> 
-                        <h3 className="text-2xl text-center font-semibold">No Utitilities Found </h3>
-                        
+                      {utilities.length > 0 ? 
+                      
+                      
+                      <div className="grid max-w-7xl p-4 m-auto  gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+
+                      
+                        {utilities.map(({id, value, product,image})  => (
+
+                          <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
+
+                        ) )              
+                      }
+                    </div>
+                      : 
+                      <div className="text-center font-medium">
+                        <h3 className="text-3xl my-6">NO UTILITY AVAILABLE <br/> PLEASE ADD SOME PROVISION IF YOU ARE THE ADMIN </h3>
                       </div>}
 
 
