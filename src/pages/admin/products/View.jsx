@@ -41,7 +41,7 @@ const ViewProduct = () => {
   return (
     <>
 
-    <div className='md:p-10'>
+    <div className='md:p-10 bg-white'>
       <div className='flex justify-between items-center'>
       <ButtonCall
         handleClick={() => setIsOpen(true)}>Add Provision </ButtonCall>
@@ -87,7 +87,7 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
        name={"provider"}
        label={"Provider"}
        required={true}  
-       className={" w-full"}
+       className={"whiteBg w-full"}
        
        />
         {/* <FormInput

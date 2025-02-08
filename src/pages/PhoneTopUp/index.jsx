@@ -7,7 +7,7 @@ import { getProvisions } from "../../redux/actions/provision"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {mobileProviders} = useSelector(state => state.provision)
+  const {mobileProviders, dataBundles, airtime} = useSelector(state => state.provision)
   useEffect(()=> {
     dispatch(getProvisions())
   },[])
@@ -23,12 +23,15 @@ const PhoneTopUp = () => {
            </h2>
         </div>
 
-        <section className="py-10 px-4">
+        <section className="py-10 px-4 ">
 
-          <div className="grid bg-white p-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
+          <div className="max-w-7xl m-auto p-4 bg-white">
+            <h3 className="font-medium text-xl">Data Bundle</h3>
+
+          <div className="grid bg-white py-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
 
 
-            {mobileProviders.map(({id, product, name, min_value, currency, max_value})  => (
+            {dataBundles.map(({id, product, name, min_value, currency, max_value})  => (
 
               <ProductCard key={id} id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
 
@@ -38,8 +41,30 @@ const PhoneTopUp = () => {
 
 
             </div>
+            
+          </div>
         </section>
+        <section className="py-10 px-4">
 
+          <div className="max-w-7xl m-auto bg-white p-4">
+            <h3 className="font-medium text-xl">Airtime Recharge</h3>
+
+          <div className="grid bg-white py-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
+
+
+            {airtime.map(({id, product, name, min_value, currency, max_value})  => (
+
+              <ProductCard key={id} id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
+
+                
+             ))}
+
+
+
+            </div>
+            </div>
+
+        </section>
     </div>
   )
 }

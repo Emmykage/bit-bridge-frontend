@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import { nairaFormat } from "../../../utils/nairaFormat"
 import { CheckCircleOutlined } from "@ant-design/icons"
 
-const ComfirmPurchase = () => {
+const ComfirmDataPurchase = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
@@ -24,6 +24,8 @@ const ComfirmPurchase = () => {
 
     return (
         <>
+        <div className="py-20">
+
         {message && 
           <div className="bg-green-200 p-4 my-4">
             <p className="text-green-800 items-center flex gap-2 font-semibold text-center">
@@ -36,20 +38,11 @@ const ComfirmPurchase = () => {
         }
       
         <div className="p-4 border rounded-lg">
-        <div className="  md:flex-row flex-col flex gap-4">
-                <p className="md:w-60 border-b px-2 font-semibold">Token</p>
-                <p className="flex-1 border-b px-2 font-bold text-3xl">{purchaseOrder?.token}</p>
-            </div>
-            <div className="  md:flex-row my-4 flex-col flex gap-4">
-                <p className="md:w-60 md:border-b px-2 font-semibold">Customer Name</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.name}</p>
-            </div>
+       
+           
+           
             <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Address</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.address}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Meter Number</p>
+                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Phone Number</p>
                 <p className="flex-1 border-b px-2">{purchaseOrder?.meter_number}</p>
             </div>
             <div className="my-4 gap-4 md:flex-row flex-col  flex">
@@ -57,14 +50,11 @@ const ComfirmPurchase = () => {
                 <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.amount ?? 0)}</p>
             </div>
             <div className="gap-4 my-4 md:flex-row flex-col flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Total PayableAmount</p>
+                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Total Payable Amount</p>
                 <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
             </div>
-            {/* <div className="border-b my-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 font-semibold">Transaction ID</p>
-                <p className="flex-1">{purchaseOrder?.amount}</p>
-            </div> */}
-              <div className="gap-4 my-4 flex">
+
+              <div className="gap-4 my-4 md:flex-row flex-col flex">
                 <p className="w-60 md:w-60 border-b px-2 font-semibold">Transaction ID</p>
                 <p className="flex-1 border-b px-2">{purchaseOrder?.transaction_id}</p>
             </div>
@@ -81,8 +71,10 @@ const ComfirmPurchase = () => {
         <div>
             <ClassicBtn onclick={()=> navigate("/")}>Back to Home Page</ClassicBtn>
         </div>
+        </div>
+
         </>
     )
 }
 
-export default ComfirmPurchase
+export default ComfirmDataPurchase

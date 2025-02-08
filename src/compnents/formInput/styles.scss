@@ -6,7 +6,7 @@
         .ant-input-affix-wrapper,
             input{
                 background: none;
-                @apply border border-alt text-white;
+                @apply border border-alt py-3 text-white;
 
                 &::placeholder{
                     @apply text-gray-500;
@@ -23,6 +23,31 @@
         width: 100%;
         .ant-input{
             // padding: 10px;
+        }
+    }
+
+    &.whiteBg{
+        .ant-col{
+
+    
+   
+                input{
+                    background: none;
+                    @apply border border-alt text-black;
+    
+                    &::placeholder{
+                        @apply text-gray-500;
+                    }
+    
+                }
+     
+    
+        }
+        .ant-form-item-control{
+            width: 100%;
+            .ant-input{
+                // padding: 10px;
+            }
         }
     }
 

@@ -9,7 +9,7 @@ import powerDistributions from "../../../data/powerDistributions.json"
 import { getProvisions } from "../../../redux/actions/provision"
 import ElectricCard from "../../../compnents/product-card/ElectricCard"
 
-const ViewBuyPower = () => {
+const ViewBuyData = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
    
@@ -86,4 +86,4 @@ const ViewBuyPower = () => {
 
 
 
-export default ViewBuyPower
+export default ViewBuyData

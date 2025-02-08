@@ -2,12 +2,11 @@
 import {StarOutlined} from "@ant-design/icons"
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { nairaFormat } from "../../utils/nairaFormat"
+
 import { splitString } from "../../utils"
 const ProductCard = ({id, min_value, currency, max_value, provider, provision }) => {
     const navigate = useNavigate()
 
-    console.log("first",max_value, min_value, currency)
     const imagePic = splitString(provider)
 
   return (

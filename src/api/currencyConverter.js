@@ -25,6 +25,8 @@ const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
     
                     const rawRates = await res.json();
 
+                    console.log(rawRates)
+
                     currencyRates = rawRates.rates
 
                     // const currentTime = new Date().getTime()

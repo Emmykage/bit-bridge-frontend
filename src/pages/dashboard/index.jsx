@@ -4,15 +4,16 @@ import { nairaFormat } from "../../utils/nairaFormat"
 import NavButton from "../../compnents/button/NavButton"
 import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import SelectInput from "../../compnents/select/Select"
 import OrderTransact from "./components/Orders"
 import DepositTransaction from "./components/DepositsTransaction"
 import WithdrawalTransactions from "./components/WithdrawalTransaction"
+import { getConversion } from "../../redux/actions/currency_caonversion"
 
 const HomeDashboard = () => {
     const {wallet} = useSelector(state => state.wallet)
-
+    const dispatch = useDispatch()
     const [selectedItem, setSelectedItem] = useState("gift-cards")
 
     const [convertedAmount, setConvertedAmount] = useState(null)
@@ -54,6 +55,13 @@ const HomeDashboard = () => {
 
         fetchConversion()
     },[wallet?.balance, activeCurrency])
+
+
+    useEffect(()=> {
+
+        console.log("fetching......")
+        dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
+    },[])
 
 // console.log(activeCurrency)
   return (

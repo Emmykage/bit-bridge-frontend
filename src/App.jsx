@@ -53,6 +53,8 @@ import ContactUs from './pages/contact-us/ContactUs'
 import AboutUs from './pages/about-us/AboutUs'
 import TermsCondintion from './pages/policies/TermsCondintion'
 import PrivacyPolicies from './pages/policies/PrivacyPolicies'
+import PurchaseDataDetails from './pages/PhoneTopUp/buy-data/PurchaseDetails'
+import ComfirmDataPurchase from './pages/PhoneTopUp/buy-data/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -82,7 +84,11 @@ function App() {
     <Route path='/about-us' element={<AboutUs/>}/>
 
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
-    <Route path='/phone-top-up/:id' element={<MainLayout><ViewMobileTopUp/></MainLayout>} />
+    <Route path='/phone-top-up/:id' element={<MainLayout><ViewMobileTopUp/></MainLayout>}>
+      <Route path='payment-details' element={<PurchaseDataDetails/>}/>
+      <Route path='confirm-payment' element={<ComfirmDataPurchase/>}/>
+
+    </Route>
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
     <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>} />
     <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
@@ -93,9 +99,9 @@ function App() {
     <Route path='/confirmation-order' element={<MainLayout><ConfirmOrder/></MainLayout>} />
     <Route path='/buy-power' element={<MainLayout><BuyPower/></MainLayout>}/>
     <Route path='/buy-power/:id' element={<MainLayout><ViewBuyPower/></MainLayout>}>
-    <Route path='payment-form' element={<PowerForm/>}/>
-    <Route path='payment-details' element={<PurchaseDetails/>}/>
-    <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
+      <Route path='payment-form' element={<PowerForm/>}/>
+      <Route path='payment-details' element={<PurchaseDetails/>}/>
+      <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
     </Route>
     <Route path='/dashboard' element={<DashboardLayout/>} >
       <Route path='home' element={<HomeDashboard/>}>

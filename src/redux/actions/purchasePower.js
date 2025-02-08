@@ -66,26 +66,56 @@ export const confirmPurchase = createAsyncThunk("purchase-order/approve-orders",
     }
 });
 
-// export const getUserOrders = createAsyncThunk("order/get-user-orders", async(data, {rejectWithValue}) => {
-//     try {
-//         const response = await axios.get(`${baseUrl + apiRoute}order_details/user`, {
-//             headers: {
-//                 "Authorization": `Bearer ${fetchToken()}`
-//             }
-//         });
+export const confirmDataPurchase = createAsyncThunk("data/buy-data-orders", async({queryId}, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/approve_data`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
 
-//         const result = response.data;     
-//         console.log(result) 
+        const result = response.data;      
 
-//         return result;
-//     } catch (error) {
-//         if (error.response) {
-//             return rejectWithValue({ message: error.response.data.message });
-//         }
-//         console.error(error);
-//         return rejectWithValue({ message: "Something went wrong" });
-//     }
-// });
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+export const getPriceList = createAsyncThunk("payment/get-price-list", async({provider, service_type}, {rejectWithValue}) => {
+
+    console.log(provider, service_type)
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/get_price_list?provider=${provider}&service_type=${service_type}`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+        const result = response.data;     
+
+        const priceListOptions = result.data.map(item => {
+            return {
+                value: item.code,
+                label: `${item?.desc} | ${item?.price} | ${item?.validity}`,
+                amount: item?.price
+            }
+        })
+        console.log(priceListOptions) 
+
+        return priceListOptions;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
 
 
 

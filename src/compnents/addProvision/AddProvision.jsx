@@ -8,11 +8,20 @@ import { createProvision } from '../../redux/actions/provision'
 import "./style.scss"
 import PropTypes from 'prop-types'
 import { fetchProduct } from '../../redux/actions/product'
+// import { PlusOutlined } from '@ant-design/icons'
 
 const AddProvision = ({productID, setIsOpen}) => {
 
     const dispatch = useDispatch()
     const [form] = Form.useForm()
+
+    // const normFile = (e) => {
+
+    //   if (Array.isArray(e)) {
+    //     return e;
+    //   }
+    //   return e?.fileList || [];
+    // };
 
   return (
     <div className='provision'>
@@ -37,9 +46,10 @@ const AddProvision = ({productID, setIsOpen}) => {
        initialValues={{
         product_id: "productID",
         provision: "",
-   
+        image: null,
         value: 110,
         currency: "usd",
+        service_type: "",
         description: "",
         value_range: [],
         notice: ""
@@ -57,7 +67,7 @@ const AddProvision = ({productID, setIsOpen}) => {
                 <FormInput
                     placeholder={"name"}
                     name={"name"}
-                    label={"provision"}
+                    label={"Provision"}
                     required={true}  
                     className={"w-full"}          
                     />
@@ -67,7 +77,7 @@ const AddProvision = ({productID, setIsOpen}) => {
             <div className='flex gap-4'>                    
                 <FormSelect
                     className={"flex-1"}
-                    label={"currency"}
+                    label={"Currency"}
                     name={"currency"}
                     required={true}
                     options={[{value: "ngn", label: "NGN"},
@@ -75,14 +85,63 @@ const AddProvision = ({productID, setIsOpen}) => {
                         {value: "gbp", label: "GBP"}
                         ]}
                 />
-                {/* <FormInput
+                <FormSelect
                     placeholder={"Value"}
-                    name={"value"}
-                    label={"value"}
+                    name={"service_type"}
+                    label={"Type"}
                     required={false}    
                     className={"flex-1"}   
-                    type='number'        
-                /> */}
+                    options={[{value: "DATA", label: "DATA"},
+                      {value: "ELECTRICITY", label: "ELECTRICITY"},
+                      {value: "VTU", label: "VTU"} , {value: "TV", label: "TV"}
+                      ]}        
+                />
+                </div>
+
+                <div>
+                  
+        {/* <Form.Item 
+        label="payment receipt" 
+        valuePropName="fileList" 
+        className='text-white add-fund' 
+        name="image" 
+
+        getValueFromEvent={normFile}
+        >
+          <Upload 
+
+          beforeUpload={(file)=> {
+            const isImage = file.type.startsWith("image/")
+            if(!isImage){
+              message.error("You can only upload image files!");
+
+            }
+            
+            return false}
+          }          
+          maxCount={1}
+    
+          listType="picture-card"
+          >
+            <button
+              style={{
+                border: 0,
+                background: 'none',
+              }}
+              type="button"
+            >
+              <PlusOutlined className='text-white' />
+              <div
+                style={{
+                  marginTop: 8,
+                  color: "white"
+                }}
+              >
+                Upload
+              </div>
+            </button>
+          </Upload>
+        </Form.Item> */}
                 </div>
 
                 
@@ -91,7 +150,7 @@ const AddProvision = ({productID, setIsOpen}) => {
                     className={"flex-1"}
                     label={"value range"}
                     name={"value_range"}
-                    required={true}
+                    required={false}
                     mode="multiple"
                     options={[{value: "10", label: "10"},
                         {value: "20", label: "20"},
@@ -140,7 +199,7 @@ const AddProvision = ({productID, setIsOpen}) => {
             />    <FormInputArea
             placeholder={"description"}
             name={"description"}
-            label={"description"}
+            label={"Description"}
             required={true}       
             
             />

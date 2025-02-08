@@ -6,7 +6,11 @@ const initialState = {
     provisions: [],
     giftcards: [],
     mobileProviders: [],
+    airtime: [],
+    dataBundles: [],
     services: [],
+    utilities: [],
+
    
     loading: false
 }
@@ -40,17 +44,25 @@ const provisionSlice = createSlice({
         
                 .addCase(getProvisions.fulfilled, (state, action) => {
                     const products  = action.payload.data
-                    
+                                    // utilities: filteredUtilities,
+
                     const filteredGiftCards = products.filter(item => item.product.category === "gift card")
                     const filteredMobileProvider = products.filter(item => item.product.category === "mobile provider")
                     const filteredServices = products.filter(item => item.product.category === "service")
+                    const airtime = products.filter(item => item.service_type === "VTU")
+                    const databundles = products.filter(item => item.service_type === "DATA")
+                    const filteredUtilities = products.filter(item => item.category === "utility")
 
+                    console.log(filteredUtilities)
                     return{
                         ...state,
                         products: action.payload.data,
                         giftcards: filteredGiftCards,
                         services: filteredServices,
+                        airtime: airtime,
+                        dataBundles: databundles,
                         mobileProviders: filteredMobileProvider,
+                        utilities: filteredUtilities,
                         loading: false
                     }
                 })

@@ -11,7 +11,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
-const PowerForm = () => {
+const DataForm = () => {
     const [id, biller] = useOutletContext()
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
@@ -106,9 +106,9 @@ const PowerForm = () => {
 
 
 
-PowerForm.propTypes = {
+DataForm.propTypes = {
     handleSubmit: PropTypes.func
 }
 
 
-export default PowerForm
+export default DataForm

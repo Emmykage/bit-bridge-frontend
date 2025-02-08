@@ -1,9 +1,6 @@
 import {
   Button,
-
-  DatePicker,
   Form,
-  Input,
 
 } from 'antd';
 import FormInput from '../../compnents/formInput/FormInput';
@@ -13,12 +10,12 @@ import { useDispatch } from 'react-redux';
 import { createProduct } from '../../redux/actions/product';
 import { toast } from 'react-toastify';
 
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
+// const normFile = (e) => {
+//   if (Array.isArray(e)) {
+//     return e;
+//   }
+//   return e?.fileList;
+// };
 const AddProduct = () => {
   const [form] = Form.useForm()
   const dispatch = useDispatch()
@@ -58,9 +55,10 @@ const AddProduct = () => {
       >
     
 <FormSelect
+label={"Category"}
 name={"category"}
 options={[{label: "service", value: "service"},{value: "gift card", label: "Gift Card"},
-{value: "mobile provider", label: "Mobile Service"}]}
+{value: "mobile provider", label: "Mobile Service"}, {value: "utility", label: "Utility"}, {value: "power", label: "Power"}]}
 />
 
 <div className=''>
@@ -71,7 +69,8 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
           name={"provider"}
           label={"Provider"}
           required={true}  
-          className={" w-full"}
+          className={"whiteBg w-full"}
+
           
           />
             {/* <FormInput
@@ -118,9 +117,9 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
       ]}
     /> */}
 <FormInputArea
-       placeholder={"header_info"}
+       placeholder={"Header Info"}
        name={"header_info"}
-       label={"header_info"}
+       label={"Header Info"}
        required={true}    
        className={"flex-1"}   
    
@@ -130,21 +129,21 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
         <FormInputArea
        placeholder={"description"}
        name={"description"}
-       label={"description"}
+       label={"Description"}
        required={true}       
        
        />
         <FormInputArea
        placeholder={"info"}
        name={"info"}
-       label={"info"}
+       label={"Info"}
        required={true}       
        
        />
         <FormInputArea
        placeholder={"alert info"}
        name={"attention"}
-       label={"attention"}
+       label={"Attention"}
        required={true}       
        
        />

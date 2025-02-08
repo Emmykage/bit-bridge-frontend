@@ -24,10 +24,10 @@ const BuyPower = () => {
     <div>
         <Header/>
         <section className="px-o">
-            <Banner/>
+        <Banner/>
        
         </section>
-
+        
 
         <section className="py-10 px-4 bg-white my-10">
 
@@ -50,7 +50,7 @@ const BuyPower = () => {
                 ))}
 
             </div>
-            </div>
+          </div>
 
         </section>
     

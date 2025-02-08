@@ -8,13 +8,15 @@ import { useNavigate } from "react-router-dom"
 
 const UtilityServices = () => {
   const dispatch = useDispatch()
-  const {services} =  useSelector(state => state.product)
+  const {utilities} =  useSelector(state => state.provision)
   useEffect(()=> {
     dispatch(getProvisions())
   },[])
   const navigate = useNavigate()
 
-  const utility = [...services]
+  // const utility = [...services] 
+
+  console.log(utilities)
 
   return (
     <div>
@@ -44,11 +46,16 @@ const UtilityServices = () => {
                 <div className="grid max-w-7xl m-auto bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
 
 
-                      {utility.map(({id, value, provider,image, provision})  => (
+
+                      {utilities.length > 0 ?  utilities.map(({id, value, provider,image, provision})  => (
 
                         <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={provider}  provision={provision} />
 
-                      ))}
+                      ) ) : 
+                      <div className="py-5"> 
+                        <h3 className="text-2xl text-center font-semibold">No Utitilities Found </h3>
+                        
+                      </div>}
 
 
 

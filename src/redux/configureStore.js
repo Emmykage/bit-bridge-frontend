@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, configureStore } from "@reduxjs/toolkit";
-import { AppReducer, AuthReducer, OrderReducer, orderTokenReducer, ProductReducer, ProvisionReducer, purchaseReducer, TransactionReducer, WalletReducer } from ".";
+import { AppReducer, AuthReducer, OrderReducer, orderTokenReducer, paymentReducer, ProductReducer, ProvisionReducer, purchaseReducer, TransactionReducer, WalletReducer } from ".";
 import { thunk } from "redux-thunk";
 import logger from "redux-logger";
 
@@ -12,7 +12,8 @@ const rootReducer = combineReducers({
     product: ProductReducer,
     provision: ProvisionReducer,
     purchase: purchaseReducer,
-    orderToken: orderTokenReducer
+    orderToken: orderTokenReducer,
+    billPurchase: paymentReducer
 })
 
 
