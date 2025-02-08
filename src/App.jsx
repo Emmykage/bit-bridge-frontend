@@ -55,6 +55,7 @@ import TermsCondintion from './pages/policies/TermsCondintion'
 import PrivacyPolicies from './pages/policies/PrivacyPolicies'
 import PurchaseDataDetails from './pages/PhoneTopUp/buy-data/PurchaseDetails'
 import ComfirmDataPurchase from './pages/PhoneTopUp/buy-data/ConfirmPurchase'
+import PurchaseCableDetails from './pages/UtilityServicesPage/buy-cable/PurchaseDetails'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -90,7 +91,13 @@ function App() {
 
     </Route>
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
-    <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>} />
+    <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>}>
+      <Route path='payment-details' element={<PurchaseCableDetails/>}/>
+      <Route path='confirm-payment' element={<PurchaseCableDetails/>}/>
+
+
+
+    </Route>
     <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
     <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
     <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />

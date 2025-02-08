@@ -3,18 +3,18 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import UtilityCard from "../../compnents/product-card/UtilityCard"
 import img from "../../assets/images/banners/buy-power.jpg"
-import { getProvisions } from "../../redux/actions/provision"
+// import { getProvisions } from "../../redux/actions/provision"
 import { useNavigate } from "react-router-dom"
+import { getProducts } from "../../redux/actions/product"
 
 const UtilityServices = () => {
   const dispatch = useDispatch()
   const {utilities} =  useSelector(state => state.provision)
   useEffect(()=> {
-    dispatch(getProvisions())
+    dispatch(getProducts())
   },[])
   const navigate = useNavigate()
 
-  // const utility = [...services] 
 
   console.log(utilities)
 
@@ -41,15 +41,15 @@ const UtilityServices = () => {
                 </div>
               </section>
                     
-              <section className="py-10 px-4">
+              <section className="py-10 bg-white px-4">
 
-                <div className="grid max-w-7xl m-auto bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid max-w-7xl p-4 m-auto  gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
 
 
 
-                      {utilities.length > 0 ?  utilities.map(({id, value, provider,image, provision})  => (
+                      {utilities.length > 0 ?  utilities.map(({id, value, product,image})  => (
 
-                        <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={provider}  provision={provision} />
+                        <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
 
                       ) ) : 
                       <div className="py-5"> 

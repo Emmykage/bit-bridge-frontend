@@ -6,6 +6,7 @@ const initialState = {
     products: [],
     giftcards: [],
     mobileProviders: [],
+    utilities: [],
     services: [],
     message: null,
     loading: false
@@ -43,6 +44,7 @@ const productSlice = createSlice({
             const filteredGiftCards = products.filter(item => item.category === "gift card")
             const filteredMobileProvider = products.filter(item => item.category === "mobile provider")
             const filteredServices = products.filter(item => item.category === "service")
+            const filteredUtilities = products.filter(item => item.category === "utility")
 
             return{
                 ...state,
@@ -50,6 +52,7 @@ const productSlice = createSlice({
                 giftcards: filteredGiftCards,
                 services: filteredServices,
                 mobileProviders: filteredMobileProvider,
+                utilities: filteredUtilities,
                 loading: false
             }
         })

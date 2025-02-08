@@ -50,7 +50,6 @@ const ViewMobileTopUp = () => {
 
 
         if(location.hash == "#details"){
-            console.log("hash exists")
             const element = document.getElementById("details")
             element.scrollIntoView({behavior: "smooth"})
         }
