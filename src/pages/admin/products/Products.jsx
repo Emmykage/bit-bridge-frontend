@@ -64,7 +64,7 @@ const Products = () => {
                                         <p className="font-medium text-gray-600 leading-5">{item.provider} </p>
                                     </td>
                                     <td className="whitespace-nowrap  border-b border-gray-200 px-3 py-4 text-sm text-gray-900 font-normal sm:table-cell capitalize">
-                                        {item.provision}
+                                        {item.category}
                                     </td>
                                     
                                     <td className="relative whitespace-nowrap border-b border-gray-200 py-3 px-6 uppercase text-left text-gray-900 text-sm sm:pr-8 ">

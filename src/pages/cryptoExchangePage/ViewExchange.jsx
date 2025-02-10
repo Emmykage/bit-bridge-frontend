@@ -62,7 +62,7 @@ const ViewGiftCard = () => {
 
                 <h3 className="text-2xl font-medium">NTEL Refil</h3>
                 
-                <div className="notice border rounded-xl my-2 p-2 px-3">
+                <div className="notice border rounded-xl my-2">
                     <p className="text-sm text-gray-700">
                     This gift card is redeemable on the e-commerce platform & at the physical store
                     </p>

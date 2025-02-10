@@ -86,7 +86,7 @@ const ViewGiftCard = () => {
 
                 <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
                 
-                <div className="notice border rounded-xl my-2 p-2 px-3">
+                <div className="notice rounded-xl my-2">
                     <p className="text-sm text-gray-700">
                     {selectedProvider?.product?.info}    
                     </p>

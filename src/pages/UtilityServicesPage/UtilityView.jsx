@@ -156,8 +156,8 @@ const UtilityView = () => {
 
             <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
             
-            <div className="notice border rounded-xl my-2 p-2 px-3">
-                <p className="text-sm text-gray-700">
+            <div className="notice border rounded-xl my-2 font-medium">
+                <p className="text-base text-gray-700">
                 {selectedProvider?.product?.info}    
                 </p>
             </div>

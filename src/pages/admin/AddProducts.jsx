@@ -73,49 +73,9 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
 
           
           />
-            {/* <FormInput
-          placeholder={"provision"}
-          name={"provision"}
-          label={"provision"}
-          required={true}     
-          className={"w-full"}  
-          
-          /> */}
+        
          </div>
 
-{/* <div className='flex gap-4'>
-  
-    <FormInput
-          placeholder={"min value"}
-          name={"min_value"}
-          label={"min value"}
-          required={true}    
-          className={"flex-1"}   
-          type='number'
-          
-          />
-          <FormInput
-          placeholder={"max value"}
-          name={"max_value"}
-          label={"min value"}
-          required={true}    
-          className={"flex-1"}   
-          type='number'
-
-          
-          />
-      
-
-    </div> */}
-    {/* <FormSelect
-    label={"currency"}
-    name={"currency"}
-    required={true}
-    options={[{value: "ngn", label: "NGN"},
-      {value: "usd", label: "USD"},
-      {value: "gbp", label: "GBP"}
-      ]}
-    /> */}
 <FormInputArea
        placeholder={"Header Info"}
        name={"header_info"}
@@ -127,7 +87,7 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
        />
     
         <FormInputArea
-       placeholder={"description"}
+       placeholder={"Enter Description"}
        name={"description"}
        label={"Description"}
        required={true}       
@@ -151,7 +111,7 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
       <FormInputArea
             placeholder={"Notice info"}
             name={"notice_info"}
-            label={"notice_info"}
+            label={"Notice Info"}
             required={true}       
             
             />

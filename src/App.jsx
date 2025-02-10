@@ -72,7 +72,7 @@ function App() {
   
   ScrollToTop()
   return (
-    <div className='bg-gray-100 h-screen overflow-y-auto bg'>
+    <div className='bg-gray-100 '>
     <Suspense fallback={<LoaderPage />}>
 
     <AppToast/>

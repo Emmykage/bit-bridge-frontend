@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Services = () => {
-  const {products} = useSelector(state => state.product)
+  const {services} = useSelector(state => state.product)
 
   return (
     <div className='bg-gray-100 p-4'>           
@@ -30,7 +30,7 @@ const Services = () => {
 
                                 {/* make conditional statement  here  */}
                             {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                            { products?.map(item => (
+                            { services?.map(item => (
 
                             <tr key={item?.id}>
                                 <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal sm:pl-6 lg:pl-8">

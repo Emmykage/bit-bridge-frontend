@@ -4,7 +4,7 @@ import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
 import { ExclamationOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux"
-import { ADD_TO_CART } from "../../redux/app"
+import { ADD_TO_CART, SET_LOADING } from "../../redux/app"
 import { useEffect, useState } from "react"
 import { converter } from "../../api/currencyConverter"
 import { splitString } from "../../utils"
@@ -30,7 +30,6 @@ const ViewMobileTopUp = () => {
         amount: ""
 
     })
-    const [setLoading] = useState(false)
 
     const {mobileProviders, giftcards} = useSelector(state => state.provision)
 
@@ -55,10 +54,10 @@ const ViewMobileTopUp = () => {
         }
 
     },[location])
-    console.log("pricelist value=>",value)
+
     const handleSubmit = () => {
 
-        setLoading(true)
+        dispatch(SET_LOADING(true))
 
         if(value.billersCode.trim() != "" && value.tariff_class.trim() !== ""){
 
@@ -70,11 +69,11 @@ const ViewMobileTopUp = () => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
 
-            setLoading(false)
+            SET_LOADING(false)
             navigate(`/phone-top-up/${id}/payment-details?transaction_id=${data.id}#details`)
         }
         else{
-            setLoading(false)
+            SET_LOADING(false)
             const data = result.payload.message
             toast(data, {type: "error"})
             // setMessage(data)
@@ -155,7 +154,7 @@ const ViewMobileTopUp = () => {
 
                 <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
                 
-                <div className="notice border rounded-xl my-2 p-2 px-3">
+                <div className="notice rounded-xl my-2">
                     <p className="text-sm text-gray-700">
                     {selectedProvider?.product?.info}    
                     </p>

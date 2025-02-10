@@ -12,6 +12,7 @@ import AppModal from '../../../compnents/modal/Modal'
 import AddProvision from '../../../compnents/addProvision/AddProvision'
 import { fetchProduct, updateProduct } from '../../../redux/actions/product'
 import { nairaFormat } from '../../../utils/nairaFormat'
+import EditProvision from '../../../compnents/addProvision/EditProvision'
 
 const ViewProduct = () => {
     const dispatch = useDispatch()
@@ -19,6 +20,8 @@ const ViewProduct = () => {
     const [disableForm, setDisableForm ] = useState(true)
     const {id} = useParams()
     const [isOpen, setIsOpen] = useState(false)
+    const [isUpdateOpen, setIsUpdateOpen] = useState(false)
+    const [provision, setProvision] = useState(null)
 
 
     useEffect(()=> {
@@ -75,8 +78,8 @@ const ViewProduct = () => {
 <FormSelect
 name={"category"}
 label={"Category"}
-options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift Card"},
-{value: "Mobille Service", label: "Mobile Service"}]}
+options={[{label: "service", value: "service"},{value: "gift card", label: "Gift Card"},
+  {value: "mobile provider", label: "Mobile Service"}, {value: "utility", label: "Utility"}, {value: "power", label: "Power"}]}
 />
 
 <div className=''>
@@ -132,9 +135,9 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
         {value: "USD", label: "USD"}]}
     /> */}
     <FormInputArea
-        placeholder={"header_info"}
+        placeholder={"Brief Description"}
         name={"info"}
-        label={"header_info"}
+        label={"Header info"}
         required={true}    
         className={"flex-1"}   
     
@@ -142,23 +145,23 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
         />
     
         <FormInputArea
-            placeholder={"description"}
+            placeholder={"Enter Description"}
             name={"description"}
-            label={"description"}
+            label={"Description"}
             required={true}       
        
        />
         <FormInputArea
             placeholder={"notice_info"}
             name={"notice_info"}
-            label={"notice_info"}
+            label={"Notice info"}
             required={true}       
             
        />
         <FormInputArea
             placeholder={"alert info"}
             name={"attention"}
-            label={"attention"}
+            label={"Attention"}
             required={true}       
        
        />
@@ -181,6 +184,7 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                             <thead>
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter md:pl-4"> Provision</th>
+                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter md:pl-4"> Type</th>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6"> Currency</th>
                                 <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 pl-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Min Value</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Max Value</th>
@@ -201,6 +205,8 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                                 <tr key={item?.id}>
                                     <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal md:pl-4">
                                         <p className="font-medium text-gray-600 leading-5">{item.name} </p>
+                                    </td> <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal md:pl-4">
+                                        <p className="font-medium text-gray-600 leading-5">{item.service_type} </p>
                                     </td>
                                     <td className="whitespace-nowrap border-b text-left border-gray-200 py-2 pl-3 pr-3 text-sm font-normal uppercase sm:pl-6 lg:pl-8">
                                         <p className="font-medium text-gray-600 leading-5">{item.currency} </p>
@@ -214,6 +220,19 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
                                         {(item?.description)}
 
                                     </td>
+
+                                    <td className="relative max-w-96 whitespace-wrap border-b text-left border-gray-200 py-3 pr-4 pl-0 text-gray-900  text-sm sm:pr-8 ">
+                                      <button className='font-medium'
+                                      onClick={() => {
+                                        setProvision(item)
+                                        setIsUpdateOpen(prev => !prev)
+                                      }}
+                                      >
+                                        Edit
+                                      </button>
+
+                                    </td>
+
 
                        
                                     </tr>
@@ -235,6 +254,15 @@ options={[{label: "service", value: "service"},{value: "Gift Card", label: "Gift
 
     <AppModal title={`Add Provision-${product?.provider}`} handleCancel={() => setIsOpen(false)} isModalOpen={isOpen}>
         <AddProvision  productID={id} setIsOpen={setIsOpen} isOpen={isOpen}/>
+    </AppModal>
+
+    <AppModal title={`Update Provision-${product?.provider}`}
+     handleCancel={() =>{ 
+      setIsUpdateOpen(false)
+      setProvision(null)
+
+    }} isModalOpen={isUpdateOpen}>
+        <EditProvision productID={id} provision={provision} setIsOpen={setIsUpdateOpen} isOpen={isUpdateOpen}/>
     </AppModal>
     </>
   )

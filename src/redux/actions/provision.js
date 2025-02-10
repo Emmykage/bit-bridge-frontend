@@ -21,33 +21,14 @@ export const createProvision = createAsyncThunk("product/creaet-provision", asyn
     }
 });
 
-// export const updateProduct = createAsyncThunk("product/update-product", async({id, data}, {rejectWithValue}) => {
-//     try {
-//         const response = await axios.patch(`${baseUrl + apiRoute}products${id}`,data, {
-//             headers: {
-//                 "Authorization": `Bearer ${fetchToken()}`}
-//         });
-
-//         const result = response.data; 
-//         return result;
-//     } catch (error) {
-//         if (error.response) {
-//             return rejectWithValue({ message: error.response.data.message });
-//         }
-//         console.error(error);
-//         return rejectWithValue({ message: "Something went wrong" });
-//     }
-// });
-
-export const getProvisions = createAsyncThunk("provisions/get-provisions", async(_, {rejectWithValue}) => {
+export const updateProvision = createAsyncThunk("product/update-product", async({id, data}, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}provisions`, {
+        const response = await axios.patch(`${baseUrl + apiRoute}provisions/${id}`,data, {
             headers: {
-                "Authorization": `Bearer ${fetchToken()}`
-            }
+                "Authorization": `Bearer ${fetchToken()}`}
         });
 
-        const result = response.data;
+        const result = response.data; 
         return result;
     } catch (error) {
         if (error.response) {
@@ -58,22 +39,25 @@ export const getProvisions = createAsyncThunk("provisions/get-provisions", async
     }
 });
 
-// export const getProduct = createAsyncThunk("product/get-product", async(id, {rejectWithValue}) => {
-//     try {
-//         const response = await axios.get(`${baseUrl + apiRoute}products/${id}`, {
-//             headers: {
-//                 "Authorization": `Bearer ${fetchToken()}`
-//             }
-//         });
+export const getProvisions = createAsyncThunk("provisions/get-provisions", async(_, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}provisions`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
 
-//         const result = response.data;
-//         return result;
-//     } catch (error) {
-//         if (error.response) {
-//             return rejectWithValue({ message: error.response.data.message || "Failed to get Product" });
-//         }
-//         console.error(error);
-//         return rejectWithValue({ message: "Something went wrong" });
-//     }
-// });
+        const result = response.data;
+
+        console.log(result)
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
 

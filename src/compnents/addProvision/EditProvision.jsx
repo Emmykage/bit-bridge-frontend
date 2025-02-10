@@ -4,55 +4,59 @@ import FormSelect from '../formSelect/FormSelect'
 import { Button, Form } from 'antd'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { createProvision } from '../../redux/actions/provision'
+import { createProvision, updateProvision } from '../../redux/actions/provision'
 import "./style.scss"
 import PropTypes from 'prop-types'
 import { fetchProduct } from '../../redux/actions/product'
+import { useEffect } from 'react'
 // import { PlusOutlined } from '@ant-design/icons'
 
-const AddProvision = ({productID, setIsOpen}) => {
+const EditProvision = ({provision, productID, setIsOpen}) => {
 
     const dispatch = useDispatch()
     const [form] = Form.useForm()
+    console.log(provision)
 
-    // const normFile = (e) => {
 
-    //   if (Array.isArray(e)) {
-    //     return e;
-    //   }
-    //   return e?.fileList || [];
-    // };
+    useEffect(() => {
+      
+      console.log("first")
+      form.setFieldsValue({
+        ...provision
+      })
+    },[provision, form])
 
   return (
     <div className='provision'>
     <Form
        onFinish={(values) => {
-        dispatch(createProvision({
-            provision:{
-                product_id: productID,
-                ...values
-            }})).then(result => {
-          if(createProvision.fulfilled.match(result)){
+        console.log(values)
+        dispatch(updateProvision(
+       {
+                id: provision.id,
+                data: values
+            })).then(result => {
+          if(updateProvision.fulfilled.match(result)){
+            console.log(result.payload.notice)
             form.resetFields()
             dispatch(fetchProduct(productID))
             toast(result.payload.message ?? "Provission has been created", {type: "success"})
             setIsOpen(false)
-          }else if(createProvision.rejected.match(result)){
+          }else if(updateProvision.rejected.match(result)){
             toast(result.payload.message, {type: "error"})
           }
         })
 
        }}
        initialValues={{
-        product_id: "productID",
-        provision: "",
-        image: null,
-        value: 110,
-        currency: "usd",
-        service_type: "",
-        description: "",
-        value_range: [],
-        notice: ""
+        
+   
+        name: provision.name,
+        currency: provision.currency,
+        service_type: provision.service_type,
+        description: provision.description,
+        value_range: provision.value_range,
+        notice: provision.description
        }}
         layout="vertical"
         
@@ -100,52 +104,6 @@ const AddProvision = ({productID, setIsOpen}) => {
                 />
                 </div>
 
-                <div>
-                  
-        {/* <Form.Item 
-        label="payment receipt" 
-        valuePropName="fileList" 
-        className='text-white add-fund' 
-        name="image" 
-
-        getValueFromEvent={normFile}
-        >
-          <Upload 
-
-          beforeUpload={(file)=> {
-            const isImage = file.type.startsWith("image/")
-            if(!isImage){
-              message.error("You can only upload image files!");
-
-            }
-            
-            return false}
-          }          
-          maxCount={1}
-    
-          listType="picture-card"
-          >
-            <button
-              style={{
-                border: 0,
-                background: 'none',
-              }}
-              type="button"
-            >
-              <PlusOutlined className='text-white' />
-              <div
-                style={{
-                  marginTop: 8,
-                  color: "white"
-                }}
-              >
-                Upload
-              </div>
-            </button>
-          </Upload>
-        </Form.Item> */}
-                </div>
-
                 
             <div className='flex gap-4'>                    
                 <FormSelect
@@ -164,34 +122,8 @@ const AddProvision = ({productID, setIsOpen}) => {
           
                 </div>
 
-                {/* <div className='flex gap-4'>                    
-              
-                  <FormInput
-                    placeholder={"Min Value"}
-                    name={"min_value"}
-                    label={"Min value"}
-                    required={false}    
-                    className={"flex-1"}   
-                    type='number'        
-                />
-                <FormInput
-                    placeholder={"Max Value"}
-                    name={"max_value"}
-                    label={"Max value"}
-                    required={false}    
-                    className={"flex-1"}   
-                    type='number'        
-                />
-                </div> */}
-
-{/*         
-                <FormInputArea
-            placeholder={"Info"}
-            name={"info"}
-            label={"Info"}
-            required={true}       
-            
-            />    */}
+               
+               
              <FormInputArea
             placeholder={"Notice"}
             name={"notice"}
@@ -218,9 +150,10 @@ const AddProvision = ({productID, setIsOpen}) => {
   )
 }
 
-AddProvision.propTypes = {
+EditProvision.propTypes = {
+  provision: PropTypes.object,
   productID: PropTypes.string,
   setIsOpen: PropTypes.func
 }
 
-export default AddProvision
+export default EditProvision

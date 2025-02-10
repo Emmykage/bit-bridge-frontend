@@ -13,8 +13,6 @@ const FormInput = ({
     required=false,
     label}) => {
   
-
-      console.log("my classname", className)
   return (
   <>
   

@@ -13,7 +13,7 @@ const ViewBuyData = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
    
-    const {mobileProviders} =  useSelector(state => state.product)
+    const {mobileProviders} =  useSelector(state => state.provision)
  
     const selectedProvider =powerDistributions?.find(item => item.id == id)
 
