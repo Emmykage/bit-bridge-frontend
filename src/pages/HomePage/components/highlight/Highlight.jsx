@@ -2,7 +2,7 @@
 import { recommendedData } from '../../../../data/recommended'
 
 import ClassicBtn from '../../../../compnents/button/ClassicButton'
-import Slider from "react-slick";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
@@ -37,7 +37,7 @@ const HighlightInfo = () => {
     <div className="grid lg:grid-cols-home-grid gap-4 max-w-app-layout m-auto">
       <div>
         <h5 className="text-lg font-bold text-gray-800 my-4 ">Check Out Offers</h5>
-      <div className="h-[600px] rounded text-white">
+      <div className=" rounded text-white">
       <Carousel 
         autoFocus={true}
         autoPlay={true}
@@ -50,8 +50,8 @@ const HighlightInfo = () => {
           <div key={item.id} className='w-full h-[400px] relative'>
             <img src={item.image} className='w-full h-full object-cover'/>
             <div className='absolute top-0 left-0 bg-red-200/30 bg-gradient-to-r from-gray-900/80 to-gray-500/60 z-10 w-full h-full' >
-                <div className={`h-full w-1/2 ml-aut flex flex-col justify-center items-center`}>
-                  <h2 className='text-3xl'>
+                <div className={`h-full px-4 md:w-1/2 ml-aut flex flex-col justify-center items-center`}>
+                  <h2 className='md:text-3xl text-xl'>
                     {item.text}
                   </h2>
 

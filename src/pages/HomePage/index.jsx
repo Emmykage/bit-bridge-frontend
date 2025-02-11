@@ -8,7 +8,7 @@ const Home = () => {
 
     <div className=" m-auto relative">
         <Header/>
-        <section className="lg:h-[700px] p-4 w-full hero-header">
+        <section className="h-screen lg:h-[700px] p-4 w-full hero-header">
           <div className="max-w-app-layout items-center h-full grid sm:grid-cols-2 m-auto w-full ">
             <div className="p-5">
               <h2 className="lg:text-5xl text-3xl text-white font-bold">

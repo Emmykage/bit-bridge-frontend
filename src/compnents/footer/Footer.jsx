@@ -13,7 +13,7 @@ const Footer = () => {
               {/* <p className="my-2 font-medium text-gray-300">Crypto Market place</p> */}
             </div>
 
-            <div className="bg-red-30 text-left">
+            <div className="bg-red-30 text-center md:text-left">
               <h4 className="text-lg text-alt font-semibold">Support</h4>
               <ul>
 
@@ -24,7 +24,7 @@ const Footer = () => {
                 
               </ul>
             </div>
-            <div className="bg-red-30 text-left">
+            <div className="bg-red-30 text-center md:text-left">
               <h4 className="text-lg text-alt font-semibold">Live on Crypto</h4>
               <ul >
 
@@ -36,11 +36,11 @@ const Footer = () => {
             </div>
    
    
-          <div className="bg-red-30 text-left">
-            <h4>Resources</h4>
+          <div className="bg-red-30 text-center md:text-left">
+            <h4 className="text-lg text-alt font-semibold">Resources</h4>
             <ul>
-              <li>Referal</li>
-              <li>Vulnerability Disclosure</li>                
+              <li><NavLink to={"#"}>Referal</NavLink></li>
+              <li><NavLink to={"#"}>Vulnerability Disclosure</NavLink></li>                
             </ul>
           </div>
          
