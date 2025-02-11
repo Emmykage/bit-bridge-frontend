@@ -12,7 +12,7 @@ const initialState = {
     utilities: [],
 
    
-    loading: false
+    loading: true
 }
 
 const provisionSlice = createSlice({
@@ -25,24 +25,21 @@ const provisionSlice = createSlice({
             return{
                 ...state,
                 provision: action.payload.data,
-                loading: false
             }
         })
         .addCase(createProvision.rejected, (state, action) => {
             return{
                 ...state,
                 message: action.payload.message,
-                loading: false
             }
         })
         .addCase(createProvision.pending, (state) => {
             return{
                 ...state,
-                loading: true,
             }
         })
         
-                .addCase(getProvisions.fulfilled, (state, action) => {
+        .addCase(getProvisions.fulfilled, (state, action) => {
                     const products  = action.payload.data
                                     // utilities: filteredUtilities,
 

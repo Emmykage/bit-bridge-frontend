@@ -5,28 +5,31 @@ import UtilityCard from "../../compnents/product-card/UtilityCard"
 import img from "../../assets/images/banners/buy-power.jpg"
 // import { getProvisions } from "../../redux/actions/provision"
 import { useNavigate } from "react-router-dom"
-import { getProducts } from "../../redux/actions/product"
+
+import LoadingComp from "../../compnents/loader/LoadingComp"
+import { getProvisions } from "../../redux/actions/provision"
 
 const UtilityServices = () => {
   const dispatch = useDispatch()
-  const {utilities} =  useSelector(state => state.provision)
+
+  const {utilities, loading} =  useSelector(state => state.provision)
   useEffect(()=> {
-    dispatch(getProducts())
+    dispatch(getProvisions())
   },[])
   const navigate = useNavigate()
 
 
-  console.log(utilities)
+  console.log(loading)
 
   return (
     <div>
         
         <Header/>
-          <section className="py-10">
+          <section className="py-10 mt-40">
                 <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
                   <div>
                     <h2 onClick={() => navigate("/buy-power")} className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
-                    Buy Power with your Crypto wallet with Ease
+                    Purchase Electricity with your crypto wallet with ease
         
                     </h2>
                     <p className="my-4 text-lg font-medium text-gray-600 text-lef">
@@ -50,7 +53,7 @@ const UtilityServices = () => {
 
 
 
-                      {utilities.length > 0 ? 
+                      {loading ? <LoadingComp/> :  utilities.length > 0 ? 
                       
                       
                       <div className="grid max-w-7xl p-4 m-auto  gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

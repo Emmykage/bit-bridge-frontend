@@ -1,40 +1,69 @@
 
 import { recommendedData } from '../../../../data/recommended'
-import ButtonCall from '../../../../compnents/button/ButtonCall'
+
 import ClassicBtn from '../../../../compnents/button/ClassicButton'
+import Slider from "react-slick";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 
 const HighlightInfo = () => {
+
+
+
+  const items = [
+    {
+      id: 1,
+      image: "/backgrounds/swipe-1.jpg",
+      text: "",
+      pos: "left"
+    },
+    {
+      id: 2,
+
+      image: "/backgrounds/swipe-2.jpg"
+    },{
+      id: 3,
+
+      image: "/backgrounds/swipe-3.jpg"
+    },
+    
+  ]
   return (
     <section className="px-4 py-10 bg-white">
     <div className="grid lg:grid-cols-home-grid gap-4 max-w-app-layout m-auto">
       <div>
         <h5 className="text-lg font-bold text-gray-800 my-4 ">Check Out Offers</h5>
-      <div className="min-h-[400px] bg-black rounded text-white">
-        <div className="flex flex-col sm:flex-row py-16 px-4 md:px-10">
+      <div className="h-[600px] rounded text-white">
+      <Carousel 
+        autoFocus={true}
+        autoPlay={true}
+        infiniteLoop={true}
+        showThumbs={false}
+        showStatus={false}
+        showArrows={true} onChange={() => {}} onClickItem={() => {}} onClickThumb={() => {}}
+      >
+        {items.map(item => (
+          <div key={item.id} className='w-full h-[400px] relative'>
+            <img src={item.image} className='w-full h-full object-cover'/>
+            <div className='absolute top-0 left-0 bg-red-200/30 bg-gradient-to-r from-gray-900/80 to-gray-500/60 z-10 w-full h-full' >
+                <div className='bg-red h-full w-1/2 ml-auto flex flex-col justify-center items-center'>
+                  <h2 className='text-3xl'>
+                    SEcure Fast Electricity bills
+                  </h2>
 
-        <div className="flex-[60%]">
-        <h1 className="text-4xl font-semibold">
-          Access Black Friday Week Deal With BitBridge Account
-        </h1>
-        <ClassicBtn> Get Started</ClassicBtn>
+                    <ClassicBtn className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>
+                  
+                
+                </div>
+            </div>
+            {/* <p className="legend">Legend 1</p> */}
         </div>
-        <div className="flex-[30%] gap-3 flex justify-center">
-        <span className="h-6 w-6 bg-red-500 items-center rounded-full  flex justify-center">
-          B
+        ))}
+              
+              
+            </Carousel>
 
-          </span>  <span className="h-6 w-6 bg-red-500 items-center rounded-full  flex justify-center">
-          B
-
-          </span>  <span className="h-6 w-6 bg-red-500 items-center rounded-full  flex justify-center">
-          B
-
-          </span>  <span className="h-6 w-6 bg-red-500 items-center rounded-full  flex justify-center">
-          B
-
-          </span>
-        </div>
-
-        </div>
 
       </div>
       </div>

@@ -4,10 +4,11 @@ import ProductCard from "../../compnents/product-card/ProductCard"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getProvisions } from "../../redux/actions/provision"
+import LoadingComp from "../../compnents/loader/LoadingComp"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {mobileProviders, dataBundles, airtime} = useSelector(state => state.provision)
+  const {mobileProviders, dataBundles, loading, airtime} = useSelector(state => state.provision)
   useEffect(()=> {
     dispatch(getProvisions())
   },[])
@@ -17,7 +18,7 @@ const PhoneTopUp = () => {
       <Header/>
 
         
-        <div className='h-72 bg-gray-900 flex justify-center items-center'>
+        <div className='h-[500px] bg-gray-900 flex justify-center items-center'>
          <h2 className="text-4xl max-w-5xl font-semibold text-center text-white">
            Top up prepaid mobile phones with Bitcoin and other cryptocurrencies from anywhere in the world
            </h2>
@@ -30,7 +31,7 @@ const PhoneTopUp = () => {
 
 
 
-            { dataBundles.length > 0 ? 
+            { loading ? <LoadingComp/> :  dataBundles.length > 0 ? 
               
               <div className="grid bg-white py-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
                 {dataBundles?.map(({id, product, name, min_value, currency, max_value})  => (

@@ -37,6 +37,7 @@ const PowerForm = () => {
             setLoading(false)
             const data = result.payload.message
             toast(data, {type: "error"})
+            console.log(data)
             setMessage(data)
             setErr(true)
 

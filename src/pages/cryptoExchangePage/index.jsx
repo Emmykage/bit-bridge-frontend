@@ -16,7 +16,7 @@ const CryptoExchangePage = () => {
   return (
     <div>        
       <Header/>
-      <section className="p-10 ">
+      <section className="pt-44">
         <div className="max-w-7xl m-auto bg-white p-4 rounded-lg shadow">
 
 
