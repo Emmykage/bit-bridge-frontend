@@ -1,17 +1,21 @@
 const recommendedData = [
     {
         id: 1,
-        name: "Trade crypto",
-        image: "/images/download.jpg"},
+        name: "Apple US Gift Card",
+        image: "/images/providers/apple.webp",
+        link: "/gift-cards"
+    },
     {
         id: 2,
-        name: "Trade crypto",
-        image: "/images/original-size.webp"
+        name: "MTN Data Bundle",
+        link: "/phone-top-up",
+        image: "/images/providers/mtn.webp"
     },
-{
-    id: 3,
-    name: "Solar Installation crypto",
-    image: "/images/solar-installation.jpg"
-}]
+    {
+        id: 3,
+        name: "Solar Installation crypto",
+        link: "/phone-top-up",
+        image: "/images/solar-installation.jpg"
+    }]
 
 export {recommendedData}

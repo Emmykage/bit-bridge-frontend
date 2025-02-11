@@ -40,7 +40,7 @@ const Nav = ({ open, setToggle }) => {
 
     <div
       ref={navRef}
-      className={`navslide md:my-0  fixed md:static h-screen md:h-auto top-0 shadow md:shadow-none rounded transition-all duration-150 ease-linear ${
+      className={`navslide md:my-0 bg-gray-400 md:bg-transparent fixed md:static h-screen md:h-auto top-0 shadow md:shadow-none rounded transition-all duration-150 ease-linear ${
         open ? "left-0" : "-left-full"
       } text-primary z-50 max-w-sm md:max-w-7xl w-full`}
     >
@@ -50,7 +50,7 @@ const Nav = ({ open, setToggle }) => {
         shape="circle"
         icon={<CloseOutlined />}
       />
-      <ul className="flex px-5 md:px-0 py-10 md:py-5 bg-red-4 flex-col md:flex-row hidde gap-5 text-lg font-semibold">
+      <ul className="flex px-5  md:px-0 py-10 md:py-5 b flex-col md:flex-row hidde gap-5 text-lg font-semibold">
         <li to="#" className="font-medium">
           <NavLink className={({isActive}) => isActive ? active : inActive} to={"/gift-cards"}>Gift Cards</NavLink>
         </li>

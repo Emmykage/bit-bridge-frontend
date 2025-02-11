@@ -5,10 +5,11 @@ import ClassicBtn from '../../../../compnents/button/ClassicButton'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useNavigate } from 'react-router-dom';
 
 
 const HighlightInfo = () => {
-
+const navigate = useNavigate()
 
 
   const items = [
@@ -76,16 +77,16 @@ const HighlightInfo = () => {
 
         <div className="grid grid-cols-2 gap-3 gap-y-5">
           {recommendedData.map(item => 
-                  <div key={item.id} className="border border-gray-100 rounded" onClick={() => {}}>
-                    <div className="h-40">
+            <div onClick={() => navigate(item.link)} key={item.id} className="border border-gray-100 rounded">
+              <div className="h-40">
 
-                    <img className="w-full h-full" src={item.image} alt={item.name} />
-                    </div>
+              <img className="w-full h-full" src={item.image} alt={item.name} />
+              </div>
 
-                    <p className="text-base my-6 font-semibold">{item.name}</p>
+              <p className="text-base my-6 font-semibold">{item.name}</p>
 
 
-                  </div>
+          </div>
           )}
 
 

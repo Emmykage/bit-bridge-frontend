@@ -26,7 +26,7 @@ const ViewBuyPower = () => {
   return (
     <div>
         <Header/>
-        <section className="px-4 py-10">
+        <section className="px-4  py-10">
 
             <div className="max-w-7xl bg-white m-auto py-10 px-4 md:px-10">
 

@@ -46,7 +46,7 @@
 
     "id": 5,
     "info": "This gift card is only redeemable on the e-commerce platform",
-    "description": "Pay for Xbox with Crypto. Buy Xbox Gift Card with Bitcoin, Lightning, Ethereum, Binance Pay, Tether (USDT), USD Coin (USDC), Dogecoin, Litecoin or Dash. Bitrefill's Xbox gift card lets you purchase what ever you want on the Microsoft Store.",
+    "description": "Pay for Xbox with Crypto. Buy Xbox Gift Card with Bitcoin, Lightning, Ethereum, Binance Pay, Tether (USDT), USD Coin (USDC), Dogecoin, Litecoin or Dash. BitBridge Global's Xbox gift card lets you purchase what ever you want on the Microsoft Store.",
     "provider": "xbox",
     "provision": "Xbox USD International",
     "value": "5NGN - 50000NGN",
@@ -60,7 +60,7 @@
     "provision": "Airtime",
     "value": "5NGN - 50000NGN",
     "rate": 4.7,
-    "description": "Looking to purchase Skype credit or a virtual number? Bitrefill's Skype gift card let's you pay for all of Skypes great services with Bitcoin, Ethereum, Dash, Dogecoin, and Litecoin."
+    "description": "Looking to purchase Skype credit or a virtual number? BitBridge Global's Skype gift card let's you pay for all of Skypes great services with Bitcoin, Ethereum, Dash, Dogecoin, and Litecoin."
 },
 {    "image": "/images/gift-cards/skype-usd-international.webp",
 

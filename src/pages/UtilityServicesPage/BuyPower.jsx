@@ -23,7 +23,7 @@ const BuyPower = () => {
   return (
     <div>
         <Header/>
-        <section className="px-o">
+        <section className="px-0 mt-36">
         <Banner/>
        
         </section>

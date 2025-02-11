@@ -22,7 +22,7 @@ const UtilityServices = () => {
     <div>
         
         <Header/>
-          <section className="py-10 mt-40">
+          <section className="py-10 mt-28 md:mt-32">
                 <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
                   <div>
                     <h2 onClick={() => navigate("/buy-power")} className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
