@@ -15,17 +15,20 @@ const HighlightInfo = () => {
     {
       id: 1,
       image: "/backgrounds/swipe-1.jpg",
-      text: "",
+      text: "Enjoy seamless browsing with fast and easy mobile data top-ups for all networks.",
       pos: "left"
     },
     {
       id: 2,
+      pos: "left",
 
-      image: "/backgrounds/swipe-2.jpg"
+      image: "/backgrounds/swipe-2.jpg",
+      text: "Never experience a blackout again! Pay your electricity bills instantly and stay powered.",
+
     },{
       id: 3,
-
-      image: "/backgrounds/swipe-3.jpg"
+      image: "/backgrounds/swipe-3.jpg",
+      text: "Keep up with your favorite shows by renewing your cable subscription hassle-free!"
     },
     
   ]
@@ -47,9 +50,9 @@ const HighlightInfo = () => {
           <div key={item.id} className='w-full h-[400px] relative'>
             <img src={item.image} className='w-full h-full object-cover'/>
             <div className='absolute top-0 left-0 bg-red-200/30 bg-gradient-to-r from-gray-900/80 to-gray-500/60 z-10 w-full h-full' >
-                <div className='bg-red h-full w-1/2 ml-auto flex flex-col justify-center items-center'>
+                <div className={`h-full w-1/2 ml-aut flex flex-col justify-center items-center`}>
                   <h2 className='text-3xl'>
-                    SEcure Fast Electricity bills
+                    {item.text}
                   </h2>
 
                     <ClassicBtn className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>

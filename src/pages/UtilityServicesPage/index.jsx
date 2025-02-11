@@ -18,9 +18,6 @@ const UtilityServices = () => {
   },[])
   const navigate = useNavigate()
 
-
-  console.log(loading)
-
   return (
     <div>
         
