@@ -1,5 +1,6 @@
 import {  Form, Select } from 'antd';
 import PropTypes from 'prop-types';
+import "./style.scss"
 const FormSelect = ({
     onChange,
     name, 
@@ -15,7 +16,7 @@ const FormSelect = ({
   <>
   
       <Form.Item
-      className={className}
+      className={`formInput ${className}`}
       name={name}
       rules={[
         {

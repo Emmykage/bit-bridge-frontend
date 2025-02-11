@@ -3,7 +3,7 @@
     .ant-col{
 
     
-        .ant-input-affix-wrapper,
+        .ant-input-affix-wrapper, 
             input{
                 background: none;
                 @apply border border-alt py-3 text-white;
@@ -11,11 +11,18 @@
                 &::placeholder{
                     @apply text-gray-500;
                 }
-
+                &.ant-input-password{
+                    // background: red;
+                    padding: 0 6px;
+          
+                }
             }
-  
+             
 
         // }
+        .ant-input-number-input-wrap{
+            @apply border border-alt  text-white;
+        }
     
 
     }
@@ -28,8 +35,7 @@
 
     &.whiteBg{
         .ant-col{
-
-    
+  
    
                 input{
                     background: none;
@@ -37,6 +43,13 @@
     
                     &::placeholder{
                         @apply text-gray-500;
+                    }
+
+                    &.ant-input-number{
+                        background: none;
+                        @apply border border-alt text-black;
+
+
                     }
     
                 }

@@ -18,10 +18,6 @@ const PowerForm = () => {
     const [err, setErr] = useState()
     generateRequestId()
 
-    console.log(biller)
-
-
-
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -29,7 +25,6 @@ const PowerForm = () => {
       const handleFormSubmit = (values) => {
         setLoading(true)
 
-        console.log({...values, biller, request_id: generateRequestId()})
        dispatch(createPurchaseOrder({...values, biller, service_type: "Electricity", request_id: generateRequestId()})).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
@@ -81,7 +76,7 @@ const PowerForm = () => {
         >
 
             <div className="flex flex-col sm:flex-row sm:gap-4">
-                <FormSelect placeholder={"Select Meter Type"} className="flex-1" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"meter_type"}/>
+                <FormSelect placeholder={"Select Meter Type"} className="flex-1 whiteBg" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"meter_type"}/>
                 <FormInput className={"flex-1 w-full"} label={"Meter Number"} placeholder={"Enter Meter Number"} name={"billersCode"}/>
             </div>
 
@@ -91,7 +86,7 @@ const PowerForm = () => {
 
             </div>
             <div className="sm:w-1/2">
-                <FormInput className={"w-full"} label={"Amount"} placeholder={"Enter Amount"} type="Number" name={"amount"}/>
+                <FormInput className={"w-full whiteBg"} label={"Amount"} placeholder={"Enter Amount"} type="Number" name={"amount"}/>
 
             </div>
 

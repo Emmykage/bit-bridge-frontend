@@ -1,4 +1,18 @@
+.ant-form-item{
+    .ant-select{
+         .ant-select-selector{
+            background-color: none;
+    @apply border border-alt py-3 text-gray-200;
 
-.ant-select-selector{
-    background-color: none;
+}
+}
+&.whiteBg{
+    .ant-select{
+        .ant-select-selector{
+   @apply  text-gray-800;
+
+}
+}
+}
+
 }
