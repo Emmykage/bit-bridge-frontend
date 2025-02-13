@@ -19,9 +19,11 @@ const GiftCard = ({image, onClick, id, provider, title}) => {
 }
 
 GiftCard.propTypes = {
-    image: PropTypes.string,
-    title: PropTypes.string,
-    provider: PropTypes.string,
+  image: PropTypes.string,
+  id: PropTypes.string,
+  title: PropTypes.string,
+  provider: PropTypes.string,
+  onClick: PropTypes.func,
     
 }
 

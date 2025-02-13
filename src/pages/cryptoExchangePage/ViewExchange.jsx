@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import giftCardData from '../../data/giftCardData.json'
+
 import Header from "../../compnents/header/Header"
 import ProductCard from "../../compnents/product-card/ProductCard"
 import CartButton from "../../compnents/button/CartButton"
@@ -123,7 +123,7 @@ const ViewGiftCard = () => {
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
                 {selectedProvider.map(({id, product, name, min_value, max_value, currency }) => (
-                    <ProductCard key={id} id={id} provider={product.provider} currency={currency} provision={name} min_value={min_value} max_value={max_value} />
+                    <ProductCard link={`/phone-top-up/${id}`} key={id} id={id} provider={product.provider} currency={currency} provision={name} min_value={min_value} max_value={max_value} />
                 ))}
 
             </div>

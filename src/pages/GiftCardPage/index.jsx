@@ -1,10 +1,10 @@
 import Header from "../../compnents/header/Header"
-import GiftCard from "../../compnents/product-card/GiftCard"
 import scrollToTop from "../../hooks/scrollToTop"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getProvisions } from "../../redux/actions/provision"
 import LoadingComp from "../../compnents/loader/LoadingComp"
+import ProductCard from "../../compnents/product-card/ProductCard"
 
 const GiftCardPAge = () => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const GiftCardPAge = () => {
 
 
           {giftcards.slice(0, 4).map(({id, product, name, image, value})  => (
-          <GiftCard key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
+          <ProductCard link={`/gift-cards/${id}`} key={id} id={id} provider={product?.provider} provision={name} image={image} value={value}/>
           ))
         }
 
@@ -51,7 +51,7 @@ const GiftCardPAge = () => {
 
 
           {giftcards.map(({id, product, currency, name, image, min_value, max_value})  => (
-          <GiftCard key={id} id={id} provider={product?.provider} currency={currency} provision={name} image={image} min_value={min_value} max_value={max_value}/>
+          <ProductCard key={id} id={id} provider={product?.provider} currency={currency} provision={name} image={image} min_value={min_value} max_value={max_value}/>
           ))}
 
 

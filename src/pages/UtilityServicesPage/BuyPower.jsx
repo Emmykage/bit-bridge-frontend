@@ -46,7 +46,7 @@ const BuyPower = () => {
             <h2 className="text-2xl my-4">More Products on BitBridge</h2>
             <div className="grid sm:grid-cols-4 gap-3">
                 {mobileProviders.map(({id, provider, currency, name, max_value, min_value}) => (
-                    <ProductCard key={id} id={id} provider={provider} currency={currency} max_value={max_value} min_value={ min_value} provision={name} />
+                    <ProductCard link={`/phone-top-up/${id}`} key={id} id={id} provider={provider} currency={currency} max_value={max_value} min_value={ min_value} provision={name} />
                 ))}
 
             </div>

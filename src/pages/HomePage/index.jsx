@@ -3,7 +3,6 @@ import ClassicBtn from "../../compnents/button/ClassicButton"
 import Header from "../../compnents/header/Header"
 import ExxlusiveDeals from "./components/deals/ExclusiveDeals"
 import HighlightInfo from "./components/highlight/Highlight"
-import { useDispatch, useSelector } from 'react-redux';
 
 import "./style.scss"
 import PopularCards from "./components/popular-card/PopularCards"

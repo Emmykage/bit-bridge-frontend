@@ -80,7 +80,7 @@ const navigate = useNavigate()
             <div onClick={() => navigate(item.link)} key={item.id} className="border border-gray-400/40 shadow-sm overflow-hidden rounded">
               <div className="h-40">
 
-              <img className="w-full h-full" src={item.image} alt={item.name} />
+              <img className="w-full h-full hover:scale-105 transition-all duration-300 ease-out cursor-pointer" src={item.image} alt={item.name} />
               </div>
 
               <p className="text-base my-3 font-semibold px-4">{item.name}</p>

@@ -1,13 +1,12 @@
 import Header from "../../compnents/header/Header"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import UtilityCard from "../../compnents/product-card/UtilityCard"
 import img from "../../assets/images/banners/buy-power.jpg"
-// import { getProvisions } from "../../redux/actions/provision"
 import { useNavigate } from "react-router-dom"
 
 import LoadingComp from "../../compnents/loader/LoadingComp"
 import { getProvisions } from "../../redux/actions/provision"
+import ProductCard from "../../compnents/product-card/ProductCard"
 
 const UtilityServices = () => {
   const dispatch = useDispatch()
@@ -58,7 +57,7 @@ const UtilityServices = () => {
                       
                         {utilities.map(({id, value, product,image})  => (
 
-                          <UtilityCard key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
+                          <ProductCard link={`/utility-services/${id}`} valueRange={false} key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
 
                         ) )              
                       }

@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../../../../redux/actions/product'
-import { splitString } from '../../../../utils'
 import SimpleCard from '../../../../compnents/product-card/SimpleCard'
 
 const PopularCards = () => {
