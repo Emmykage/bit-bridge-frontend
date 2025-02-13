@@ -26,9 +26,11 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         localStorage.setItem("bitglobal", JSON.stringify(accessToken));
         return result
     } catch (error) {
+        const message = error.response.data.status.message
+        console.log(message)
         if(error.response){
-            toast(error.response.message, {type: "error"})
-            return rejectWithValue({message: error.response.message})
+            toast(message, {type: "error"})
+            return rejectWithValue({message: message})
         }
 
         return rejectWithValue({message: "something went wrong"})

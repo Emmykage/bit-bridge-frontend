@@ -14,7 +14,7 @@ import {
 import enUS from "antd/es/locale/en_US"
 
 import { ConfigProvider, Space, Tabs, theme } from 'antd';
-import { useState } from 'react';
+import {  useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,6 +36,8 @@ export const Signup = () => {
     cursor: 'pointer',
   };
 
+
+
   return (
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
@@ -43,15 +45,17 @@ export const Signup = () => {
                 loading={loading}
 
         onFinish={(values) => {
+          dispatch(SET_LOADING(true))
+
           dispatch(userSignUp({user: values})).then(result =>
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
                 navigate("/dashboard/home")
               }
-              else  if(userSignUp.rejected.match(result)){
+              else  
                 dispatch(SET_LOADING(false))
-              }
+            
             }
   
         
