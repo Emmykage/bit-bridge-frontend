@@ -34,10 +34,10 @@ const navigate = useNavigate()
     
   ]
   return (
-    <section className="px-4 py-10 bg-white">
+    <section className="px-4 py-10 bg-gray-900/10">
     <div className="grid lg:grid-cols-home-grid gap-4 max-w-app-layout m-auto">
       <div>
-        <h5 className="text-lg font-bold text-gray-800 my-4 ">Check Out Offers</h5>
+        <h5 className="text-lg font-bold text-gray-700 my-4 ">Check Out Offers</h5>
       <div className=" rounded text-white">
       <Carousel 
         autoFocus={true}
@@ -73,17 +73,17 @@ const navigate = useNavigate()
       </div>
     
       <div>
-        <h3 className="font-medium text-lg my-4">Recommended for you</h3>
+        <h3 className="font-semibold text-gray-700 text-lg my-4">Recommended for you</h3>
 
         <div className="grid grid-cols-2 gap-3 gap-y-5">
           {recommendedData.map(item => 
-            <div onClick={() => navigate(item.link)} key={item.id} className="border border-gray-100 rounded">
+            <div onClick={() => navigate(item.link)} key={item.id} className="border border-gray-400/40 shadow-sm overflow-hidden rounded">
               <div className="h-40">
 
               <img className="w-full h-full" src={item.image} alt={item.name} />
               </div>
 
-              <p className="text-base my-6 font-semibold">{item.name}</p>
+              <p className="text-base my-3 font-semibold px-4">{item.name}</p>
 
 
           </div>

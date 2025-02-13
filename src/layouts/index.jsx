@@ -3,7 +3,7 @@ import Footer from '../compnents/footer/Footer'
 
 const MainLayout = ({children}) => {
   return (
-    <div>
+    <div className='mt-40'>
 
         {children}
         <Footer/>

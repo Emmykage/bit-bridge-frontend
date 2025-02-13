@@ -9,8 +9,10 @@ const Nav = ({ open, setToggle }) => {
   const {pathname} = useLocation()
   console.log(pathname)
   const navRef = useRef();
-  const active = "active " + "text-primary"
-  const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) && "text-primary"}`
+  const active = "active text-alt"
+  const inActive = `inactive text-alt`
+
+  // const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) && "text-primary"}`
   const closeNav = (e) => {
     if ( navRef.current && !navRef.current.contains(e.target)) {
       console.log(open)

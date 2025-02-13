@@ -3,16 +3,20 @@ import ClassicBtn from "../../compnents/button/ClassicButton"
 import Header from "../../compnents/header/Header"
 import ExxlusiveDeals from "./components/deals/ExclusiveDeals"
 import HighlightInfo from "./components/highlight/Highlight"
+import { useDispatch, useSelector } from 'react-redux';
+
 import "./style.scss"
+import PopularCards from "./components/popular-card/PopularCards"
 const Home = () => {
   const navigate = useNavigate()
+
   return (
 
-    <div className=" m-auto relative">
+    <div className="-mt-40 md:-mt-40">
         <Header/>
-        <section className="h-screen lg:h-[700px] p-4 w-full hero-header">
-          <div className="max-w-app-layout items-center h-full grid sm:grid-cols-2 m-auto w-full ">
-            <div className="p-5">
+        <section className="h-screen lg:h-[800px] p-4 w-full hero-header">
+          <div className="max-w-app-layout  items-center h-full grid sm:grid-cols-2 m-auto w-full ">
+            <div className="p-5 bg-gray-900/40 rounded-lg">
               <h2 className="lg:text-5xl text-3xl text-white font-bold">
                Get Awesome trading experience
               </h2>
@@ -21,7 +25,8 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <HighlightInfo/>     
+        <HighlightInfo/>    
+        <PopularCards/>          
 
         <ExxlusiveDeals/>
 

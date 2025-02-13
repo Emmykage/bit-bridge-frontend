@@ -16,10 +16,10 @@ const GiftCardPAge = () => {
   scrollToTop()
 
   return (
-    <div>        
+    <div className="">        
       <Header/>
       
-      <section className="py-10 px-4 mt-36">
+      <section className="py-10 px-4 mt-40">
         <div className=" max-w-7xl px-4 py-10 shadow rounded-lg bg-white m-auto">
 
         <div className="">

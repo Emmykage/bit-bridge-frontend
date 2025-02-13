@@ -18,7 +18,8 @@ const Header = () => {
   const [toggleNav, setToggle] = useState(false)
   const {pathname} = useLocation()
 
-  const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) ?  "text-primary" : "text-alt"}`
+  // const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) ?  "text-primary" : "text-alt"}`
+  const inActive = `inactive text-alt`
 
 
   const {cartItems} = useSelector(state => state.app)
@@ -38,11 +39,12 @@ const Header = () => {
       <Carts items={cartItems} />
     </DrawerModal>
     
-    <header className='absolute  bg-primar w-full top-0 z-10 left-0 p-4  px-0 border-b border-gray-800/50  shadow'>
-      <div className=' max-w-app-layout -700 m-auto px-4 '>
+    <header className='absolute  bg-primar w-full top-0 z-10 left-0 p-4  px-0 border-b border-gray-700 shadow'>
+      <div className=' max-w-app-layout -700 m-auto px-4'>
 
 
-        <div className='flex gap-3 flex-wrap justify-between items-center'>
+        <div className='flex gap-3 flex-wrap md:flex-row flex-col justify-between items-center'>
+          <div className='w-full md:w-max flex items-center gap-4'>
 
         <Button onClick={() => setToggle(prev => !prev)} className='md:hidden nav-btn' shape="circle" icon={<MenuUnfoldOutlined />} />
         
@@ -50,9 +52,11 @@ const Header = () => {
             <img src={logo} alt='logo' className='h-14 w- object-cover border' />
 
           </NavLink>
+          </div>
+
           {/* <SearchField className={"w-full max-w-md flex-"}/> */}
 
-          <div className='flex items-center gap-4 md:justify-end justify-between'>
+          <div className='flex  items-center gap-4 md:justify-end justify-between w-full md:w-max'>
             <NavLink to={"/"} className={`${inActive}  text-center font-semibold text-alt hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl`} >
               <QuestionCircleOutlined className={`${inActive} flex text-center`}/>
               Help
