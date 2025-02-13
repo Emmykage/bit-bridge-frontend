@@ -12,7 +12,7 @@ const PhoneTopUp = () => {
   useEffect(()=> {
     dispatch(getProvisions())
   },[])
-  console.log(mobileProviders)
+
   return (
     <div>
       <Header/>

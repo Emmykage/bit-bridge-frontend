@@ -29,7 +29,6 @@ const ViewProduct = () => {
 
 
     }, [])
-    console.log(product)
 
     if(loading){
         return(
@@ -56,7 +55,7 @@ const ViewProduct = () => {
          <Form
          disabled={disableForm}
        onFinish={(values) => {
-        console.log(values)
+
         dispatch(updateProduct({id, data: values})).then(result => {
           if(updateProduct.fulfilled.match(result)){
             toast(result.payload.message, {type: "success"})

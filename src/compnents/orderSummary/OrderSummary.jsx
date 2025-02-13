@@ -12,15 +12,11 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
     const dispatch = useDispatch()
     const [conversions, setConversion] = useState()
     
-    console.log("Order summmary:", convertedTotal)
-
     const VAT = totalAmount/100 * 10
 
        const handleConversion = async(fromCurr, toCurr, amount)=> {
-        console.log(fromCurr, toCurr, amount)
             const newvalue = await converter({fromCurr, toCurr, amount})
 
-        console.log(newvalue?.calc)
 
             return newvalue?.calc
         
@@ -39,7 +35,6 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
 
         })()
 
-         console.log(conversions)
         }, [cartItems])
 
         // useEffect(()=> {
@@ -52,7 +47,6 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
         // }, [cartItems])
       
 
-console.log(cartItems, conversions)
   return (
     <div className='bg-white p-4'>
     <h3 className='text-2xl mb-10 font-semibold'>Order Summary</h3>

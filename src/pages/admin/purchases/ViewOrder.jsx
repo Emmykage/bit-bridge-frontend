@@ -39,8 +39,6 @@ handleUpdate
             }
             else{
              toast(result.payload?.message || "Something went wrong", {type: "error"})
-
-                console.log(result.payload)
             }
         })
         
@@ -120,11 +118,7 @@ handleUpdate
             form={form}
             layout='vertical'
             onFinish={(values) => {
-                console.log({
-                    ...values,
-                    reveal: false,
-                    order_item: selectedId
-                })
+                
                 handleUpdate({
                     ...values,
                     reveal: false,

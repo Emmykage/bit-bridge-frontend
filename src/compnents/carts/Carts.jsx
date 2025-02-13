@@ -10,7 +10,6 @@ import { nairaFormat } from '../../utils/nairaFormat'
 const Carts = ({items}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    console.log(items)
   
   return (
     <div className='bg-red- h-full justify-between flex flex-col'>

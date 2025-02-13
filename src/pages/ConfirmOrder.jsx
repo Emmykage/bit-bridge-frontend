@@ -20,17 +20,15 @@ const ConfirmOrder = () => {
   const [query] = useSearchParams();
   const orderId = query.get('orderId');
   const dispatch = useDispatch();
-      const [conversions, setConversion] = useState([])
+      const [setConversion] = useState([])
       const [convertedTotal, setConvertedTotal] = useState(0)
 
   const { order, status } = useSelector((state) => state.order);
-  console.log(order?.total_amount, order)
   ScrollToTop();
   useEffect(() => {
     dispatch(getOrder(orderId));
   }, []);
   const handleConversion = async(fromCurr, toCurr, amount)=> {
-    console.log(fromCurr, toCurr, amount)
         const newvalue = await converter({fromCurr, toCurr, amount})
 
 
@@ -38,10 +36,6 @@ const ConfirmOrder = () => {
     
     }
 
-
-
-
-console.log(order) 
    useEffect(()=> {
 
     (async() => {
@@ -55,12 +49,10 @@ console.log(order)
 
 })()
 
- console.log(conversions)
 }, [])
    const fetchTotal = async() => {
         const result = await  calculateTotalUSD()
         setConvertedTotal(result)
-        console.log(result)
     }
     useEffect(()=> {
         fetchTotal()

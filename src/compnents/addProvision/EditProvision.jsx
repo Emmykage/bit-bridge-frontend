@@ -15,13 +15,9 @@ const EditProvision = ({provision, productID, setIsOpen}) => {
 
     const dispatch = useDispatch()
     const [form] = Form.useForm()
-    console.log(provision)
-
 
     useEffect(() => {
-      
-      console.log("first")
-      form.setFieldsValue({
+            form.setFieldsValue({
         ...provision
       })
     },[provision, form])
@@ -30,14 +26,12 @@ const EditProvision = ({provision, productID, setIsOpen}) => {
     <div className='provision'>
     <Form
        onFinish={(values) => {
-        console.log(values)
         dispatch(updateProvision(
        {
                 id: provision.id,
                 data: values
             })).then(result => {
           if(updateProvision.fulfilled.match(result)){
-            console.log(result.payload.notice)
             form.resetFields()
             dispatch(fetchProduct(productID))
             toast(result.payload.message ?? "Provission has been created", {type: "success"})

@@ -17,7 +17,6 @@ const DropDown = () => {
             case '1':
               // Navigate to My Account
               message.info('Navigating to My Account...');
-              console.log('Navigating to My Account');
               navigate('/'); // Use a routing library like react-router-dom
               break;
       
@@ -36,7 +35,6 @@ const DropDown = () => {
       
             default:
               message.info('Unknown action');
-              console.log('Unknown action');
           }
       };
       

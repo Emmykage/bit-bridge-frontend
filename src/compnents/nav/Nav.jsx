@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 
 const Nav = ({ open, setToggle }) => {
-  const {pathname} = useLocation()
-  console.log(pathname)
   const navRef = useRef();
   const active = "active text-alt"
   const inActive = `inactive text-alt`
@@ -15,10 +13,9 @@ const Nav = ({ open, setToggle }) => {
   // const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) && "text-primary"}`
   const closeNav = (e) => {
     if ( navRef.current && !navRef.current.contains(e.target)) {
-      console.log(open)
   if(open){
     setToggle(false);
-    console.log(open, "close triggered"); }
+  }
       
     }
 
