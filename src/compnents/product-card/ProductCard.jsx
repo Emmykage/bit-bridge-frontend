@@ -13,13 +13,13 @@ const ProductCard = ({id, min_value, currency, max_value, provider, provision ,l
   return (
     <div key={id} onClick={()=> {navigate(link)} } className="">
 
-    <div  className="h-52 border shadow cursor-pointer hover:scale-105 rounded-md hover:shadow-xl transition-all ease-linear duration-300  bg-white overflow-hidden">
-      <img src={`/images/providers/${imagePic}.webp`} alt="" className="w-full object-cover  h-full" />
+    <div  className="md:h-52 h-24 border shadow cursor-pointer hover:scale-105 rounded-md hover:shadow-xl transition-all ease-linear duration-300  bg-white overflow-hidden">
+      <img src={`/images/providers/${imagePic}.webp`} alt="" className="w-full md:object-cover object-fill  h-full" />
 
     </div>
     <div className=" justify-between px-2 my-2">
       <div className="flex items-center w-full justify-between">
-        <p className="text-lg text-gray-800 font-medium capitalize">{provider}</p>
+        <p className="md:text-lg text-gray-800 font-medium capitalize">{provider}</p>
 
         <div className="flex gap-3">
           <span className="font-semibold">4.7</span>
@@ -29,7 +29,7 @@ const ProductCard = ({id, min_value, currency, max_value, provider, provision ,l
       </div>
 
       <div className="flex items-center w-full justify-between">
-        <p className="text-lg text-gray-600 font-medium">{provision}</p>
+        <p className="md:text-lg text-gray-600 font-medium">{provision}</p>
 
         {min_value && 
                     <p className="text-base font-medium text-gray-600">{`${nairaFormat(min_value, currency)} - ${nairaFormat(max_value, currency)}`}</p>
