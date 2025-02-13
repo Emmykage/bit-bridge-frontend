@@ -12,8 +12,7 @@ export const getWallet = createAsyncThunk("wallet/get-wallet", async(data, {reje
         });
 
         const result = response.data;   
-        // console.log(result)   
-
+s
         return result;
     } catch (error) {
         if (error.response) {

@@ -52,7 +52,7 @@ const purchaseSlice = createSlice({
             }
         })
         .addCase(getPurchaseOrder.fulfilled, (state, action) => {
-            console.log(action.payload.data)
+
             return{
                 ...state,
                 loading: true,

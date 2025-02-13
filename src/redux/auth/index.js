@@ -32,7 +32,7 @@ const AuthSlice = createSlice({
             }
         })
         .addCase(userSignUp.rejected, (state, action) => {
-            console.log(action.payload)
+
             return{
                 ...state,
                 // message: action.payload.message,

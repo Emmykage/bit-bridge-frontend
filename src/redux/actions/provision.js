@@ -48,8 +48,6 @@ export const getProvisions = createAsyncThunk("provisions/get-provisions", async
         });
 
         const result = response.data;
-
-        console.log(result)
         return result;
     } catch (error) {
         if (error.response) {

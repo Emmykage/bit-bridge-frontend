@@ -33,7 +33,7 @@ export const getCardTokens = createAsyncThunk("card-token/get-order-token", asyn
         });
 
         const result = response.data; 
-        console.log(result)
+
         return result;
     } catch (error) {
         if (error.response) {
@@ -44,7 +44,6 @@ export const getCardTokens = createAsyncThunk("card-token/get-order-token", asyn
     }
 });
 export const getUserCardTokens = createAsyncThunk("card-token/get-user-order-token", async(_, {rejectWithValue}) => {
-    console.log("second")
 
     try {
         const response = await axios.get(`${baseUrl + apiRoute}card_tokens/user`, {
@@ -64,7 +63,6 @@ export const getUserCardTokens = createAsyncThunk("card-token/get-user-order-tok
     }
 });
 export const updateCardToken = createAsyncThunk("card-token/update-order-token", async({id, data}, {rejectWithValue}) => {
-   console.log(id)
     try {
         const response = await axios.patch(`${baseUrl + apiRoute}card_tokens/${id}`,data, {
             headers: {

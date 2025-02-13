@@ -50,7 +50,6 @@ const provisionSlice = createSlice({
                     const databundles = products.filter(item => item.service_type === "DATA")
                     const filteredUtilities = products.filter(item => item.product.category === "utility")
 
-                    console.log(products)
                     return{
                         ...state,
                         products: action.payload.data,

@@ -13,7 +13,6 @@ export const createPurchaseOrder = createAsyncThunk("purchase/purchase-power", a
         });
 
         const result = response.data; 
-        console.log(result)
         toast(result?.message  || "order has been initialized", {type: "success"})
 
         return result;
@@ -36,7 +35,6 @@ export const getPurchaseOrder = createAsyncThunk("purchaseOrder/get-order", asyn
         });
 
         const result = response.data;    
-        console.log(result)  
         return result;
     } catch (error) {
         if (error.response) {
@@ -108,7 +106,6 @@ export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({qu
 
 export const getPriceList = createAsyncThunk("payment/get-price-list", async({provider, service_type}, {rejectWithValue}) => {
 
-    console.log(provider, service_type)
     try {
         const response = await axios.get(`${baseUrl + apiRoute}payment_processors/get_price_list?provider=${provider}&service_type=${service_type}`, {
             headers: {
@@ -125,8 +122,6 @@ export const getPriceList = createAsyncThunk("payment/get-price-list", async({pr
                 amount: item?.price
             }
         })
-        console.log(priceListOptions) 
-
         return priceListOptions;
     } catch (error) {
         if (error.response) {

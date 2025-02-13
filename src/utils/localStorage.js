@@ -44,12 +44,12 @@ export const deleteCartItem = (id) => {
         const existingCartItems = getCartItems()
         const newItems = existingCartItems.filter(item => item.provision_id !== id)
        processCart(newItems)
-       console.log(id)
+
        message.success("Item deleted")
 
         
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return []
     }
 }
@@ -60,7 +60,7 @@ export const clearCartItems = () => {
   try {
       localStorage.removeItem("G_BRIDGE_CART")      
   } catch (error) {
-      console.log(error)
+      console.error(error)
       return []
   }
 }
@@ -122,7 +122,5 @@ export const addToCartItems = (cartData) => {
       convertedAmount += Number(res.calc);   
 
     }
-
-   console.log("hggjggjgjggjgg =>", convertedAmount)
     return convertedAmount
   }

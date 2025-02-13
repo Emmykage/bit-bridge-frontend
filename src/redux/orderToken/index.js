@@ -55,7 +55,7 @@ const orderTokenSlice = createSlice({
             }
         })
         .addCase(getCardTokens.fulfilled, (state, actions) => {
-            console.log("third")
+
             return {
                 ...state,
                 loading: false,

@@ -19,7 +19,6 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
     }
 
     try {
-        console.log(fetchToken())
 
         const response = await axios.post(`${baseUrl + apiRoute}transactions`, 
             formData
