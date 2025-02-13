@@ -39,8 +39,9 @@ const CryptoExchangePage = () => {
       
         <div className=" my-10 m-auto">
         <h3 className="text-lg font-medium">Top Features!</h3>
+        <div className="overflow-x-auto">
 
-          <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid w-[400%] sm:w-[200%] md:w-full bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 grid-cols-4">
 
 
           {giftcards.slice(0, 4).map(({id, product, name, value})  => (
@@ -49,8 +50,9 @@ const CryptoExchangePage = () => {
 
 
 
-          </div>
         </div>
+        </div>
+</div>
         </div>
 
        

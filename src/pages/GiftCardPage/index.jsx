@@ -25,10 +25,11 @@ const GiftCardPAge = () => {
         <div className="">
         <h3 className="text-lg font-medium text-gray-800">Top Features!</h3>
 
+        <div className="overflow-x-auto">
 
         {loading ? 
          <LoadingComp/> : 
-          <div className="grid bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid w-[400%] sm:w-[200%] md:w-full bg-gray-50 gap-x-3 gap-y-5 md:gap-y-10 grid-cols-4">
 
 
           {giftcards.slice(0, 4).map(({id, product, name, image, value})  => (
@@ -40,10 +41,8 @@ const GiftCardPAge = () => {
 
           
           }
-
-
-
-        </div>
+    </div>
+    </div>
 
         <div className="max-w-7xl py-10 m-auto">
           <h2 className="text-2xl font-semibold">All gift cards</h2>
