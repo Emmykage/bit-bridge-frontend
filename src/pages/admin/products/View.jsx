@@ -187,7 +187,7 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6"> Currency</th>
                                 <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 pl-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Min Value</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50  bg-opacity-75 px-0 py-3.5  text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">Max Value</th>
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-0 py-3.5 text-center text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Description</th>
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-0 py-3.5 text-left text-xs font-semibold text-gray-900 backdrop-blur backdrop-filter">Description</th>
 
 
                         
@@ -205,7 +205,7 @@ options={[{label: "service", value: "service"},{value: "gift card", label: "Gift
                                     <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal md:pl-4">
                                         <p className="font-medium text-gray-600 leading-5">{item.name} </p>
                                     </td> <td className="whitespace-nowrap border-b border-gray-200 py-2 pl-3 pr-3 text-sm font-normal md:pl-4">
-                                        <p className="font-medium text-gray-600 leading-5">{item.service_type} </p>
+                                        <p className="font-medium text-gray-600 leading-5">{item.service_type.trim() == "" ? "N/A" : item.service_type }</p>
                                     </td>
                                     <td className="whitespace-nowrap border-b text-left border-gray-200 py-2 pl-3 pr-3 text-sm font-normal uppercase sm:pl-6 lg:pl-8">
                                         <p className="font-medium text-gray-600 leading-5">{item.currency} </p>
