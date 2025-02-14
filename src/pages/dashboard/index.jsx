@@ -63,7 +63,7 @@ const HomeDashboard = () => {
         dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
     },[])
 
-// console.log(activeCurrency)
+console.log(wallet?.balance)
   return (
     <div className="homeDashboard text-white w-full">
         <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">

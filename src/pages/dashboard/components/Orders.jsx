@@ -1,6 +1,6 @@
 import  { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders } from '../../../redux/actions/order'
+import { getUserOrders } from '../../../redux/actions/order'
 import dateFormater from '../../../utils/dateFormat'
 import { nairaFormat } from '../../../utils/nairaFormat'
 import Loading from '../../../compnents/loader/Loading'
@@ -13,7 +13,7 @@ const OrderTransact = () => {
 
 
     useEffect(()=> {
-        dispatch(getOrders())
+        dispatch(getUserOrders())
     },[])
 
     console.log(orders)

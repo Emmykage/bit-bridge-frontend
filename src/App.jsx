@@ -56,6 +56,7 @@ import PrivacyPolicies from './pages/policies/PrivacyPolicies'
 import PurchaseDataDetails from './pages/PhoneTopUp/buy-data/PurchaseDetails'
 import ComfirmDataPurchase from './pages/PhoneTopUp/buy-data/ConfirmPurchase'
 import PurchaseCableDetails from './pages/UtilityServicesPage/buy-cable/PurchaseDetails'
+import Ethereum from './pages/dashboard/crypto-exchange/Ethereum'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -128,6 +129,8 @@ function App() {
       <Route path='crypto-sell' element={<CryptoSell/>}>
       <Route path='bitcoin' element={<Bitcoin/>} />
       <Route path='dogecoin' element={<Dogecoin/>} />
+      <Route path='ethereum' element={<Ethereum/>} /> 
+                    
       </Route>
     </Route>
 

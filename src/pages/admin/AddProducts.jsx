@@ -58,7 +58,7 @@ const AddProduct = () => {
 label={"Category"}
 name={"category"}
 options={[{label: "service", value: "service"},{value: "gift card", label: "Gift Card"},
-{value: "mobile provider", label: "Mobile Service"}, {value: "utility", label: "Utility"}, {value: "power", label: "Power"}]}
+{value: "mobile provider", label: "Mobile Service"}, {value: "utility", label: "Utility"}, {value: "crypto", label: "crypto"}]}
 />
 
 <div className=''>

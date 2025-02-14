@@ -62,6 +62,7 @@ import { toast } from 'react-toastify';
           {
             if(userLogin.fulfilled.match(result)){
               dispatch(SET_LOADING(false))
+              
 
               navigate("/dashboard/home")
             }

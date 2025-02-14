@@ -133,6 +133,29 @@ export const getPriceList = createAsyncThunk("payment/get-price-list", async({pr
 });
 
 
+export const queryTransaction = createAsyncThunk("payment/query-transaction", async({id}, {rejectWithValue}) => {
+
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${id}query_transaction`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+        const result = response.data;     
+
+    
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+
 
 // export const updateOrder = createAsyncThunk("order/update-order", async({id, data}, {rejectWithValue}) => {
 //     try {

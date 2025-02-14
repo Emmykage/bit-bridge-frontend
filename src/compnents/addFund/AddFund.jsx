@@ -11,7 +11,8 @@ const AddFund = ({
   address,
   handleSubmit,
   disableAddress= true,
-  coin_type
+  coin_type="USDT",
+
 }) => {
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
@@ -44,7 +45,7 @@ const AddFund = ({
         maxWidth: formLayout === 'inline' ? 'none' : 600,
       }}
     >
-        <FormInput className="add-fund" name="amount" type='number' label={"Amount(USDT value)"}/>
+        <FormInput className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
         <FormInput className="add-fund" name="address" type='text' label={"Address"} disabled={disableAddress} />
         <FormSelect className="add-fund" name="coin_type"  label={"Type"} disabled={true} options={coinType}/>
 

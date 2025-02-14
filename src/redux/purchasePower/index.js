@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { confirmDataPurchase, confirmPurchase, createPurchaseOrder, getPurchaseOrder } from "../actions/purchasePower"
+import { confirmDataPurchase, confirmPurchase, createPurchaseOrder, getPurchaseOrder, queryTransaction } from "../actions/purchasePower"
 
 const initialState = {
    purchaseOrder: {},
@@ -94,6 +94,30 @@ const purchaseSlice = createSlice({
                 loading: true
             }
         })
+        .addCase(queryTransaction.fulfilled, (state, action) => {
+            return{
+                ...state,
+                purchaseOrder: action.payload.data,
+                message: action.payload.message, 
+                loading: false
+            }
+        })
+        .addCase(queryTransaction.rejected, (state, action) => {
+            return{
+                ...state,
+                message: action.payload.message, 
+                loading: false
+            }
+        })
+        .addCase(queryTransaction.pending, (state) => {
+            return{
+                ...state,
+        
+                loading: true
+            }
+        })
+
+        
        
        
     }

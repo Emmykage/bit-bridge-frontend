@@ -5,6 +5,7 @@ const initialState = {
     product: {},
     products: [],
     giftcards: [],
+    crypto: [],
     mobileProviders: [],
     utilities: [],
     services: [],
@@ -45,6 +46,7 @@ const productSlice = createSlice({
             const filteredMobileProvider = products.filter(item => item.category === "mobile provider")
             const filteredServices = products.filter(item => item.category === "service")
             const filteredUtilities = products.filter(item => item.category === "utility")
+            const filteredCrypto = products.find(item => item.category === "crypto")
 
             return{
                 ...state,
@@ -53,6 +55,7 @@ const productSlice = createSlice({
                 services: filteredServices,
                 mobileProviders: filteredMobileProvider,
                 utilities: filteredUtilities,
+                crypto: filteredCrypto,
                 loading: false
             }
         })

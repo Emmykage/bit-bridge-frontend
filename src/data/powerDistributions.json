@@ -46,7 +46,7 @@
     "description": "Prepaid and Postpaid PHED payment",
     "image": "/images/power-providers/Port-Harcourt-Electric.jpg",
     "serviceID": "portharcourt-electric",
-    "biller": "portharcourt"
+    "biller": "PH"
 
 
 },

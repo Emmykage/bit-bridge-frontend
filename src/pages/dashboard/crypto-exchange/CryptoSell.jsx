@@ -48,6 +48,11 @@ const Links = () => {
             Dogecoin
 
           </NavLink>
+          <NavLink to={"/dashboard/crypto-sell/ethereum"} className={({isActive}) => isActive ? active : normal}>
+            <TbCurrencyDogecoin />
+            Ethereum
+
+          </NavLink>
     </>
   )
 }

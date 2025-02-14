@@ -12,7 +12,6 @@ const ViewGiftCard = () => {
 
     const selectedProvider = giftcards.find(item => item.id == id)
 
-    console.log(selectedProvider)
     const description = {__html: `    Cherry Credits is a versatile virtual currency that can be used for over 1,000 digital content and games, including popular titles like Ragnarok Online, Dragon Nest, Black Desert Online, and more. By using Cherry Credits, you can easily purchase games, software, and other items on popular platforms such as Steam and Ubisoft Store.
 
 

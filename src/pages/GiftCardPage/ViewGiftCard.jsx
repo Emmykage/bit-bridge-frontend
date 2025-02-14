@@ -19,13 +19,10 @@ const ViewGiftCard = () => {
     const [value, setValue] = useState(0)
     const {giftcards, mobileProviders} =  useSelector(state => state.provision)
     const [btcValue, setBtcValue] = useState()
-    console.log(giftcards)
 
     const selectedProvider = giftcards?.find(item => item.id == id)
 
     const giftcardImage =  splitString(selectedProvider?.product?.provider)
-
-    console.log(giftcardImage, selectedProvider)
 
     useEffect(()=> {
         dispatch(getProvisions())
@@ -53,13 +50,11 @@ const ViewGiftCard = () => {
 
                }
 
-               console.log(value)
                useEffect(() => {
                 const fetchBtcValue = async () => {
                     try {
                         const btcValueFig = await converter({ fromCurr: "usd", amount: value, toCurr: "btc" });
                         setBtcValue(btcValueFig);
-                        console.log("bitcoin value", btcValueFig); // Logs the converted value
                     } catch (error) {
                         console.error("Error fetching BTC value:", error.message);
                     }
