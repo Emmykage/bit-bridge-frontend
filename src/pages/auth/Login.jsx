@@ -314,6 +314,7 @@ import { toast } from 'react-toastify';
               style={{
                 float: 'right',
               }}
+              onClick={() => navigate("/forgot-password")}
             >
               Forgot Password
             </a>

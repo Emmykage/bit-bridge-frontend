@@ -57,6 +57,8 @@ import PurchaseDataDetails from './pages/PhoneTopUp/buy-data/PurchaseDetails'
 import ComfirmDataPurchase from './pages/PhoneTopUp/buy-data/ConfirmPurchase'
 import PurchaseCableDetails from './pages/UtilityServicesPage/buy-cable/PurchaseDetails'
 import Ethereum from './pages/dashboard/crypto-exchange/Ethereum'
+import ForgotPasswordPage from './pages/auth/ForgotPassword'
+import ResetPasswordPage from './pages/auth/PasswordReset'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -138,6 +140,8 @@ function App() {
 
     <Route path='/login' element={<LoginPage/>}/>
     <Route path='/signup' element={<SignUp/>}/>
+    <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
+    <Route path='/reset_password' element={<ResetPasswordPage/>}/>
     
     <Route path='/admin/login' element={<ALogin/>}/>
     <Route path='/admin/signup' element={<ASignup/>}/>

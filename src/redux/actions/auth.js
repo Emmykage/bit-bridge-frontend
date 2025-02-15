@@ -42,7 +42,6 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
 
 export const userProfile = createAsyncThunk("auth/user-profile", async(data, {rejectWithValue}) => {
     try {
-        console.log(fetchToken())
 
         const response = await axios.get(`${baseUrl + apiRoute}users/user_profile`, {  
             headers: {
@@ -105,8 +104,6 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
 
 export const userLogout = createAsyncThunk("logout/user-logout", async(_, {rejectWithValue}) => {
     try {
-        console.log("first")
-
         const response = await axios.delete(`${baseUrl}logout`,{
             headers: {
                 "Authorization":  `Bearer ${fetchToken()}`
@@ -132,46 +129,29 @@ export const userLogout = createAsyncThunk("logout/user-logout", async(_, {rejec
 
 
 
-// const userLogin = createAsyncThunk('user/addUser', async (data) => {
-//     const response = await fetch(`${baseUrl}login`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     })
-//      const result = await response.json()
-//      const headers = response.headers
-//      const authorizationHeader = headers.get('Authorization');
+export const userPasswordReset = createAsyncThunk('user/password-reset', async ({email}) => {
 
-//      console.log(authorizationHeader)
-//     return result;
-//   });
-//   const loginUser = createAsyncThunk('user/logUser', async (data, { rejectWithValue }) => {
-//     try {
-//       const response = await fetch(`${baseURL}login`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-type': 'application/json',
-//         },
-//         body: JSON.stringify(data),
-//       });
-//       const result = await response.json();
-  
-//       if (!response.ok) {
-//         const errorMessage = result.error || result.message || 'unknownerror occured ';
-//         return rejectWithValue({ message: errorMessage });
-//       }
-  
-//       setToken(result.token);
-//       return result;
-//     } catch (error) {
-//       console.error('error thrown', error);
-//       return rejectWithValue({ message: 'Spmething went wrong, check your internet Connection!!' });
-  
-//       // throw new Error(error);
-//     }
-//   });
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}users/password_reset?email=${email}`)
+     
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
 
+  });
+
+  
+export const changePasswordReset = createAsyncThunk('user/change-password', async (data) => {
+
+    try {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/update_password`, data)
+     
+        return response;
+    } catch (error) {
+        console.log(error)
+    }
+
+  });
 
 export {userSignUp, userLogin}
