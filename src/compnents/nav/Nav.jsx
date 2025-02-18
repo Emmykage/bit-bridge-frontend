@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./nav.scss";
 import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";

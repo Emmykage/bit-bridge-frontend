@@ -1,6 +1,6 @@
 import { LoginOutlined, TrophyOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
-
+import './style.scss'
 import NavButton from "../../compnents/button/NavButton"
 import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from "react"
@@ -82,7 +82,7 @@ console.log(wallet?.balance)
                  </div>
 
                         
-                <div className="flex overflow-x-auto w-full my-10">
+                <div className="flex overflow-x-auto  w-full my-10 no-scroll">
                     <div className="pr-6 border-r border-gray-700 ">
 
                         <div className="flex py-8 gap-3">

@@ -10,9 +10,32 @@
     .ant-select{
         .ant-select-selector{
    @apply  text-gray-800;
+   }
+  }
+}
+}
+
+
+.ant-select{
+    .ant-select-selector{
+       background: none;
+@apply border border-alt py-3 text-gray-200;
 
 }
-}
+&.whiteBg{
+        .ant-select-selector{
+            @apply border border-alt py-3 text-gray-800;
+    }
 }
 
 }
+
+
+// .ant-select{
+//     .ant-select-selector{
+//        background-color: none;
+// @apply border border-alt py-3 text-gray-200;
+
+// }
+// }
+// }

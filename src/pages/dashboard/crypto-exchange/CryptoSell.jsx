@@ -10,13 +10,13 @@ const CryptoSell = () => {
   return (
     <div className='flex flex-col md:flex-row  gap-4'>
       <aside className='max-w-52 lg:max-w-xs w-full px-2 hidden md:block rounded-xl border border-gray-700'>
-          <ul className='bg-red-'>
+          <ul className=''>
            <Links/>
           </ul>
       </aside>
 
       <div className='md:hidden '>
-      <ul className='bg-red- flex'>
+      <ul className='overflow-x-auto flex'>
         <Links/>
       </ul>
       </div>
@@ -53,6 +53,11 @@ const Links = () => {
             Ethereum
 
           </NavLink>
+          {/* <NavLink to={"/dashboard/crypto-sell/ethereum"} className={({isActive}) => isActive ? active : normal}>
+            <TbCurrencyDogecoin />
+            Ethereum
+
+          </NavLink> */}
     </>
   )
 }

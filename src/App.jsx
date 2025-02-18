@@ -59,6 +59,7 @@ import PurchaseCableDetails from './pages/UtilityServicesPage/buy-cable/Purchase
 import Ethereum from './pages/dashboard/crypto-exchange/Ethereum'
 import ForgotPasswordPage from './pages/auth/ForgotPassword'
 import ResetPasswordPage from './pages/auth/PasswordReset'
+import ComfirmCablePurchase from './pages/UtilityServicesPage/buy-cable/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -96,7 +97,7 @@ function App() {
     <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
     <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>}>
       <Route path='payment-details' element={<PurchaseCableDetails/>}/>
-      <Route path='confirm-payment' element={<PurchaseCableDetails/>}/>
+      <Route path='confirm-payment' element={<ComfirmCablePurchase/>}/>
 
 
 

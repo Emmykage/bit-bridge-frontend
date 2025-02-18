@@ -1,5 +1,6 @@
-import React from 'react';
 import { Select } from 'antd';
+import PropTypes from 'prop-types';
+import './style.scss'
 const PlainSelect = ({options,
 
     onChange
@@ -16,6 +17,12 @@ const PlainSelect = ({options,
       (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
     }
     options={options}
+    className='whiteBg'
   />
 );
+
+PlainSelect.propTypes = {
+  options: PropTypes.array,
+  onChange: PropTypes.func
+}
 export default PlainSelect;

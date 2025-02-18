@@ -69,7 +69,6 @@ import { toast } from 'react-toastify';
             else  if(userLogin.rejected.match(result)){
               dispatch(SET_LOADING(false) )
               console.log("first", result)
-              toast(result.payload.message, {type: "error"})
 
             }
           }

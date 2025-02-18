@@ -7,3 +7,12 @@
 html {
     scroll-padding-top: 100px; /* Adjust based on header height */
   }
+
+  .no-scroll{
+    scrollbar-width: none;
+} 
+
+/* .no-scroll::-webkit-scrollbar{
+    scrollbar-width: none;
+
+} */

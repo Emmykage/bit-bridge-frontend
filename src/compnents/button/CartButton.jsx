@@ -7,7 +7,7 @@ const CartButton = ({text, children, onClick}) => {
     const [size] = useState("large")
   return (
     <div>
-            <Button onClick={onClick} className='py-5 max-w-lg w-full text-white bg-primary hover:bg-primary/80' shape="round" icon={<ShoppingCartOutlined />} size={size}>
+            <Button onClick={onClick} className='py-5 max-w-xl w-full text-white bg-primary hover:bg-primary/80' shape="default" icon={<ShoppingCartOutlined />} size={size}>
             {children}
           </Button>
     </div>

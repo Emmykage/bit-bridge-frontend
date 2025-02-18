@@ -25,7 +25,8 @@ const UtilityView = () => {
     const [value, setValue] = useState({
         billersCode: "",
         tariff_class: "",
-        amount: ""
+        amount: "",
+        email: ""
 
     })
     const {utilities, giftcards} =  useSelector(state => state.provision)
@@ -154,14 +155,14 @@ const UtilityView = () => {
                 <p className="capitalize">Mobile Top Up &gt; {selectedProvider?.product?.provider}</p>
             </div>
 
-            <h3 className="text-2xl font-medium">{selectedProvider?.name}</h3>
+            <h3 className="text-2xl font-medium p-">{selectedProvider?.name}</h3>
             
-            <div className="notice border rounded-xl my-2 font-medium">
+            <div className="notice border rounded-xl my-2 p-3 font-medium">
                 <p className="text-base text-gray-700">
                 {selectedProvider?.product?.info}    
                 </p>
             </div>
-            <p className="my-3">
+            <p className="my-3  p-3">
                 {selectedProvider?.product?.header_info}   
              </p>
 
@@ -196,6 +197,7 @@ const UtilityView = () => {
                     <div className="flex flex-col gap-0">
                     <FormInput type="text"
                         value={value.billersCode}
+                        name={"biller"}
                         onChange={(input)=> {
                             setValue({
                                 ...value, 
@@ -206,6 +208,22 @@ const UtilityView = () => {
                         className={"whiteBg"}
                         />
 
+                </div>
+
+                <div>
+                     
+                <div className="my-0">
+
+                    <FormInput
+                        // value={}
+                        onChange={(input) => {
+                            setValue({
+                                ...value,
+                                email: input.target.value
+                            })
+                        }}
+                    type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
+                </div>
                 </div>
                     <h3 className="text-xl font-semibold">Select Plan bundle </h3>
 
@@ -237,13 +255,9 @@ const UtilityView = () => {
             <div>
 
                 <div className="my-3">
-                    <CartButton onClick={handleSubmit}>Buy Data</CartButton>
+                    <CartButton onClick={handleSubmit}>Subscribe</CartButton>
                 </div>
-                
-                {/* <div className="my-4">
-                    <label htmlFor="phone_no my-2">Number to Top-Up</label>
-                    <input className="p-4 block border w-full rounded" placeholder="0801230456 7890"/>
-                </div> */}
+               
 
             </div>
             <div className="bg-gray-600 flex items-center gap-3 rounded-lg text-white p-4">

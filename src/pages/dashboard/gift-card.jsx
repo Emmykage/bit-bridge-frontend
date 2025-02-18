@@ -5,27 +5,25 @@ import { useDispatch, useSelector } from "react-redux"
 import AppModal from "../../compnents/modal/Modal"
 import SellFund from "../../compnents/sellCard/SellCard"
 import { createOrder } from "../../redux/actions/order"
-import { toast } from "react-toastify"
 import { getProvisions } from '../../redux/actions/provision'
+import { SET_LOADING } from '../../redux/app'
 const GiftCards = () => {
   const [selectedItem, setSelectedItem] = useState({ provider: "", product_id: "", provision: "", provision_id: ""})
   const {giftcards} = useSelector(state => state.provision)
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
 
-  console.log(giftcards)
-
   const handleSubmit = (values) => {
-    console.log(values)
+
+    dispatch(SET_LOADING(true))
+  
     dispatch(createOrder(values)).then(result => {
       if(createOrder.fulfilled.match(result)){
         setOpen(false)
-        console.log(result.payload.message)
+        dispatch(SET_LOADING(false))
 
-        toast(result.payload.message, {type: "success"})
       }else{
-        toast(result.payload.message, {type: "error"})
-
+        dispatch(SET_LOADING(false))
       }
     })
 
@@ -60,7 +58,7 @@ const GiftCards = () => {
     </div>
     </section>
 
-    <AppModal title={`Sell ${selectedItem.provider}-${selectedItem.provision} GiftCard `} handleCancel={()=> setOpen(false)} isModalOpen={open}>
+    <AppModal title={`Buy ${selectedItem.provider}-${selectedItem.provision} GiftCard `} handleCancel={()=> setOpen(false)} isModalOpen={open}>
       <div>
         <SellFund handleSubmit={handleSubmit} selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
 

@@ -84,8 +84,6 @@ const Bitcoin = () => {
         }
         const selectedProvider = crypto?.provisions?.find(item => item.currency == "btc" )
 
-
-        console.log(selectedProvider, crypto)
     
   return (
     <>

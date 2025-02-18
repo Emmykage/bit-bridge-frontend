@@ -84,9 +84,9 @@ export const confirmDataPurchase = createAsyncThunk("data/buy-data-orders", asyn
     }
 });
 
-export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId}, {rejectWithValue}) => {
+export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId, payment_method}, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/confirm_payment`, {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/confirm_payment?payment_method=${payment_method}`, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }
