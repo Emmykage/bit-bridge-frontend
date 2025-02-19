@@ -1,9 +1,36 @@
-import React from 'react'
+import  { useEffect, useState } from 'react'
 import CartButton from '../button/CartButton'
 import { ExclamationOutlined } from '@ant-design/icons'
 import FormInput from '../formInput/FormInput'
+import { splitString } from '../../utils'
+import selectCurrencyOptions from '../../utils/selectCurrencyOption'
+import { converter } from '../../api/currencyConverter'
+import PlainSelect from '../formSelect/plainSelect'
+import PropTypes from 'prop-types'
 
-const ProvisionDetails = ({selectedProvider}) => {
+const ProvisionDetails = ({selectedProvider,
+    setValue,
+    value,
+    priceList,
+    handleSubmit
+
+}) => {
+    const serviceImage =  splitString(selectedProvider?.product?.provider)
+    const [btcValue, setBtcValue] = useState()
+
+    useEffect(() => {
+        const fetchBtcValue = async () => {
+            try {
+                const calcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                setBtcValue(calcValue);
+
+            } catch (error) {
+                console.error("Error fetching BTC value:", error.message);
+            }
+        };
+    
+        fetchBtcValue();
+    }, [])
   return (
     <section className="px-4">
 
@@ -55,7 +82,7 @@ const ProvisionDetails = ({selectedProvider}) => {
                 </div>
                 :
                 <div>
-                   <h3 className="text-xl font-semibold">Meter Code </h3>
+                   <h3 className="text-base font-semibold">Meter Code </h3>
 
                     <div className="flex flex-col gap-0">
                     <FormInput type="text"
@@ -76,9 +103,10 @@ const ProvisionDetails = ({selectedProvider}) => {
                 <div>
                      
                 <div className="my-0">
+                <h3 className="text-base font-semibold">Enter Email </h3>
+
 
                     <FormInput
-                        // value={}
                         onChange={(input) => {
                             setValue({
                                 ...value,
@@ -88,7 +116,7 @@ const ProvisionDetails = ({selectedProvider}) => {
                     type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
                 </div>
                 </div>
-                    <h3 className="text-xl font-semibold">Select Plan bundle </h3>
+                    <h3 className="text-base font-semibold">Select Plan/Bundle </h3>
 
                     <div className="flex flex-col gap-0">
                         <PlainSelect
@@ -142,6 +170,14 @@ const ProvisionDetails = ({selectedProvider}) => {
     </div>
     </section>
   )
+}
+
+ProvisionDetails.propTypes = {
+    selectedProvider: PropTypes.object,
+    setValue: PropTypes.func,
+    value: PropTypes.string,
+    priceList: PropTypes.array,
+    handleSubmit: PropTypes.func
 }
 
 export default ProvisionDetails
