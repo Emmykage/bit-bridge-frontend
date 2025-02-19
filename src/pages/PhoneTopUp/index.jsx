@@ -8,7 +8,7 @@ import LoadingComp from "../../compnents/loader/LoadingComp"
 const PhoneTopUp = () => {
   // const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {mobileProviders, dataBundles, loading, airtime} = useSelector(state => state.provision)
+  const { dataBundles, loading, airtime} = useSelector(state => state.provision)
   useEffect(()=> {
     dispatch(getProvisions())
   },[])

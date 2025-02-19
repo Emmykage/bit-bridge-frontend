@@ -10,6 +10,7 @@ import generateRequestId from "../../../utils/generateRequestID";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import { SET_LOADING } from "../../../redux/app";
 
 const PowerForm = () => {
     const [id, biller] = useOutletContext()
@@ -25,19 +26,23 @@ const PowerForm = () => {
       const handleFormSubmit = (values) => {
         setLoading(true)
 
+        dispatch(SET_LOADING(true))
+
        dispatch(createPurchaseOrder({...values, biller, service_type: "Electricity", request_id: generateRequestId()})).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
             console.log(data)
             setLoading(false)
+            dispatch(SET_LOADING(false))
+
             navigate(`/buy-power/${id}/payment-details?transaction_id=${data.id}`)
         }
         else{
             setLoading(false)
             const data = result.payload.message
             toast(data, {type: "error"})
-            console.log(data)
+            dispatch(SET_LOADING(false))
             setMessage(data)
             setErr(true)
 

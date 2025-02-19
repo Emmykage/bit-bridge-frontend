@@ -12,7 +12,8 @@ const ProvisionDetails = ({selectedProvider,
     setValue,
     value,
     priceList,
-    handleSubmit
+    handleSubmit,
+    label
 
 }) => {
     const serviceImage =  splitString(selectedProvider?.product?.provider)
@@ -82,7 +83,7 @@ const ProvisionDetails = ({selectedProvider,
                 </div>
                 :
                 <div>
-                   <h3 className="text-base font-semibold">Meter Code </h3>
+                   <h3 className="text-base font-semibold">{label} </h3>
 
                     <div className="flex flex-col gap-0">
                     <FormInput type="text"
@@ -177,7 +178,8 @@ ProvisionDetails.propTypes = {
     setValue: PropTypes.func,
     value: PropTypes.string,
     priceList: PropTypes.array,
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    label: PropTypes.string
 }
 
 export default ProvisionDetails

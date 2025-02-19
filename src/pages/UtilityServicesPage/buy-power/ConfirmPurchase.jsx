@@ -3,8 +3,8 @@ import ClassicBtn from "../../../compnents/button/ClassicButton"
 import { useEffect } from "react"
 import { getPurchaseOrder } from "../../../redux/actions/purchasePower"
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { nairaFormat } from "../../../utils/nairaFormat"
 import { CheckCircleOutlined } from "@ant-design/icons"
+import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
 
 const ComfirmPurchase = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
@@ -35,49 +35,8 @@ const ComfirmPurchase = () => {
         </div>
         }
       
-        <div className="p-4 border rounded-lg">
-        <div className="  md:flex-row flex-col flex gap-4">
-                <p className="md:w-60 border-b px-2 font-semibold">Token</p>
-                <p className="flex-1 border-b px-2 font-bold text-3xl">{purchaseOrder?.token}</p>
-            </div>
-            <div className="  md:flex-row my-4 flex-col flex gap-4">
-                <p className="md:w-60 md:border-b px-2 font-semibold">Customer Name</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.name}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Address</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.address}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Meter Number</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.meter_number}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Amount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.amount ?? 0)}</p>
-            </div>
-            <div className="gap-4 my-4 md:flex-row flex-col flex">
-                <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Total PayableAmount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
-            </div>
-            {/* <div className="border-b my-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 font-semibold">Transaction ID</p>
-                <p className="flex-1">{purchaseOrder?.amount}</p>
-            </div> */}
-              <div className="gap-4 my-4 flex">
-                <p className="w-60 md:w-60 border-b px-2 font-semibold">Transaction ID</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.transaction_id}</p>
-            </div>
-            <div className="gap-4 my-4 md:flex-row flex-col  flex">
-                <p className="w-60 border-b px-2  md:w-60 font-semibold">Status</p>
-                <p className="flex-1 border-b px-2 text-green-700">{purchaseOrder?.status}</p>
-            </div>
-            <div className="gap-4 my-4 md:flex-row flex-col  flex">
-                <p className="w-60 px-2 md:w-60 font-semibold">Purchase ID</p>
-                <p className="flex-1 px-2">{purchaseOrder?.id}</p>
-            </div>
-        </div>
-
+                <BillOrderDetails purchaseOrder={purchaseOrder}/>
+        
         <div>
             <ClassicBtn onclick={()=> navigate("/")}>Back to Home Page</ClassicBtn>
         </div>

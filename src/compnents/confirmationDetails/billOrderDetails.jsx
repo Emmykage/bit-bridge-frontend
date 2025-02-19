@@ -9,6 +9,13 @@ const BillOrderDetails = ({
 
   return (
     <div className="p-4 border rounded-lg">
+        {
+            purchaseOrder?.token && 
+                    <div className="  md:flex-row flex-col flex gap-4">
+                    <p className="md:w-60 border-b px-2 font-semibold">Token</p>
+                    <p className="flex-1 border-b px-2 font-bold text-3xl">{purchaseOrder?.token}</p>
+                </div>
+        }
     {
         purchaseOrder?.name && 
         <div className="gap-4 my-4 md:flex-row flex-col  flex">

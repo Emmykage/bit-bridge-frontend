@@ -101,6 +101,8 @@ const UtilityView = () => {
     <div>
     <Header/>
     <ProvisionDetails
+    label="Meter Number"
+    service_type="tv"
     setValue={setValue}
     value={value}
     priceList={priceList}
