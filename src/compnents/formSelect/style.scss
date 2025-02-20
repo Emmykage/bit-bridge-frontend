@@ -1,12 +1,25 @@
-.ant-form-item{
+.ant-form-item.formInput{
+    .ant-form-item-label{
+        label{
+            @apply text-white;
+
+        }
+    }
+
+
     .ant-select{
+
          .ant-select-selector{
-            background-color: none;
+            background: none;
     @apply border border-alt py-3 text-gray-200;
 
 }
 }
 &.whiteBg{
+    label{
+        @apply text-black;
+
+    }
     .ant-select{
         .ant-select-selector{
    @apply  text-gray-800;

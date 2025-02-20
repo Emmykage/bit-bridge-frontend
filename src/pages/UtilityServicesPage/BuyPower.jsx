@@ -7,11 +7,13 @@ import powerDistributions from "../../data/powerDistributions.json"
 import { getProvisions } from "../../redux/actions/provision"
 import ElectricCard from "../../compnents/product-card/ElectricCard"
 import Banner from "../../compnents/banner/Banner"
+import { useNavigate } from "react-router-dom"
 
 const BuyPower = () => {
     const dispatch = useDispatch()
-    const {services,mobileProviders} =  useSelector(state => state.product)
-    console.log(services)
+    const {services, mobileProviders} =  useSelector(state => state.product)
+
+    const navigate = useNavigate()
 
 
     useEffect(()=> {
@@ -33,7 +35,7 @@ const BuyPower = () => {
 
             <div className="max-w-7xl m-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {powerDistributions.map(({id, description,name, image}) => (
-                   <ElectricCard key={id} id={id} description={description} name={name} image={image} />
+                   <ElectricCard onClick={() => navigate(`/dashboard/utilities/buy-power/${id}`)} key={id} id={id} description={description} name={name} image={image} />
                 ))}
 
 

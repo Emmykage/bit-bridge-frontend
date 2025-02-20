@@ -92,7 +92,6 @@ const Header = () => {
                                }
                             else  if(userLogin.rejected.match(result)){
                               dispatch(SET_LOADING(false) )
-                              toast(result.payload.message, {type: "error"})
                 
                             }
                           }

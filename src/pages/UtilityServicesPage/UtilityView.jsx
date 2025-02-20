@@ -39,16 +39,26 @@ const UtilityView = () => {
     },[])
 
 
-    useEffect(() => {
-        if(location.hash === "#details"){
+    const toView = () => {
+        console.log("trigged ==>", location.hash)
+            console.log("it equals", sectionRef.current)
             sectionRef.current.scrollIntoView({behavior: "smooth" })
 
+    }
+
+    useEffect(() => {
+        if(location.hash == "#details"){
+            toView()
         }
     },[location])
 
 
      useEffect(()=> {
+        console.log(selectedProvider, "he will come")
+
             if(selectedProvider){
+                console.log("get list")
+
               const provider =  splitString(selectedProvider?.product?.provider)
     
                 dispatch(getPriceList({service_type: selectedProvider?.service_type, provider: provider}))
@@ -73,6 +83,7 @@ const UtilityView = () => {
             
                         dispatch(SET_LOADING(false))
                         navigate(`/utility-services/${id}/payment-details?transaction_id=${data.id}#details`)
+                         toView()
                     }
                     else{
                         dispatch(SET_LOADING(false))

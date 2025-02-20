@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom"
+import { Outlet, useNavigate, useParams } from "react-router-dom"
 import Header from "../../../compnents/header/Header"
 import ProductCard from "../../../compnents/product-card/ProductCard"
 
@@ -12,7 +12,7 @@ import ElectricCard from "../../../compnents/product-card/ElectricCard"
 const ViewBuyPower = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
-   
+   const navigate = useNavigate()
     const {mobileProviders} =  useSelector(state => state.product)
  
     const selectedProvider =powerDistributions?.find(item => item.id == id)
@@ -59,7 +59,7 @@ const ViewBuyPower = () => {
 
             <div className="max-w-7xl m-auto grid md:grid-cols-3 gap-10">
                 {powerDistributions.map(({id, description,name, image}) => (
-                   <ElectricCard key={id} id={id} description={description} name={name} image={image} />
+                   <ElectricCard onClick={() => () => navigate(`/buy-power/${id}/payment-form`)} key={id} id={id} description={description} name={name} image={image} />
                 ))}
 
 

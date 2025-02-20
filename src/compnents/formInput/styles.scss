@@ -20,9 +20,12 @@
              
 
         // }
-        .ant-input-number-input-wrap{
+
+        .ant-input-number{
+            background: none;
             @apply border border-alt  text-white;
         }
+    
     
 
     }

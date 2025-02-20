@@ -1,6 +1,9 @@
 .homeDashboard{
     .no-scroll{
-        // background-color: red;
         scrollbar-width: none;
+    }
+
+    .ant-select-selector{
+        color: black !important;
     }
 }

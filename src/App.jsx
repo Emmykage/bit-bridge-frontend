@@ -60,6 +60,12 @@ import Ethereum from './pages/dashboard/crypto-exchange/Ethereum'
 import ForgotPasswordPage from './pages/auth/ForgotPassword'
 import ResetPasswordPage from './pages/auth/PasswordReset'
 import ComfirmCablePurchase from './pages/UtilityServicesPage/buy-cable/ConfirmPurchase'
+import Utility from './pages/dashboard/utility/Utility'
+import PowerUtilities from './pages/dashboard/utility/power/PowerUtilities'
+import PowerView from './pages/dashboard/utility/power/PowerView'
+import DashboardPowerForm from './pages/dashboard/utility/power/PowerForm'
+import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDetails'
+import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -121,6 +127,17 @@ function App() {
       
       <Route path='approved-gift-cards' element={<GiftCardOrder/>} />
       <Route path='wallet' element={<Account/>} />
+      <Route path='utilities' element={<Utility/>}/>
+      <Route path='utilities/buy-power' element={<PowerUtilities/>}/>
+      <Route path='utilities/buy-power/:id' element={<PowerView/>}>
+      <Route path='powerform' element={<DashboardPowerForm/>}/>
+      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
+      <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
+
+      
+
+      </Route>
+
       <Route path='gift-cards' element={<GiftCards/>} />
       <Route path='transactions' element={<Transactions/>}>
         <Route path='orders' element={<Orders/>} />
