@@ -100,8 +100,10 @@ import { toast } from 'react-toastify';
               backgroundColor: 'rgba(255,255,255,0.25)',
               backdropFilter: 'blur(4px)',
             },
-            title: 'Event Title, with Configurable Image',
-            subTitle: 'Event Introduction Description Text',
+            title: 'Securely Bridge Your Digital Assets',
+            subTitle: 'Access your BitBridge account and seamlessly manage your digital assets.',
+            text: " Enjoy a secure, fast, and user-friendly experience while bridging assets across networks",
+            
             action: (
               <Button
                 size="large"
