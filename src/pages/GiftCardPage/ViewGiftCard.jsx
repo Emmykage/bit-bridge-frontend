@@ -94,12 +94,12 @@ const ViewGiftCard = () => {
 
                 <div className="flex flex-col gap-0">
 
-                        <FormSelect type="nubmer"
+                        <FormSelect  type="nubmer"
                         value={value}
                         onChange={(input)=> {setValue(input)}}
                         placeholder={"Enter Value"}
                         options={selectCurrencyOptions(selectedProvider?.currency)}
-                        className={""}/>
+                        className={"whiteBg"}/>
 
 
                         <div className="flex-1 text-sm mt-2 from-gray-800">

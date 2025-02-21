@@ -4,7 +4,7 @@ import ProductCard from "../../compnents/product-card/ProductCard"
 
 import { useDispatch, useSelector } from "react-redux"
 import { SET_LOADING } from "../../redux/app"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { splitString } from "../../utils"
 
 import { getProvisions } from "../../redux/actions/provision"
@@ -35,9 +35,15 @@ const ViewMobileTopUp = () => {
 
     const selectedProvider = mobileProviders?.find(item => item.id === id)
 
+    const sectionRef = useRef(null)
 
 
+    const toView = () => {
+        console.log("trigged ==>", location.hash)
+            console.log("it equals", sectionRef.current)
+            sectionRef.current.scrollIntoView({behavior: "smooth" })
 
+    }
 
     useEffect(()=> {
 
@@ -65,6 +71,9 @@ const ViewMobileTopUp = () => {
 
            dispatch(SET_LOADING(false))
             navigate(`/phone-top-up/${id}/payment-details?transaction_id=${data.id}#details`)
+            setTimeout(() => {
+                toView();
+            }, 300);
         }
         else{
             dispatch(SET_LOADING(false))
@@ -113,12 +122,12 @@ const ViewMobileTopUp = () => {
       
       
 
-        <section id="details" className="bg-white ">
+      <section id="details" ref={sectionRef} className="bg-white ">
 
-            <div className="m-auto max-w-7xl shadow border px-4">
-                <Outlet context={[id]}/>
-            </div>
-  
+        <div className="m-auto max-w-7xl shadow border px-4">
+            <Outlet context={[id]}/>
+        </div>
+
         </section>
 
         <section className="px-4 bg-gray-200 py-10">

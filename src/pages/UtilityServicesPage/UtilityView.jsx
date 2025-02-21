@@ -83,7 +83,9 @@ const UtilityView = () => {
             
                         dispatch(SET_LOADING(false))
                         navigate(`/utility-services/${id}/payment-details?transaction_id=${data.id}#details`)
-                         toView()
+                        setTimeout(() => {
+                            toView();
+                        }, 300);
                     }
                     else{
                         dispatch(SET_LOADING(false))
@@ -103,12 +105,7 @@ const UtilityView = () => {
     
     
         }
- 
-
-
-            
-            console.log(value)
-  return (
+      return (
     <div>
     <Header/>
     <ProvisionDetails

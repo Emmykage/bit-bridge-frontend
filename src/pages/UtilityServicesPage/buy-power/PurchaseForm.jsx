@@ -70,7 +70,7 @@ const PowerForm = () => {
             onFinish={handleFormSubmit}
             form={form}
             initialValues={{
-                amount: "0.00",
+                amount: "",
                 phone: "",
                 meter_type: "",
                 billersCode: "",
