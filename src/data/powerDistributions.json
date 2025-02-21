@@ -10,7 +10,7 @@
 {
     "id": 2,
     "name": "Abuja Electric Payment - AEDC",
-    "description": "Prepaid and Postpaid IKEDC payment",
+    "description": "Prepaid and Postpaid AEDC payment",
     "image": "/images/power-providers/Abuja-Electric.jpg",
     "serviceID": "abuja-electric",
     "biller": "abuja"
@@ -20,7 +20,7 @@
 {
     "id": 4,
     "name": "Enugu Electric - EEDC",
-    "description": "Prepaid and Postpaid IKEDC payment",
+    "description": "Prepaid and Postpaid EEDC payment",
     "image": "/images/power-providers/Enugu-Electric-EEDC.jpg",
     "serviceID": "enugu-electric",
     "biller": "enugu"
