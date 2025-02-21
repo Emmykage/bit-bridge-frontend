@@ -35,7 +35,7 @@ const BuyPower = () => {
 
             <div className="max-w-7xl m-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {powerDistributions.map(({id, description,name, image}) => (
-                   <ElectricCard onClick={() => navigate(`/dashboard/utilities/buy-power/${id}`)} key={id} id={id} description={description} name={name} image={image} />
+                   <ElectricCard onClick={() => navigate(`/buy-power/${id}/payment-form`)} key={id} id={id} description={description} name={name} image={image} />
                 ))}
 
 

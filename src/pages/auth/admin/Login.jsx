@@ -11,7 +11,7 @@ import enUS from "antd/es/locale/en_US"
 
 import { ConfigProvider, Tabs, theme } from 'antd';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 // import logo from "../../../assets/logos/2.png"
 import logo from "../../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,7 +51,7 @@ export const AdminLogin = () => {
           console.log(values)
         }}
           logo={logo}
-          title="BitBridge Global Admin Login"
+          title={<NavLink to={"/"}> BitBridge Global Admin Login</NavLink>}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
             backdropFilter: 'blur(4px)',

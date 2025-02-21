@@ -51,6 +51,17 @@ const BillOrderDetails = ({
         </div>
 
     }
+    {
+        purchaseOrder?.amount && 
+        <div className="gap-4 my-4 md:flex-row flex-col  flex">
+            <p className="w-60 md:w-60 border-b px-2 font-semibold">Service Charge</p>
+            <p className="flex-1 border-b px-2">{nairaFormat(100)}</p>
+        </div>
+
+    }
+    
+
+    
 
 {
         purchaseOrder?.amount && 

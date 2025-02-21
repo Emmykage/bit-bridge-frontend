@@ -63,7 +63,7 @@ export const Signup = () => {
           console.log(values)
         }}
           logo={logo}
-          title="BitBridge Global"
+          title={<NavLink to={"/"}> BitBridge Global</NavLink>}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
             backdropFilter: 'blur(4px)',

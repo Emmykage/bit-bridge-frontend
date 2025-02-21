@@ -49,6 +49,16 @@ const ComfirmDataPurchase = () => {
                 <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Amount</p>
                 <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.amount ?? 0)}</p>
             </div>
+
+            {
+        purchaseOrder?.amount && 
+        <div className="gap-4 my-4 md:flex-row flex-col  flex">
+            <p className="w-60 md:w-60 border-b px-2 font-semibold">Service Charge</p>
+            <p className="flex-1 border-b px-2">{nairaFormat(100)}</p>
+        </div>
+
+    }
+    
             <div className="gap-4 my-4 md:flex-row flex-col flex">
                 <p className="w-60 md:w-60 md:border-b px-2 font-semibold">Total Payable Amount</p>
                 <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>

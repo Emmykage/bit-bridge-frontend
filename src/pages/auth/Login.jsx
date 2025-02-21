@@ -24,11 +24,10 @@ import {
     cursor: 'pointer',
   };
   import enUS from "antd/es/locale/en_US"
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
-import { toast } from 'react-toastify';
   
   const LoginPage = () => {
 
@@ -80,7 +79,9 @@ import { toast } from 'react-toastify';
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           logo={logo}
           backgroundVideoUrl="https://gw.alipayobjects.com/v/huamei_gcee1x/afts/video/jXRBRK_VAwoAAAAAAAAAAAAAK4eUAQBr"
-          title="BitBridge Global"
+          // title="BitBridge Global"
+          title={<NavLink to={"/"}> BitBridge Global</NavLink>}
+
           containerStyle={{
             backgroundColor: 'rgba(0, 0, 0,0.65)',
             backdropFilter: 'blur(4px)',
