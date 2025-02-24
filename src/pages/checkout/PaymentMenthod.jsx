@@ -40,7 +40,6 @@ const PaymentMenthod = () => {
     const fetchTotal = async() => {
         const result = await  calculateTotalUSD()
         setConvertedTotal(result)
-        console.log(result)
     }
     useEffect(()=> {
         fetchTotal()
