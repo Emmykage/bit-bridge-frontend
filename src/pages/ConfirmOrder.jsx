@@ -51,6 +51,7 @@ const ConfirmOrder = () => {
 
 }, [])
    const fetchTotal = async() => {
+    console.log("first")
         const result = await  calculateTotalUSD()
         setConvertedTotal(result)
     }

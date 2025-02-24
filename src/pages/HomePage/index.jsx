@@ -19,7 +19,7 @@ const Home = () => {
               <h2 className="lg:text-5xl text-3xl text-white font-bold">
                Get Awesome trading experience
               </h2>
-              <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Buy and Sell Gift Card, Benefit from fast and Secured crypto transaction</p>
+              <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Buy and Sell Gift Card and pay Utility bills</p>
               <ClassicBtn onclick={()=>navigate("/login")} className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>
             </div>
           </div>

@@ -30,7 +30,7 @@ const Footer = () => {
 
                 <li> <NavLink to={"/gift-cards"}>Gift Cards </NavLink> </li>
                 <li> <NavLink to={"/phone-top-up"}> Phone Top Up</NavLink> </li>
-                <li><NavLink to={"/crypto-exchange"}>Crypto Cards</NavLink></li>
+                {/* <li><NavLink to={"/crypto-exchange"}>Crypto Cards</NavLink></li> */}
                 
               </ul>
             </div>

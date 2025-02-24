@@ -15,7 +15,7 @@ const navigate = useNavigate()
   const items = [
     {
       id: 1,
-      image: "/backgrounds/swipe-1.jpg",
+      image: "/backgrounds/fast-browsing.webp",
       text: "Enjoy seamless browsing with fast and easy mobile data top-ups for all networks.",
       pos: "left"
     },

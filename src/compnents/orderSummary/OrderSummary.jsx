@@ -37,15 +37,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
 
         }, [cartItems])
 
-        // useEffect(()=> {
-
-        //     (async() => {
-        //        const newTotal = await converter({fromCurr: totalAmount, toCurr: "usd", amount: totalAmount})
-
-        // })()
-
-        // }, [cartItems])
-      
+          
 
   return (
     <div className='bg-white p-4'>

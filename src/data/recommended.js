@@ -13,7 +13,7 @@ const recommendedData = [
     },
     {
         id: 3,
-        name: "Solar Installation crypto",
+        name: "Solar Installation",
         link: "/phone-top-up",
         image: "/images/solar-installation.jpg"
     }]

@@ -79,6 +79,7 @@ const PaymentMenthod = () => {
 
     }
 
+
   return (
 
     <div className='m-auto '>

@@ -114,13 +114,21 @@ export const addToCartItems = (cartData) => {
 
   export const calculateTotalUSD = async() => {
     let convertedAmount = 0
+
     const cart_items = getCartItems()
+
+
 
 
     for(const item of cart_items){
       const res = await converter({fromCurr: item?.currency, toCurr: "usd", amount: item?.amount ?? 0})
+      console.log("fdsfdfdfdfsd===>", res)
+
       convertedAmount += Number(res.calc);   
 
     }
+
+    console.log(convertedAmount)
+
     return convertedAmount
   }
