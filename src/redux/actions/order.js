@@ -16,6 +16,7 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
         formData.append(`order_detail[order_items_attributes][${index}][amount]`, item?.amount);
         item?.provision_id && formData.append(`order_detail[order_items_attributes][${index}][provision_id]`, item?.provision_id);
         item?.quantity && formData.append(`order_detail[order_items_attributes][${index}][quantity]`, item?.quantity);
+        item?.currency && formData.append(`order_detail[order_items_attributes][${index}][currency]`, item?.currency);
         
 
       });  

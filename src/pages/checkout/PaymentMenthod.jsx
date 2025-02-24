@@ -31,10 +31,12 @@ const PaymentMenthod = () => {
             quantity: 1,
             amount: item.amount,
             product_id: item.product_id,
-            provision_id: item.provision_id 
+            provision_id: item.provision_id,
+            currency: item.currency
 
         }
     ))
+
 
 
     const fetchTotal = async() => {
@@ -48,9 +50,9 @@ const PaymentMenthod = () => {
     },[cartItems])
 
 
+
     const handlePayment = () => {
 
-        console.log(convertedTotal)
         convertedTotal < wallet?.balance ? 
         dispatch(createOrder({
         
@@ -78,6 +80,7 @@ const PaymentMenthod = () => {
         : setAlertText(true)
 
     }
+
 
 
   return (

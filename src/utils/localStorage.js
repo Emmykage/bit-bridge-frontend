@@ -1,4 +1,3 @@
-import { toast } from "react-toastify"
 import { converter } from "../api/currencyConverter";
 import { message } from "antd";
 
@@ -112,23 +111,19 @@ export const addToCartItems = (cartData) => {
     return amount
   }
 
-  export const calculateTotalUSD = async() => {
+  export const calculateTotalUSD = async(cart_items = getCartItems()) => {
     let convertedAmount = 0
 
-    const cart_items = getCartItems()
+    // const cart_items = getCartItems()
 
 
 
 
     for(const item of cart_items){
       const res = await converter({fromCurr: item?.currency, toCurr: "usd", amount: item?.amount ?? 0})
-      console.log("fdsfdfdfdfsd===>", res)
-
       convertedAmount += Number(res.calc);   
 
     }
-
-    console.log(convertedAmount)
 
     return convertedAmount
   }

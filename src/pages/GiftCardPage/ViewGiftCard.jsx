@@ -50,6 +50,8 @@ const ViewGiftCard = () => {
 
                }
 
+
+               console.log(selectedProvider)
                useEffect(() => {
                 const fetchBtcValue = async () => {
                     try {

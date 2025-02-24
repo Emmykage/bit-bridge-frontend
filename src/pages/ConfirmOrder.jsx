@@ -51,8 +51,8 @@ const ConfirmOrder = () => {
 
 }, [])
    const fetchTotal = async() => {
-    console.log("first")
-        const result = await  calculateTotalUSD()
+
+    const result = await  calculateTotalUSD()
         setConvertedTotal(result)
     }
     useEffect(()=> {
@@ -60,6 +60,8 @@ const ConfirmOrder = () => {
      
     
     },[])
+
+    console.log(convertedTotal, order)
   return (
     <section className="py-10 px-4 sm:px-10 ">
 
@@ -172,7 +174,7 @@ const ConfirmOrder = () => {
           </div>
 
         </div>
-        <OrderSummary convertedTotal={convertedTotal} totalAmount={Number(order?.total_amount)} cartItems={order?.order_items} counter={order?.order_items?.length} />
+        <OrderSummary convertedTotal={Number(order?.total_amount)} netAmount={order?.net_total}  cartItems={order?.order_items} counter={order?.order_items?.length} />
       </div>
 
     </section>

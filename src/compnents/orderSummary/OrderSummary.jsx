@@ -8,13 +8,15 @@ import { useEffect, useState } from 'react'
 import { converter } from '../../api/currencyConverter'
 import { CgArrowsExchangeAlt } from 'react-icons/cg'
 
-const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
+const OrderSummary = ({cartItems, VAT, netAmount, convertedTotal}) => {
     const dispatch = useDispatch()
     const [conversions, setConversion] = useState()
     
-    const VAT = totalAmount/100 * 10
+    const _VAT = VAT ?? convertedTotal * (10/ 100)
+    const _netAmount = netAmount ?? _VAT + convertedTotal
 
        const handleConversion = async(fromCurr, toCurr, amount)=> {
+        console.log(fromCurr)
             const newvalue = await converter({fromCurr, toCurr, amount})
 
 
@@ -23,6 +25,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
         }
 
         useEffect(()=> {
+            // console.log("initiation items coversion");
 
             (async() => {
                 const _cartItems = await Promise.all( cartItems.map(async(item) => ({
@@ -36,6 +39,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
         })()
 
         }, [cartItems])
+
 
           
 
@@ -87,7 +91,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
         VAT
     </span>
     <span className='font-semibold text-lg'>
-        {nairaFormat((VAT), "usd")}
+        {nairaFormat((_VAT), "usd")}
     </span>
 </div>
 
@@ -96,7 +100,7 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
         NET TOTAL
     </span>
     <span className='font-semibold text-lg'>
-        {nairaFormat(VAT + totalAmount, "usd")}
+        {nairaFormat(_netAmount, "usd")}
     </span>
 </div>
 
@@ -107,7 +111,9 @@ const OrderSummary = ({cartItems, totalAmount, convertedTotal}) => {
 OrderSummary.propTypes = {
     cartItems: PropTypes.array,
     totalAmount: PropTypes.number,
-    convertedTotal: PropTypes.number
+    convertedTotal: PropTypes.number,
+    VAT: PropTypes.number , 
+    netAmount: PropTypes.number
 }
 
 export default OrderSummary
