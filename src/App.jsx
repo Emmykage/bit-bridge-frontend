@@ -66,6 +66,7 @@ import PowerView from './pages/dashboard/utility/power/PowerView'
 import DashboardPowerForm from './pages/dashboard/utility/power/PowerForm'
 import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDetails'
 import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
+import MainServices from './pages/services'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -110,6 +111,7 @@ function App() {
     </Route>
     <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
     <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
+    <Route path='/services' element={<MainLayout><Services/></MainLayout>} />
     <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
@@ -169,7 +171,7 @@ function App() {
       <Route path='purchases/:id' element={<ViewOrder/>}/>
       <Route path='products' element={<Products/>}/>
       <Route path='products/:id' element={<ViewProduct/>}/>
-      <Route path='services' element={<Services/>}/>
+      <Route path='services' element={<MainServices/>}/>
       <Route path='add-product' element={<AddProduct/>}/>
       <Route path='transactions' element={<AdminTransactions/>}/>
       <Route path='users' element={<Users/>}/>

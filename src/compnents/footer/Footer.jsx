@@ -25,10 +25,10 @@ const Footer = () => {
               </ul>
             </div>
             <div className="bg-red-30 text-center md:text-left">
-              <h4 className="text-lg text-alt font-semibold">Live on Crypto</h4>
+              <h4 className="text-lg text-alt font-semibold">Links</h4>
               <ul >
 
-                <li> <NavLink to={"/gift-cards"}>Gift Cards </NavLink> </li>
+                <li> <NavLink to={"/utility-services"}>Utility Bill </NavLink> </li>
                 <li> <NavLink to={"/phone-top-up"}> Phone Top Up</NavLink> </li>
                 {/* <li><NavLink to={"/crypto-exchange"}>Crypto Cards</NavLink></li> */}
                 

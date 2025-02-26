@@ -52,9 +52,10 @@ const Nav = ({ open, setToggle }) => {
       <ul className="flex px-5  md:px-0 py-10 md:py-5 b flex-col md:flex-row hidde gap-5 text-lg font-semibold">
       <li to="#" className="font-medium">
           <NavLink className={({isActive}) => isActive ? active : inActive} to={"/"}>Home</NavLink>
-        </li> <li to="#" className="font-medium">
-          <NavLink className={({isActive}) => isActive ? active : inActive} to={"/gift-cards"}>Gift Cards</NavLink>
         </li>
+         {/* <li to="#" className="font-medium">
+          <NavLink className={({isActive}) => isActive ? active : inActive} to={"/gift-cards"}>Gift Cards</NavLink>
+        </li> */}
         <li>
           <NavLink className={({isActive}) => isActive ? active : inActive} to={"/phone-top-up"}>Phone Top Ups</NavLink>
         </li>

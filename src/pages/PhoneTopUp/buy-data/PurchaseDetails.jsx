@@ -6,12 +6,27 @@ import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom
 import { nairaFormat } from "../../../utils/nairaFormat"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
+import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
+import PaymentOptions from "../../../compnents/paymentOptions/PaymentOptions"
 
 const PurchaseDataDetails = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
     const [id] = useOutletContext()
+    const {user} = useSelector(state =>  state.auth)
 
+    const componentProps = {
+        email: purchaseOrder.email ?? user?.emal,
+        amount: purchaseOrder.total_amount * 100,
+      
+        publicKey: "pk_test_f833f603b86e23ffa37f40f2e90056de9b928bf7",
+        text: 'Pay With Card',
+        onSuccess: () => {
+          handleConfirmation("card")
+            },
+        // onClose: () => alert('Are you sure'),
+      }; 
+    
     const navigate = useNavigate()
 
     const queryId = searchParams.get("transaction_id")
@@ -23,7 +38,6 @@ const PurchaseDataDetails = () => {
                 if(confirmDataPurchase.fulfilled.match(result)){
                     const data  = result.payload.data 
                     navigate(`/phone-top-up/${id}/confirm-payment?transaction_id=${data?.id}`)
-                    console.log("sasdsdasdsda",result.payload)
                 }else{
                     const data  = result.payload 
                     console.log(data)
@@ -41,7 +55,7 @@ const PurchaseDataDetails = () => {
     },[])
     return (
         <>
-        <div className="py-20 my-10">
+        <div className="py-20">
 
         {message && 
           <div className="bg-green-200 p-4 my-4">
@@ -54,48 +68,15 @@ const PurchaseDataDetails = () => {
         </div>
         }
       
-        <div className="p-4 border rounded-lg">
-            <div className="  md:flex-row flex-col flex gap-4">
-                <p className="md:w-60 border-b px-2 font-semibold">Customer Name</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.name}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 border-b px-2 font-semibold">Address</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.address}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 border-b px-2 font-semibold">Meter Number</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.meter_number}</p>
-            </div>
-            <div className="my-4 gap-4 md:flex-row flex-col  flex">
-                <p className="w-60 md:w-60 border-b px-2 font-semibold">Amount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.amount ?? 0)}</p>
-            </div>
-            {
-        purchaseOrder?.amount && 
-        <div className="gap-4 my-4 md:flex-row flex-col  flex">
-            <p className="w-60 md:w-60 border-b px-2 font-semibold">Service Charge</p>
-            <p className="flex-1 border-b px-2">{nairaFormat(100)}</p>
-        </div>
-
-    }
-    
-            <div className="gap-4 my-4 flex">
-                <p className="w-60 md:w-60 border-b px-2 font-semibold">Total Payable Amount</p>
-                <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
-            </div>
-            <div className="gap-4 my-4 md:flex-row flex-col  flex">
-                <p className="w-60 border-b px-2  md:w-60 font-semibold">Status</p>
-                <p className="flex-1 border-b px-2">{purchaseOrder?.status}</p>
-            </div>
-            <div className="gap-4 my-4 md:flex-row flex-col  flex">
-                <p className="w-60 px-2 md:w-60 font-semibold">Order ID</p>
-                <p className="flex-1 px-2">{purchaseOrder?.id}</p>
-            </div>
-        </div>
+        <BillOrderDetails 
+              purchaseOrder={purchaseOrder}/>
 
         <div>
-            <ClassicBtn onclick={handleConfirmation}>Confirm Payment</ClassicBtn>
+ <PaymentOptions 
+      componentProps={componentProps}
+      handleConfirmation={handleConfirmation}
+      purchaseOrder={purchaseOrder}
+      />            {/* <ClassicBtn onclick={handleConfirmation}>Confirm Payment</ClassicBtn> */}
         </div>
 
         </div>

@@ -9,6 +9,7 @@ import PlainSelect from '../formSelect/plainSelect'
 import PropTypes from 'prop-types'
 
 const ProvisionDetails = ({selectedProvider,
+    linkTitle,
     setValue,
     value,
     priceList,
@@ -43,7 +44,7 @@ const ProvisionDetails = ({selectedProvider,
         <div>
 
             <div className="text-sm my-2 text-gray-600 font-medium">
-                <p className="capitalize">Mobile Top Up &gt; {selectedProvider?.product?.provider}</p>
+                <p className="capitalize">{linkTitle} &gt; {selectedProvider?.product?.provider}</p>
             </div>
 
             <h3 className="text-2xl font-medium p-">{selectedProvider?.name}</h3>
@@ -179,7 +180,8 @@ ProvisionDetails.propTypes = {
     value: PropTypes.string,
     priceList: PropTypes.array,
     handleSubmit: PropTypes.func,
-    label: PropTypes.string
+    label: PropTypes.string,
+    linkTitle: PropTypes.string
 }
 
 export default ProvisionDetails
