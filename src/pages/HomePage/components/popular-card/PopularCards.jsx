@@ -22,7 +22,8 @@ const PopularCards = () => {
               BitBridge Global has a catalogue of mobile data top ups and recharge vouchers, But below are the  popular ones
             </p>
 
-            <div className='grid my-10 grid-cols-4 overflow-x-auto md:grid-cols-5 gap-3 md:gap-8 '>
+            <div className='no-scroll my-10 md:grid flex-nowrap md:grid-cols-4 md:w-full flex-row overflow-x-auto flex w-full bg- gap-3 md:gap-8 '>
+
               {mobileProviders?.map(item => (
                 <SimpleCard key={item.id} provider={item.provider}  id={item.id} />
               ))}
