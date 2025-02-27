@@ -1,31 +1,33 @@
 
 import { useNavigate } from "react-router-dom"
-import cashback from "../../../../assets/images/deals/gift-card.png"
+import solar from "../../../../assets/images/deals/solar-installation.webp"
+import cable from "../../../../assets/images/deals/cable.webp"
+import mobile from "../../../../assets/images/deals/mobile.webp"
 import ClickButton from "../../../../compnents/button/Button"
 
 const ExclusiveDeals = () => {
     const navigate = useNavigate()
     const items = [{
         id: 1,
-        promo: "10% on Gift Card Purchase",
-        offer: "Experience effortless global connectivity in over 180 countries with BitBridge Global eSIMs at an unbeatable price",
-        img: cashback,
-        link: "/gift-cards"
+        promo: "10% on Solar Installation",
+        offer: "Get 10% on Solar installation services when you request on  BitBridge Global",
+        img: solar,
+        link: "#"
     },
     {
         id: 1,
-        promo: "50% Cashback on eSims",
+        promo: "Fast Cable Subscription",
         offer: "Experience effortless global connectivity in over 180 countries with BitBridge Global eSIMs at an unbeatable price",
-        img: cashback,
-        link: "/gift-cards"
+        img: cable,
+        link: "#"
 
     },
     {
         id: 1,
-        promo: "50% Cashback on eSims",
-        offer: "Experience effortless global connectivity in over 180 countries with BitBridge Global eSIMs at an unbeatable price",
-        img: cashback,
-        link: "/gift-cards"
+        promo: "50% Cashback on Mobile top up",
+        offer: "Experience effortless global connectivity  with BitBridge Data subscription and mobile recharge at an unbeatable price",
+        img: mobile,
+        link: "#"
 
     }]
   return (

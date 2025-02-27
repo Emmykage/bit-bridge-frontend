@@ -18,11 +18,11 @@ const PopularCards = () => {
             <p className='font-semibold text-blue-600'>WHATS TRENDING</p>
 
             <h2 className="md:text-4xl text-3xl font-semibold ">Popular Offers</h2>
-            <p className="font-normal text-xl">
+            <p className="font-normal sm:text-xl text-base">
               BitBridge Global has a catalogue of mobile data top ups and recharge vouchers, But below are the  popular ones
             </p>
 
-            <div className='grid my-10 grid-cols-4 md:grid-cols-5 gap-3 md:gap-8 '>
+            <div className='grid my-10 grid-cols-4 overflow-x-auto md:grid-cols-5 gap-3 md:gap-8 '>
               {mobileProviders?.map(item => (
                 <SimpleCard key={item.id} provider={item.provider}  id={item.id} />
               ))}
