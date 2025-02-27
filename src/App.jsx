@@ -67,6 +67,7 @@ import DashboardPowerForm from './pages/dashboard/utility/power/PowerForm'
 import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDetails'
 import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
 import MainServices from './pages/services'
+import ProductView from './pages/ProductPage/ViewProduct'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -112,6 +113,7 @@ function App() {
     <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
     <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
     <Route path='/services' element={<MainLayout><Services/></MainLayout>} />
+    <Route path='/product/:id' element={<MainLayout><ProductView/></MainLayout>} />
     <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
     <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />

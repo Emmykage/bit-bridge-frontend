@@ -1,10 +1,10 @@
 const recommendedData = [
-    {
-        id: 1,
-        name: "Apple US Gift Card",
-        image: "/images/providers/apple.webp",
-        link: "/gift-cards"
-    },
+    // {
+    //     id: 1,
+    //     name: "Apple US Gift Card",
+    //     image: "/images/providers/apple.webp",
+    //     link: "/gift-cards"
+    // },
     {
         id: 2,
         name: "MTN Data Bundle",

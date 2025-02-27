@@ -17,9 +17,9 @@ const Home = () => {
           <div className="max-w-app-layout  items-center h-full grid sm:grid-cols-2 m-auto w-full ">
             <div className="p-5 bg-gray-900/40 rounded-lg">
               <h2 className="lg:text-5xl text-3xl text-white font-bold">
-               Get Awesome trading experience
+               Get Awesome experience paying you bills
               </h2>
-              <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Buy and Sell Gift Card and pay Utility bills</p>
+              <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Top up your mobile Data  and pay Utility bills</p>
               <ClassicBtn onclick={()=>navigate("/login")} className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>
             </div>
           </div>
