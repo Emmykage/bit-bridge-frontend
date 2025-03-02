@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
-import ClassicBtn from "../../../compnents/button/ClassicButton"
 import { useEffect } from "react"
 import { confirmDataPurchase, getPurchaseOrder } from "../../../redux/actions/purchasePower"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
-import { nairaFormat } from "../../../utils/nairaFormat"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
 import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
 import PaymentOptions from "../../../compnents/paymentOptions/PaymentOptions"
+import { publicKey } from "../../../redux/baseUrl"
 
 const PurchaseDataDetails = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
@@ -19,7 +18,7 @@ const PurchaseDataDetails = () => {
         email: purchaseOrder.email ?? user?.emal,
         amount: purchaseOrder.total_amount * 100,
       
-        publicKey: "pk_test_f833f603b86e23ffa37f40f2e90056de9b928bf7",
+        publicKey: publicKey,
         text: 'Pay With Card',
         onSuccess: () => {
           handleConfirmation("card")

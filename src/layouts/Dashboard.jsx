@@ -19,9 +19,7 @@ const DashboardLayout = () => {
     const normal = "flex justify-center items-center flex-col"
     const active = "flex text-alt justify-center items-center flex-col"
     const [showMenu, seTShowMenu] = useState(false)
-    useEffect(()=>{
-        dispatch(getWallet())
-    }, [])
+ 
 
     useEffect(()=> {
        if(!loading && !user){

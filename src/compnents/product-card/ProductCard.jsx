@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { splitString } from "../../utils"
 import { nairaFormat } from "../../utils/nairaFormat"
-const ProductCard = ({id, min_value, currency, max_value, provider, provision ,link }) => {
+const ProductCard = ({id, min_value, currency, isDetails=true, max_value, provider, provision ,link }) => {
     const navigate = useNavigate()
 
     const imagePic = splitString(provider)
@@ -17,7 +17,9 @@ const ProductCard = ({id, min_value, currency, max_value, provider, provision ,l
       <img src={`/images/providers/${imagePic}.webp`} alt="" className="w-full md:object-cover object-fill  h-full" />
 
     </div>
-    <div className=" justify-between px-2 my-2">
+
+    {isDetails && 
+      <div className=" justify-between px-2 my-2">
       <div className="flex items-center w-full justify-between">
         <p className="md:text-lg text-gray-800 font-medium capitalize">{provider}</p>
 
@@ -37,7 +39,8 @@ const ProductCard = ({id, min_value, currency, max_value, provider, provision ,l
       
       </div>
      
-    </div>
+    </div> }
+  
   </div>
   )
 }

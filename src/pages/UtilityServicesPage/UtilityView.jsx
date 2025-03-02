@@ -109,13 +109,13 @@ const UtilityView = () => {
     <div>
     <Header/>
     <ProvisionDetails
-    linkTitle="Utility"
-    label="Meter Number"
-    service_type="tv"
-    setValue={setValue}
-    value={value}
-    priceList={priceList}
-    handleSubmit={handleSubmit}
+        linkTitle="Utility"
+        label="Meter Number"
+        service_type="tv"
+        setValue={setValue}
+        value={value}
+        priceList={priceList}
+        handleSubmit={handleSubmit}
         selectedProvider={selectedProvider}
     />
 

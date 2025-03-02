@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { confirmPurchase, getPurchaseOrder } from "../../../redux/actions/purchasePower"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
-import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
-import { SET_LOADING } from "../../../redux/app"
-import PaymentOptions from "../../../compnents/paymentOptions/PaymentOptions"
-import { publicKey } from "../../../redux/baseUrl"
+import { SET_LOADING } from "../../../../redux/app"
+import { confirmPayment, getPurchaseOrder } from "../../../../redux/actions/purchasePower"
+import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
+import PaymentOptions from "../../../../compnents/paymentOptions/PaymentOptions"
+import { publicKey } from "../../../../redux/baseUrl"
 
-const PurchaseDetails = () => {
+const DashboardCablePurchaseDetails = () => {
     const {user} = useSelector(state =>  state.auth)
 
     const {purchaseOrder} = useSelector(state =>  state.purchase)
@@ -24,7 +24,7 @@ const PurchaseDetails = () => {
   const componentProps = {
     email: purchaseOrder.email ?? user?.emal,
     amount: purchaseOrder.total_amount * 100,  
-    publicKey,
+    publicKey:  publicKey,
     text: 'Pay With Card',
     onSuccess: () => {
       handleConfirmation("card")
@@ -36,16 +36,18 @@ const PurchaseDetails = () => {
     const queryId = searchParams.get("transaction_id")
     const dispatch = useDispatch()
 
-    const handleConfirmation = () => {
+    const handleConfirmation = (payment_method) => {
                 dispatch(SET_LOADING(true))
         
-        dispatch(confirmPurchase({queryId, status: "completed"})).then(
+        dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
-                if(confirmPurchase.fulfilled.match(result)){
+                if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
                     dispatch(SET_LOADING(false))
+                    console.log("first")
+                    console.log(data)
 
-                    navigate(`/buy-power/${id}/confirm-payment?transaction_id=${data?.id}`)
+                    navigate(`/dashboard/utilities/cable/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
                     const data  = result.payload
                     dispatch(SET_LOADING(false))
@@ -56,6 +58,7 @@ const PurchaseDetails = () => {
             }
         )
     }
+    console.log(purchaseOrder)
 
 
     useEffect(()=> {
@@ -87,4 +90,4 @@ const PurchaseDetails = () => {
     )
 }
 
-export default PurchaseDetails
+export default DashboardCablePurchaseDetails

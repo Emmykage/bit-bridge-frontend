@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import { PaystackButton } from "react-paystack"
 import { SET_LOADING } from "../../../redux/app"
 import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
+import { publicKey } from "../../../redux/baseUrl"
 
 const PurchaseCableDetails = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
@@ -15,7 +16,6 @@ const PurchaseCableDetails = () => {
     const [id] = useOutletContext()
 
     const navigate = useNavigate()
-    const publicKey = "pk_test_f833f603b86e23ffa37f40f2e90056de9b928bf7"
 
     const queryId = searchParams.get("transaction_id")
     const dispatch = useDispatch()
@@ -49,8 +49,7 @@ const PurchaseCableDetails = () => {
     
   const componentProps = {
     email: purchaseOrder.email ?? user?.emal,
-    amount: purchaseOrder.total_amount * 100,
-  
+    amount: purchaseOrder.total_amount * 100,  
     publicKey,
     text: 'Pay With Card',
     onSuccess: () => {

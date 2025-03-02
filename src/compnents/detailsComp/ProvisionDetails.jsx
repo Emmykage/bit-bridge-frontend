@@ -153,13 +153,13 @@ const ProvisionDetails = ({selectedProvider,
                
 
             </div>
-            <div className="bg-gray-600 flex items-center gap-3 rounded-lg text-white p-4">
+            <div className="bg-gray-600 hidden items-center gap-3 rounded-lg text-white p-4">
                 <span className="border rounded-full flex justify-center shrink-0">
                 <ExclamationOutlined />
 
 
                 </span>
-                <p className="text-sm font-medium">We are currently out of stock on this product</p>
+                <p className="text-sm font-medium ">We are currently out of stock on this product</p>
             </div>
             <div>
                 <h3 className="text-2xl my-6 font-medium"> Description  </h3>

@@ -25,7 +25,7 @@ const UtilityServices = () => {
                 <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
                   <div>
                     <h2 onClick={() => navigate("/buy-power")} className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
-                    Purchase Electricity with your crypto wallet with ease
+                    Purchase Electricity with your  wallet with ease
         
                     </h2>
                     <p className="my-4 text-lg font-medium text-gray-600 text-lef">

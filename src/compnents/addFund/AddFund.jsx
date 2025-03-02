@@ -1,5 +1,5 @@
 import { Button, Form, message, Upload } from 'antd'
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
 // import paymentDetails from '../../data/walletAddres.json'
@@ -7,17 +7,41 @@ import coinType from '../../data/coinType.json'
 import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import FormSelect from '../formSelect/FormSelect';
+import PaymentOptions from '../paymentOptions/PaymentOptions';
+import { PaystackButton } from 'react-paystack';
+import { useSelector } from 'react-redux';
+import { publicKey } from '../../redux/baseUrl';
 const AddFund = ({
   address,
   handleSubmit,
   disableAddress= true,
-  coin_type="USDT",
+  coin_type="bank",
 
 }) => {
+
+  const {user} = useSelector(state => state.auth)
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
+
+  const amount = Form.useWatch("amount", form);
+
+
+  
+  console.log(amount)
+    
+  const componentProps = {
+    email:  user?.email,
+    amount: amount * 100,   
+    publicKey:  publicKey,
+  
+    text: 'Pay With Card',
+    onSuccess: () => {
+      form.submit()
+        },
+    // onClose: () => alert('Are you sure'),
+  }; 
  
-  console.log(disableAddress)
+  // console.log(disableAddress)
   const normFile = (e) => {
 
     if (Array.isArray(e)) {
@@ -25,20 +49,24 @@ const AddFund = ({
     }
     return e?.fileList || [];
   };
+
+
+  
   return (
+    <>
     <Form
     className='add-fund'
       layout={formLayout}
       onFinish={(values) =>{
             handleSubmit(values)
-
       }}
       form={form}
       initialValues={{
         amount: "",
         address: !disableAddress ? "" : address ,
         proof: null,
-        coin_type: coin_type
+        coin_type: coin_type,
+        currency: "ngn"
         }}
       style={{
         color: "white",
@@ -94,12 +122,21 @@ const AddFund = ({
         </Form.Item>
         <Form.Item label={null}>
 
-        <Button type="primary" htmlType="submit">
+        {/* <Button className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" type="primary" htmlType="submit">
             Submit
-        </Button>
-    </Form.Item>
+        </Button> */}
+
+     
+      </Form.Item>
 
     </Form>
+
+<div className="w-full">
+<PaystackButton 
+htmlType="button"
+className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" {...componentProps}/>
+</div>
+</>
   )
 }
 

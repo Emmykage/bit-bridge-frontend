@@ -95,7 +95,7 @@ const DashboardPowerForm = () => {
 
             </div>
 
-            <ClassicBtn isLoading={loading} htmlType={"submit"}>Submit </ClassicBtn>
+            <ClassicBtn isLoading={loading} className={"w-full"} htmlType={"submit"}>Proceed to Payment </ClassicBtn>
 
 
         </Form>

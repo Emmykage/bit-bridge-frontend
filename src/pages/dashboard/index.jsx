@@ -10,6 +10,7 @@ import OrderTransact from "./components/Orders"
 import DepositTransaction from "./components/DepositsTransaction"
 import WithdrawalTransactions from "./components/WithdrawalTransaction"
 import { getConversion } from "../../redux/actions/currency_caonversion"
+import { getWallet } from "../../redux/actions/wallet"
 
 const HomeDashboard = () => {
     const {wallet} = useSelector(state => state.wallet)
@@ -17,9 +18,11 @@ const HomeDashboard = () => {
     const [selectedItem, setSelectedItem] = useState("gift-cards")
 
     const [convertedAmount, setConvertedAmount] = useState(null)
-    const [activeCurrency, setActiveCurrency] = useState("usd")
+    const [activeCurrency, setActiveCurrency] = useState("ngn")
 
-
+    useEffect(()=>{
+        dispatch(getWallet())
+    }, [])
     const items = [
         {
             label: "Gift Cards Orders",
@@ -57,13 +60,13 @@ const HomeDashboard = () => {
     },[wallet?.balance, activeCurrency])
 
 
-    useEffect(()=> {
+    // useEffect(()=> {
 
-        console.log("fetching......")
-        dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
-    },[])
+    //     console.log("fetching......")
+    //     dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
+    // },[])
 
-console.log(wallet?.balance)
+console.log(wallet)
   return (
     <div className="homeDashboard text-white w-full">
         <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">
@@ -75,9 +78,9 @@ console.log(wallet?.balance)
                 </div>
            
                 <div>
-                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "usd")}</p>
+                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
                     {/* <p>{convertedAmount} </p> */}
-                    <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p>
+                    {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 
@@ -90,7 +93,7 @@ console.log(wallet?.balance)
                             <LoginOutlined /> 
                             </span>
                             <span>
-                                Total Trades
+                                Trades
                             </span>
                         </div>
                         <p className="text-2xl ">  {nairaFormat(0,activeCurrency )}</p>
@@ -103,10 +106,10 @@ console.log(wallet?.balance)
                             <LoginOutlined /> 
                             </span>
                             <span>
-                                Total bought 
+                                Bought 
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(0, "gbp")}</p>
+                        <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
 
                     </div>
 
@@ -117,10 +120,10 @@ console.log(wallet?.balance)
                         <LoginOutlined /> 
                         </span>
                         <span>
-                            Total Withdrawals
+                            Withdrawals
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
+                    <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
 
                     </div>
 
@@ -131,10 +134,10 @@ console.log(wallet?.balance)
                         <LoginOutlined /> 
                         </span>
                         <span>
-                            Total Sold
+                            Sold
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0, activeCurrency)}</p>
+                    <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
 
                     </div>
 

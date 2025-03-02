@@ -68,6 +68,11 @@ import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDe
 import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
 import MainServices from './pages/services'
 import ProductView from './pages/ProductPage/ViewProduct'
+import CableUtilities from './pages/dashboard/utility/cable/CableUtilities'
+import CableView from './pages/dashboard/utility/cable/PowerView'
+import DashboardCableForm from './pages/dashboard/utility/cable/CableForm'
+import DashboardCablePurchaseDetails from './pages/dashboard/utility/cable/PurchaseDetails'
+import DashboardCableComfirmPurchase from './pages/dashboard/utility/cable/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -137,6 +142,18 @@ function App() {
       <Route path='powerform' element={<DashboardPowerForm/>}/>
       <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
       <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
+
+      
+
+      </Route>
+
+      <Route path='utilities/cable' element={<CableUtilities/>}/>
+
+
+      <Route path='utilities/cable/:id' element={<CableView/>}>
+      <Route path='cableform' element={<DashboardCableForm/>}/>
+      <Route path='confirm-payment' element={<DashboardCableComfirmPurchase/>}/>
+      <Route path='payment-details' element={<DashboardCablePurchaseDetails/>}/>
 
       
 

@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
 import { SET_LOADING } from "../../../redux/app"
 import PaymentOptions from "../../../compnents/paymentOptions/PaymentOptions"
+import { publicKey } from "../../../redux/baseUrl"
 
 const PurchaseDetails = () => {
     const {user} = useSelector(state =>  state.auth)
@@ -23,8 +24,7 @@ const PurchaseDetails = () => {
   const componentProps = {
     email: purchaseOrder.email ?? user?.emal,
     amount: purchaseOrder.total_amount * 100,
-  
-    publicKey: "pk_test_f833f603b86e23ffa37f40f2e90056de9b928bf7",
+    publicKey,
     text: 'Pay With Card',
     onSuccess: () => {
       handleConfirmation("card")
