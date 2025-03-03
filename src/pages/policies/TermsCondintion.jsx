@@ -1,135 +1,93 @@
+import Footer from "../../compnents/footer/Footer"
 import Header from "../../compnents/header/Header"
 import HeroBanner from "../../compnents/hero/Hero"
 
 
 const TermsCondintion = () => {
   return (
-    <main>
+    <>
+    <main className="">
       <Header />
-      <HeroBanner link="/policies" extra="/terms and conditions" text={"Terms and Condition"}/>
+      <HeroBanner link="policies" extra="terms and conditions" text={"Terms and Condition"}/>
 
 
-    <section className="px-4">
+      <section className=" py-10 px-4 ">
 
-      <div className="max-w-7xl m-auto my-10">
-        <h3 className="text-2xl font-semibold my-4">
-        Terms and Conditions
+        <div className="max-w-7xl m-auto my-10">
+          <h3 className="text-2xl font-semibold my-4">
+          Terms and Conditions
 
-        </h3>
-
-        <p>
-          By using the BitBridge platform, you agree to abide by the following terms and conditions:
-
-        </p>
-
-        <p className="font-medium text-gray-900 mt-5">Eligibility</p>
-        <ul className="list-inside list-disc">
-          <li>You must be at least 18 years old to use our services </li>
-          <li>You must provide accurate and truthful information when registering an account.
-          </li>
-        </ul>
-
-        
-        <p className="font-medium text-gray-900 mt-5">Gift Card Trading        </p>
-        <ul className="list-inside list-disc">
-          <li>All submitted gift cards must be valid and unused. </li>
-          <li>BitBridge reserves the right to verify and validate all gift card submissions before processing payments.          </li>
-          <li>Fraudulent transactions will be reported and may lead to account suspension.</li>
-        </ul>
-
-        <p className="font-medium text-gray-900 mt-5">Utility Bill Payments  </p>
-        <ul className="list-inside list-disc">
-          <li>Users are responsible for ensuring accurate bill details before making payments. </li>
-          <li>BitBridge is not liable for any incorrect transactions resulting from user input errors.          </li>
-
-        </ul>
-
-        
-        <p className="font-medium text-gray-900 mt-5">Utility Bill Payments  </p>
-          <ul className="list-inside list-disc">
-            <li>Users are responsible for ensuring accurate bill details before making payments. </li>
-            <li>BitBridge is not liable for any incorrect transactions resulting from user input errors.          </li>
-
-          </ul>   
-        <p className="font-medium text-gray-900 mt-5">Payment Processing</p>
-          <ul className="list-inside list-disc">
-            <li>Payouts for traded gift cards will be processed promptly based on the agreed exchange rate. </li>
-            <li>All transactions are final once completed.</li>
-
-          </ul>
-
-          <p className="font-medium text-gray-900 mt-5">Security & Privacy</p>
-          <ul className="list-inside list-disc">
-            <li>BitBridge implements strict security measures to protect user data and transactions. </li>
-            <li>User information will not be shared with third parties without consent, except as required by law.</li>
-
-          </ul>
-
-          <p className="font-medium text-gray-900 mt-5">Prohibited Activities</p>
-          <ul className="list-inside list-disc">
-            <li>Users must not engage in fraudulent activities, including the sale of stolen or invalid gift cards. </li>
-            <li>Misuse of the platform may result in account suspension or legal action.</li>
-
-          </ul>
-          <p className="font-medium text-gray-900 mt-5">Limitation of Liability</p>
-          <ul className="list-inside list-disc">
-            <li>BitBridge is not responsible for losses resulting from unauthorized access to user accounts. </li>
-            <li>We do not guarantee the availability of all gift card types or service providers at all times.
-            </li>
-
-          </ul>
-          <p className="font-medium text-gray-900 mt-5">Changes to Terms</p>
-          <ul className="list-inside list-disc">
-            <li>BitBridge reserves the right to update these terms at any time. Continued use of the platform constitutes acceptance of any changes. </li>
-
-          </ul>
+          </h3>
 
           <p>
+            By using the BitBridge platform, you agree to abide by the following terms and conditions:
+
+          </p>
+
+          <p className="font-medium text-xl my-3 text-gray-900 mt-5">Vulnerability disclosure</p>
+          <ul className="list-inside list-decimal space-y-10">
+            <li>Bridge Global Vulnerability Disclosure Policy
+            IntroductionAt Bit Bridge Global, security is a top priority. We are committed to protecting our users' data and ensuring our platform is safe and reliable. This Vulnerability Disclosure Policy (VDP) outlines the guidelines for security researchers to report vulnerabilities responsibly </li>
+            
+              <li>
+              ScopeThis policy applies to:
+              All web applications, APIs, and services operated by Bit Bridge Global.
+              Any vulnerability that could impact the confidentiality, integrity, or availability of our platform and users.
+              Out of scope:
+              Denial-of-Service (DoS) attacks.
+              Social engineering or phishing attacks.
+              Physical attacks against our employees, offices, or data centers.
+              Reports based on outdated software versions that are no longer supported.
+            
+            </li>
+              <li>
+                
+              Guidelines for Responsible DisclosureTo ensure a safe and ethical vulnerability reporting process, we ask researchers to:
+              Avoid actions that may disrupt services (e.g., DDoS attacks, spam, etc.).
+              Not access, modify, or delete any data belonging to other users.
+              Report vulnerabilities promptly and privately.
+              Provide a clear and detailed report, including steps to reproduce the issue.
+              Give us a reasonable timeframe to investigate and resolve the issue before making any public disclosure.
+              </li>
+              <li>
+                How to Report a VulnerabilityIf you discover a vulnerability, please report it via <a href="mailto:care@bitbridgeglobal.com" className="text-blue-500">care@bitbridgeglobal.com</a>  with the following details:
+              Description: A clear explanation of the issue and potential impact.
+              Steps to Reproduce: Step-by-step instructions or proof-of-concept code.
+              Affected Systems: URLs, API endpoints, or other details.
+              Your Contact Information: So we can follow up with questions or updates.
+
+              </li>
+            <li>
+                          Our CommitmentWe will acknowledge your report within two business days.
+                We will work diligently to investigate and resolve valid vulnerabilities.
+                If permitted, we may publicly acknowledge your contribution.
+                We will not take legal action against researchers who act in good faith and follow this policy.
+
+            </li>
+            <li>
+            Recognition and Rewards We value the effort of security researchers and may offer recognition or rewards for significant findings. Any rewards will be determined based on the severity and impact of the reported vulnerability.
 
 
+            </li>
+            <li>
+            Legal ConsiderationsThis policy does not authorize unauthorized access, data modification, or activities that would violate any applicable laws. Researchers must comply with all relevant laws and act in good faith.
 
+            </li>
+            <li>
+            Contact UsFor security-related concerns or to submit a vulnerability report, contact us at care@bitbridgeglobal.com
+            By following this policy, you help us maintain a secure and trusted platform for all users. We appreciate your efforts in making Bit Bridge Global safer!
 
+            </li>
+          </ul>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-        </p>
-      </div> 
-      
-      </section>
+          
+          
+        </div> 
+        
+        </section>
       </main>
+      <Footer/>
+    </>
   )
 }
 

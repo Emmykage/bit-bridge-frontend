@@ -40,7 +40,7 @@ const Footer = () => {
             <h4 className="text-lg text-alt font-semibold">Resources</h4>
             <ul>
               <li><NavLink to={"#"}>Referal</NavLink></li>
-              <li><NavLink to={"#"}>Vulnerability Disclosure</NavLink></li>                
+              <li><NavLink to={"/terms-conditions"}>Vulnerability Disclosure</NavLink></li>                
             </ul>
           </div>
          
@@ -58,9 +58,8 @@ const Footer = () => {
 
         <li className="border-r border-gray-400 px-4"> <NavLink to="/terms-conditions" class="hover:text-alt" >Terms and Conditions </NavLink> </li>
         <li className="border-r border-gray-400 px-4"> <NavLink to="/privacy-policy" class="hover:text-alt" >Privacy Policy</NavLink></li>
-        <li className="border-r border-gray-400 px-4"><NavLink to={"/modern-slavery"} class="hover:text-alt"> Modern Slavery Statement </NavLink></li>
-        <li className="border-r border-gray-400 px-4"><NavLink to={"/site-map"} class="hover:text-alt">  Site Map </NavLink></li>
-        <li className=" border-gray-400 px-4"><NavLink to={"/terms-of-service"} class="hover:text-alt"> Terms and Conditions</NavLink></li>
+        {/* <li className="border-r border-gray-400 px-4"><NavLink to={"/modern-slavery"} class="hover:text-alt"> Modern Slavery Statement </NavLink></li> */}
+        <li className="bord border-gray-400 px-4"><NavLink to={"/site-map"} class="hover:text-alt">  Site Map </NavLink></li>
       </ul>
     </div>
     </section>

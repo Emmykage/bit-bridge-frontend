@@ -73,6 +73,7 @@ import CableView from './pages/dashboard/utility/cable/PowerView'
 import DashboardCableForm from './pages/dashboard/utility/cable/CableForm'
 import DashboardCablePurchaseDetails from './pages/dashboard/utility/cable/PurchaseDetails'
 import DashboardCableComfirmPurchase from './pages/dashboard/utility/cable/ConfirmPurchase'
+import SiteMap from './pages/policies/SiteMap'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -99,6 +100,7 @@ function App() {
     <Route path='/contact-us' element={<ContactUs/>}/>
     <Route path='/terms-conditions' element={<TermsCondintion/>}/>
     <Route path='/privacy-policy' element={<PrivacyPolicies/>}/>
+    <Route path='/site-map' element={<SiteMap/>}/>
     <Route path='/about-us' element={<AboutUs/>}/>
 
     <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />

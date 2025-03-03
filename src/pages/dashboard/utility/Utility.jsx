@@ -6,7 +6,7 @@ const Utility = () => {
   return (
 
     <div className='px-4'>
-        <div className='grid grid-cols-2 gap-5 md:grid-cols-4'>
+        <div className='grid grid-cols-2 md:gap-5 gap-2 md:grid-cols-4'>
 
             <div>
                 <UtilityCard
@@ -17,7 +17,7 @@ const Utility = () => {
                     
                 />
             </div>
-            
+
             <div>
                 <UtilityCard
                 onClick={()=> {navigate("/dashboard/utilities/cable")}}

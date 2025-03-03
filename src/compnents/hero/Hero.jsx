@@ -2,13 +2,13 @@ import PropTypes from "prop-types"
 
 const HeroBanner = ({text, link, extra}) => {
   return (
-    <div className='h-72 bg-gray-900 flex justify-center items-center'>
+    <div className='h-72 bg-gray-900 flex justify-center items-center py-10 mt-28 md:mt-36'>
       <div className="bg-red- w-full max-w-app-layout px-4 m-auto">
-    <div className="flex gap-5 text-gray-200 ">
-      <p>/ {link}
+    <div className="flex gap-2 text-gray-200 ">
+      <p> / {link}
         </p>
 
-        <span>/{extra}
+        <span>/ {extra}
         </span>
 
     </div>
