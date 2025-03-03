@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
 import FormInput from "../../../../compnents/formInput/FormInput";
-import FormSelect from "../../../../compnents/formSelect/FormSelect";
 import ClassicBtn from "../../../../compnents/button/ClassicButton";
 import { createPurchaseOrder, getPriceList } from "../../../../redux/actions/purchasePower";
 import { SET_LOADING } from "../../../../redux/app";
@@ -84,9 +83,8 @@ console.log(value)
             }
         },[selectedProvider])
 
-    const amount = Form.useWatch("amount", form);
+    // const amount = Form.useWatch("amount", form);
 
-    console.log(priceList, selectedProvider)
 
 
     return (
@@ -124,7 +122,7 @@ console.log(value)
                           </div>
           
                           
-                              <h3 className="text-base font-semibold text-white">Select Plan/Bundle </h3>
+                              <h3 className="text-base font-semibold text-white mb-2">Select Plan/Bundle </h3>
           
                               <div className="flex flex-col gap-0">
                                   <PlainSelect

@@ -11,7 +11,7 @@ const Utility = () => {
             <div>
                 <UtilityCard
                 onClick={()=> {navigate("/dashboard/utilities/buy-power")}}
-                provider={"power"}
+                provider={"electricity"}
                 title={"Electric Bills"}
                 btnText={"Select Provider"}
                     

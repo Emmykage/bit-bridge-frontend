@@ -15,7 +15,7 @@ const CableUtilities = () => {
   },[])
   return (
     <div>
-         <section className="py-10 px-4 my-10">
+         <section className="py-10 px-4 my-10 bg-black">
 
 <div className="max-w-7xl text-white m-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
     {utilities.map(({id, description,name,  image}) => (

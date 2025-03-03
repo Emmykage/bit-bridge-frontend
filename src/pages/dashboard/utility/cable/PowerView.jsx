@@ -17,7 +17,6 @@ const CableView = () => {
 
  
     const selectedProvider = utilities?.find(item => item.id == id)
-    console.log(selectedProvider)
     const imagePic = splitString(selectedProvider?.product?.provider)
 
   return (
