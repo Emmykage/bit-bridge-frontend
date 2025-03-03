@@ -9,6 +9,7 @@ import PlainSelect from '../formSelect/plainSelect'
 import PropTypes from 'prop-types'
 
 const ProvisionDetails = ({selectedProvider,
+    service_type,
     linkTitle,
     setValue,
     value,
@@ -60,7 +61,23 @@ const ProvisionDetails = ({selectedProvider,
 
              {selectedProvider?.service_type == "VTU" ?
                 <div>
-                <h3 className="text-xl font-semibold">Enter Amount </h3>
+
+<h3 className="text-sm font-semibold">Phone Number </h3>
+
+
+<FormInput type="text"
+                        value={value.billersCode}
+                        name={"biller"}
+                        onChange={(input)=> {
+                            setValue({
+                                ...value, 
+                                billersCode: input.target.value
+                            })
+                        }}
+                        placeholder={"Enter Phone Number"}
+                        className={"whiteBg"}
+                        />
+                <h3 className="text-sm font-semibold">Enter Amount </h3>
 
             <div className="flex flex-col gap-0">
                 <FormInput type="nubmer"
@@ -68,9 +85,8 @@ const ProvisionDetails = ({selectedProvider,
                     onChange={(input)=> {
 
                         setValue({...value,
-                        billersCode: input})}}
-                    placeholder={"Enter Value"}
-                    options={selectCurrencyOptions(selectedProvider?.currency)}
+                        amount: input})}}
+                    placeholder={"Enter Amount"}
                     className={"whiteBg"}
                     />
 
@@ -134,7 +150,7 @@ const ProvisionDetails = ({selectedProvider,
                             }}
                             placeholder={"Enter Value"}
                             options={priceList}
-                            className={""}
+                            className={"whiteBg"}
                             />
 
                             <div className="flex-1 text-sm mt-2 from-gray-800">
@@ -148,7 +164,7 @@ const ProvisionDetails = ({selectedProvider,
             <div>
 
                 <div className="my-3">
-                    <CartButton onClick={handleSubmit}>Subscribe</CartButton>
+                    <CartButton onClick={handleSubmit}> {service_type==="VTU" ? "Purchase Airtime" : "Purcahse Data"}</CartButton>
                 </div>
                
 

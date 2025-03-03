@@ -57,9 +57,11 @@ const ViewMobileTopUp = () => {
 
     const handleSubmit = () => {
 
-        dispatch(SET_LOADING(true))
 
-        if(value.billersCode.trim() != "" && value.tariff_class.trim() !== ""){
+        console.log(value)
+
+        if((selectedProvider?.service_type==="VTU" && value.billersCode.trim() != "" && String(value.amount).trim() != "" ) ||(selectedProvider?.service_type ==="DATA" && value.billersCode.trim() != "" && value.tariff_class.trim() !== "")){
+            dispatch(SET_LOADING(true))
 
         dispatch(createPurchaseOrder({
         ...value,
@@ -105,19 +107,20 @@ const ViewMobileTopUp = () => {
         }
     },[selectedProvider])
 
-         
+         console.log(selectedProvider)
             
   return (
     <div>
         <Header/>
             <ProvisionDetails
-            service_type="data"
+            service_type={selectedProvider?.service_type}
+            linkTitle={selectedProvider?.product?.provider}
             label="Phone Number"
             setValue={setValue}
             value={value}
             priceList={priceList}
             handleSubmit={handleSubmit}
-                selectedProvider={selectedProvider}
+            selectedProvider={selectedProvider}
             />
       
       
@@ -125,7 +128,7 @@ const ViewMobileTopUp = () => {
       <section id="details" ref={sectionRef} className="bg-white ">
 
         <div className="m-auto max-w-7xl shadow border px-4">
-            <Outlet context={[id]}/>
+            <Outlet context={[id, toView]}/>
         </div>
 
         </section>

@@ -8,7 +8,7 @@ const BillOrderDetails = ({
     const {user} = useSelector(state =>  state.auth)
 
   return (
-    <div className="p-4 border rounded-lg">
+    <div className="md:p-4 border rounded-lg">
         {
             purchaseOrder?.token && 
                     <div className="  md:flex-row flex-col flex gap-4">
@@ -55,7 +55,7 @@ const BillOrderDetails = ({
         purchaseOrder?.amount && 
         <div className="gap-4 my-4 md:flex-row flex-col  flex">
             <p className="w-60 md:w-60 border-b px-2 font-semibold">Service Charge</p>
-            <p className="flex-1 border-b px-2">{nairaFormat(100)}</p>
+            <p className="flex-1 border-b px-2">{nairaFormat(purchaseOrder?.service_charge)}</p>
         </div>
 
     }
@@ -66,8 +66,8 @@ const BillOrderDetails = ({
 {
         purchaseOrder?.amount && 
         <div className="gap-4 my-4 md:flex-row flex-col  flex">
-            <p className="w-60 md:w-60 border-b px-2 font-semibold">Total PayableAmount</p>
-            <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount ?? 0))}</p>
+            <p className="w-60 md:w-60 border-b px-2 font-semibold">Total Payable Amount</p>
+            <p className="flex-1 border-b px-2">{nairaFormat(Number(purchaseOrder?.total_amount))}</p>
          </div>
 
             }

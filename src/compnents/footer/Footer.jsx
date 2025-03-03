@@ -58,7 +58,7 @@ const Footer = () => {
 
         <li className="border-r border-gray-400 px-4"> <NavLink to="/terms-conditions" class="hover:text-alt" >Terms and Conditions </NavLink> </li>
         <li className="border-r border-gray-400 px-4"> <NavLink to="/privacy-policy" class="hover:text-alt" >Privacy Policy</NavLink></li>
-        {/* <li className="border-r border-gray-400 px-4"><NavLink to={"/modern-slavery"} class="hover:text-alt"> Modern Slavery Statement </NavLink></li> */}
+        <li className="border-r border-gray-400 px-4"><NavLink to={"/vulnerability-disclosure"} class="hover:text-alt"> Vulnerability Disclosure </NavLink></li>
         <li className="bord border-gray-400 px-4"><NavLink to={"/site-map"} class="hover:text-alt">  Site Map </NavLink></li>
       </ul>
     </div>

@@ -13,24 +13,19 @@ const Home = () => {
 
     <div className="-mt-40 md:-mt-40">
         <Header/>
-        <section className="h-screen lg:h-[800px] p-4 w-full hero-header">
-          <div className="max-w-app-layout  items-center h-full grid sm:grid-cols-2 m-auto w-full ">
-            <div className="p-5 bg-gray-900/40 rounded-lg">
-              <h2 className="lg:text-5xl text-3xl text-white font-bold">
-               Get Awesome experience paying your bills
-              </h2>
-              <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Top up your mobile data  and pay utility bills</p>
-              <ClassicBtn onclick={()=>navigate("/login")} className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>
+          <section className="h-screen lg:h-[800px] p-4 w-full hero-header">
+            <div className="max-w-app-layout  items-center h-full grid sm:grid-cols-2 m-auto w-full">
+              <div className="p-5 mt-10 bg-gray-900/40 rounded-lg">
+                <h2 className="lg:text-5xl text-3xl text-white font-bold">Get Awesome experience paying your bills </h2>
+                <p className="lg:text-3xl text-2xl text-gray-300 leading-10  my-6 font-semibold">Top up your mobile data  and pay utility bills</p>
+                <ClassicBtn onclick={()=>navigate("/login")} className={"text-lg h-14 text-alt font-semibold"}> Get Started</ClassicBtn>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
         <HighlightInfo/>    
-        <PopularCards/>          
+        <PopularCards/>   
 
-        <ExxlusiveDeals/>
-
-      
-       
+        <ExxlusiveDeals/>    
       
     </div>
   )

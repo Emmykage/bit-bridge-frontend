@@ -7,11 +7,12 @@ import { toast } from "react-toastify"
 import BillOrderDetails from "../../../compnents/confirmationDetails/billOrderDetails"
 import PaymentOptions from "../../../compnents/paymentOptions/PaymentOptions"
 import { publicKey } from "../../../redux/baseUrl"
+import { SET_LOADING } from "../../../redux/app"
 
 const PurchaseDataDetails = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
-    const [id] = useOutletContext()
+    const [id, toView] = useOutletContext()
     const {user} = useSelector(state =>  state.auth)
 
     const componentProps = {
@@ -32,14 +33,21 @@ const PurchaseDataDetails = () => {
     const dispatch = useDispatch()
 
     const handleConfirmation = () => {
+        dispatch(SET_LOADING(true))
         dispatch(confirmDataPurchase({queryId, status: "completed"})).then(
             result => {
                 if(confirmDataPurchase.fulfilled.match(result)){
                     const data  = result.payload.data 
+                    dispatch(SET_LOADING(false))
+
+                    setTimeout(() => {
+                        toView();
+                    }, 300);
                     navigate(`/phone-top-up/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
+                    dispatch(SET_LOADING(false))
+
                     const data  = result.payload 
-                    console.log(data)
                     toast(data?.message || "Failed to make purchase", {type: "error"})
 
                 }
@@ -48,13 +56,15 @@ const PurchaseDataDetails = () => {
     }
 
 
+    console.log(purchaseOrder)
+
 
     useEffect(()=> {
         dispatch(getPurchaseOrder(queryId))
     },[])
     return (
         <>
-        <div className="py-20">
+        <div className="py-1">
 
         {message && 
           <div className="bg-green-200 p-4 my-4">

@@ -24,7 +24,7 @@ const ComfirmDataPurchase = () => {
 
     return (
         <>
-        <div className="py-20">
+        <div className="py-1">
 
         {message && 
           <div className="bg-green-200 p-4 my-4">
