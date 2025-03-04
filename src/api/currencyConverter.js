@@ -15,24 +15,16 @@ const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
 
                 if(storedRate && rateTimeStamp && (currentTime - rateTimeStamp < rateExpiresin) ){
                     currencyRates =  JSON.parse(storedRate)
-                    console.log("converted called here", fromCurr)
 
                 }
                 else{
-                    console.log("converted called here", fromCurr)
-
                     const res = await fetch(api);
-
-                    console.log(res)
-
 
                     if (!res.ok) {
                         throw new Error(`Failed to fetch exchange rates: ${res.status}`);
                     }
     
                     const rawRates = await res.json();
-
-                    console.log(rawRates)
 
                     currencyRates = rawRates.rates
 
@@ -49,10 +41,6 @@ const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
                 const toRate =  currencyRates[toCurr].value;
                 const naira =  currencyRates["ngn"].value;
                 const usd =  currencyRates["usd"].value;
-
-                console.log(fromRate)
-
-                console.log(fromCurr)
 
                 const calc = ((toRate / fromRate) * amount).toFixed(8);
                 console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);

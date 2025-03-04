@@ -7,6 +7,22 @@ const BillOrderDetails = ({
 }) => {
     const {user} = useSelector(state =>  state.auth)
 
+    const pickLabel = (type) => {
+        console.log(type)
+        switch (type) {
+            case "vtu":
+            case "data":
+                return "Phone Number"
+            case "tv":
+            return "Decoder ID"
+            case "electricity":
+                return "Meter Number"
+                        
+            default:
+               return "Number"
+            }
+    }
+
   return (
     <div className="md:p-4 border rounded-lg">
         {
@@ -18,7 +34,7 @@ const BillOrderDetails = ({
         }
     {
         purchaseOrder?.name && 
-        <div className="gap-4 my-4 md:flex-row flex-col  flex">
+        <div className={`${purchaseOrder?.service_type === "VTU" || purchaseOrder?.service_type === "VTU" ? "hidden" : "flex"} gap-4 my-4 md:flex-row flex-col  `}>
             <p className="md:w-60 border-b px-2 font-semibold">Customer Name</p>
             <p className="flex-1 border-b px-2">{purchaseOrder?.name}</p>
         </div>
@@ -26,7 +42,7 @@ const BillOrderDetails = ({
     }
        {
         purchaseOrder?.address && 
-        <div className="gap-4 my-4 md:flex-row flex-col  flex">
+        <div className={`${purchaseOrder?.service_type === "VTU" || purchaseOrder?.service_type === "VTU" ? "hidden" : "flex"} gap-4 my-4 md:flex-row flex-col  `}>
             <p className="w-60 md:w-60 border-b px-2 font-semibold">Address</p>
             <p className="flex-1 border-b px-2">{purchaseOrder?.address}</p>
         </div>
@@ -36,7 +52,7 @@ const BillOrderDetails = ({
 {
         purchaseOrder?.meter_number && 
         <div className="gap-4 my-4 md:flex-row flex-col  flex">
-            <p className="w-60 md:w-60 border-b px-2 font-semibold">Meter Number</p>
+            <p className="w-60 md:w-60 border-b px-2 font-semibold">{pickLabel(purchaseOrder?.service_type.toLowerCase())}</p>
             <p className="flex-1 border-b px-2">{purchaseOrder?.meter_number}</p>
         </div>
 

@@ -97,6 +97,19 @@ const ProvisionDetails = ({selectedProvider,
 
 
                 </div>
+                <div className="my-0">
+                <h3 className="text-base font-semibold">Enter Email </h3>
+
+
+                    <FormInput
+                        onChange={(input) => {
+                            setValue({
+                                ...value,
+                                email: input.target.value
+                            })
+                        }}
+                    type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
+                </div>
                 </div>
                 :
                 <div>
@@ -164,7 +177,7 @@ const ProvisionDetails = ({selectedProvider,
             <div>
 
                 <div className="my-3">
-                    <CartButton onClick={handleSubmit}> {service_type==="VTU" ? "Purchase Airtime" : "Purcahse Data"}</CartButton>
+                    <CartButton onClick={handleSubmit}> {service_type==="VTU" ? "Purchase Airtime" : "Purcahse Subscription"}</CartButton>
                 </div>
                
 

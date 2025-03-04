@@ -20,8 +20,6 @@ const Account = () => {
     const coinType ="bank"
     const currency = "ngn"
 
-    console.log(wallet)
-
 
     useEffect(()=> {
         const fetchConversion = async() => {

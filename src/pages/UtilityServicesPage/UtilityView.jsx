@@ -52,6 +52,9 @@ const UtilityView = () => {
         }
     },[location])
 
+    console.log(selectedProvider)
+
+
 
      useEffect(()=> {
         console.log(selectedProvider, "he will come")
