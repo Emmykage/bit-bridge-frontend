@@ -38,7 +38,7 @@ const DashboardComfirmPurchase = () => {
                 <BillOrderDetails purchaseOrder={purchaseOrder}/>
         
         <div>
-            <ClassicBtn onclick={()=> navigate("/dashboard")}>Back to Home Page</ClassicBtn>
+            <ClassicBtn onclick={()=> navigate("/dashboard/home")}>Back to Home Page</ClassicBtn>
         </div>
         </>
     )
