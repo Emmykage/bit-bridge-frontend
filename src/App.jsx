@@ -75,6 +75,11 @@ import DashboardCablePurchaseDetails from './pages/dashboard/utility/cable/Purch
 import DashboardCableComfirmPurchase from './pages/dashboard/utility/cable/ConfirmPurchase'
 import SiteMap from './pages/policies/SiteMap'
 import VulnerabilityDisclosure from './pages/policies/VulnerabilityDisclosure'
+import MobileTopUps from './pages/dashboard/utility/mobile-top-up/MobileTops'
+import DashboardMobileForm from './pages/dashboard/utility/mobile-top-up/MobileForm'
+import MobileView from './pages/dashboard/utility/mobile-top-up/MobileView'
+import DashboardMobilePurchaseDetails from './pages/dashboard/utility/mobile-top-up/PurchaseDetails'
+import DashboardMobileComfirmPurchase from './pages/dashboard/utility/mobile-top-up/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -143,11 +148,11 @@ function App() {
       <Route path='utilities' element={<Utility/>}/>
       <Route path='utilities/buy-power' element={<PowerUtilities/>}/>
       <Route path='utilities/buy-power/:id' element={<PowerView/>}>
-      <Route path='powerform' element={<DashboardPowerForm/>}/>
-      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
-      <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
+        <Route path='powerform' element={<DashboardPowerForm/>}/>
+        <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
+        <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
 
-      
+        
 
       </Route>
 
@@ -162,6 +167,21 @@ function App() {
       
 
       </Route>
+
+
+      {/* mobile top up  */}
+      <Route path='utilities/mobile-top-up' element={<MobileTopUps/>}/>
+
+
+        <Route path='utilities/mobile-top-up/:id' element={<MobileView/>}>
+        <Route path='mobileform' element={<DashboardMobileForm/>}/>
+        <Route path='confirm-payment' element={<DashboardMobileComfirmPurchase/>}/>
+        <Route path='payment-details' element={<DashboardMobilePurchaseDetails/>}/>
+
+      
+
+      </Route>
+
 
       <Route path='gift-cards' element={<GiftCards/>} />
       <Route path='transactions' element={<Transactions/>}>

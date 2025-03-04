@@ -40,8 +40,8 @@
     .ant-select{
            .ant-select-selector{
             background: none;
-            // color: white;
     @apply border border-alt py-3 text-gray-200;
+
     .ant-select-selection-placeholder{
         @apply text-gray-200/50
     }
@@ -77,13 +77,3 @@
 }
 
 }
-
-
-// .ant-select{
-//     .ant-select-selector{
-//        background-color: none;
-// @apply border border-alt py-3 text-gray-200;
-
-// }
-// }
-// }

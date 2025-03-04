@@ -26,6 +26,16 @@ const Utility = () => {
                 btnText={"Subscribe to Tv"}
                     
                 />
+                </div>
+                <div>
+
+                <UtilityCard
+                    onClick={()=> {navigate("/dashboard/utilities/mobile-top-up")}}
+                    provider={"mobile1"}
+                    title={"Airtime Top UP"}
+                    btnText={"Mobile Top Up"}
+                        
+                    />
             </div>
         </div>
 

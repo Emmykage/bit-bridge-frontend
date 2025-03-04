@@ -19,6 +19,8 @@ const FormInput = ({
       <Form.Item
       className={`formInput ${className}`}
       name={name}
+      normalize={(value) => value?.trim()}
+
       rules={[
         {
           required: required,

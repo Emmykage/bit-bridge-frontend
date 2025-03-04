@@ -62,11 +62,11 @@ const ProvisionDetails = ({selectedProvider,
              {selectedProvider?.service_type == "VTU" ?
                 <div>
 
-<h3 className="text-sm font-semibold">Phone Number </h3>
+                <h3 className="text-sm font-semibold">Phone Number </h3>
 
 
-<FormInput type="text"
-                        value={value.billersCode}
+                <FormInput type="text"
+                  value={value.billersCode}
                         name={"biller"}
                         onChange={(input)=> {
                             setValue({
@@ -197,7 +197,8 @@ ProvisionDetails.propTypes = {
     priceList: PropTypes.array,
     handleSubmit: PropTypes.func,
     label: PropTypes.string,
-    linkTitle: PropTypes.string
+    linkTitle: PropTypes.string,
+    service_type:  PropTypes.string,
 }
 
 export default ProvisionDetails

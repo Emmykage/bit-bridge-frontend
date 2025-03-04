@@ -39,8 +39,6 @@ const ViewMobileTopUp = () => {
 
 
     const toView = () => {
-        console.log("trigged ==>", location.hash)
-            console.log("it equals", sectionRef.current)
             sectionRef.current.scrollIntoView({behavior: "smooth" })
 
     }
@@ -57,16 +55,13 @@ const ViewMobileTopUp = () => {
 
     const handleSubmit = () => {
 
-
-        console.log(value)
-
         if((selectedProvider?.service_type==="VTU" && value.billersCode.trim() != "" && String(value.amount).trim() != "" ) ||(selectedProvider?.service_type ==="DATA" && value.billersCode.trim() != "" && value.tariff_class.trim() !== "")){
             dispatch(SET_LOADING(true))
 
         dispatch(createPurchaseOrder({
         ...value,
          biller: selectedProvider?.product?.provider, 
-         service_type: selectedProvider?.service_type})).
+         service_type: selectedProvider?.service_type, skip: true})).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
@@ -106,8 +101,6 @@ const ViewMobileTopUp = () => {
 
         }
     },[selectedProvider])
-
-         console.log(selectedProvider)
             
   return (
     <div>

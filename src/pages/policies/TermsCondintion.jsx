@@ -13,7 +13,7 @@ const TermsCondintion = () => {
       <section className="px-4">
 
 <div className="max-w-7xl m-auto my-10">
-<h3 className="text-2xl font-semibold my-4"> Privacy Policy</h3>
+{/* <h3 className="text-2xl font-semibold my-4"> Privacy Policy</h3> */}
 
 <p className='my-3'><strong> Effective Date</strong> March 2025</p>
 <p><strong> Last Updated Date</strong> March 2025</p>
