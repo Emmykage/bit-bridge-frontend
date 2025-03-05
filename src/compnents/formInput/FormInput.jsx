@@ -19,7 +19,7 @@ const FormInput = ({
       <Form.Item
       className={`formInput ${className}`}
       name={name}
-      normalize={(value) => value?.trim()}
+      // normalize={(value) => value?.trim()}
 
       rules={[
         {

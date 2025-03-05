@@ -25,7 +25,6 @@ export const createOrder = createAsyncThunk("order/creaet-order", async(data, {r
         formData.append("order_detail[proof]", data.proof[0].originFileObj)
     }
 
-    console.log(Object.fromEntries(formData))
     try {
         const response = await axios.post(`${baseUrl + apiRoute}order_details`,formData, {
             headers: {
@@ -105,6 +104,27 @@ export const getUserOrders = createAsyncThunk("order/get-user-orders", async(dat
     }
 });
 
+
+export const getUserBillOrders = createAsyncThunk("bill-order/get-user-bill-orders", async(data, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}bill_orders/user`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+        const result = response.data;     
+        console.log(result) 
+
+        return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
 
 
 export const updateOrder = createAsyncThunk("order/update-order", async({id, data}, {rejectWithValue}) => {

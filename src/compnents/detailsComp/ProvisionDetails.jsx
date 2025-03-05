@@ -3,10 +3,10 @@ import CartButton from '../button/CartButton'
 import { ExclamationOutlined } from '@ant-design/icons'
 import FormInput from '../formInput/FormInput'
 import { splitString } from '../../utils'
-import selectCurrencyOptions from '../../utils/selectCurrencyOption'
 import { converter } from '../../api/currencyConverter'
 import PlainSelect from '../formSelect/plainSelect'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
 const ProvisionDetails = ({selectedProvider,
     service_type,
@@ -19,7 +19,10 @@ const ProvisionDetails = ({selectedProvider,
 
 }) => {
     const serviceImage =  splitString(selectedProvider?.product?.provider)
+    const {user} = useSelector(state => state.auth)
+
     const [btcValue, setBtcValue] = useState()
+
 
     useEffect(() => {
         const fetchBtcValue = async () => {
@@ -39,7 +42,7 @@ const ProvisionDetails = ({selectedProvider,
 
     <div className="grid lg:grid-cols-2 gap-10 max-w-6xl m-auto py-10 ">
         <div className="p-10 bg-gray-200 flex justify-center items-center h-96">
-            <img src={`/images/providers/${serviceImage}.webp`} alt="provider image"/>
+            <img src={`/images/providers/${serviceImage}.webp`} alt="provider image" className='w-full h-full'/>
 
         </div>
         <div>
@@ -97,19 +100,27 @@ const ProvisionDetails = ({selectedProvider,
 
 
                 </div>
-                <div className="my-0">
-                <h3 className="text-base font-semibold">Enter Email </h3>
+
+                {!user &&  <div className="my-0">
 
 
-                    <FormInput
-                        onChange={(input) => {
-                            setValue({
-                                ...value,
-                                email: input.target.value
-                            })
-                        }}
-                    type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
-                </div>
+                    <h3 className="text-base font-semibold">Enter Email </h3>
+
+
+                        <FormInput
+                            onChange={(input) => {
+                                setValue({
+                                    ...value,
+                                    email: input.target.value
+                                })
+                            }}
+                        type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
+                    </div>}
+
+
+
+
+               
                 </div>
                 :
                 <div>
@@ -132,8 +143,8 @@ const ProvisionDetails = ({selectedProvider,
                 </div>
 
                 <div>
-                     
-                <div className="my-0">
+
+                {!user &&  <div className="my-0">
                 <h3 className="text-base font-semibold">Enter Email </h3>
 
 
@@ -145,7 +156,9 @@ const ProvisionDetails = ({selectedProvider,
                             })
                         }}
                     type="text" name="email" className="block w-full rounded" placeholder="Enter Email Address"/>
-                </div>
+                </div> }
+                     
+               
                 </div>
                     <h3 className="text-base my- font-semibold">Select Plan/Bundle </h3>
 

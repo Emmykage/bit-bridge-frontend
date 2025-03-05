@@ -16,6 +16,7 @@ const AddFund = ({
   handleSubmit,
   disableAddress= true,
   coin_type="bank",
+  transaction_type="deposit"
 
 }) => {
 
@@ -63,8 +64,10 @@ const AddFund = ({
       form={form}
       initialValues={{
         amount: "",
+        transaction_type: transaction_type,
         address: !disableAddress ? "" : address ,
         proof: null,
+        bank: "",
         coin_type: coin_type,
         currency: "ngn"
         }}
@@ -74,10 +77,11 @@ const AddFund = ({
       }}
     >
         <FormInput className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
-        <FormInput className="add-fund" name="address" type='text' label={"Address"} disabled={disableAddress} />
+        <FormInput className="add-fund" name="address" type='text' label={"Account Number"} disabled={disableAddress} />
+       {transaction_type=== "withdrawal"  &&  <FormInput className="add-fund" name="bank" type='text' label={"Bank"} disabled={disableAddress} />}
         <FormSelect className="add-fund" name="coin_type"  label={"Type"} disabled={true} options={coinType}/>
 
-        <Form.Item 
+        {/* <Form.Item 
         label="payment receipt" 
         valuePropName="fileList" 
         className='text-white add-fund' 
@@ -119,12 +123,18 @@ const AddFund = ({
               </div>
             </button>
           </Upload>
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label={null}>
 
-        {/* <Button className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" type="primary" htmlType="submit">
-            Submit
-        </Button> */}
+
+        {/* <button
+  
+  className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl"
+  > Withdraw Fund</button> :  */}
+
+        {transaction_type === "withdrawal" &&  <Button className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" type="primary" htmlType="submit">
+            Withdraw Fund
+        </Button> }
 
      
       </Form.Item>
@@ -132,9 +142,10 @@ const AddFund = ({
     </Form>
 
 <div className="w-full">
-<PaystackButton 
-htmlType="button"
-className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" {...componentProps}/>
+  {transaction_type === "deposit" && 
+  <PaystackButton 
+  htmlType="button"
+  className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" {...componentProps}/> }
 </div>
 </>
   )
@@ -142,6 +153,7 @@ className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white ro
 
 AddFund.propTypes = {
   handleSubmit: PropTypes.func,
+  transaction_type: PropTypes.string,
   address: PropTypes.func,
   coin_type: PropTypes.func,
   disableAddress: PropTypes.bool
