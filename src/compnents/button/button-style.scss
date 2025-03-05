@@ -18,3 +18,14 @@
     @apply bg-none text-alt border-alt;
     background: none;
 }
+
+.navbtn{
+    &.ant-btn{
+        padding: 0;
+        @media (max-width: 700px) {
+            font-size: 12px;
+            padding-inline-start: 8px !important;
+            
+        }
+    }
+}

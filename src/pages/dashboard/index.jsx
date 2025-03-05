@@ -69,7 +69,7 @@ const HomeDashboard = () => {
 
   return (
     <div className="homeDashboard text-white w-full">
-        <div className="account w-full info bg-black my-10 p-4 md:p-10 flex flex-col md:flex-row justify-between ">
+        <div className="account w-full info bg-black my-0 p-10 flex flex-col md:flex-row justify-between ">
             <div className="overflow-hidden">
                 <div className="flex gap-10">
                 <h3 className="text-xl">Wallet balance</h3>

@@ -1,10 +1,9 @@
-import { DollarOutlined, GiftOutlined, HomeOutlined, LoginOutlined, MenuUnfoldOutlined, WalletOutlined } from '@ant-design/icons'
+import { HomeOutlined, LoginOutlined, MenuUnfoldOutlined, WalletOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getWallet } from '../redux/actions/wallet';
+import { useEffect, useRef, useState } from 'react';
 import { userLogout } from '../redux/actions/auth';
 import DropDown from '../compnents/dropDown/DropDown';
 import logo from "../assets/logos/logo-mod.png"
@@ -13,6 +12,8 @@ import { LuUtilityPole } from 'react-icons/lu';
 const DashboardLayout = () => {
 
     const dispatch = useDispatch()
+    const sideNavRef = useRef(null)
+    const menuRef = useRef(null)
     // const {wallet} = useSelector(state => state.wallet)
     const {user, loading} = useSelector(state => state.auth)
     const navigate = useNavigate()
@@ -27,12 +28,42 @@ const DashboardLayout = () => {
        }
     },[user, loading])
 
+    const closeNav = (e) => {
+        console.log(e.target)
+
+        // console.log(sideNavRef.current)
+
+        if(sideNavRef.current && !sideNavRef.current.contains(e.target) && !menuRef.current.contains(e.target)){
+            console.log("first")
+            seTShowMenu(false)
+        }
+
+    }
+
+
+
+    console.log(showMenu)
+
+
+    useEffect(()=> {
+        document.addEventListener("mousedown", closeNav)
+
+
+        return () => {
+            document.removeEventListener("mousedown", closeNav)
+        }
+
+    
+
+    },[closeNav, sideNavRef])
+
   return (
-    <div className='relative bg-gray-00 min-h-screen bg-black/90'>
-        <div className='max-w-[1500px] m-auto'>
+    <div className='relative bg-gray-00 h-screen bg-black/90'>
+        <div className='max-w-[1500px] m-auto flex flex-col overflow-hidden h-screen'>
 
         <header className='flex justify-between items-center bg-black gap-4 rounded py-10 px-7  top-0'>
-            <span className='lg:hidden ' onClick={()=> seTShowMenu(prev => !prev)}>
+            <span ref={menuRef} className='lg:hidden'  onClick={()=> {
+                seTShowMenu(prev => !prev)}}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
             <NavLink className={"text-3xl text-white flex1"}>
@@ -56,8 +87,11 @@ const DashboardLayout = () => {
         
         </div>
         </header>
-        <div className='min-h-96 flex overflow-hidden'>
-            <aside className={`${showMenu ? "w-max px-3" : "w-0 px-0"} shrink-0 overflow-hidden transition-all duration-200 ease-linear bg-zinc-800 md:hidden py-10 text-gray-300`}>
+        <div className=' flex overflow-hidden mt-0 h-full flex-1 w-full  md:px-10'>
+
+            <div className='relative bg-red-50'>
+
+            <aside ref={sideNavRef} className={`${showMenu ? "w-max px-1.5" : "w-0 px-0"} shrink-0 sticky h-full top-0 left-0 overflow-hidden transition-all duration-200 ease-linear bg-zinc-800 md:hidden py-10 text-gray-300`}>
             <ul className='flex flex-col gap-9'>
                 <li><NavLink to={"/dashboard/home"} className={({isActive})=>  isActive ? active : normal}><HomeOutlined className='text-2xl' /> Home</NavLink></li>
                 <li><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
@@ -71,7 +105,9 @@ const DashboardLayout = () => {
             </ul>
 
             </aside>
-            <div className='mt-10  w-full flex-1'>
+            </div>
+
+             <div className='mt-10  w-full flex-1 overflow-y-auto '>
             <Outlet/>
 
             </div>

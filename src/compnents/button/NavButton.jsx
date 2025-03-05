@@ -13,7 +13,7 @@ const NavButton = ({
     
         onClick={onClick}
         
-    className={`${className} button font-medium h-10 text-black bg-alt border-none` } classNames={"hello"} shape="round" >
+    className={`${className} button font-medium md:h-10 text-black navbtn bg-alt border-none px-0` }  shape="round" >
     {children}
   </Button>
   )
