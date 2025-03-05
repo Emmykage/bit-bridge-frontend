@@ -7,6 +7,7 @@ import ClickButton from '../../../compnents/button/Button'
 import { toast } from 'react-toastify'
 import dateFormater from '../../../utils/dateFormat'
 import statusStyle from '../../../utils/statusStyle'
+import { nairaFormat } from '../../../utils/nairaFormat'
 // import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
 
 const AdminDepositTransactions = () => {
@@ -37,7 +38,6 @@ const AdminDepositTransactions = () => {
         })
     }
 
-
   return (
     <div>
         <h3 className='font-semibold text-xl text-gray-900'>Deposits</h3>
@@ -52,12 +52,13 @@ const AdminDepositTransactions = () => {
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter">Amount</th>
 
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-20">  status</th>
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-5">  status</th>
                                     {/* <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Type</th> */}
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold  backdrop-blur backdrop-filter sm:table-cell">Address</th>
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Time </th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Address </th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Time </th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"> </th>
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"></th>
+                                    {/* <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"></th> */}
 
                         
                             </tr>
@@ -71,7 +72,7 @@ const AdminDepositTransactions = () => {
                                 { transactions?.map(({id, status, transaction_type, address, created_at, amount}) => (
 
                                 <tr key={id}>
-                                <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{amount}</p></td>
+                                <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(amount)}</p></td>
                                 <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{transaction_type}</p></td>
 
                                     <td className="relative whitespace-nowrap border-b  border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
@@ -86,13 +87,13 @@ const AdminDepositTransactions = () => {
                                         {address ?? "Not Available"}
 
                                     </td> 
-                                    <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
+                                    <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                         {dateFormater(created_at)}
 
                                     </td>
 
                                     <td className="relative whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                        <BreadCrunbs id={id} setSelectedId={setSelectedId} setOpen={setOpen} open={open}/>
+                                        <BreadCrunbs id={id} setSelectedId={setSelectedId} setOpen={setOpen} link={`/admin/transactions/${id}`} open={open}/>
                                         {/* <OptionDropDown id={id} handleDel={()=> {
                                                                                 setOpen(true)
                                                                                 setSelectedId(id)

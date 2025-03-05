@@ -92,7 +92,7 @@ const Purchases = () => {
                             </td>
 
                               <td className="relative z-0 whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
-                                                                    <BreadCrunbs id={item.id} setSelectedId={setSelectedId} setOpen={setOpen} open={open}/>
+                                                                    <BreadCrunbs id={item.id} setSelectedId={setSelectedId} link={`/admin/purchases/${item?.id}`}  setOpen={setOpen} open={open}/>
                                                                     {/* <OptionDropDown id={id} handleDel={()=> {
                                                                                                             setOpen(true)
                                                                                                             setSelectedId(id)

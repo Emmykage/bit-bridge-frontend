@@ -1,13 +1,11 @@
-import { Button, Form, message, Upload } from 'antd'
-import  { useEffect, useState } from 'react'
+import { Button, Form } from 'antd'
+import  { useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
 // import paymentDetails from '../../data/walletAddres.json'
 import coinType from '../../data/coinType.json'
-import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import FormSelect from '../formSelect/FormSelect';
-import PaymentOptions from '../paymentOptions/PaymentOptions';
 import { PaystackButton } from 'react-paystack';
 import { useSelector } from 'react-redux';
 import { publicKey } from '../../redux/baseUrl';
@@ -42,14 +40,13 @@ const AddFund = ({
     // onClose: () => alert('Are you sure'),
   }; 
  
-  // console.log(disableAddress)
-  const normFile = (e) => {
+  // const normFile = (e) => {
 
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList || [];
-  };
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   return e?.fileList || [];
+  // };
 
 
   

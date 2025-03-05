@@ -11,6 +11,9 @@ import { MdMiscellaneousServices, MdProductionQuantityLimits } from 'react-icons
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPricetagOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
+import { userLogout } from '../redux/actions/auth';
+import { SET_LOADING } from '../redux/app';
+import { CiLogout } from 'react-icons/ci';
 const AdminDashboardLayout = () => {
     const dispatch = useDispatch()
 
@@ -20,8 +23,24 @@ const AdminDashboardLayout = () => {
 
 
     useEffect(() => {
-        dispatch(getWallet());
+        dispatch(getWallet())
     }, [dispatch]);
+
+
+    const handleLogOut = () => {
+        dispatch(SET_LOADING(true))
+        
+        dispatch(userLogout()).then(result => {
+            if(userLogout.fulfilled.match(result)){
+                dispatch(SET_LOADING(false))
+
+                navigate("/admin/login")
+            }else{
+                dispatch(SET_LOADING(false))
+
+            }
+        })
+    }
 
 
     useEffect(() => {
@@ -64,9 +83,10 @@ const AdminDashboardLayout = () => {
                 <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/products"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
                 <IoPricetagOutline className='text-2xl'/>
                  Products </NavLink>       </li>
-                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/services"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+                {/* <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/services"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
                 <MdMiscellaneousServices className='text-2xl'/>
-                Services </NavLink>       </li> 
+                Services </NavLink>       
+                </li>  */}
                 <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/transactions"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
                 <SiMoneygram className='text-2xl'/>
                 Deposits </NavLink>       </li> 
@@ -76,6 +96,13 @@ const AdminDashboardLayout = () => {
                 <span>Users</span>
                 
                  </NavLink>       </li> 
+                 <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <a onClick={handleLogOut} 
+                 className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 justify-center items-center`}> 
+
+                <CiLogout className='text-2xl'/>
+                <span>Log Out</span>
+                
+                 </a>       </li> 
                 </ul>
 
         </aside>

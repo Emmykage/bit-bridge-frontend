@@ -6,6 +6,7 @@ import { getTransactions } from '../../redux/actions/transaction'
 import { nairaFormat } from '../../utils/nairaFormat'
 import statusStyle from '../../utils/statusStyle'
 import dateFormater from '../../utils/dateFormat'
+import { PiHandDepositBold, PiHandWithdrawFill } from 'react-icons/pi'
 
 const AdminHome = () => {
     const dispatch = useDispatch()
@@ -22,26 +23,26 @@ const AdminHome = () => {
             <div className='min-h-60 w-full gap-4 flex-col sm:flex-row flex bg-white  p-4 400'>
             <div className='flex flex-col justify-center shadow flex-1 items-center'>
                     <UserAddOutlined className='text-3xl text-alt'/>
-                    <span>
+                    <span className='text-gray-700'>
                         TOTAL  USERS
                     </span>
-                    <p className='font-bold text-xl text-gray-900'>0+</p>
+                    <p className='text-gray-700 font-semibold'>0+</p>
 
                     </div>
                     <div className='flex flex-col justify-center shadow flex-1 items-center'>
-                    <UserAddOutlined className='text-3xl'/>
-                    <span>
-                        TOTAL  USERS
+                    <PiHandDepositBold className='text-3xl'/>
+                    <span className='text-gray-700'>
+                        AMOUNT DEPOSITED
                     </span>
-                    <p>0+</p>
+                    <p className='text-gray-700 font-semibold'>0+</p>
 
                     </div>
                     <div className='flex flex-col justify-center shadow flex-1 items-center'>
-                    <UserAddOutlined className='text-3xl'/>
-                    <span>
-                        TOTAL  USERS
+                    <PiHandWithdrawFill className='text-3xl'/>
+                    <span className='text-gray-700'>
+                    AMOUNT WITHDRAWN
                     </span>
-                    <p>0+</p>
+                    <p className='text-gray-700 font-semibold'>0+</p>
 
                     </div>
             </div>

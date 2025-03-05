@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createTransaction, getTransactions, getUserTransactions } from "../actions/transaction"
+import { createTransaction, getTransaction, getTransactions, getUserTransactions } from "../actions/transaction"
 
 const initialState = {
     transactions: [],
+    transaction: {},
     logged: false,
     loading: false,
     deposits: []
@@ -89,6 +90,22 @@ const AuthSlice = createSlice({
             return{
                 ...state,
 
+                loading: false
+            }
+        }).addCase(getTransaction.fulfilled, (state, action) => {
+            return{
+                ...state,
+                transaction: action.payload.data,
+                loading: false
+            }
+        }).addCase(getTransaction.pending, (state) => {
+            return{
+                ...state,
+                loading: true
+            }
+        }).addCase(getTransaction.rejected, (state) => {
+            return{
+                ...state,
                 loading: false
             }
         })
