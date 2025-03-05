@@ -8,7 +8,6 @@ import { createTransaction } from "../../redux/actions/transaction";
 import { RiUserReceived2Line } from "react-icons/ri";
 import { converter } from "../../api/currencyConverter";
 import dateFormater from "../../utils/dateFormat";
-import { message } from "antd";
 import statusStyle from "../../utils/statusStyle";
 import { getWallet } from "../../redux/actions/wallet";
 import { SET_LOADING } from "../../redux/app";
@@ -20,7 +19,7 @@ const Account = () => {
     const [convertedAmount, setConvertedAmount] = useState(null)
     const address = "Card Transfer"
     const coinType ="bank"
-    const currency = "ngn"
+    // const currency = "ngn"
 
 
     useEffect(()=> {
@@ -203,13 +202,13 @@ const Account = () => {
     </div>
 
     <AppModal title={"Fund Wallet"}  isModalOpen={isModalOpen} handleOk={()=> {}} handleCancel={()=> {setIsModalOpen(false)}}  >
-        <div className="bg-purple- p-10">
+        <div className="bg-purple- p-0">
             <AddFund handleSubmit={handleSubmit} coin_type={coinType} address={address}/>
         </div>
     </AppModal>
 
     <AppModal title={"Withdraw Funds"}  isModalOpen={isWithdrawModalOpened} handleOk={()=> {}} handleCancel={()=> {setIsWithdrawalModalOpen(false)}}  >
-        <div className="bg-purple- p-10">
+        <div className="bg-purple- p-0">
             <AddFund handleSubmit={handleWithdrawalSubmit} coin_type={coinType} disableAddress={false} transaction_type="withdrawal" address={address}/>
         </div>
     </AppModal>

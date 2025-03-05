@@ -11,9 +11,10 @@ import DepositTransaction from "./components/DepositsTransaction"
 import WithdrawalTransactions from "./components/WithdrawalTransaction"
 import { getConversion } from "../../redux/actions/currency_caonversion"
 import { getWallet } from "../../redux/actions/wallet"
+import Loading from "../../compnents/loader/Loading"
 
 const HomeDashboard = () => {
-    const {wallet} = useSelector(state => state.wallet)
+    const {wallet, loading} = useSelector(state => state.wallet)
     const dispatch = useDispatch()
     const [selectedItem, setSelectedItem] = useState("gift-cards")
 
@@ -77,7 +78,10 @@ const HomeDashboard = () => {
                 </div>
            
                 <div>
-                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
+                    {loading ?               <div className=" pl-10">   <Loading/></div>
+: 
+<p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
+}
                     {/* <p>{convertedAmount} </p> */}
                     {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>

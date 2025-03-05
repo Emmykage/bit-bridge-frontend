@@ -19,9 +19,9 @@ const Orders = () => {
     <div className='lg:p-10 bg-black py-4 px-2 text-white'>
         <h4 className='text-2xl font-medium text-alt'>Recent Orders</h4>
         <div className='h-[500px] overflow-x-auto relative'>
-            <div className="px-4 sm:px-6 bg-rd-400 w-full lg:px-8 hover:border-gray-900">
+            <div className="">
                 <div className="mt-4 flow-root">
-                    <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
+                    <div className="">
                         <div className="inline-block min-w-full py-2 align-middle">
                             <table className="min-w-full bg-gray-300 border border-gray-200 rounded-md border-separate border-spacing-0 table-auto">
                                 <thead>

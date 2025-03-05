@@ -76,10 +76,10 @@ const AddFund = ({
         maxWidth: formLayout === 'inline' ? 'none' : 600,
       }}
     >
-        <FormInput className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
-        <FormInput className="add-fund" name="address" type='text' label={"Account Number"} disabled={disableAddress} />
-       {transaction_type=== "withdrawal"  &&  <FormInput className="add-fund" name="bank" type='text' label={"Bank"} disabled={disableAddress} />}
-        <FormSelect className="add-fund" name="coin_type"  label={"Type"} disabled={true} options={coinType}/>
+        <FormInput required={true} className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
+        <FormInput  required={true}  className="add-fund" name="address" type='text' label={"Account Number"} disabled={disableAddress} />
+       {transaction_type=== "withdrawal"  &&  <FormInput  required={true}  className="add-fund" name="bank" type='text' label={"Bank"} disabled={disableAddress} />}
+        <FormSelect className="add-fund" name="coin_type"  required={true}   label={"Type"} disabled={true} options={coinType}/>
 
         {/* <Form.Item 
         label="payment receipt" 
@@ -132,7 +132,7 @@ const AddFund = ({
   className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl"
   > Withdraw Fund</button> :  */}
 
-        {transaction_type === "withdrawal" &&  <Button className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" type="primary" htmlType="submit">
+        {transaction_type === "withdrawal" &&  <Button className="border-alt m-auto block w-full h-20 bg-primary text-white rounded-lg  border shadow-md font-medium text-xl" type="primary" htmlType="submit">
             Withdraw Fund
         </Button> }
 
@@ -145,7 +145,7 @@ const AddFund = ({
   {transaction_type === "deposit" && 
   <PaystackButton 
   htmlType="button"
-  className="border-alt m-auto block max-w-sm w-full h-20 bg-primary text-white rounded-lg  border px-4 py-2 shadow-md font-medium text-xl" {...componentProps}/> }
+  className="border-alt m-auto block  w-full h-20 bg-primary text-white rounded-lg  border  shadow-md font-medium text-xl" {...componentProps}/> }
 </div>
 </>
   )
