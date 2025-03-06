@@ -9,3 +9,4 @@ export {default as orderTokenReducer} from './orderToken'
 export {default as paymentReducer} from './billPayment'
 
 export {default as purchaseReducer} from "./purchasePower"
+export {default as userReducer}  from "./user"

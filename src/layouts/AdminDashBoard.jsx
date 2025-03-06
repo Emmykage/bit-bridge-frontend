@@ -61,10 +61,10 @@ const AdminDashboardLayout = () => {
   return (
     <div className='admin flex relative  h-screen'>
         <aside className={`${toggleNav ? "w-60" : "w-0 md:w-28"} h-full overflow-hidden px-0 transition-all ease-linear duration-150 shrink-0`}>
-            <div className='flex items-center py-7 bg-blue-800/60'>
-                {/* <img src={img} alt="" className='w-28 h-28 rounded-full'/> */}
+            <div className='flex items-center justify-center flex-col py-7 bg-blue-800/60'>
+                <img src={img} alt="" className='w-28 h-28 rounded-full'/>
                 <div className='text-white text-wrap text-center flex-1'>
-                    <p className='text-base font-semibold'>{user?.email}</p>
+                    {/* <p className='text-base font-semibold'>{user?.email}</p> */}
                     <p className='text-green-600'>Online</p>
                 </div>
             </div>
