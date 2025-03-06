@@ -40,7 +40,7 @@ const AdminDepositTransactions = () => {
 
   return (
     <div>
-        <h3 className='font-semibold text-xl text-gray-900'>Deposits</h3>
+        <h3 className='font-semibold text-xl my-5 text-gray-900'>Deposits</h3>
 
 
         <div className="px-4 sm:px-6 lg:px-8  hover:border-gray-900">
@@ -52,9 +52,9 @@ const AdminDepositTransactions = () => {
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter">Amount</th>
 
-                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-5">  status</th>
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-5">  Type</th>
                                     {/* <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Type</th> */}
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold  backdrop-blur backdrop-filter sm:table-cell">Address</th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold  backdrop-blur backdrop-filter sm:table-cell">Status</th>
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Address </th>
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Time </th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"> </th>

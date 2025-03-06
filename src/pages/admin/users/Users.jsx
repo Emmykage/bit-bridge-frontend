@@ -15,7 +15,7 @@ const Users = () => {
     console.log(users)
   return (
     <div>
-        <h3 className='font-semibold text-xl text-gray-900'>Deposits</h3>
+        <h3 className='font-semibold text-xl my-5 text-gray-900'>Deposits</h3>
 
 
         <div className="px-4 sm:px-6 lg:px-8 hover:border-gray-900">
@@ -59,11 +59,11 @@ const Users = () => {
                                    
                                     
                                     {/* <td className="whitespace-nowrap border-b border-gray-200 hidden px-3 py-3 text-sm text-gray-600 sm:table-cell text-left"><span className="rounded-xl  text-xs border border-gray-200 py-1 px-2.5"> <span className= "text-base <%=set_empt_status(user.status)%>"> &#x2022;</span> <span></span></span></td> */}
-                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                    <td className={`${item?.role === "admin" && "text-red-600" } font-semibold relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8`}>
                                         {item?.role}
 
                                     </td> 
-                                    <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
+                                    <td className="relative whitespace-nowrap border-b text-left border-gray-200 py-3 pr-4 pl-3  text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                         {dateFormater(item?.created_at)}
 
                                     </td>
@@ -71,7 +71,7 @@ const Users = () => {
 
                        
                                     </tr>
-                                                                    ))}
+                                 ))}
 
 
                         
