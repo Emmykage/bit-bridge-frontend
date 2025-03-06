@@ -69,7 +69,7 @@ const DashboardPowerForm = () => {
             onFinish={handleFormSubmit}
             form={form}
             initialValues={{
-                amount: "0.00",
+                amount: "",
                 phone: "",
                 meter_type: "",
                 billersCode: "",
@@ -82,12 +82,12 @@ const DashboardPowerForm = () => {
 
             <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormSelect placeholder={"Select Meter Type"} className="flex-1" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"meter_type"}/>
-                <FormInput className={"flex-1 w-full"} label={"Meter Number"} placeholder={"Enter Meter Number"} name={"billersCode"}/>
+                <FormInput className={"flex-1 w-full"} label={"Meter Number"} placeholder={"Meter Number"} name={"billersCode"}/>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormInput className={"flex-1"} label={"Phone Number"} placeholder={"Enter Phone Number"} name={"phone"}/>
-                <FormInput className={"flex-1"} label={"Email"} placeholder={"Enter Meter Number"} name={"email"}/>
+                <FormInput className={"flex-1"} label={"Email"} placeholder={"Email Address"} name={"email"}/>
 
             </div>
             <div className="sm:w-1/2">

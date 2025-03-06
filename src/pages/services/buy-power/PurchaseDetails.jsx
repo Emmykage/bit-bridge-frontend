@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { confirmPurchase, getPurchaseOrder } from "../../../redux/actions/purchasePower"
+import { confirmPayment, getPurchaseOrder } from "../../../redux/actions/purchasePower"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
@@ -36,12 +36,12 @@ const PurchaseDetails = () => {
     const queryId = searchParams.get("transaction_id")
     const dispatch = useDispatch()
 
-    const handleConfirmation = () => {
+    const handleConfirmation = (payment_method) => {
                 dispatch(SET_LOADING(true))
         
-        dispatch(confirmPurchase({queryId, status: "completed"})).then(
+        dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
-                if(confirmPurchase.fulfilled.match(result)){
+                if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
                     dispatch(SET_LOADING(false))
 

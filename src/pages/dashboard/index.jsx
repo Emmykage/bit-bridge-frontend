@@ -148,9 +148,9 @@ const HomeDashboard = () => {
 
 
         </div>
-        <div>
-            <img src={wallet} alt="" />
-        </div>
+        {/* <div>
+            <img src={wallet} alt="fake wallet" />dfdf
+        </div> */}
 
         </div>
 

@@ -8,7 +8,7 @@ const BillOrderDetails = ({
     const {user} = useSelector(state =>  state.auth)
 
     const pickLabel = (type) => {
-        console.log(type)
+
         switch (type) {
             case "vtu":
             case "data":

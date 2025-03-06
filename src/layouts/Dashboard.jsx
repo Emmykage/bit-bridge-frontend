@@ -29,20 +29,12 @@ const DashboardLayout = () => {
     },[user, loading])
 
     const closeNav = (e) => {
-        console.log(e.target)
-
-        // console.log(sideNavRef.current)
-
         if(sideNavRef.current && !sideNavRef.current.contains(e.target) && !menuRef.current.contains(e.target)){
-            console.log("first")
+
             seTShowMenu(false)
         }
 
     }
-
-
-
-    console.log(showMenu)
 
 
     useEffect(()=> {
