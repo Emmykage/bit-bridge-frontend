@@ -7,14 +7,17 @@ import { nairaFormat } from '../../utils/nairaFormat'
 import statusStyle from '../../utils/statusStyle'
 import dateFormater from '../../utils/dateFormat'
 import { PiHandDepositBold, PiHandWithdrawFill } from 'react-icons/pi'
+import { getStatistics } from '../../redux/actions/statistics'
 
 const AdminHome = () => {
     const dispatch = useDispatch()
     const {transactions, deposits} = useSelector(state => state.transaction)
+    const {stats} = useSelector(state =>  state.stat)
     console.log(deposits)
     useEffect(()=> {
 
       dispatch (getTransactions())
+        dispatch(getStatistics())
 
     },[])
   return (
@@ -26,7 +29,7 @@ const AdminHome = () => {
                     <span className='text-gray-700'>
                         TOTAL  USERS
                     </span>
-                    <p className='text-gray-700 font-semibold'>0+</p>
+                    <p className='text-gray-700 text-lg font-semibold'>{stats?.users}</p>
 
                     </div>
                     <div className='flex flex-col justify-center shadow flex-1 items-center'>
@@ -34,7 +37,7 @@ const AdminHome = () => {
                     <span className='text-gray-700'>
                         AMOUNT DEPOSITED
                     </span>
-                    <p className='text-gray-700 font-semibold'>0+</p>
+                    <p className='text-gray-700 text-lg font-semibold'>{nairaFormat(stats?.total_deposits ?? 0)}</p>
 
                     </div>
                     <div className='flex flex-col justify-center shadow flex-1 items-center'>
@@ -42,7 +45,7 @@ const AdminHome = () => {
                     <span className='text-gray-700'>
                     AMOUNT WITHDRAWN
                     </span>
-                    <p className='text-gray-700 font-semibold'>0+</p>
+                    <p className='text-gray-700 text-lg font-semibold'>{nairaFormat(stats?.total_withdrawals ?? 0)}</p>
 
                     </div>
             </div>

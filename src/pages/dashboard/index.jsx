@@ -9,7 +9,6 @@ import SelectInput from "../../compnents/select/Select"
 import OrderTransact from "./components/Orders"
 import DepositTransaction from "./components/DepositsTransaction"
 import WithdrawalTransactions from "./components/WithdrawalTransaction"
-import { getConversion } from "../../redux/actions/currency_caonversion"
 import { getWallet } from "../../redux/actions/wallet"
 import Loading from "../../compnents/loader/Loading"
 

@@ -28,7 +28,7 @@ const DashboardPowerForm = () => {
 
         dispatch(SET_LOADING(true))
 
-       dispatch(createPurchaseOrder({...values, biller, service_type: "Electricity"})).
+       dispatch(createPurchaseOrder({...values, biller, service_type: "ELECTRICITY"})).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data

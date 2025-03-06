@@ -10,3 +10,4 @@ export {default as paymentReducer} from './billPayment'
 
 export {default as purchaseReducer} from "./purchasePower"
 export {default as userReducer}  from "./user"
+export {default as statisticsReducer} from "./statistics"

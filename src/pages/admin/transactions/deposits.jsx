@@ -40,7 +40,7 @@ const AdminDepositTransactions = () => {
 
   return (
     <div>
-        <h3 className='font-semibold text-xl my-5 text-gray-900'>Deposits</h3>
+        <h3 className='font-semibold text-xl my-5 text-gray-900'>Users</h3>
 
 
         <div className="px-4 sm:px-6 lg:px-8  hover:border-gray-900">
