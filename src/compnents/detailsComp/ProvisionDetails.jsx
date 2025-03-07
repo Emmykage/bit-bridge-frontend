@@ -27,7 +27,7 @@ const ProvisionDetails = ({selectedProvider,
     useEffect(() => {
         const fetchBtcValue = async () => {
             try {
-                const calcValue = await converter({ fromCurr: "ngn", amount: value, toCurr: "btc" });
+                const calcValue = await converter({ fromCurr: "ngn", amount: value?.amount, toCurr: "btc" });
                 setBtcValue(calcValue);
 
             } catch (error) {
@@ -37,6 +37,8 @@ const ProvisionDetails = ({selectedProvider,
     
         fetchBtcValue();
     }, [])
+
+    console.log(btcValue)
   return (
     <section className="px-4">
 
@@ -190,7 +192,7 @@ const ProvisionDetails = ({selectedProvider,
             <div>
 
                 <div className="my-3">
-                    <CartButton onClick={handleSubmit}> {service_type==="VTU" ? "Purchase Airtime" : "Purcahse Subscription"}</CartButton>
+                    <CartButton onClick={handleSubmit}> {service_type==="VTU" ? "Purchase Airtime" : "Purchase Subscription"}</CartButton>
                 </div>
                
 

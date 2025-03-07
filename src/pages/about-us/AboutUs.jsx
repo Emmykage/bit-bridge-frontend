@@ -5,98 +5,124 @@ const AboutUs = () => {
   return (
     <div>
         <Header/>
-        <HeroBanner text={"About Us"}/>
+        <HeroBanner link={"About Us"} extra={"Policies"} text={"About Us"}/>
 
   
 
-      <section id='contact-form' className='get-in-touch text-white py-20 px-4'>
+      <section id='contact-form' className='get-in-touch text-white py-10 px-4'>
         <div className='max-w-4xl  m-auto my-14'>
-        <h3 className='text-5xl text-left font-semibold text-primary '>Why Choose BitBridge?</h3>
-        <p className='md:text-2xl my-5 text-justify text-gray-700'>
-        At BitBridge, we provide a seamless, secure, and efficient platform for converting your gift cards to cash and paying utility bills with ease. Whether you’re looking to sell gift cards for instant payment or conveniently settle your bills, BitBridge is your go-to solution!
-        </p>
+        <h3 className='text-5xl text-left font-semibold text-primary '>Who We Are?</h3>
+        <p className='md:text-lg my-5 text-justify text-gray-700'>
+            Bit Bridge Global is a trusted digital payment platform designed to make financial transactions seamless, secure, and efficient. We specialize in utility payment services and connecting buyers to sellers in our online market place.
+ </p>
 
-        <h3 className='text-3xl text-gray-800 font-semibold'>        Our Services  </h3>
-        <p className='text-gray-800 text-lg my-4 font-semibold'>
-            1. Trade Gift Cards for Instant Cash
-
-        </p>
-        <p className='text-gray-800 px-4'>
-            Got unused or unwanted gift cards? Convert them to cash effortlessly! We support a wide range of gift cards,
-        </p>
-        <p className='text-gray-800 text-lg my-4 font-semibold'>
-            2. Pay Utility Bills with Ease
-
-            
-        </p>
-        <p className='text-gray-800 px-4 font-semibold'>
-            Say goodbye to late payments! With BitBridge, you can conveniently settle your utility bills, including:
-        </p>
-            <ul className='list-disc list-inside text-gray-700 font-medium'>
-                <li>
-                Electricity Bills
-
-                </li>
-                <li>
-                Water Bills
-
-                </li>
-                <li>
-                Internet & Cable Subscriptions
-
-                </li>
-                <li>
-                    Mobile Airtime & Data Top-ups
-
-                </li>
-                
-
-
-
-
-            </ul>
-            <p className='text-gray-800'>
-            We support multiple service providers, ensuring you stay connected and powered up at all times.
-
+        <h3 className='text-2xl text-primary font-semibold'>    Why Choose Bit Bridge Global? </h3>
+            <p className='md:text-base my-5 text-justify text-gray-700'>
+                We stand out as a reliable and customer-centric platform committed to simplifying financial transactions. Here’s why thousands trust us:
             </p>
-            <h3 className='text-3xl font-semibold text-gray-800 my-4'>
-            Comprehensive Support for Your Payment Needs
+            <div>
 
-            </h3>
-            <p className='text-gray-700 font-medium'>
-                Whether you need assistance with gift card trading, bill payments, or navigating our platform, we’re here to support your financial transactions. Our team of experts is available to provide personalized guidance and ensure a smooth experience for all your payment needs.
+                <p className='text-gray-800 text-base my-4 font-normal'>
+                    <span className='font-semibold'>✅ Fast Transactions –</span>  Enjoy instant processing for gift card exchanges and bill payments.
 
-            </p>
-
-            <h3 className='text-xl font-semibold text-primary my-4'>  Why BitBridge Stands Out? </h3>
-            <p className='leading-7 text-gray-700 font-medium'>
-            ✅ Fast Transactions – Get your payments processed instantly. <br/>
-            ✅ Secure & Reliable – Your data and transactions are protected with top-tier security.<br/>
-            ✅ Competitive Rates – Enjoy the best market rates for your gift card trades.<br/>
-            ✅ 24/7 Customer Support – Our dedicated support team is always available to assist you.<br/>
-            ✅ User-Friendly Platform – A seamless experience on both desktop and mobile devices.<br/>
-
-            </p>
-
-            <p className='text-xl text-primary font-semibold my-4'>
-                How It Works
 
                 </p>
-                {/* <ul>
+    
+            </div>
 
-                For Gift Card Trading:
+            <div>
 
-                Select the type of gift card you want to trade.
+                <p className='text-gray-800 text-base my-4 font-normal'>
+                    <span className='font-semibold'>✅ Secure & Reliable –</span>  Your data and transactions are safeguarded with industry-leading security measures
 
-                Enter the details and upload the card.
+                </p>
+              </div>
+              <div>
 
-                Receive an instant quote.
+                <p className='text-gray-800 text-base my-4 font-normal'>
+                    <span className='font-semibold'>✅ Competitive Rates –</span>   Get the best market value for your gift card trades
 
-                Get paid instantly to your preferred payment method.
-            </ul> */}
+                </p>
+            </div>
+            <div>
 
-            <p>
-                <p className='text-gray-700  font-semibold '>
+            <p className='text-gray-800 text-base my-4 font-normal'>
+                <span className='font-semibold'>✅ 24/7 Customer Support –</span>  Our dedicated team is always available to assist you
+
+            </p>
+            </div>
+            <div>
+
+            <p className='text-gray-800 text-base my-4 font-normal'>
+                <span className='font-semibold'>✅ User-Friendly Experience –</span>  Our platform is designed for smooth navigation on both desktop and mobile devices.
+
+
+            </p>
+            </div>
+
+
+
+            <div>
+                <h3 className='text-2xl text-primary font-semibold'> Our Services </h3>
+
+                    <div>
+                        <p className='text-gray-800 text-base my-4 font-semibold'>
+                                    1. Trade Gift Cards for Instant Cash
+                            
+                        </p>
+                        <p className='text-gray-800 px-4 font-semibold'>
+                            Got unused or unwanted gift cards? Convert them into cash effortlessly! We support a wide range of gift cards, offering <bold>competitive rates</bold>  and <bold>instant payouts</bold> 
+                        </p>
+                </div>
+                <div>
+                        <p className='text-gray-800 text-base my-4 font-semibold'>
+                        2. Pay Utility Bills with Ease
+
+                            
+                        </p>
+                        <p className='text-gray-800 px-4 font-semibold'>
+                        Never worry about missing a payment again! With Bit Bridge Global, you can settle your essential bills quickly and securely, including:
+
+                        </p>
+                        <ul className='list-disc list-inside my-3 text-gray-700 font-normal'>
+                            <li>
+                            Electricity Bills
+
+                            </li>
+                            <li>
+                            Water Bills
+
+                            </li>
+                            <li>
+                            Internet & Cable Subscriptions
+
+                            </li>
+                            <li>
+                                Mobile Airtime & Data Top-ups
+
+                            </li>
+                            
+
+
+
+
+                        </ul>
+                        <p className='text-gray-800 my-6 text-base'>
+                            We partner with multiple service providers to ensure you stay connected and powered up at all times.
+                            Comprehensive Support for Your Payment Needs*
+
+                        </p>
+                </div>
+
+                <div className='my-6'>
+                    <p className='text-gray-700'>
+                    We go beyond just transactions – we are committed to providing exceptional customer service. Whether you need assistance with gift card trading, bill payments, or navigating our platform, our team of experts is here to offer personalized guidance and ensure a seamless experience.
+
+                    </p>
+
+                    <p className='text-xl text-primary font-semibold my-4'> How It Works</p>
+                <p>
+                <p className='text-gray-700 my-3 font-semibold '>
                 For Utility Bill Payments:
 
                 </p>
@@ -125,14 +151,24 @@ const AboutUs = () => {
 
                 </ul>
 
-                <p className='text-gray-700 font-semibold my-8'>
-                Join Thousands of Happy Users!
-                Experience the convenience of trading gift cards and paying your bills with BitBridge. Get started today!
+                <p className='text-gray-700 my-5 text-xl '>
+                Legally Certified & Registered
+                </p>
 
+                <p className='text-gray-700 font-semibold my-0'>
+
+                    Bit Bridge Global is officially certified to provide these services. We are registered under <strong> The Registrar - General Affairs Commission</strong> with <strong> Company Registration No. 8178481 </strong>. Our compliance with legal and regulatory standards ensures that you can transact with complete confidence.
+                    Join Thousands of Happy Users!*
+                
+                </p>
+
+                <p className='text-base text-gray-800 my-5'>
+                Experience the convenience of trading gift cards and paying your bills with *Bit Bridge Global*. Get started today!
                 </p>
            
               </p>
-
+                </div>
+            </div>
 
         <p>
 

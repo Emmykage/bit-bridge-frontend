@@ -29,7 +29,7 @@ const UtilityServices = () => {
         
                     </h2>
                     <p className="my-4 text-lg font-medium text-gray-600 text-lef">
-                    Crypto conversion made easy - conver your crypto to cash in one simple step Pay with crypto and stay connected while traveling!
+                    Securely pay for electricity using your wallet in just a few clicks—fast, convenient, and hassle-free!
                     </p>
                   </div>
                   <div>

@@ -15,7 +15,7 @@ const AdminDepositTransactions = () => {
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const [selectedId, setSelectedId] = useState(null)
-    console.log(selectedId)
+
     useEffect(()=> {
             dispatch(getTransactions())
     }, [])

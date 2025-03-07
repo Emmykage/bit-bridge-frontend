@@ -12,10 +12,6 @@ const ComfirmCablePurchase = () => {
     const navigate = useNavigate()
     const queryId = searchParams.get("transaction_id")
 
-
-
-    console.log("details of purchase", purchaseOrder)
-
     const dispatch = useDispatch()
 
     useEffect(()=> {

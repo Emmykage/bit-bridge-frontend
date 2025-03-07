@@ -61,7 +61,6 @@ const ConfirmOrder = () => {
     
     },[])
 
-    console.log(convertedTotal, order)
   return (
     <section className="py-10 px-4 sm:px-10 ">
 

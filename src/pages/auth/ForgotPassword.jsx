@@ -50,8 +50,6 @@ export const ForgotPassword = () => {
           onFinish={(values) => {
           dispatch(SET_LOADING(true))
 
-          console.log(values)
-
           dispatch(userPasswordReset(values)).then(result =>
             {
               if(userPasswordReset.fulfilled.match(result)){

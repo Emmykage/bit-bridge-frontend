@@ -23,10 +23,6 @@ const AddFund = ({
   const [formLayout] = useState('vertical');
 
   const amount = Form.useWatch("amount", form);
-
-
-  
-  console.log(amount)
     
   const componentProps = {
     email:  user?.email,

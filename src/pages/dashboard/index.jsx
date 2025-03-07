@@ -62,7 +62,6 @@ const HomeDashboard = () => {
 
     // useEffect(()=> {
 
-    //     console.log("fetching......")
     //     dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
     // },[])
 

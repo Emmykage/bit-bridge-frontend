@@ -12,7 +12,6 @@ const Users = () => {
         dispatch(getUsers())
     }, [])
 
-    console.log(users)
   return (
     <div>
         <h3 className='font-semibold text-xl my-5 text-gray-900'>Deposits</h3>

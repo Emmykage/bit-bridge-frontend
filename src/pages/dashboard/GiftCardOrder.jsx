@@ -7,11 +7,10 @@ import {getUserCardTokens, updateCardToken } from '../../redux/actions/orderToke
 const GiftCardOrder = () => {
     const dispatch = useDispatch()
     const {cardTokens} = useSelector(state => state.orderToken)
-    console.log(cardTokens)
 
     useEffect(() => {
-        console.log("first")
-        dispatch(getUserCardTokens())
+
+      dispatch(getUserCardTokens())
     }, [])
 
 

@@ -16,7 +16,6 @@ const OrderSummary = ({cartItems, VAT, netAmount, convertedTotal}) => {
     const _netAmount = netAmount ?? _VAT + convertedTotal
 
        const handleConversion = async(fromCurr, toCurr, amount)=> {
-        console.log(fromCurr)
             const newvalue = await converter({fromCurr, toCurr, amount})
 
 
@@ -25,8 +24,8 @@ const OrderSummary = ({cartItems, VAT, netAmount, convertedTotal}) => {
         }
 
         useEffect(()=> {
-            // console.log("initiation items coversion");
 
+            
             (async() => {
                 const _cartItems = await Promise.all( cartItems.map(async(item) => ({
                     ...item,

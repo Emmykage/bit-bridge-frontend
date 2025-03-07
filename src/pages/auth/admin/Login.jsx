@@ -48,8 +48,8 @@ export const AdminLogin = () => {
   
         
             )
-          console.log(values)
-        }}
+
+          }}
           logo={logo}
           title={<NavLink to={"/"}> BitBridge Global Admin Login</NavLink>}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"

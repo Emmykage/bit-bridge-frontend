@@ -33,10 +33,6 @@ const Account = () => {
     },[wallet?.balance])
 
 
-
-    // console.log( wallet, wallet)
-
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isWithdrawModalOpened, setIsWithdrawalModalOpen] = useState(false);
     const dispatch = useDispatch()

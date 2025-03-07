@@ -43,10 +43,9 @@ const converter = async ({ fromCurr = "usd", amount = 1, toCurr = "usd" }) => {
                 const usd =  currencyRates["usd"].value;
 
                 const calc = ((toRate / fromRate) * amount).toFixed(8);
-                console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);
+                // console.log(`Converted ${amount} ${fromCurr} to ${calc} ${toCurr}`);
 
-                const currArrays = Object.values(currencyRates)
-                console.log(currArrays)
+                // const currArrays = Object.values(currencyRates)
                 return {calc: toCurr === "btc" ? calc : Number(calc).toFixed(2), 
                     dollarRate: Number ( currencyRates["usd"].value/currencyRates["ngn"].value )?.toFixed(2),
                     nairaRate: Number(currencyRates["ngn"].value / currencyRates["usd"].value)?.toFixed(2),

@@ -40,8 +40,6 @@ const UtilityView = () => {
 
 
     const toView = () => {
-        console.log("trigged ==>", location.hash)
-            console.log("it equals", sectionRef.current)
             sectionRef.current.scrollIntoView({behavior: "smooth" })
 
     }
@@ -52,16 +50,10 @@ const UtilityView = () => {
         }
     },[location])
 
-    console.log(selectedProvider)
-
-
-
      useEffect(()=> {
         console.log(selectedProvider, "he will come")
 
             if(selectedProvider){
-                console.log("get list")
-
               const provider =  splitString(selectedProvider?.product?.provider)
     
                 dispatch(getPriceList({service_type: selectedProvider?.service_type, provider: provider}))

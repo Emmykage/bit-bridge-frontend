@@ -42,10 +42,6 @@ export const ResetPassword = () => {
     cursor: 'pointer',
   };
 
-
-  console.log(email, passwordToken)
-
-
   return (
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
@@ -53,9 +49,6 @@ export const ResetPassword = () => {
           loading={loading}
           onFinish={(values) => {
           dispatch(SET_LOADING(true))
-
-          console.log(values)
-
 
           dispatch(changePasswordReset({
             user: {
@@ -82,8 +75,8 @@ export const ResetPassword = () => {
   
         
             )
-          console.log(values)
-        }}
+
+          }}
           logo={logo}
           title="BitBridge Global"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"

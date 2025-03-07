@@ -57,8 +57,8 @@ export const AdminSignup = () => {
   
         
             )
-          console.log(values)
-        }}
+
+          }}
           logo={logo}
           title="BitBridge Global"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"

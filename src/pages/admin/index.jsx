@@ -11,9 +11,9 @@ import { getStatistics } from '../../redux/actions/statistics'
 
 const AdminHome = () => {
     const dispatch = useDispatch()
-    const {transactions, deposits} = useSelector(state => state.transaction)
+    const {transactions} = useSelector(state => state.transaction)
     const {stats} = useSelector(state =>  state.stat)
-    console.log(deposits)
+
     useEffect(()=> {
 
       dispatch (getTransactions())

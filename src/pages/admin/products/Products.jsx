@@ -20,8 +20,8 @@ const Products = () => {
       const handleDelete = (id) => {
           dispatch(delProduct(id)).then(result => {
               if(delProduct.fulfilled.match(result)){
-                console.log(result)
-                  toast(result.payload.message, {type: "success"})
+
+                toast(result.payload.message, {type: "success"})
                   dispatch(getProducts())
                   setOpen(false)
   

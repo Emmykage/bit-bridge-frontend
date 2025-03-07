@@ -34,7 +34,6 @@ export default SelectInput
 // import { Select, Space } from 'antd';
 // import PropTypes from 'prop-types';
 // const handleChange = (value) => {
-//   console.log(`selected ${value}`);
 // };
 // const SelectInput = ({options,placeholder, className, onChange, defaultValue}) => (
 //   <Space wrap>

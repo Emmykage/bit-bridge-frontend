@@ -36,8 +36,8 @@ const Purchases = () => {
               }
           })
       }
-  console.log(orders)
-  return (
+
+      return (
     <div className="p-4 bg-gray-100">
      <h3  className='font-semibold text-xl text-gray-900'>Orders</h3>
 
