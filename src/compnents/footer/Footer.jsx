@@ -20,7 +20,7 @@ const Footer = () => {
                 <li> <NavLink to={"/about-us"}>Live Chat </NavLink> </li>
                 <li> <NavLink to={"/about-us"}> Help</NavLink> </li>
                 <li><NavLink to={"/contact-us"}>Contact Us</NavLink></li>
-                <li> <NavLink to={"/about-us"}> About US</NavLink> </li>
+                <li> <NavLink to={"/about-us"}> About Us</NavLink> </li>
                 
               </ul>
             </div>

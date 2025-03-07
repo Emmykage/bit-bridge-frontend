@@ -1,8 +1,11 @@
+import Footer from '../../compnents/footer/Footer'
 import Header from '../../compnents/header/Header'
 import HeroBanner from '../../compnents/hero/Hero'
 
 const AboutUs = () => {
   return (
+    <>
+    
     <div>
         <Header/>
         <HeroBanner link={"About Us"} extra={"Policies"} text={"About Us"}/>
@@ -178,6 +181,9 @@ const AboutUs = () => {
      
       </section>
     </div>
+    <Footer/>
+
+    </>
   )
 }
 
