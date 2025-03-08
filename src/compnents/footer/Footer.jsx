@@ -14,18 +14,18 @@ const Footer = () => {
             </div>
 
             <div className="bg-red-30 text-center md:text-left">
-              <h4 className="text-lg text-alt font-semibold">Support</h4>
+              <h4 className="text-lg text-alt font-semibold mb-2">Support</h4>
               <ul>
 
-                <li> <NavLink to={"/about-us"}>Live Chat </NavLink> </li>
-                <li> <NavLink to={"/about-us"}> Help</NavLink> </li>
+                {/* <li> <NavLink to={"/about-us"}>Live Chat </NavLink> </li>
+                <li> <NavLink to={"/about-us"}> Help</NavLink> </li> */}
                 <li><NavLink to={"/contact-us"}>Contact Us</NavLink></li>
                 <li> <NavLink to={"/about-us"}> About Us</NavLink> </li>
                 
               </ul>
             </div>
             <div className="bg-red-30 text-center md:text-left">
-              <h4 className="text-lg text-alt font-semibold">Links</h4>
+              <h4 className="text-lg text-alt font-semibold mb-2">Links</h4>
               <ul >
 
                 <li> <NavLink to={"/utility-services"}>Utility Bill </NavLink> </li>
@@ -37,9 +37,9 @@ const Footer = () => {
    
    
           <div className="bg-red-30 text-center md:text-left">
-            <h4 className="text-lg text-alt font-semibold">Resources</h4>
+            <h4 className="text-lg text-alt font-semibold mb-2">Resources</h4>
             <ul>
-              <li><NavLink to={"#"}>Referal</NavLink></li>
+              {/* <li><NavLink to={"#"}>Referal</NavLink></li> */}
               <li><NavLink to={"/terms-conditions"}>Vulnerability Disclosure</NavLink></li>                
             </ul>
           </div>

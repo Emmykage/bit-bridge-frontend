@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../../redux/actions/user'
 import Loading from '../../../compnents/loader/Loading'
 import dateFormater from '../../../utils/dateFormat'
+import { NavLink } from 'react-router-dom'
 
 const Users = () => {
     const dispatch = useDispatch()
@@ -66,7 +67,7 @@ const Users = () => {
                                         {dateFormater(item?.created_at)}
 
                                     </td>
-                                    <td className="whitespace-nowrap border-b border-gray-200 px-5 py-3 text-sm text-gray-600/90  font-medium "><p className=" text-blue-600">View</p></td>
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-5 py-3 text-sm text-gray-600/90  font-medium "><NavLink to={`/admin/users/${item.id}`} className=" text-blue-600">View</NavLink></td>
 
                        
                                     </tr>

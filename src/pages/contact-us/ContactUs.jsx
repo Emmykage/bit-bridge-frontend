@@ -1,13 +1,16 @@
 import HeroBanner from '../../compnents/hero/Hero'
 
 import Header from '../../compnents/header/Header'
+import Footer from '../../compnents/footer/Footer'
 
 const ContactUs = () => {
   return (
+    <>
+    
     <div>
        
         <Header/>
-        <HeroBanner text={"Contact Us"}/>
+        <HeroBanner extra={"Policies"} link={"contact us"} text={"Contact Us"}/>
 
         <section className='py-10 px-5'>
         <div>
@@ -48,9 +51,9 @@ const ContactUs = () => {
           <div className='my-6'>
           <div className='flex-1'>
               <label htmlFor="phone_no">
-              <input type="text"  placeholder='phone_no' name='Phone Number' className='p-5 rounded focus:outline-none text-gray-900 w-full font-semibold'/>
+              <input type="text"  placeholder='Phone Number' name='Phone Number' className='p-5 rounded focus:outline-none text-gray-900 w-full font-semibold'/>
 
-              </label>
+            </label>
             </div>
           </div>
           <div>
@@ -63,6 +66,8 @@ const ContactUs = () => {
         </form>
       </section>
     </div>
+    <Footer/>
+    </>
   )
 }
 

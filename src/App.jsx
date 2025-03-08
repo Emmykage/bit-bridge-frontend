@@ -81,6 +81,7 @@ import MobileView from './pages/dashboard/utility/mobile-top-up/MobileView'
 import DashboardMobilePurchaseDetails from './pages/dashboard/utility/mobile-top-up/PurchaseDetails'
 import DashboardMobileComfirmPurchase from './pages/dashboard/utility/mobile-top-up/ConfirmPurchase'
 import ViewTransaction from './pages/admin/transactions/ViewTransaction'
+import ViewUser from './pages/admin/users/ViewUser'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -220,6 +221,7 @@ function App() {
       <Route path='transactions' element={<AdminTransactions/>}/>
       <Route path='transactions/:id' element={<ViewTransaction/>}/>
       <Route path='users' element={<Users/>}/>
+      <Route path='users/:id' element={<ViewUser/>}/>
 
     </Route>
   </Routes>
