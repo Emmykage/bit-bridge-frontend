@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { createOrder, getOrder, getOrders, getUserBillOrders, getUserOrders } from "../actions/order"
+import { getBillOrder, getBillOrders } from "../actions/billOrders"
 
 const initialState = {
     order: {},
+    billOrder: {},
     billOrders: [],
     orders: [],
     message: null,
@@ -113,6 +115,38 @@ const orderSlice = createSlice({
             }
         })
         .addCase(getOrders.pending, (state) => {
+            return{
+                ...state,
+                loading: true,
+            }
+        })
+        .addCase(getBillOrders.fulfilled, (state, action) => (
+            {
+                ...state, 
+                loading: false,
+                billOrders: action.payload.data
+            }
+        )) 
+        .addCase(getBillOrders.rejected, (state)=> ({
+            ...state,
+            loading: false
+        }))
+        .addCase(getBillOrder.fulfilled, (state, action) => {
+            console.log(action.payload.data)
+            return{
+                ...state,
+                billOrder: action.payload.data,
+                loading: false
+            }
+        })
+        .addCase(getBillOrder.rejected, (state, action) => {
+            return{
+                ...state,
+                message: action.payload.message,
+                loading: false
+            }
+        })
+        .addCase(getBillOrder.pending, (state) => {
             return{
                 ...state,
                 loading: true,

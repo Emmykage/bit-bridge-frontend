@@ -5,7 +5,6 @@ import { nairaFormat } from '../../../utils/nairaFormat'
 
 import "./styles.scss"
 
-import { getTransaction } from '../../../redux/actions/transaction'
 import { FaArrowLeft } from 'react-icons/fa'
 import { getUser } from '../../../redux/actions/user'
 import dateFormater from '../../../utils/dateFormat'
@@ -24,8 +23,6 @@ const ViewUser = () => {
         dispatch(getUser(id))
 
     }, [])
-
-    console.log(user, id)
 
     
   return (
@@ -97,7 +94,7 @@ const ViewUser = () => {
                                 
 
                               
-                               user.transactions.length > 0 ? user.transactions?.map(item => (
+                               user?.transactions?.length > 0 ? user?.transactions?.map(item => (
 
                                 <tr key={item?.id}>
                                     <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{item?.transaction_type}</p></td>

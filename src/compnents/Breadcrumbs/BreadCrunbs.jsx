@@ -20,7 +20,7 @@ const BreadCrunbs = ({id,setSelectedId, setOpen, link}) => {
     document.addEventListener("click", closeDropDown)
   },[])
   return (
-    <div className='relative z-50' ref={dropDownRef}>
+    <div className='relative z-[100]' ref={dropDownRef}>
 
       <span className='cursor-pointer relative z-50' onClick={()=> setToggle(prev => !prev)}>
         <MdMoreHoriz className='text-lg' />
@@ -28,18 +28,18 @@ const BreadCrunbs = ({id,setSelectedId, setOpen, link}) => {
         <div style={{right: "calc(100% + 10px)"}} className={`absolute bottom-0 rounded z-10  p-2 px-4 bg-white ${toggle ? "block" : "hidden"}`}>
             <ul>
               <li className='my-2'>
-                <span className='' onClick={() => navigate(link)}>View</span>
+                <button className='' onClick={() => navigate(link)}>View</button>
               </li>
-              <li className='my-2'>
+              {/* <li className='my-2'>
                 <span className=''
                 onClick={()=> {
                   setOpen(prev => !prev)
                   setSelectedId(id)
                 }}
                 >update</span>
-              </li>
+              </li> */}
               <li className='my-2'>
-                <span className=''>delete</span>
+                <button disabled className=''>delete</button>
               </li>
             </ul>
 

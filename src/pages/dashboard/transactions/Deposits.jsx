@@ -11,7 +11,7 @@ const Deposits = () => {
     const [toggle, setToggle] = useState(false)
     const [viewImage, setViewImage] = useState(null)
   const {transactions, loading} = useSelector(state => state.transaction)
-    console.log(loading)
+
   const dispatch = useDispatch()
   useEffect(()=> {
     dispatch(getUserTransactions({type: "deposit"}))

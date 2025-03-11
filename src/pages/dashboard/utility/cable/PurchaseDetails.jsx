@@ -37,8 +37,7 @@ const DashboardCablePurchaseDetails = () => {
     const dispatch = useDispatch()
 
     const handleConfirmation = (payment_method) => {
-                dispatch(SET_LOADING(true))
-        
+                dispatch(SET_LOADING(true))        
         dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
                 if(confirmPayment.fulfilled.match(result)){
