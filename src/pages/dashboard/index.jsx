@@ -11,6 +11,9 @@ import DepositTransaction from "./components/DepositsTransaction"
 import WithdrawalTransactions from "./components/WithdrawalTransaction"
 import { getWallet } from "../../redux/actions/wallet"
 import Loading from "../../compnents/loader/Loading"
+import PowerComponent from "../../compnents/powerComponents/PowerComponent"
+import MobileTopUpViewComponents from "./components/MobileTopUpViewComponent"
+import CableTvComponents from "./components/CableTVCOmpoent"
 
 const HomeDashboard = () => {
     const {wallet, loading} = useSelector(state => state.wallet)
@@ -25,23 +28,23 @@ const HomeDashboard = () => {
     }, [])
     const items = [
         {
-            label: "Gift Cards Orders",
-            name: "gift-cards",
-            render: <OrderTransact/>,
-            btn: "Gift Card"
+            label: "Mobile Top Up",
+            name: "Top Up",
+            render: <MobileTopUpViewComponents/>,
+            btn: "Mobile Top Up"
         },
         {
-            label: "Bought Exchange Orders",
-            name: "buy-crypto",
-            render: <DepositTransaction/>,
-            btn: "Sell Crpto"
+            label: "Pay Electric Bills",
+            name: "Electric Bills",
+            render: <PowerComponent/>,
+            btn: "Electric Bills"
 
         },
         {
-            label: "Sold Exchange Orders",
-            name: "sell-crypto",
-            render: <WithdrawalTransactions/>,
-            btn: "Buy Crypto"
+            label: "Subscribe Cable Tv",
+            name: "TV Subscription",
+            render: <CableTvComponents/>,
+            btn: "Tv Subscription"
 
         }
     ]
@@ -77,9 +80,9 @@ const HomeDashboard = () => {
            
                 <div>
                     {loading ?               <div className=" pl-10">   <Loading/></div>
-: 
-<p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
-}
+                    : 
+                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
+                    }
                     {/* <p>{convertedAmount} </p> */}
                     {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>

@@ -45,27 +45,9 @@ export const getPurchaseOrder = createAsyncThunk("purchaseOrder/get-order", asyn
     }
 });
 
-export const confirmDataPurchase = createAsyncThunk("data/buy-data-orders", async({queryId}, {rejectWithValue}) => {
-    try {
-        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/approve_data`, {
-            headers: {
-                "Authorization": `Bearer ${fetchToken()}`
-            }
-        });
-
-        const result = response.data;      
-
-        return result;
-    } catch (error) {
-        if (error.response) {
-            return rejectWithValue({ message: error.response.data.message });
-        }
-        console.error(error);
-        return rejectWithValue({ message: "Something went wrong" });
-    }
-});
 
 export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId, payment_method}, {rejectWithValue}) => {
+    console.log(payment_method)
     try {
         const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/confirm_payment?payment_method=${payment_method}`, {
             headers: {

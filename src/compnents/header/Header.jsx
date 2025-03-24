@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 // import SearchField from '../serachField/SearchField'
 import Nav from '../nav/Nav'
 import { MenuUnfoldOutlined, QuestionCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
@@ -21,6 +21,7 @@ const Header = () => {
   // const inActive = `inactive  ${(pathname !== "/" && pathname !== "/phone-top-up" ) ?  "text-primary" : "text-alt"}`
   const inActive = `inactive text-alt`
 
+  const navigate = useNavigate()
 
   const {cartItems} = useSelector(state => state.app)
   const [open, setOpen] = useState(false);
@@ -87,10 +88,11 @@ const Header = () => {
                           {
                             if(userLogin.fulfilled.match(result)){
                               dispatch(SET_LOADING(false))
+                              navigate("/dashboard/home")
                               setShowLogin(false)
 
                                }
-                            else  if(userLogin.rejected.match(result)){
+                            else if(userLogin.rejected.match(result)){
                               dispatch(SET_LOADING(false) )
                 
                             }

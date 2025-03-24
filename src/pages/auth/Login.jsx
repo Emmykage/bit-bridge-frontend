@@ -67,7 +67,6 @@ import { SET_LOADING } from '../../redux/app';
             }
             else  if(userLogin.rejected.match(result)){
               dispatch(SET_LOADING(false) )
-              console.log("first", result)
 
             }
           }

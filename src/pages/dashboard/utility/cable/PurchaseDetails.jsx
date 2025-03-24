@@ -49,6 +49,7 @@ const DashboardCablePurchaseDetails = () => {
                     navigate(`/dashboard/utilities/cable/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
                     const data  = result.payload
+                    
                     dispatch(SET_LOADING(false))
                     toast(data?.message || "Failed to make purchase", {type: "error"})
                     setMessage(data.message)

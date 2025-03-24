@@ -60,8 +60,11 @@ const ViewOrder = () => {
 
             <div className='flex-1 '>
             <p className='text-gray-500 my-2 font-semibold'> <span className='text-gray-800 font-semibold'>Email</span> : {order?.email} </p>
-            <p className='text-gray-500 my-2 font-semibold'><span className='text-gray-800 my-2 font-semibold'>Total Amount</span> : <span> {nairaFormat(order?.total_amount, "usd")}</span> </p>
+            <p className='text-gray-500 my-2 font-semibold'><span className='text-gray-800 my-2 font-semibold'>Total Amount</span> : <span> {nairaFormat(order?.total_amount, "ngn")}</span> </p>
             <p className='text-gray-500 my-2 font-semibold'><span className='text-gray-800 my-2 font-semibold'>Provider</span> : <span> {order?.biller}</span> </p>
+            <p className='text-gray-500 my-2 font-semibold'><span className='text-gray-800 my-2 font-semibold'>Transaction ID</span> : <span> {order?.tranaction_id}</span> </p>
+
+
            
             </div>
 
