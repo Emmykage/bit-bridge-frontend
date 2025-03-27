@@ -29,7 +29,7 @@ const AddFund = ({
     amount: amount * 100,   
     publicKey:  publicKey,
   
-    text: 'Pay With Card',
+    text: 'Fund Account',
     onSuccess: () => {
       form.submit()
         },
@@ -60,6 +60,7 @@ const AddFund = ({
         transaction_type: transaction_type,
         address: !disableAddress ? "" : address ,
         proof: null,
+        coupon_code: null,
         bank: "",
         coin_type: coin_type,
         currency: "ngn"
@@ -70,7 +71,6 @@ const AddFund = ({
       }}
     >
         <FormInput required={true} className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
-        <FormInput  required={true}  className="add-fund" name="address" type='text' label={"Account Number"} disabled={disableAddress} />
        {transaction_type=== "withdrawal"  &&  <FormInput  required={true}  className="add-fund" name="bank" type='text' label={"Bank"} disabled={disableAddress} />}
         <FormSelect className="add-fund" name="coin_type"  required={true}   label={"Type"} disabled={true} options={coinType}/>
 
@@ -117,6 +117,11 @@ const AddFund = ({
             </button>
           </Upload>
         </Form.Item> */}
+
+        <div className='mt-10'>
+        <FormInput  required={false}  className="add-fund" name="coupon_code" type='text' label={"Coupon Code"}  />
+
+        </div>
         <Form.Item label={null}>
 
 

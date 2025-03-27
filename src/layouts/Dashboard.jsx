@@ -8,6 +8,7 @@ import { userLogout } from '../redux/actions/auth';
 import DropDown from '../compnents/dropDown/DropDown';
 import logo from "../assets/logos/logo-mod.png"
 import { LuUtilityPole } from 'react-icons/lu';
+import { getWallet } from '../redux/actions/wallet';
 
 const DashboardLayout = () => {
 
@@ -48,6 +49,11 @@ const DashboardLayout = () => {
     
 
     },[closeNav, sideNavRef])
+
+
+    useEffect(()=>{
+        dispatch(getWallet())
+    }, [])
 
   return (
     <div className='relative bg-gray-00 h-screen bg-black/90'>

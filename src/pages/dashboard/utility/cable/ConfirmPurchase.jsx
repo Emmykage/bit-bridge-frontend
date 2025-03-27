@@ -5,6 +5,7 @@ import { CheckCircleOutlined } from "@ant-design/icons"
 import { getPurchaseOrder } from "../../../../redux/actions/purchasePower"
 import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
 import ClassicBtn from "../../../../compnents/button/ClassicButton"
+import { getWallet } from "../../../../redux/actions/wallet"
 
 const DashboardCableComfirmPurchase = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
@@ -20,6 +21,7 @@ const DashboardCableComfirmPurchase = () => {
 
     useEffect(()=> {
         dispatch(getPurchaseOrder(queryId))
+        dispatch(getWallet())
     },[])
 
     return (

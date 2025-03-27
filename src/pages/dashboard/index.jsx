@@ -18,14 +18,12 @@ import CableTvComponents from "./components/CableTVCOmpoent"
 const HomeDashboard = () => {
     const {wallet, loading} = useSelector(state => state.wallet)
     const dispatch = useDispatch()
-    const [selectedItem, setSelectedItem] = useState("gift-cards")
+    const [selectedItem, setSelectedItem] = useState("Top Up")
 
     const [convertedAmount, setConvertedAmount] = useState(null)
     const [activeCurrency, setActiveCurrency] = useState("ngn")
 
-    useEffect(()=>{
-        dispatch(getWallet())
-    }, [])
+
     const items = [
         {
             label: "Mobile Top Up",
@@ -161,7 +159,7 @@ const HomeDashboard = () => {
                 <h4 className="text-alt text-3xl font-medium">{label}</h4>
                 <ul className="flex gap-3">
                     {items.map(item => (
-                        <li key={item.label}><NavButton onClick={()=>setSelectedItem(item.name)} className={"bg-al text-black block  py-2 px-3 rounded-xl"}>  {item.btn}</NavButton></li>
+                        <li key={item.label}><NavButton onClick={()=>setSelectedItem(item.name)} className={`${selectedItem === item.name && "active"}  block  py-2 px-3 rounded-xl`}>  {item.btn}</NavButton></li>
 
                     ))
                 }

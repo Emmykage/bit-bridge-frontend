@@ -8,11 +8,12 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
 
     const formData = new FormData()
 
-    formData.append("transaction[address]",  data.address)
+    data.address && formData.append("transaction[address]",  data.address)
     formData.append("transaction[amount]",  data.amount)
     formData.append("transaction[transaction_type]",  data.transaction_type)
     data?.bank ??  formData.append("transaction[bank]",  data.bank)
     formData.append("transaction[coin_type]",  data.coin_type)
+    data.coupon_code && formData.append("transaction[coupon_code]",  data.coupon_code)
 
     if(data.proof && data.proof[0]){
         formData.append("transaction[proof]",  data.proof[0].originFileObj)

@@ -67,6 +67,7 @@ const Account = () => {
             if(createTransaction.fulfilled.match(result)){
                 setIsWithdrawalModalOpen(false)
                 dispatch(SET_LOADING(true))
+                dispatch(getWallet())
 
             }else{
                 dispatch(SET_LOADING(false))
