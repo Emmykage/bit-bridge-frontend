@@ -61,6 +61,9 @@ const HomeDashboard = () => {
     },[wallet?.balance, activeCurrency])
 
 
+    console.log(wallet)
+
+
     // useEffect(()=> {
 
     //     dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
@@ -111,7 +114,7 @@ const HomeDashboard = () => {
                                 Bought 
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
+                        <p className="text-2xl ">  {nairaFormat(wallet?.total_bills, "ngn")}</p>
 
                     </div>
 
@@ -125,7 +128,7 @@ const HomeDashboard = () => {
                             Withdrawals
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
+                    <p className="text-2xl ">  {nairaFormat(wallet?.withdrawn, "ngn")}</p>
 
                     </div>
 

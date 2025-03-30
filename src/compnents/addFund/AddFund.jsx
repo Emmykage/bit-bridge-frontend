@@ -119,7 +119,8 @@ const AddFund = ({
         </Form.Item> */}
 
         <div className='mt-10'>
-        <FormInput  required={false}  className="add-fund" name="coupon_code" type='text' label={"Coupon Code"}  />
+          {transaction_type=== "deposit"  && <FormInput  required={false}  className="add-fund" name="coupon_code" type='text' label={"Coupon Code"}  />
+  }
 
         </div>
         <Form.Item label={null}>
