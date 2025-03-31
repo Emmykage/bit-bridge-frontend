@@ -1,7 +1,7 @@
 import { TransactionOutlined, WalletOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
 import AppModal from "../../compnents/modal/Modal"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddFund from "../../compnents/addFund/AddFund";
 import { useDispatch, useSelector } from "react-redux";
 import { createTransaction } from "../../redux/actions/transaction";
@@ -15,10 +15,15 @@ import PropTypes from "prop-types";
 
 
 const Account = () => {
+    const formRef = useRef(null)
     const {wallet} = useSelector(state => state.wallet)
     const [convertedAmount, setConvertedAmount] = useState(null)
     const address = "Card Transfer"
     const coinType ="bank"
+
+    const resetForm = () => {
+
+    }
     // const currency = "ngn"
 
 
@@ -47,8 +52,8 @@ console.log (wallet)
             if(createTransaction.fulfilled.match(result)){
                 setIsModalOpen(false)
                 dispatch(SET_LOADING(false))
-
                 dispatch(getWallet())
+                formRef.current.resetForm()
             }else[
                 dispatch(SET_LOADING(false))
 
@@ -56,6 +61,8 @@ console.log (wallet)
         })
 
     }
+
+    console.log(formRef.current)
     const handleWithdrawalSubmit = (values) => {
         dispatch(SET_LOADING(true))
         dispatch (createTransaction({
@@ -66,8 +73,10 @@ console.log (wallet)
         .then(result => {
             if(createTransaction.fulfilled.match(result)){
                 setIsWithdrawalModalOpen(false)
-                dispatch(SET_LOADING(true))
+                dispatch(SET_LOADING(false))
                 dispatch(getWallet())
+                formRef.current.resetForm()
+
 
             }else{
                 dispatch(SET_LOADING(false))
@@ -202,13 +211,13 @@ console.log (wallet)
 
     <AppModal title={"Fund Wallet"}  isModalOpen={isModalOpen} handleOk={()=> {}} handleCancel={()=> {setIsModalOpen(false)}}  >
         <div className="bg-purple- p-0">
-            <AddFund handleSubmit={handleSubmit} coin_type={coinType} address={address}/>
+            <AddFund handleSubmit={handleSubmit} coin_type={coinType} address={address} ref={formRef}/>
         </div>
     </AppModal>
 
     <AppModal title={"Withdraw Funds"}  isModalOpen={isWithdrawModalOpened} handleOk={()=> {}} handleCancel={()=> {setIsWithdrawalModalOpen(false)}}  >
         <div className="bg-purple- p-0">
-            <AddFund handleSubmit={handleWithdrawalSubmit} coin_type={coinType} disableAddress={false} transaction_type="withdrawal" address={address}/>
+            <AddFund handleSubmit={handleWithdrawalSubmit} coin_type={coinType} disableAddress={false} transaction_type="withdrawal" ref={formRef} address={address}/>
         </div>
     </AppModal>
 

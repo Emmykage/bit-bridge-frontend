@@ -14,13 +14,15 @@
         .ant-input-affix-wrapper, 
             input{
                 background: none;
+                font-size: 16px;
+
                 @apply border border-alt py-3 text-white;
 
                 &::placeholder{
                     @apply text-gray-500;
                 }
                 &.ant-input-password{
-                    // background: red;
+                    font-size: 16px;
                     padding: 0 6px;
           
                 }
@@ -31,6 +33,7 @@
 
         .ant-input-number{
             background: none;
+            font-size: 16px;
             @apply border border-alt  text-white;
         }
     
@@ -70,7 +73,7 @@
         .ant-form-item-control{
             width: 100%;
             .ant-input{
-                // padding: 10px;
+                font-size: 16px;
             }
         }
     }

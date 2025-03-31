@@ -59,13 +59,13 @@ const DashboardLayout = () => {
     <div className='relative bg-gray-00 h-screen bg-black/90'>
         <div className='max-w-[1500px] m-auto flex flex-col overflow-hidden h-screen'>
 
-        <header className='flex justify-between items-center bg-black gap-4 rounded py-10 px-7  top-0'>
+        <header className='flex justify-between items-center bg-black gap-4 rounded md:py-10 py-5 px-7  top-0'>
             <span ref={menuRef} className='lg:hidden'  onClick={()=> {
                 seTShowMenu(prev => !prev)}}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
             <NavLink className={"text-3xl text-white flex1"}>
-                <img src={logo} alt='logo' className='h-14 w- object-cover border' />
+                <img src={logo} alt='logo' className='h-10 md:14 w- object-cover border' />
             </NavLink>
         <div className='md:flex flex- w-full max-w-3xl  items-center justify-between hidden w-ful  bg-back text-gray-200  '>
             <ul className='flex gap-9'>
@@ -105,7 +105,7 @@ const DashboardLayout = () => {
             </aside>
             </div>
 
-             <div className='mt-10  w-full flex-1 overflow-y-auto '>
+             <div className='md:mt-10 mt-4  w-full flex-1 overflow-y-auto '>
             <Outlet/>
 
             </div>

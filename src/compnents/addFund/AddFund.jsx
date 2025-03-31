@@ -1,5 +1,5 @@
 import { Button, Form } from 'antd'
-import  { useState } from 'react'
+import  { forwardRef, useImperativeHandle, useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
 // import paymentDetails from '../../data/walletAddres.json'
@@ -9,15 +9,15 @@ import FormSelect from '../formSelect/FormSelect';
 import { PaystackButton } from 'react-paystack';
 import { useSelector } from 'react-redux';
 import { publicKey } from '../../redux/baseUrl';
-const AddFund = ({
-  address,
-  handleSubmit,
-  disableAddress= true,
-  coin_type="bank",
-  transaction_type="deposit"
-
-}) => {
-
+const AddFund = forwardRef((props, ref) => {
+  const  {
+    address,
+    handleSubmit,
+    disableAddress= true,
+    coin_type="bank",
+    transaction_type="deposit"
+  
+  } = props
   const {user} = useSelector(state => state.auth)
     const [form] = Form.useForm();
   const [formLayout] = useState('vertical');
@@ -35,6 +35,10 @@ const AddFund = ({
         },
     // onClose: () => alert('Are you sure'),
   }; 
+
+  useImperativeHandle(ref, ()=> ({
+    resetForm: () => form.resetFields()
+  }))
  
   // const normFile = (e) => {
 
@@ -72,6 +76,11 @@ const AddFund = ({
     >
         <FormInput required={true} className="add-fund" name="amount" type='number' label={`Amount(${coin_type} value)`}/>
        {transaction_type=== "withdrawal"  &&  <FormInput  required={true}  className="add-fund" name="bank" type='text' label={"Bank"} disabled={disableAddress} />}
+       <div className='mt-10'>
+          {transaction_type=== "withdrawal"  && <FormInput  required={true}  className="add-fund" name="address" type='text' label={"Account Number"}  />
+  }
+
+        </div>
         <FormSelect className="add-fund" name="coin_type"  required={true}   label={"Type"} disabled={true} options={coinType}/>
 
         {/* <Form.Item 
@@ -148,13 +157,15 @@ const AddFund = ({
 </div>
 </>
   )
-}
+})
 
 AddFund.propTypes = {
   handleSubmit: PropTypes.func,
   transaction_type: PropTypes.string,
-  address: PropTypes.func,
-  coin_type: PropTypes.func,
+  address: PropTypes.string,
+  coin_type: PropTypes.string,
   disableAddress: PropTypes.bool
 }
+AddFund.displayName = "AddFund"; // Add this line
+
 export default AddFund

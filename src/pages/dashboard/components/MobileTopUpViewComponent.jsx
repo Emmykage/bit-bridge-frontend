@@ -16,13 +16,10 @@ const MobileTopUpViewComponents = () => {
   return (
     <div>
          <section className="py-0 px-4 my-10 bg-black text-white">
-
-
-<div>
-  <h3 className='my-10'>
-  Mobile Top Ups
-
-  </h3>
+          <div>
+            <h3 className='md:my-10 mb-5'>
+              Mobile Top Ups
+            </h3>
 
   {loading ? <LoadingComp className={"bg-gray-900"}/> :
 
@@ -45,7 +42,7 @@ const MobileTopUpViewComponents = () => {
       }
 </div>
 <div>
-  <h3 className='my-10'>
+  <h3 className='md:my-10 my-5'>
   Data Bundle
 
   </h3>

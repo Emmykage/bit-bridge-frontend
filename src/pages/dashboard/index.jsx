@@ -6,14 +6,13 @@ import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import SelectInput from "../../compnents/select/Select"
-import OrderTransact from "./components/Orders"
-import DepositTransaction from "./components/DepositsTransaction"
-import WithdrawalTransactions from "./components/WithdrawalTransaction"
-import { getWallet } from "../../redux/actions/wallet"
+
 import Loading from "../../compnents/loader/Loading"
 import PowerComponent from "../../compnents/powerComponents/PowerComponent"
 import MobileTopUpViewComponents from "./components/MobileTopUpViewComponent"
 import CableTvComponents from "./components/CableTVCOmpoent"
+import { MdAddCard, MdOutlineSell } from "react-icons/md"
+import { PiHandWithdraw } from "react-icons/pi"
 
 const HomeDashboard = () => {
     const {wallet, loading} = useSelector(state => state.wallet)
@@ -71,10 +70,10 @@ const HomeDashboard = () => {
 
   return (
     <div className="homeDashboard text-white w-full">
-        <div className="account w-full info bg-black my-0 p-10 flex flex-col md:flex-row justify-between ">
+        <div className="account w-full info bg-black my-0 p-5 md:p-10 flex flex-col md:flex-row justify-between ">
             <div className="overflow-hidden">
-                <div className="flex gap-10">
-                <h3 className="text-xl">Wallet balance</h3>
+                <div className="flex gap-5 md:gap-10">
+                <h3 className="md:text-xl">Wallet balance</h3>
                     <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/>
 
                 </div>
@@ -82,7 +81,7 @@ const HomeDashboard = () => {
                 <div>
                     {loading ?               <div className=" pl-10">   <Loading/></div>
                     : 
-                    <p className="text-5xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
+                    <p className="md:text-5xl text-3xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
                     }
                     {/* <p>{convertedAmount} </p> */}
                     {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
@@ -90,59 +89,47 @@ const HomeDashboard = () => {
                  </div>
 
                         
-                <div className="flex overflow-x-auto  w-full my-10 no-scroll">
-                    <div className="pr-6 border-r border-gray-700 ">
+                <div className="flex overflow-x-auto gap-3 md:gap-5  w-full my-4 md:my-10 no-scroll">
+                   
+                    <div className="px-5 md:min-w-60  border-r min-w-40 bg-gray-800/50 rounded border-gray-700 py-3">
 
-                        <div className="flex py-8 gap-3">
-                            <span className="rounded-full border shrink-0 flex items-center justify-center h-8 w-8 border-white">
-                            <LoginOutlined /> 
-                            </span>
-                            <span>
-                                Trades
-                            </span>
-                        </div>
-                        <p className="text-2xl ">  {nairaFormat(0,activeCurrency )}</p>
-
-                    </div>
-                    <div className="px-6 border-r border-gray-700 ">
-
-                        <div className="flex py-8 gap-3">
+                        <div className="flex md:py-8  py-1 gap-3">
                             <span className="rounded-full shrink-0 border flex items-center justify-center h-8 w-8 border-white">
-                            <LoginOutlined /> 
+                            <MdAddCard  /> 
                             </span>
                             <span>
                                 Bought 
                             </span>
                         </div>
-                        <p className="text-2xl ">  {nairaFormat(wallet?.total_bills, "ngn")}</p>
+                        <p className="md:text-2xl text-lg">  {nairaFormat(wallet?.total_bills, "ngn")}</p>
 
                     </div>
 
-                    <div className="px-6 border-r border-gray-700 ">
+                    <div className="px-5 md:min-w-60  border-r min-w-40 bg-gray-800/50 rounded border-gray-700 py-3">
 
-                    <div className="flex py-8 gap-3">
+                    <div className="flex md:py-8 py-1 gap-3">
                         <span className="rounded-full shrink-0 border flex items-center justify-center h-8 w-8 border-white">
-                        <LoginOutlined /> 
+                        <PiHandWithdraw /> 
                         </span>
                         <span>
                             Withdrawals
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(wallet?.withdrawn, "ngn")}</p>
+                    <p className="md:text-2xl text-lg">  {nairaFormat(wallet?.withdrawn, "ngn")}</p>
 
                     </div>
 
-                    <div className="px-6 borde border-gray-700 ">
+                    <div className="px-5 md:px-6 borde min-w-60  bg-gray-800/50 rounded border-gray-700 py-3">
 
-                    <div className="flex py-8 gap-3">
+                    <div className="flex md:py-8 py-1 bg-red-5 gap-3">
                         <span className="rounded-full shrink-0 border flex items-center justify-center h-8 w-8 border-white">
-                        <LoginOutlined /> 
+                        <MdOutlineSell /> 
                         </span>
                         <span>
                             Sold
                         </span>
                     </div>
-                    <p className="text-2xl ">  {nairaFormat(0, "ngn")}</p>
+                    <p className="md:text-2xl text-lg ">  {nairaFormat(0, "ngn")}</p>
 
                     </div>
 
@@ -159,7 +146,7 @@ const HomeDashboard = () => {
 
         <div className="bg-black p-4 lg:p-10 min-h-96">
             <div className="flex flex-col gap-3 md:flex-row justify-between">
-                <h4 className="text-alt text-3xl font-medium">{label}</h4>
+                <h4 className="text-alt md:text-3xl text-lg font-medium">{label}</h4>
                 <ul className="flex gap-3">
                     {items.map(item => (
                         <li key={item.label}><NavButton onClick={()=>setSelectedItem(item.name)} className={`${selectedItem === item.name && "active"}  block  py-2 px-3 rounded-xl`}>  {item.btn}</NavButton></li>
