@@ -24,7 +24,7 @@ const BillOrderDetails = ({
     }
 
   return (
-    <div className="md:p-4 border rounded-lg">
+    <div className="md:p-4 px-4 mx-4 border rounded-lg text-white">
         {
             purchaseOrder?.token && 
                     <div className="  md:flex-row flex-col flex gap-4">

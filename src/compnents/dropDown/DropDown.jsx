@@ -68,7 +68,7 @@ const items = [
   };
     return  (
   <Space wrap>
-    <Dropdown.Button menu={menuProps} icon={<UserOutlined />}>
+    <Dropdown.Button menu={menuProps} icon={<UserOutlined />} className='white-bg'>
       Account
     </Dropdown.Button>
 </Space>

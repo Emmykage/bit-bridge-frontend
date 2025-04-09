@@ -51,7 +51,7 @@ const PurchaseCableDetails = () => {
     email: purchaseOrder.email ?? user?.emal,
     amount: purchaseOrder.total_amount * 100,  
     publicKey,
-    text: 'Pay With Card',
+    text: 'Pay From Bank',
     onSuccess: () => {
       handleConfirmation("card")
         },

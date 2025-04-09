@@ -16,7 +16,7 @@ const ClassicBtn = ({
   htmlType={htmlType}
   loading={isLoading && { icon: <SyncOutlined spin /> }}
     onClick={onclick}
-    className={`${disabled && 'cursor-not-allowed'} ${type == 'cancel' ? 'text-red-500' : ''} ${className} font-semibold border-3 items-center block my-5 py-0 px-5 h-10 border-theme bg-light hover:bg-theme-dark hover:text-light classic-btn`}
+    className={`${disabled && 'cursor-not-allowed'} ${type} ${className}  font-semibold border-3 items-center block my-5 py-0 px-5 h-10 border-theme bg-light hover:bg-theme-dark hover:text-light classic-btn`}
   >
     {children}
   </Button>

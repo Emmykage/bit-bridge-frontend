@@ -26,6 +26,30 @@ export const createPurchaseOrder = createAsyncThunk("purchase/purchase-power", a
     }
 });
 
+
+export const repurchaseOrder = createAsyncThunk("purchase/repurchase-order", async(id, {rejectWithValue}) => {
+   
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors//${id}/repurchase`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`}
+        });
+
+        const result = response.data; 
+        toast(result.message  || "order has been Completed", {type: "success"})
+
+        return result;
+    } catch (error) {
+      console.log(error.response)
+        if (error.response) {
+            toast(error.response.data.message, {type: "error"})
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
 export const getPurchaseOrder = createAsyncThunk("purchaseOrder/get-order", async(id, {rejectWithValue}) => {
     try {
         const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${id}`, {
@@ -36,6 +60,26 @@ export const getPurchaseOrder = createAsyncThunk("purchaseOrder/get-order", asyn
 
         const result = response.data;    
         return result;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+
+export const getRescentPurchaseOrder = createAsyncThunk("purchaseOrder/get-recent-purchase-order", async(id, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}bill_orders/user_recent`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
+
+        const {data} = response.data;    
+        return data;
     } catch (error) {
         if (error.response) {
             return rejectWithValue({ message: error.response.data.message });
@@ -62,7 +106,7 @@ export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({qu
         if (error.response) {
             return rejectWithValue({ message: error.response.data.message });
         }
-        console.error(error);
+        console.error(error.response);
         return rejectWithValue({ message: "Something went wrong" });
     }
 });

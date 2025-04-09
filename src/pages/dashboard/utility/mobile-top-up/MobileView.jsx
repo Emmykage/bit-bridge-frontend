@@ -1,5 +1,4 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom'
-import powerDistributions from "../../../../data/powerDistributions.json"
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getProvisions } from '../../../../redux/actions/provision'
@@ -24,22 +23,17 @@ const MobileView = () => {
 
     <div className="max-w-7xl text-white m-auto py-10 px-4 md:px-10">
 
-        <div className="flex sm:flex-row flex-col  gap-3">
+        <div className="flex sm:flex-row flex-col mb-4  gap-3">
             <img src={`/images/providers/${imagePic}.webp`}  alt=""  className="h-52 md:h-max sm:max-w-40 rounded-lg border border-alt p-2" />
             <div>
 
                 <div>
                     <p className="text-3xl text-gray-200 mb-4 mt-0 font-semibold ">{selectedProvider?.name}</p>
-                    <p className="text-lg text-gray-300">{selectedProvider?.description}</p>
+                    <p className="text-lg text-gray-300">{selectedProvider?.description.substring(0, 100)}...</p>
                 </div>
 
-                <div className="my-4">
-                    <p className="text-base text-gray-400 my-0 ">{selectedProvider?.name}</p>
-                    <p className="text-base text-gray-400">{selectedProvider?.description}</p>
-                </div>
+              
             </div>
-            <p></p>
-
 
 
         </div>

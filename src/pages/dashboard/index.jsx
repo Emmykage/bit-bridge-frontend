@@ -1,11 +1,11 @@
-import { LoginOutlined, TrophyOutlined } from "@ant-design/icons"
+import { TrophyOutlined } from "@ant-design/icons"
 import { nairaFormat } from "../../utils/nairaFormat"
 import './style.scss'
 import NavButton from "../../compnents/button/NavButton"
-import { converter } from "../../api/currencyConverter"
+// import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import SelectInput from "../../compnents/select/Select"
+// import SelectInput from "../../compnents/select/Select"
 
 import Loading from "../../compnents/loader/Loading"
 import PowerComponent from "../../compnents/powerComponents/PowerComponent"
@@ -13,15 +13,50 @@ import MobileTopUpViewComponents from "./components/MobileTopUpViewComponent"
 import CableTvComponents from "./components/CableTVCOmpoent"
 import { MdAddCard, MdOutlineSell } from "react-icons/md"
 import { PiHandWithdraw } from "react-icons/pi"
+import { getRescentPurchaseOrder, repurchaseOrder } from "../../redux/actions/purchasePower"
+import { SET_LOADING } from "../../redux/app"
+import { useNavigate } from "react-router-dom"
+import AppModal from "../../compnents/modal/Modal"
+
+import ClassicBtn from "../../compnents/button/ClassicButton"
+import pickColorStyle from "../../utils/slect-color"
+// import ClickButton from "../../compnents/button/Button"
 
 const HomeDashboard = () => {
+    const {recentOrders} = useSelector(state => state.purchase)
     const {wallet, loading} = useSelector(state => state.wallet)
     const dispatch = useDispatch()
+    const [open, setIsOpen] = useState(false)
+    const [selectedBiller, setSelectedBillier] = useState()
+    const navigate = useNavigate()
     const [selectedItem, setSelectedItem] = useState("Top Up")
 
-    const [convertedAmount, setConvertedAmount] = useState(null)
-    const [activeCurrency, setActiveCurrency] = useState("ngn")
 
+    // const [convertedAmount, setConvertedAmount] = useState(null)
+    // const [activeCurrency, setActiveCurrency] = useState("ngn")
+    const handleRepurchase = (id) => {
+        dispatch(SET_LOADING(true))
+        dispatch(repurchaseOrder(id)).then(result => {
+            if(repurchaseOrder.fulfilled.match(result)){
+                dispatch(SET_LOADING(false))
+                const data  = result.payload.data
+                 dispatch(SET_LOADING(false))
+                 setIsOpen(false)
+                 navigate(`/dashboard/confirm/${data?.id}`)
+       
+
+            }else{
+                dispatch(SET_LOADING(false))
+
+            }
+        })
+
+    }
+
+    
+    useEffect(()=> {
+        dispatch(getRescentPurchaseOrder())
+    }, [])
 
     const items = [
         {
@@ -49,32 +84,26 @@ const HomeDashboard = () => {
 
     const {label} = items.find(item => item.name === selectedItem)
 
-    useEffect(()=> {
-        const fetchConversion = async() => {
-
-            const result = await converter({fromCurr: "usd", toCurr: activeCurrency, amount: wallet?.balance})
-            setConvertedAmount(result.calc)
-        }
-
-        fetchConversion()
-    },[wallet?.balance, activeCurrency])
-
-
-    console.log(wallet)
-
-
     // useEffect(()=> {
+    //     const fetchConversion = async() => {
 
-    //     dispatch(getConversion({to_curr: "ngn", from_curr: "usd", amount: 2000}))
-    // },[])
+    //         const result = await converter({fromCurr: "usd", toCurr: activeCurrency, amount: wallet?.balance})
+    //         setConvertedAmount(result.calc)
+    //     }
+
+    //     fetchConversion()
+    // },[wallet?.balance, activeCurrency])
+
 
   return (
+    <>
+    
     <div className="homeDashboard text-white w-full">
         <div className="account w-full info bg-black my-0 p-5 md:p-10 flex flex-col md:flex-row justify-between ">
             <div className="overflow-hidden">
                 <div className="flex gap-5 md:gap-10">
                 <h3 className="md:text-xl">Wallet balance</h3>
-                    <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/>
+                    {/* <SelectInput onChange={(selectedOption)=> setActiveCurrency(selectedOption)} defaultValue={activeCurrency} options={[{value: "usd", label: "USD"}, {value: "eur", label: "EUR"}, {value: "ngn", label: "NGN"}]}/> */}
 
                 </div>
            
@@ -87,6 +116,27 @@ const HomeDashboard = () => {
                     {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
+
+                 <div>
+                    <h5 className="mb-4">Recent Transactions</h5>
+
+
+                 <div className="flex grid-cols-4 gap-4 max-w-4xl ">
+                    {recentOrders?.map(item => (
+                        <div key={item.id} onClick={() => {
+                            setIsOpen(true)
+                            setSelectedBillier(item)} 
+                        } className={`${pickColorStyle(item.biller)} cursor-pointer  rounded-lg text-sm h-16 w-20 shadow-sm flex flex-col justify-center items-center`}>
+                          <span> {item.biller}</span> 
+                          <span className="text-sm"> {nairaFormat(item.amount)}  </span>
+                       
+                    </div>
+                    ))}
+               
+                 </div>
+
+                 </div>
+
 
                         
                 <div className="flex overflow-x-auto gap-3 md:gap-5  w-full my-4 md:my-10 no-scroll">
@@ -172,6 +222,27 @@ const HomeDashboard = () => {
         </div>
         
     </div>
+    <AppModal isModalOpen={open}  handleCancel={()=> setIsOpen(prev => !prev)}>
+        <div>
+        <h3 className="text-white text-center text-2xl font-medium">Confirm </h3>
+        <h3 className="text-white text-center text-lg">{selectedBiller?.service_type} subscription </h3>
+        <p className={`${selectedBiller?.biller === "MTN" ? "text-alt" : selectedBiller?.biller === "GLO" ? "text-green-500" : "text-white"}  font-semibold text-center text-lg my-6`}>{selectedBiller?.biller}</p>
+        <p className="text-3xl text-white text-center my-4">{nairaFormat(selectedBiller?.amount ?? 0)}</p>
+        <div className="flex justify-center gap-10">
+            <ClassicBtn
+            onclick={()=> handleRepurchase(selectedBiller.id)}>
+                Confirm
+            </ClassicBtn>
+            <ClassicBtn onclick={()=> setIsOpen(false)}
+             type="cancel">
+                Cancel
+            </ClassicBtn>
+        </div>
+            
+        </div>
+
+    </AppModal>
+    </>
   )
 }
 

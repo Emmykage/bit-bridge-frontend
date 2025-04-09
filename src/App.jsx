@@ -82,6 +82,7 @@ import DashboardMobilePurchaseDetails from './pages/dashboard/utility/mobile-top
 import DashboardMobileComfirmPurchase from './pages/dashboard/utility/mobile-top-up/ConfirmPurchase'
 import ViewTransaction from './pages/admin/transactions/ViewTransaction'
 import ViewUser from './pages/admin/users/ViewUser'
+import ComfirmQuickPurchase from './pages/dashboard/ConfirmQuickPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -147,6 +148,8 @@ function App() {
       
       <Route path='approved-gift-cards' element={<GiftCardOrder/>} />
       <Route path='wallet' element={<Account/>} />
+      <Route path='confirm/:id' element={<ComfirmQuickPurchase        />} />
+
       <Route path='utilities' element={<Utility/>}/>
       <Route path='utilities/buy-power' element={<PowerUtilities/>}/>
       <Route path='utilities/buy-power/:id' element={<PowerView/>}>

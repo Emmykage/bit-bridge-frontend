@@ -10,7 +10,7 @@ const PaymentOptions = ({
 }) => {
     const {user} = useSelector(state => state.auth)
   return (
-    <div className="bg-gray-100 flex justify-center items-center flex-col gap-6 min-h-60 p-4 md:p-8 rounded-lg">
+    <div className="bg-gray-100/10 mt-4 flex justify-center items-center flex-col gap-6 min-h-60 p-4 md:p-8 rounded-lg">
 
     {
         user ?  

@@ -14,12 +14,14 @@ const MobileTopUpViewComponents = () => {
     dispatch(getProvisions())
   },[])
   return (
-    <div>
+    <div className='w-full'>
          <section className="py-0 px-4 my-10 bg-black text-white">
           <div>
             <h3 className='md:my-10 mb-5'>
-              Mobile Top Ups
+              Airtime Recharge
             </h3>
+
+            
 
   {loading ? <LoadingComp className={"bg-gray-900"}/> :
 

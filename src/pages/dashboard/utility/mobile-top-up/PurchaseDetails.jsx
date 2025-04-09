@@ -25,7 +25,7 @@ const DashboardMobilePurchaseDetails = () => {
     email: purchaseOrder.email ?? user?.emal,
     amount: purchaseOrder.total_amount * 100,  
     publicKey:  publicKey,
-    text: 'Pay With Card',
+    text: 'Pay From Bank',
     onSuccess: () => {
       handleConfirmation("card")
         },
@@ -43,6 +43,7 @@ const DashboardMobilePurchaseDetails = () => {
             result => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
+                   console.log(data) 
                     dispatch(SET_LOADING(false))
                     navigate(`/dashboard/utilities/mobile-top-up/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
