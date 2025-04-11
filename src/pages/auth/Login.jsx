@@ -129,7 +129,7 @@ import { SET_LOADING } from '../../redux/app';
               }}
 
             >
-              <Divider plain>
+              {/* <Divider plain>
                 <span
                   style={{
                     color: token.colorTextPlaceholder,
@@ -139,8 +139,8 @@ import { SET_LOADING } from '../../redux/app';
                 >
                   Other login methods
                 </span>
-              </Divider>
-              <Space align="center" size={24}>
+              </Divider> */}
+              {/* <Space align="center" size={24}>
                 <div
                   style={{
                     display: 'flex',
@@ -183,7 +183,7 @@ import { SET_LOADING } from '../../redux/app';
                 >
                   <WeiboOutlined style={{ ...iconStyles, color: '#1890ff' }} />
                 </div>
-              </Space>
+              </Space> */}
             </div>
           }
         >
@@ -193,7 +193,7 @@ import { SET_LOADING } from '../../redux/app';
             onChange={(activeKey) => setLoginType(activeKey)}
           >
             <Tabs.TabPane key={'account'} tab={'Login with account'} />
-            <Tabs.TabPane key={'phone'} tab={'Login with phone number'} />
+            {/* <Tabs.TabPane key={'phone'} tab={'Login with phone number'} /> */}
           </Tabs>
           {loginType === 'account' && (
             <>

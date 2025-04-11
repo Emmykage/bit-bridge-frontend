@@ -1,6 +1,12 @@
 .ant-btn {
     background: none;
 
+
+    &.navbtn{
+
+        @apply bg-alt;
+    }
+
     &.button{
 
 

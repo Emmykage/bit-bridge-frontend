@@ -117,25 +117,7 @@ const HomeDashboard = () => {
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 
-                 <div>
-                    <h5 className="mb-4">Recent Transactions</h5>
-
-
-                 <div className="flex grid-cols-4 gap-4 max-w-4xl ">
-                    {recentOrders?.map(item => (
-                        <div key={item.id} onClick={() => {
-                            setIsOpen(true)
-                            setSelectedBillier(item)} 
-                        } className={`${pickColorStyle(item.biller)} cursor-pointer  rounded-lg text-sm h-16 w-20 shadow-sm flex flex-col justify-center items-center`}>
-                          <span> {item.biller}</span> 
-                          <span className="text-sm"> {nairaFormat(item.amount)}  </span>
-                       
-                    </div>
-                    ))}
-               
-                 </div>
-
-                 </div>
+                
 
 
                         
@@ -192,9 +174,33 @@ const HomeDashboard = () => {
             <img src={wallet} alt="fake wallet" />dfdf
         </div> */}
 
+        
+
         </div>
 
-        <div className="bg-black p-4 lg:p-10 min-h-96">
+       
+        
+
+        <div className="bg-black p-4 lg:p-10 lg:pt-0 min-h-96">
+        <div className="bg-black px-0 mb-10">
+                    <h5 className="mb-4 text-xl">Recent Transactions</h5>
+
+
+                 <div className="flex grid-cols-4 gap-4 max-w-4xl ">
+                    {recentOrders?.map(item => (
+                        <div key={item.id} onClick={() => {
+                            setIsOpen(true)
+                            setSelectedBillier(item)} 
+                        } className={`${pickColorStyle(item.biller)} cursor-pointer  rounded-lg text-sm h-16 w-20 shadow-sm flex flex-col justify-center items-center`}>
+                          <span> {item.biller}</span> 
+                          <span className="text-sm"> {nairaFormat(item.amount)}  </span>
+                       
+                    </div>
+                    ))}
+               
+                 </div>
+
+                 </div>
             <div className="flex flex-col gap-3 md:flex-row justify-between">
                 <h4 className="text-alt md:text-3xl text-lg font-medium">{label}</h4>
                 <ul className="flex gap-3">
