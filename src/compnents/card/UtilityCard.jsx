@@ -6,9 +6,10 @@ const UtilityCard = ({image, onClick, btnText, provider, title}) => {
 
   
   const giftcardImage = provider.split(" ")[0].toLowerCase() || provider.split("-")[0].toLowerCase()
+  console.log(giftcardImage)
   return (
     <div className='border max-w-lg border-gray-100/20 rounded p-1 md:p-4'>
-        <img src={`/images/providers/${giftcardImage}.png` } alt="gift card one" className='borde md:h-60 h-32 w-full bg-gray-200 rounded-lg'/>
+        <img  onClick={onClick} src={`/images/providers/${giftcardImage}.png` } alt="gift card one" className='borde md:h-60 h-32 w-full bg-gray-200/20 hover:bg-transparent rounded-lg cursor-pointer'/>
 
         <div className='text-center'>
             <h5 className='text-lg font-semibold text-white my-2.5 md:my-5'>{title}</h5>

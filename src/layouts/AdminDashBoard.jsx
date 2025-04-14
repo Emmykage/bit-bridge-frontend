@@ -7,7 +7,7 @@ import img from "../assets/images/user_img.jpg"
 import "./styles.scss"
 import LoaderPage from '../compnents/loader/LoaderPage';
 import { SiMoneygram } from 'react-icons/si';
-import { MdMiscellaneousServices, MdProductionQuantityLimits } from 'react-icons/md';
+import { MdProductionQuantityLimits } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPricetagOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
