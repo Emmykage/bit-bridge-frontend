@@ -5,8 +5,11 @@ import { nairaFormat } from '../../../utils/nairaFormat'
 
 import "./styles.scss"
 
-import { getTransaction } from '../../../redux/actions/transaction'
+import { getTransaction, updateTransaction } from '../../../redux/actions/transaction'
 import { FaArrowLeft } from 'react-icons/fa'
+import ClassicBtn from '../../../compnents/button/ClassicButton'
+import { SET_LOADING } from '../../../redux/app'
+import { toast } from 'react-toastify'
 
 
 const ViewTransaction = () => {
@@ -35,12 +38,13 @@ const ViewTransaction = () => {
         </span>
 
         <div className='bg-white p-4 rounded-lg shadow '>
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row justify-between'>
 
             <div>
                 <p className='text-gray-500 font-semibold my-6'> <span className='text-gray-800 font-semibold'>Addrss/Account Number</span> : {transaction?.address} </p>
                 <p><span className='text-gray-800 font-semibold  my-6'>Amount</span> : <span> {nairaFormat(transaction?.amount, "ngn")}</span> </p>
                 <p className='my-6'><span className='text-gray-800 font-semibold capitalize'>Status</span> : <span className='capitalize'>{transaction?.status} </span></p>
+                <p className='my-6'><span className='text-gray-800 font-semibold capitalize'>Bank</span> : <span className='capitalize'>{transaction?.bank} </span></p>
             </div>
 
             <div>
@@ -82,6 +86,61 @@ const ViewTransaction = () => {
             
                 ))} */}
                 <p></p>
+
+                <div className='flex  gap-4'>
+
+
+                <ClassicBtn 
+                disabled={transaction?.status === "declined"} className={"my-1"} onclick={() =>{
+                    dispatch(SET_LOADING(true))
+                         dispatch(updateTransaction({id, data: {status: "approved"}})).then(result => {
+                            if(updateTransaction.fulfilled.match(result)){
+                                dispatch(SET_LOADING(false))
+                                dispatch(getTransaction(id))
+
+
+
+                            }else{
+                                dispatch(SET_LOADING(false))
+                                console.log(result.payload.message)
+
+                                toast(result.payload.message, {type: "error"})
+
+                            }
+                         })
+                        
+                        }
+
+                            }>
+                            Approve Payment
+                        </ClassicBtn>
+
+
+                        <ClassicBtn className={"my-1 cancel"} onclick={() =>{
+                            dispatch(SET_LOADING(true))
+                                dispatch(updateTransaction({id, data: {status: "declined"}})).then(result => {
+                                    if(updateTransaction.fulfilled.match(result)){
+                                        dispatch(SET_LOADING(false))
+                                        dispatch(getTransaction(id))
+
+
+
+                                    }else{
+                                        dispatch(SET_LOADING(false))
+                                        console.log(result.payload.message)
+
+                                        toast(result.payload.message, {type: "error"})
+
+                                    }
+                                })
+                                
+                                }
+
+                                    }>
+                                    Declined Payment
+                        </ClassicBtn>
+                        </div>
+
             </div>
 
 

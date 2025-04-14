@@ -64,10 +64,12 @@ console.log (wallet)
 
     console.log(formRef.current)
     const handleWithdrawalSubmit = (values) => {
+        console.log(values)
         dispatch(SET_LOADING(true))
         dispatch (createTransaction({
             ...values,
-            transaction_type: "withdrawal"
+            transaction_type: "withdrawal",
+            status: "pending"
             
         }))
         .then(result => {

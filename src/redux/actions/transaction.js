@@ -3,15 +3,16 @@ import { apiRoute, baseUrl } from "../baseUrl";
 import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
+import { DataArraySharp } from "@mui/icons-material";
 
 export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
-
+    console.log(data)
     const formData = new FormData()
 
     data.address && formData.append("transaction[address]",  data.address)
     formData.append("transaction[amount]",  data.amount)
     formData.append("transaction[transaction_type]",  data.transaction_type)
-    data?.bank ??  formData.append("transaction[bank]",  data.bank)
+    data?.bank && formData.append("transaction[bank]",  data.bank)
     formData.append("transaction[coin_type]",  data.coin_type)
     data.coupon_code && formData.append("transaction[coupon_code]",  data.coupon_code)
 
@@ -19,6 +20,7 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
         formData.append("transaction[proof]",  data.proof[0].originFileObj)
 
     }
+  
 
     try {
 
@@ -47,6 +49,8 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
 });
 
 export const updateTransaction = createAsyncThunk("transaction/update-transaction", async({id, data}, {rejectWithValue}) => {
+
+    console.log(id, data)
     try {
         const response = await axios.patch(`${baseUrl + apiRoute}transactions/${id}`, data, {
             headers: {

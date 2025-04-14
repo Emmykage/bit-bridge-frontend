@@ -10,8 +10,8 @@ import statusStyle from '../../../utils/statusStyle'
 import { nairaFormat } from '../../../utils/nairaFormat'
 // import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
 
-const AdminDepositTransactions = () => {
-    const {transactions} = useSelector(state => state.transaction)
+const AdminWithdrawalTransactions = () => {
+    const {transactions, withdrawals} = useSelector(state => state.transaction)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const [selectedId, setSelectedId] = useState(null)
@@ -71,7 +71,7 @@ const AdminDepositTransactions = () => {
 
                                     {/* make conditional statement  here  */}
                                 {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                { transactions?.map(({id, status, transaction_type, address, created_at, amount}) => (
+                                { withdrawals?.map(({id, status, transaction_type, address, created_at, amount}) => (
 
                                 <tr key={id}>
                                 <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(amount)}</p></td>
@@ -134,4 +134,4 @@ const AdminDepositTransactions = () => {
   )
 }
 
-export default AdminDepositTransactions
+export default AdminWithdrawalTransactions

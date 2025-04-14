@@ -9,10 +9,11 @@ const ClassicBtn = ({
   onclick,
   type,
   className,
-  disabled,
+  disabled=false,
   isLoading
 }) => (
   <Button
+  disabled={disabled}
   htmlType={htmlType}
   loading={isLoading && { icon: <SyncOutlined spin /> }}
     onClick={onclick}

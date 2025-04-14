@@ -9,6 +9,8 @@ import DropDown from '../compnents/dropDown/DropDown';
 import logo from "../assets/logos/logo-mod.png"
 import { LuUtilityPole } from 'react-icons/lu';
 import { getWallet } from '../redux/actions/wallet';
+import DrawerModal from '../compnents/drawer/Drawer';
+import { SET_LOADING } from '../redux/app';
 
 const DashboardLayout = () => {
 
@@ -21,6 +23,7 @@ const DashboardLayout = () => {
     const normal = "flex justify-center items-center flex-col"
     const active = "flex text-alt justify-center items-center flex-col"
     const [showMenu, seTShowMenu] = useState(false)
+    const [open, setOpen] = useState(false)
  
 
     useEffect(()=> {
@@ -61,7 +64,7 @@ const DashboardLayout = () => {
 
         <header className='flex justify-between items-center bg-black gap-4 rounded md:py-10 py-5 px-7  top-0'>
             <span ref={menuRef} className='lg:hidden'  onClick={()=> {
-                seTShowMenu(prev => !prev)}}>
+                setOpen(prev => !prev)}}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
             <NavLink className={"text-3xl text-white flex1"}>
@@ -89,20 +92,38 @@ const DashboardLayout = () => {
 
             <div className='relative bg-red-50'>
 
-            <aside ref={sideNavRef} className={`${showMenu ? "w-max px-1.5" : "w-0 px-0"} shrink-0 sticky h-full top-0 left-0 overflow-hidden transition-all duration-200 ease-linear bg-zinc-800 md:hidden py-10 text-gray-300`}>
+                <DrawerModal open={open} onClose={() => {setOpen(false)}}  >
+
+
+
+
+            {/* <aside ref={sideNavRef} className={`${showMenu ? "w-max px-1.5" : "w-0 px-0"} shrink-0 sticky h-full top-0 left-0 overflow-hidden transition-all duration-200 ease-linear bg-zinc-800 md:hidden py-10 text-gray-300`}> */}
             <ul className='flex flex-col gap-9'>
-                <li><NavLink to={"/dashboard/home"} className={({isActive})=>  isActive ? active : normal}><HomeOutlined className='text-2xl' /> Home</NavLink></li>
-                <li><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
+                <li onClick={() => setOpen(false)}><NavLink to={"/dashboard/home"} className={({isActive})=>  isActive ? active : normal}><HomeOutlined className='text-2xl' /> Home</NavLink></li>
+                <li onClick={() => setOpen(false)}><NavLink to={"/dashboard/wallet"} className={({isActive})=>  isActive ? active : normal}><WalletOutlined className='text-2xl' /><span>Wallet</span></NavLink></li>
                 {/* <li><NavLink to={"/dashboard/gift-cards"} className={({isActive})=>  isActive ? active : normal}><GiftOutlined className='text-2xl'/> Gift Card</NavLink></li> */}
-                <li><NavLink to={"/dashboard/utilities"} className={({isActive})=>  isActive ? active : normal}><LuUtilityPole className='text-2xl'/> Utility</NavLink></li>
+                <li onClick={() => setOpen(false)}><NavLink to={"/dashboard/utilities"} className={({isActive})=>  isActive ? active : normal}><LuUtilityPole className='text-2xl'/> Utility</NavLink></li>
                 <li><NavLink to={"/dashboard/transactions/orders"} className={({isActive})=>  isActive ? active : normal}><SignalCellularAltIcon className='text-6xl' />Transaction</NavLink></li>
                 {/* <li><NavLink to={"/dashboard/crypto-sell/bitcoin"} className={({isActive})=>  isActive ? active : normal}><DollarOutlined className='text-2xl' /> Crypto Sale </NavLink></li> */}
-                <li><NavLink onClick={() => 
-                                    dispatch(userLogout())} to={"/"} className={({isActive})=>  isActive ? active : normal}><LoginOutlined className='text-2xl' /> Log Out</NavLink></li>
+                <li ><NavLink onClick={() => 
+                                    dispatch(userLogout()).then(result => {
+                                        dispatch(SET_LOADING(true))
+
+                                        if(userLogout.fulfilled.match(result)){
+                                            dispatch(SET_LOADING(false))
+                                            setOpen(false)
+                                        }else{
+                                            dispatch(SET_LOADING(false))
+
+                                        }
+                                    })} to={"/"} className={({isActive})=>  isActive ? active : normal}><LoginOutlined className='text-2xl' /> Log Out</NavLink></li>
 
             </ul>
 
-            </aside>
+            {/* </aside> */}
+
+            </DrawerModal>
+
             </div>
 
              <div className='md:mt-10 mt-4  w-full flex-1 overflow-y-auto '>

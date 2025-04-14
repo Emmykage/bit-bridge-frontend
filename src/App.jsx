@@ -83,6 +83,7 @@ import DashboardMobileComfirmPurchase from './pages/dashboard/utility/mobile-top
 import ViewTransaction from './pages/admin/transactions/ViewTransaction'
 import ViewUser from './pages/admin/users/ViewUser'
 import ComfirmQuickPurchase from './pages/dashboard/ConfirmQuickPurchase'
+import AdminWithdrawalTransactions from './pages/admin/transactions/withdrawals'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -222,6 +223,8 @@ function App() {
       <Route path='services' element={<MainServices/>}/>
       <Route path='add-product' element={<AddProduct/>}/>
       <Route path='transactions' element={<AdminTransactions/>}/>
+      <Route path='withdrawals' element={<AdminWithdrawalTransactions/>}/>
+      {/* withdrawals */}
       <Route path='transactions/:id' element={<ViewTransaction/>}/>
       <Route path='users' element={<Users/>}/>
       <Route path='users/:id' element={<ViewUser/>}/>

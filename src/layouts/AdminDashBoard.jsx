@@ -15,6 +15,7 @@ import { userLogout } from '../redux/actions/auth';
 import { SET_LOADING } from '../redux/app';
 import { CiLogout } from 'react-icons/ci';
 import logo from "../assets/logos/logo-mod.png"
+import { PiHandWithdraw } from 'react-icons/pi';
 const AdminDashboardLayout = () => {
     const dispatch = useDispatch()
 
@@ -91,6 +92,9 @@ const AdminDashboardLayout = () => {
                 <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/transactions"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 `}> 
                 <SiMoneygram className='text-2xl'/>
                 Deposits </NavLink>       </li> 
+                <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/withdrawals"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 `}> 
+                <PiHandWithdraw  className='text-2xl'/>
+                Withdrawals </NavLink>       </li> 
                 <li className='my-2 py-2 px-3 bg-blue-80 text-sm'> <NavLink to={"/admin/users"} className={`flex ${toggleNav ? "flex-row" : "flex-col" } gap-3 `}> 
 
                 <UsergroupAddOutlined className='text-2xl'/>

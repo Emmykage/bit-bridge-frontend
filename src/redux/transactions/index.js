@@ -4,6 +4,7 @@ import { createTransaction, getTransaction, getTransactions, getUserTransactions
 const initialState = {
     transactions: [],
     transaction: {},
+    withdrawals: [],
     logged: false,
     loading: false,
     deposits: []
@@ -37,13 +38,14 @@ const AuthSlice = createSlice({
             }
         }) 
         .addCase(getTransactions.fulfilled, (state, action) => {
+            const filterWithdrawals = action.payload.data.filter(item => item.transaction_type == "withdrawal")
 
             // const rawData = action.payload.data
          
             return{
                 ...state,
                 deposits: action.payload.data,
-                withdrawal: action.payload.data,
+                withdrawals: filterWithdrawals,
                 transactions: action.payload.data,
                 loading: false
             }

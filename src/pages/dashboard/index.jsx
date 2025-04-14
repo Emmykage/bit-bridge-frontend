@@ -203,7 +203,7 @@ const HomeDashboard = () => {
                  </div>
             <div className="flex flex-col gap-3 md:flex-row justify-between">
                 <h4 className="text-alt md:text-3xl text-lg font-medium">{label}</h4>
-                <ul className="flex gap-3">
+                <ul className="flex flex-wrap gap-3">
                     {items.map(item => (
                         <li key={item.label}><NavButton onClick={()=>setSelectedItem(item.name)} className={`${selectedItem === item.name && "active"}  block  py-2 px-3 rounded-xl`}>  {item.btn}</NavButton></li>
 
@@ -221,7 +221,6 @@ const HomeDashboard = () => {
                 })}
                 
 
-                {/* <Outlet  /> */}
 
 
             </div>
@@ -233,6 +232,7 @@ const HomeDashboard = () => {
         <h3 className="text-white text-center text-2xl font-medium">Confirm </h3>
         <h3 className="text-white text-center text-lg">{selectedBiller?.service_type} subscription </h3>
         <p className={`${selectedBiller?.biller === "MTN" ? "text-alt" : selectedBiller?.biller === "GLO" ? "text-green-500" : "text-white"}  font-semibold text-center text-lg my-6`}>{selectedBiller?.biller}</p>
+        <p className="text-2xl font-medium text-white text-center my-2">{selectedBiller?.meter_number}</p>
         <p className="text-3xl text-white text-center my-4">{nairaFormat(selectedBiller?.amount ?? 0)}</p>
         <div className="flex justify-center gap-10">
             <ClassicBtn
