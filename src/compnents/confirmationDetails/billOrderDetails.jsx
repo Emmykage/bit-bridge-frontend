@@ -57,6 +57,15 @@ const BillOrderDetails = ({
         </div>
 
     }
+
+{
+        purchaseOrder?.biller && 
+        <div className="gap-4 my-4 md:flex-row flex-col  flex">
+            <p className="w-60 md:w-60 border-b px-2 font-semibold">Biller</p>
+            <p className="flex-1 border-b px-2">{purchaseOrder?.biller}</p>
+        </div>
+
+    }
     
 
 {

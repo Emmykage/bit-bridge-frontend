@@ -10,6 +10,7 @@ const FormInput = ({
     value,
     type="text", 
     disabled,
+    billerType,
     required=false,
     label}) => {
   
@@ -26,6 +27,30 @@ const FormInput = ({
           required: required,
           message: `Please input ${label}!`,
         },
+
+        ...(
+          billerType === "phone_no" ? [
+            {
+              pattern: /^\d{11}$/,
+              message: "Enter your 11 digits phone number",
+            },
+          ]  : []
+        ),
+
+       
+        // ...(billerType === "phone_no" ? [
+        //     {
+        //       validator: (_,value) => {
+        //         if(!value) return Promise.resolve()
+        //           const valueStr = value.toString()
+        //         if(valueStr.length !==11) {
+        //           return Promise.reject("please enter your 11-digit number")
+        //       }
+        //       return Promise.resolve();
+        //     }
+        //   }
+        //   ] : []
+        // )
       ]}
        label={label}
        type={type}>
@@ -47,6 +72,7 @@ FormInput.propTypes = {
   type: PropTypes.string, 
   disabled: PropTypes.bool,
   required: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  billerType: PropTypes.string,
 }
 export default FormInput;

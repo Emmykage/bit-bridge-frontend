@@ -1,4 +1,16 @@
 .formInput.ant-form-item{
+
+    :where(.ant-input-outlined).ant-input-status-error:not(.ant-input-disabled):hover {
+        background-color: transparent !important;
+        border-color: #ff4d4f !important; /* or any custom color */
+
+    }
+    
+    :where(.css-dev-only-do-not-override-1x0dypw).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled):focus, :where(.css-dev-only-do-not-override-1x0dypw).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled):focus-within{
+        background-color: transparent !important;
+
+    }
+
     flex: 1;
     .ant-col{
 

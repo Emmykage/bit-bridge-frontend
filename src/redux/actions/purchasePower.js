@@ -3,6 +3,7 @@ import { apiRoute, baseUrl } from "../baseUrl";
 import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
+import { nairaFormat } from "../../utils/nairaFormat";
 
 export const createPurchaseOrder = createAsyncThunk("purchase/purchase-power", async(data, {rejectWithValue}) => {
    
@@ -125,7 +126,7 @@ export const getPriceList = createAsyncThunk("payment/get-price-list", async({pr
         const priceListOptions = result.data.map(item => {
             return {
                 value: item.code,
-                label: `${item?.desc} | ${item?.price} | ${item?.validity ?? ""}`,
+                label: `${nairaFormat(item?.price)} | ${item?.desc} |  ${item?.validity ?? ""}`,
                 amount: item?.price
             }
         })

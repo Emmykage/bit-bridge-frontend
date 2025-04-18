@@ -10,6 +10,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import ClassicBtn from '../../../compnents/button/ClassicButton'
 import { SET_LOADING } from '../../../redux/app'
 import { toast } from 'react-toastify'
+import dateFormater from '../../../utils/dateFormat'
 
 
 const ViewTransaction = () => {
@@ -38,19 +39,20 @@ const ViewTransaction = () => {
         </span>
 
         <div className='bg-white p-4 rounded-lg shadow '>
-            <div className='flex flex-col md:flex-row justify-between'>
+            <div className='flex max-w-7xl flex-col md:flex-row gap-5 bg-red-4 justify-between'>
 
             <div>
-                <p className='text-gray-500 font-semibold my-6'> <span className='text-gray-800 font-semibold'>Addrss/Account Number</span> : {transaction?.address} </p>
-                <p><span className='text-gray-800 font-semibold  my-6'>Amount</span> : <span> {nairaFormat(transaction?.amount, "ngn")}</span> </p>
-                <p className='my-6'><span className='text-gray-800 font-semibold capitalize'>Status</span> : <span className='capitalize'>{transaction?.status} </span></p>
-                <p className='my-6'><span className='text-gray-800 font-semibold capitalize'>Bank</span> : <span className='capitalize'>{transaction?.bank} </span></p>
+                <p className='text-gray-500 font-semibold my-3 flex justify-center'> <span className='text-gray-800 font-semibold'>Account Number</span> : {transaction?.address} </p>
+                <p className='flex justify-between my-3'><span className='text-gray-800 font-semibold '>Amount :</span> <span> {nairaFormat(transaction?.amount, "ngn")}</span> </p>
+                <p className='flex justify-between my-3'><span className='text-gray-800 font-semibold capitalize'>Status :</span> <span className='capitalize'>{transaction?.status} </span></p>
+                <p className='flex justify-between my-3'><span className='text-gray-800 font-semibold capitalize'>Bank :</span> <span className='capitalize'>{transaction?.bank} </span></p>
+                <p className='flex justify-between my-3'><span className='text-gray-800 font-semibold capitalize'>Request :</span> <span className='capitalize'>{dateFormater(transaction?.created_at)} </span></p>
             </div>
 
-            <div>
-            <p className='text-gray-600 font-semibold  my-6'> <span>Transaction ID </span>: {id} </p>
-            <p className=' my-6'><span className='text-gray-800 font-semibold capitalize'>  Type:</span> <span className=' text-gray-800 font-semibold capitalize  '> {transaction?.order_type}</span></p>
-            <p className=' my-6'><span className="text-gray-800 font-semibold capitalize"></span> Email:  <span className=''> {transaction?.email}</span> </p>
+            <div className=' pl-1'>
+            <p className='text-gray-600 font-semibold justify-between flex  my-3'> <span>Transaction ID </span>: {id} </p>
+            <p className='justify-between flex my-3'><span className='text-gray-800 font-semibold capitalize'>  Type:</span> <span className=' text-gray-800 font-semibold capitalize  '> {transaction?.order_type}</span></p>
+            <p className='justify-between flex my-3'><span className="text-gray-800 font-semibold capitalize">Email: </span>  <span className=''> {transaction?.email}</span> </p>
             </div>
 
             </div>

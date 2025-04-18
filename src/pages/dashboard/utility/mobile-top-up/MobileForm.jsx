@@ -38,16 +38,14 @@ const DashboardMobileForm = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
-console.log(selectedProvider)
-    
+        
       const handleFormSubmit = (values) => {
+        console.log("called value: ",values, value)
         setLoading(true)
 
         dispatch(SET_LOADING(true))
         const data = {...values, ...value, biller: selectedProvider.product.provider.toUpperCase(), service_type: selectedProvider.service_type, skip: true}
 
-        console.log(data)
        dispatch(createPurchaseOrder(data)).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
@@ -76,7 +74,6 @@ console.log(selectedProvider)
     useEffect(()=> {
 
             if(selectedProvider){
-                console.log("get list")
 
               const provider =  splitString(selectedProvider?.product?.provider)
     
@@ -115,120 +112,101 @@ console.log(selectedProvider)
         >
 
             <div>
-                {/* <div className="flex flex-col gap-0">
-                    <FormInput type="text"
-                            name={"billersCode"}
-                            placeholder={"Enter Decoder Number"}
-                            />
-          
-                          </div> */}
-          
-                          
-          
-                              <div className="flex flex-col gap-0">
-                                  {/* <PlainSelect
-                                      onChange={(val)=> {
-          
-                                          const newAmount = priceList.find(item => item.value === val)
-                                          setValue({...value,
-                                          tariff_class: val,
-                                          amount: newAmount.amount
-          
-                                      })
-                                      }}
-                                      placeholder={"Select Subscription Plan"}
-                                      options={priceList}
-                                      className={""}
-                                      /> */}
+            <div className="flex flex-col gap-0">
 
-                                {selectedProvider?.service_type == "VTU" ?
+
+        {selectedProvider?.service_type == "VTU" ?
+          <div>
+        
+        {/* <h3 className="text-sm font-semibold">Phone Number </h3> */}
+
+                        
+                    <FormInput type="text"
+                        // value={value.billersCode}
+                        billerType={"phone_no"}
+                        label={"Phone Number"}
+                        required={true}
+                            name={"billersCode"}
+                            // onChange={(input)=> {
+                            //     setValue({
+                            //         ...value, 
+                            //         billersCode: input.target.value.replace(/\D/g, "").slice(0, 11)
+                            //     })
+                            // }}
+                            placeholder={"Enter Phone Number"}
+                        />
+                        {/* <h3 className="text-sm font-semibold">Enter Amount </h3> */}
+                    
+                            <div className="flex flex-col gap-0">
+                                <FormInput type="nubmer"
+                                    // value={value}
+                                    onChange={(input)=> {
+                
+                                        setValue({...value,
+                                        amount: input})}}
+                                    placeholder={"Enter Amount"}
+                                    />
+                
+                                    {/* <div className="flex-1 text-sm mt-2 from-gray-800">
+                                        Estimated price {btcValue?.calc}BTC
+                                    </div>  */}
+                
+                
+                
+                                </div>
+                                    </div>
+                                    :
                                     <div>
-                                      
-                                        {/* <h3 className="text-sm font-semibold">Phone Number </h3> */}
-                        
-                        
+                                        {/* <h3 className="text-base font-semibold">{label} </h3> */}
+                    
+                                        <div className="flex flex-col gap-0">
                                         <FormInput type="text"
                                             value={value.billersCode}
-                                                name={"biller"}
-                                                onChange={(input)=> {
-                                                    setValue({
-                                                        ...value, 
-                                                        billersCode: input.target.value
-                                                    })
-                                                }}
-                                                placeholder={"Enter Phone Number"}
+                                            name={"billersCode"}
+                                            billerType={"phone_no"}
+                                            // onChange={(input)=> {
+                                            //     setValue({
+                                            //         ...value, 
+                                            //         billersCode: input.target.value
+                                            //     })
+                                            // }}
+                                            placeholder={"Enter Phone Number"}
+                                        //   className={"whiteBg"}
                                             />
-                                            {/* <h3 className="text-sm font-semibold">Enter Amount </h3> */}
-                                      
-                                                <div className="flex flex-col gap-0">
-                                                    <FormInput type="nubmer"
-                                                        // value={value}
-                                                        onChange={(input)=> {
-                                    
-                                                            setValue({...value,
-                                                            amount: input})}}
-                                                        placeholder={"Enter Amount"}
-                                                        />
-                                    
-                                                        {/* <div className="flex-1 text-sm mt-2 from-gray-800">
-                                                            Estimated price {btcValue?.calc}BTC
-                                                        </div>  */}
-                                    
-                                    
-                                    
-                                                    </div>
-                                                      </div>
-                                                      :
-                                                      <div>
-                                                         {/* <h3 className="text-base font-semibold">{label} </h3> */}
-                                      
-                                                          <div className="flex flex-col gap-0">
-                                                          <FormInput type="text"
-                                                              value={value.billersCode}
-                                                              name={"biller"}
-                                                              onChange={(input)=> {
-                                                                  setValue({
-                                                                      ...value, 
-                                                                      billersCode: input.target.value
-                                                                  })
-                                                              }}
-                                                              placeholder={"Enter Phone Number"}
-                                                            //   className={"whiteBg"}
-                                                              />
-                                      
-                                                      </div>
-                                      
-                                                      <div>
-                                                           
-                                    
-                                                      </div>
-                                                          {/* <h3 className="text-base my- font-semibold">Select Plan/Bundle </h3> */}
-                                      
-                                                          <div className="flex flex-col gap-0">
-                                                              <PlainSelect
-                                                                  // value={value}
-                                                                  onChange={(val)=> {
-                                      
-                                                                      const newAmount = priceList.find(item => item.value === val)
-                                                                      setValue({...value,
-                                                                      tariff_class: val,
-                                                                      amount: newAmount.amount
-                                      
-                                                                  })
-                                                                  }}
-                                                                  placeholder={"Select data bundle"}
-                                                                  options={priceList}
-                                                                  />
-                                      
-                                                                  {/* <div className="flex-1 text-sm mt-2 from-gray-800">
-                                                                      Estimated price {btcValue?.calc}BTC
-                                                                  </div>  */}
-                                                          </div>
-                                                      </div>
-                                                       }
-          
-                                      <div className="flex-1 text-sm mt-2 from-gray-800">
-                                      </div> 
+                    
+                                    </div>
+                    
+                                    <div>
+                                        
+                
+                                    </div>
+                                        {/* <h3 className="text-base my- font-semibold">Select Plan/Bundle </h3> */}
+                    
+                                        <div className="flex flex-col gap-0">
+                                            <PlainSelect
+                                                // value={value}
+                                                onChange={(val)=> {
+                    
+                                                    const newAmount = priceList.find(item => item.value === val)
+                                                    setValue({...value,
+                                                    tariff_class: val,
+                                                    amount: newAmount.amount
+                    
+                                                })
+                                                }}
+                                                placeholder={"Select data bundle"}
+                                                options={priceList}
+                                                />
+                    
+                                                {/* <div className="flex-1 text-sm mt-2 from-gray-800">
+                                                    Estimated price {btcValue?.calc}BTC
+                                                </div>  */}
+                                        </div>
+                                    </div>
+                                    }
+
+                    <div className="flex-1 text-sm mt-2 from-gray-800">
+                    </div> 
                               </div>
                           </div>
 
