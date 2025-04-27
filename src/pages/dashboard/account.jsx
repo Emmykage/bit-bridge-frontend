@@ -36,7 +36,6 @@ const Account = () => {
 
         fetchConversion()
     },[wallet?.balance])
-console.log (wallet)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isWithdrawModalOpened, setIsWithdrawalModalOpen] = useState(false);
@@ -54,6 +53,8 @@ console.log (wallet)
                 dispatch(SET_LOADING(false))
                 dispatch(getWallet())
                 formRef.current.resetForm()
+                // window.location.reload();
+
             }else[
                 dispatch(SET_LOADING(false))
 

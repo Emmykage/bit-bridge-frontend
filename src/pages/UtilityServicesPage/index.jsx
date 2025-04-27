@@ -24,7 +24,12 @@ const UtilityServices = () => {
           <section className="py-10 mt-28 md:mt-32">
                 <div className="max-w-7xl m-auto border gap-4 p-4 rounded-2xl grid md:grid-cols-2">
                   <div>
-                    <h2 onClick={() => navigate("/buy-power")} className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
+                    <h2 
+                    // onClick={() =>    navigate("/buy-power")}
+                    onClick={() =>    navigate("/dashboard/home")}
+
+
+                       className="text-5xl hover:text-blue-900 cursor-pointer font-bold text-gray-700 leading-tight">
                     Purchase Electricity with your  wallet with ease
         
                     </h2>
@@ -57,7 +62,10 @@ const UtilityServices = () => {
                       
                         {utilities.map(({id, value, product,image})  => (
 
-                          <ProductCard link={`/utility-services/${id}`} valueRange={false} key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
+                          <ProductCard
+                          link={`/dashboard/home`}
+                          //  link={`/utility-services/${id}`}
+                            valueRange={false} key={id} id={id} linkTo={`utility-services`} image={image} value={value} provider={product?.provider}  />
 
                         ) )              
                       }

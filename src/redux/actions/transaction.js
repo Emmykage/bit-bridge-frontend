@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { DataArraySharp } from "@mui/icons-material";
 
 export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
-    console.log(data)
     const formData = new FormData()
 
     data.address && formData.append("transaction[address]",  data.address)

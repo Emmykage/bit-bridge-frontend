@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
@@ -36,8 +36,15 @@ const DashboardMobilePurchaseDetails = () => {
     const queryId = searchParams.get("transaction_id")
     const dispatch = useDispatch()
 
-    const handleConfirmation = (payment_method) => {
+
+    const handleConfirmation = useCallback((payment_method) => {
+      console.log("updateed query: ",queryId)
+
                 dispatch(SET_LOADING(true))
+                console.log("sent id",queryId, purchaseOrder.id)
+
+                console.log("first func test")
+
         
         dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
@@ -55,10 +62,11 @@ const DashboardMobilePurchaseDetails = () => {
                 }
             }
         )
-    }
+    }, [queryId, dispatch, navigate])
 
-
+console.log("test this")
     useEffect(()=> {
+      console.log("fetch by id:", queryId)
         dispatch(getPurchaseOrder(queryId))
     },[])
     return (

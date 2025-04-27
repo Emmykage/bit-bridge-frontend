@@ -6,9 +6,8 @@ import "./style.scss"
 import coinType from '../../data/coinType.json'
 import PropTypes from 'prop-types';
 import FormSelect from '../formSelect/FormSelect';
-import { PaystackButton } from 'react-paystack';
 import { useSelector } from 'react-redux';
-import { publicKey } from '../../redux/baseUrl';
+import PayMentButton from '../paymentOptions/PayMentButton';
 const AddFund = forwardRef((props, ref) => {
   const  {
     address,
@@ -23,18 +22,15 @@ const AddFund = forwardRef((props, ref) => {
   const [formLayout] = useState('vertical');
 
   const amount = Form.useWatch("amount", form);
+
+  const handleFormSubmit =  () => {
+   form.submit()
+
+ 
+
+  }
     
-  const componentProps = {
-    email:  user?.email,
-    amount: amount * 100,   
-    publicKey:  publicKey,
-  
-    text: 'Fund Account',
-    onSuccess: () => {
-      form.submit()
-        },
-    // onClose: () => alert('Are you sure'),
-  }; 
+
 
   useImperativeHandle(ref, ()=> ({
     resetForm: () => form.resetFields()
@@ -151,9 +147,12 @@ const AddFund = forwardRef((props, ref) => {
 
 <div className="w-full">
   {transaction_type === "deposit" && 
-  <PaystackButton 
-  htmlType="button"
-  className="border-alt m-auto block  w-full h-20 bg-primary text-white rounded-lg  border  shadow-md font-medium text-xl" {...componentProps}/> }
+  <PayMentButton 
+  handleFormSubmit={handleFormSubmit}
+  amount={amount}
+  user={user}
+
+  /> }
 </div>
 </>
   )

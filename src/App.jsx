@@ -32,7 +32,7 @@ import Services from './pages/admin/services/Services'
 import AddProduct from './pages/admin/AddProducts'
 import ALogin from './pages/auth/admin/Login'
 import ASignup from './pages/auth/admin/SignUp'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import LoaderPage from './compnents/loader/LoaderPage'
 import CryptoSell from './pages/dashboard/crypto-exchange/CryptoSell'
 import AdminTransactions from './pages/admin/transactions/deposits'
@@ -96,7 +96,15 @@ const CryptoExchangePage = lazy(() => import('./pages/cryptoExchangePage'));
 function App() {
   const {isLoading} = useSelector(state => state.app)
 
+  // useEffect(() => {
+  // const script =   document.createElement('script');
+  // script.src = "https://sdk.monnify.com/plugin/monnify.js"
+  // script.async = true;
+  // document.body.appendChild(script)
+  // }, [])
+
   userInitializeData()
+
   
   ScrollToTop()
   return (

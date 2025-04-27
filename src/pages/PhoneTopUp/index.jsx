@@ -36,7 +36,10 @@ const PhoneTopUp = () => {
               <div className="grid bg-white py-4 rounded-lg gap-4 gap-y-7 grid-cols-2 md:grid-cols-3 max-w-7xl m-auto">
                 {dataBundles?.map(({id, product, name, min_value, currency, max_value})  => (
 
-                  <ProductCard key={id} link={`/phone-top-up/${id}`} id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
+                  <ProductCard key={id}
+                  // link={`/phone-top-up/${id}`}
+                  link={`/dashboard/home`}
+                  id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
         
              )) }
              </div>
@@ -64,7 +67,11 @@ const PhoneTopUp = () => {
                         
                         {airtime?.map(({id, product, name, min_value, currency, max_value})  => (
 
-              <ProductCard key={id} link={`/phone-top-up/${id}`} id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
+              <ProductCard key={id} 
+              link={`/dashboard/home`}
+
+              // link={`/phone-top-up/${id}`}
+               id={id} min_value={min_value} currency={currency} max_value={max_value} provider={product?.provider} provision={name}/>
 
                 
              ))}

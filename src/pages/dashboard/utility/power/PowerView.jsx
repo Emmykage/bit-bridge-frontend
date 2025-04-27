@@ -25,9 +25,6 @@ const PowerView = () => {
                     <p className="text-base text-gray-400">{selectedProvider?.description}</p>
                 </div>
             </div>
-
-
-
         </div>
 
         <Outlet context={[id, selectedProvider?.biller]}/>

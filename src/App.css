@@ -1,6 +1,5 @@
 .bg{
     background: linear-gradient(rgb(229 231 235),rgba(17, 24, 39, 0.103)),url("/public/backgrounds/pattern_h.png") ;
-
     @apply bg-gray-200/50
 }
 
@@ -21,8 +20,8 @@ html {
     border-radius: 10px;
     cursor: pointer;
   }
-  
-/* .no-scroll::-webkit-scrollbar{
+
+  /* .no-scroll::-webkit-scrollbar{
     scrollbar-width: none;
 
 } */
