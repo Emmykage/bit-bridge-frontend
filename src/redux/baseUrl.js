@@ -12,4 +12,4 @@ export const apiRoute = "api/v1/"
 // export const  publicKey= "MK_TEST_CQV87G8H1W"
 export const publicKey = "MK_PROD_AH8EL53JW8"
 
-// export const publicKey = "NWF3CEW2PM61CMWGUHG31HG78A4A0BCL"
+// export const secret = "NWF3CEW2PM61CMWGUHG31HG78A4A0BCL"

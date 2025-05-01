@@ -84,6 +84,7 @@ import ViewTransaction from './pages/admin/transactions/ViewTransaction'
 import ViewUser from './pages/admin/users/ViewUser'
 import ComfirmQuickPurchase from './pages/dashboard/ConfirmQuickPurchase'
 import AdminWithdrawalTransactions from './pages/admin/transactions/withdrawals'
+import AppRedirect from './pages/AppRedirect'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -115,6 +116,8 @@ function App() {
 
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
+    <Route path='/app-redirect' element={<AppRedirect/>}/>
+
     <Route path='/contact-us' element={<ContactUs/>}/>
     <Route path='/terms-conditions' element={<TermsCondintion/>}/>
     <Route path='/privacy-policy' element={<PrivacyPolicies/>}/>
@@ -187,14 +190,14 @@ function App() {
       <Route path='utilities/mobile-top-up' element={<MobileTopUps/>}/>
 
 
-        <Route path='utilities/mobile-top-up/:id' element={<MobileView/>}>
+      <Route path='utilities/mobile-top-up/:id' element={<MobileView/>}>
         <Route path='mobileform' element={<DashboardMobileForm/>}/>
         <Route path='confirm-payment' element={<DashboardMobileComfirmPurchase/>}/>
         <Route path='payment-details' element={<DashboardMobilePurchaseDetails/>}/>
-
-      
-
       </Route>
+
+      <Route path='confirm-payment' element={<DashboardMobileComfirmPurchase/>}/>
+
 
 
       <Route path='gift-cards' element={<GiftCards/>} />
@@ -236,6 +239,8 @@ function App() {
       <Route path='transactions/:id' element={<ViewTransaction/>}/>
       <Route path='users' element={<Users/>}/>
       <Route path='users/:id' element={<ViewUser/>}/>
+    
+    
 
     </Route>
   </Routes>

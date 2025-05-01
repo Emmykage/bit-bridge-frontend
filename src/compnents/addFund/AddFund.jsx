@@ -2,7 +2,6 @@ import { Button, Form } from 'antd'
 import  { forwardRef, useImperativeHandle, useState } from 'react'
 import FormInput from '../formInput/FormInput';
 import "./style.scss"
-// import paymentDetails from '../../data/walletAddres.json'
 import coinType from '../../data/coinType.json'
 import PropTypes from 'prop-types';
 import FormSelect from '../formSelect/FormSelect';
@@ -25,9 +24,6 @@ const AddFund = forwardRef((props, ref) => {
 
   const handleFormSubmit =  () => {
    form.submit()
-
- 
-
   }
     
 
