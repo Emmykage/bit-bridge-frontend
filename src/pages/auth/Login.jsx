@@ -24,7 +24,7 @@ import {
     cursor: 'pointer',
   };
   import enUS from "antd/es/locale/en_US"
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
@@ -34,6 +34,8 @@ import { SET_LOADING } from '../../redux/app';
     const { logged, loading} = useSelector(state => state.auth)
     const [loginType, setLoginType] = useState('account');
     const dispatch = useDispatch()
+    const location = useLocation()
+
     const { token } = theme.useToken();
 
     const navigate = useNavigate()
@@ -63,7 +65,7 @@ import { SET_LOADING } from '../../redux/app';
               dispatch(SET_LOADING(false))
               
 
-              navigate("/dashboard/home")
+              navigate(location.state?.from?.pathname ||"/dashboard/home")
             }
             else  if(userLogin.rejected.match(result)){
               dispatch(SET_LOADING(false) )

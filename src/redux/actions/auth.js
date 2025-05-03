@@ -40,6 +40,87 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
 
 
 
+export const userProfileUpdate = createAsyncThunk("user/user-update", async({id, data}, {rejectWithValue}) => {
+    console.log(data)
+    try {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "application/json"
+            }
+        })
+        const result =  response.data    
+
+        return result
+    } catch (error) {
+        if(error.response){
+            console.log(error.response)
+
+            const message = error.response.data?.message 
+            toast(message || "Something broke", {type: "error"})
+            return rejectWithValue({message: message})
+        }
+
+        return rejectWithValue({message: "something went wrong"})
+
+    }
+})
+
+
+export const userPasswordUpdate = createAsyncThunk("user/password-update", async({id, data}, {rejectWithValue}) => {
+    console.log(data)
+    try {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "application/json"
+            }
+        })
+        const result =  response.data    
+
+        return result
+    } catch (error) {
+        const message = error.response.data?.message
+        console.log(message)
+        if(error.response){
+            toast(message, {type: "error"})
+            return rejectWithValue({message: message})
+        }
+
+        return rejectWithValue({message: "something went wrong"})
+
+    }
+})
+
+
+
+export const userDelete = createAsyncThunk("user/account-delete", async(id, {rejectWithValue}) => {
+    try {
+        const response = await axios.delete(`${baseUrl + apiRoute}users/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "application/json"
+            }
+        })
+        const result =  response.data    
+
+        return result
+    } catch (error) {
+        const message = error.response.data.message
+        console.log(message)
+        if(error.response){
+            toast(message, {type: "error"})
+            return rejectWithValue({message: message})
+        }
+
+        return rejectWithValue({message: "something went wrong"})
+
+    }
+})
+
+
+
+
 export const userProfile = createAsyncThunk("auth/user-profile", async(data, {rejectWithValue}) => {
     try {
 

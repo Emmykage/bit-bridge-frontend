@@ -85,6 +85,7 @@ import ViewUser from './pages/admin/users/ViewUser'
 import ComfirmQuickPurchase from './pages/dashboard/ConfirmQuickPurchase'
 import AdminWithdrawalTransactions from './pages/admin/transactions/withdrawals'
 import AppRedirect from './pages/AppRedirect'
+import ProfileAccountPage from './pages/dashboard/ProfilePage'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -154,6 +155,8 @@ function App() {
       <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
     </Route>
     <Route path='/dashboard' element={<DashboardLayout/>} >
+    <Route path='profile-account' element={<ProfileAccountPage/>} />
+
       <Route path='home' element={<HomeDashboard/>}>
         <Route path="orders-transaction" element={<OrderTransact/>}/>
       </Route>

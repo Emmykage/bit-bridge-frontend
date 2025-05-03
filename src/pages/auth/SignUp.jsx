@@ -15,7 +15,7 @@ import enUS from "antd/es/locale/en_US"
 
 import { ConfigProvider, Space, Tabs, theme } from 'antd';
 import {  useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from "../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignUp } from '../../redux/actions/auth';
@@ -27,6 +27,7 @@ export const Signup = () => {
   const [loginType, setLoginType] = useState('phone');
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const iconStyles = {
     marginInlineStart: '16px',
@@ -40,9 +41,9 @@ export const Signup = () => {
 
   return (
     <ProConfigProvider hashed={false}>
-      <div style={{ backgroundColor: token.colorBgContainer }}>
+      <div  style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
-                loading={loading}
+          loading={loading}
 
         onFinish={(values) => {
           dispatch(SET_LOADING(true))
@@ -51,7 +52,7 @@ export const Signup = () => {
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
-                navigate("/dashboard/home")
+                navigate(location.state?.from?.pathname ||"/dashboard/home")
               }
               else  
                 dispatch(SET_LOADING(false))
@@ -60,8 +61,9 @@ export const Signup = () => {
   
         
             )
-          console.log(values)
+          // console.log(values)
         }}
+      
           logo={logo}
           title={<NavLink to={"/"}> BitBridge Global</NavLink>}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
@@ -69,7 +71,6 @@ export const Signup = () => {
             backdropFilter: 'blur(4px)',
             height: "100vh",
             display: "flex",
-            // width: "500px",
             justifyContent: "center"
           }}
           subTitle="Nigerians Largest trading and exchange platform"
@@ -188,18 +189,10 @@ export const Signup = () => {
           <div
             style={{
               marginBlockEnd: 24,
+              
             }}
           >
-            {/* <ProFormCheckbox noStyle name="autoLogin">
-            Auto-login
-            </ProFormCheckbox>
-            <a
-              style={{
-                float: 'right',
-              }}
-            >
-              Forgot password
-            </a> */}
+          
           </div>
         </LoginForm>
       </div>

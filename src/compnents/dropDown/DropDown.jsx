@@ -22,7 +22,7 @@ const DropDown = () => {
       
             case '2':
              
-               navigate('/dashboard/approved-gift-cards');
+               navigate('/dashboard/profile-account');
               break;
       
             case '3':
@@ -37,18 +37,18 @@ const DropDown = () => {
               message.info('Unknown action');
           }
       };
-      
-    
-const items = [
+
+
+    const items = [
     {
       label: 'Switch',
       key: '1',
       icon: <SwitcherOutlined />,
     },
     {
-      label: 'Gift Cards',
+      label: 'Profile',
       key: '2',
-      icon: <GiftOutlined />,
+      icon: <UserOutlined />,
       // danger: true
       // disabled: true,
     },

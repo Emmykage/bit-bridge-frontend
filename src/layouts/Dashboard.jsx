@@ -1,6 +1,6 @@
 import { HomeOutlined, LoginOutlined, MenuUnfoldOutlined, WalletOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
@@ -11,6 +11,7 @@ import { LuUtilityPole } from 'react-icons/lu';
 import { getWallet } from '../redux/actions/wallet';
 import DrawerModal from '../compnents/drawer/Drawer';
 import { SET_LOADING } from '../redux/app';
+import LoaderPage from '../compnents/loader/LoaderPage';
 
 const DashboardLayout = () => {
 
@@ -24,14 +25,20 @@ const DashboardLayout = () => {
     const active = "flex text-alt justify-center items-center flex-col"
     const [showMenu, seTShowMenu] = useState(false)
     const [open, setOpen] = useState(false)
+    const location = useLocation()
  
 
-    useEffect(()=> {
-       if(!loading && !user){
-        navigate('/login')
-       }
-    },[user, loading])
+    // useEffect(()=> {
+    //    if(!loading && !user){
 
+    //     return <Navigate to="/login" state={{from: location }} replace/>
+    //     // navigate('/login')
+    //    }
+    // },[user, loading])
+
+
+
+  
     const closeNav = (e) => {
         if(sideNavRef.current && !sideNavRef.current.contains(e.target) && !menuRef.current.contains(e.target)){
 
@@ -53,10 +60,25 @@ const DashboardLayout = () => {
 
     },[closeNav, sideNavRef])
 
+        
 
     useEffect(()=>{
         dispatch(getWallet())
     }, [])
+
+
+  
+    if(!loading && !user){
+
+        return <Navigate to="/login" state={{from: location }} replace/>
+       }
+    
+       if(loading) {
+        return <><LoaderPage/></>;}
+    
+    
+
+    
 
   return (
     <div className='relative bg-gray-00 h-screen bg-black/90'>
