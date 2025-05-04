@@ -33,6 +33,7 @@ const Deposits = () => {
                             <thead className="top-0 sticky bg-gray-700/50 w-full left-0">
                                 <tr>
                                 <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-300 backdrop-blur backdrop-filter uppercase">Amount</th>
+                                <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-300 backdrop-blur backdrop-filter uppercase">Bonus</th>
 
                                     <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 pl-2  py-3.5 pr-3 text-center text-xs font-semibold text-gray-300  backdrop-blur backdrop-filter uppercase">Status</th>
                                     <th scope="col" className="sticky top-0 z-10  border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold text-gray-300 backdrop-blur backdrop-filter lg:table-cell uppercase">Time </th>
@@ -67,7 +68,8 @@ const Deposits = () => {
 
                                 <tr key={item?.id}>
                                     <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-300  font-semibold "><p className="font-bold">{nairaFormat(item.amount, "ngn")}</p></td>
-                  
+                                    <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-100  font-semibold "><p className="font-bold">{nairaFormat(item.bonus, "ngn")}</p></td>
+
                                     <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
                                         <span className={`${statusStyleCard(item?.status)} py-1 w-full max-w-[200px] block m-auto text-center px-3 border rounded-3xl`}>
                                         {item?.status }
