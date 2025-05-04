@@ -109,9 +109,11 @@ export const getTransaction = createAsyncThunk("transaction/get-transaction", as
     }
 });
 
-export const getUserTransactions = createAsyncThunk("transaction/get-user-transactions", async({type}, {rejectWithValue}) => {
+export const getUserTransactions = createAsyncThunk("transaction/get-user-transactions", async({params}, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}transactions/user?transaction_type=${type}`, {
+        const response = await axios.get(`${baseUrl + apiRoute}transactions/user`,
+            {
+            params, 
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }

@@ -1,4 +1,5 @@
 const statusStyle = (style) => {
+    console.log(style)
 
     const props =   {
         declined: " border-red-500 text-red-700 bg-red-100/30" ,
