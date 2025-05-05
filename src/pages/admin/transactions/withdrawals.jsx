@@ -57,10 +57,11 @@ const AdminWithdrawalTransactions = () => {
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50  bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-xs font-semibold backdrop-blur backdrop-filter sm:pl-6 lg:pl-5">  Type</th>
                                     {/* <th scope="col" className="sticky top-0  z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 pr-3 text-left text-xs font-semibold text-gray-900  backdrop-blur backdrop-filter">Type</th> */}
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50  bg-opacity-75 px-6 py-3.5  text-left text-xs font-semibold  backdrop-blur backdrop-filter sm:table-cell">Status</th>
-                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Address </th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Bank </th>
+                                    <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Account </th>
                                     <th scope="col" className="sticky top-0 z-10 hidden border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-left text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell">Time </th>
                                     <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"> </th>
-                                    {/* <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"></th> */}
+                                    <th scope="col" className="sticky top-0 z-10 border-b border-gray-200/50 bg- bg-opacity-75 px-3 py-3.5 text-center text-xs font-semibold  backdrop-blur backdrop-filter lg:table-cell"></th>
 
                         
                             </tr>
@@ -71,7 +72,7 @@ const AdminWithdrawalTransactions = () => {
 
                                     {/* make conditional statement  here  */}
                                 {/* <td colspan="5" rowspan="10" class="font-semibold text-gray-900 backdrop-blur backdrop-filter text-center">  </td> */}
-                                { withdrawals?.map(({id, status, transaction_type, address, created_at, amount}) => (
+                                { withdrawals?.map(({id, status, bank, transaction_type, address, created_at, amount}) => (
 
                                 <tr key={id}>
                                 <td className="whitespace-nowrap border-b border-gray-200 px-3 py-3 text-sm text-gray-600/90  font-semibold "><p className="font-bold">{nairaFormat(amount)}</p></td>
@@ -85,7 +86,10 @@ const AdminWithdrawalTransactions = () => {
 
                                     </td>
 
-                                  <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                    <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
+                                        {bank ?? "Not Available"}
+
+                                    </td>                                   <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left text-gray-900 text-sm sm:pr-8 lg:pr-8">
                                         {address ?? "Not Available"}
 
                                     </td> 

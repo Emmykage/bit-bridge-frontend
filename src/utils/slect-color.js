@@ -11,4 +11,16 @@ const pickColorStyle = (biller) => {
 
 }
 
+export const pickTextColor = (status) => {
+
+   const color = {
+        withdrawal: "text-green-800",
+        deposit: "text-red-800"
+    }
+
+
+    return color[status]
+
+}
+
 export default pickColorStyle

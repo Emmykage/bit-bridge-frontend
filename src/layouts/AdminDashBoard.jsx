@@ -36,6 +36,7 @@ const AdminDashboardLayout = () => {
             if(userLogout.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
 
+
                 navigate("/admin/login")
             }else{
                 dispatch(SET_LOADING(false))
