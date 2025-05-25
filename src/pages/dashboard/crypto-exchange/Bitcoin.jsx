@@ -30,9 +30,6 @@ const Bitcoin = () => {
 
         ( async () => {
             const conversion =  await converter({toCurr: "ngn"})
-            console.log(conversion)
-
-
             setCurrencyConversion(conversion)
         }
 
@@ -61,8 +58,7 @@ const Bitcoin = () => {
                 ]
                 
             }
-            console.log(raw)
-        
+       
             dispatch (createOrder({
                 ...values,
                 order_type: "sell",

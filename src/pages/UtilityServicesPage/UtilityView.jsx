@@ -51,8 +51,6 @@ const UtilityView = () => {
     },[location])
 
      useEffect(()=> {
-        console.log(selectedProvider, "he will come")
-
             if(selectedProvider){
               const provider =  splitString(selectedProvider?.product?.provider)
     

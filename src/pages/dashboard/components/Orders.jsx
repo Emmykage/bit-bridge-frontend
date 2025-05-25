@@ -9,9 +9,6 @@ const OrderTransact = () => {
     const dispatch = useDispatch()
     const {orders, loading} = useSelector(state => state.order)
 
-    console.log(orders )
-
-
     useEffect(()=> {
         dispatch(getUserOrders())
     },[])

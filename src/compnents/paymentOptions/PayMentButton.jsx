@@ -16,7 +16,7 @@ const PayMentButton = ({
           script.async = true;
           script.onload = () => {
             scriptLoadedRef.current = true;
-            console.log("✅ Monnify SDK loaded");
+
           };
           script.onerror = () => {
             console.error("❌ Failed to load Monnify SDK");

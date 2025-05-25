@@ -3,7 +3,6 @@ import { apiRoute, baseUrl } from "../baseUrl";
 import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
-import { DataArraySharp } from "@mui/icons-material";
 
 export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
     const formData = new FormData()
@@ -48,8 +47,6 @@ export const createTransaction = createAsyncThunk("transaction/user-deposit", as
 });
 
 export const updateTransaction = createAsyncThunk("transaction/update-transaction", async({id, data}, {rejectWithValue}) => {
-
-    console.log(id, data)
     try {
         const response = await axios.patch(`${baseUrl + apiRoute}transactions/${id}`, data, {
             headers: {

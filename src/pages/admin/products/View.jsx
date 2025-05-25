@@ -60,7 +60,7 @@ const ViewProduct = () => {
           if(updateProduct.fulfilled.match(result)){
             toast(result.payload.message, {type: "success"})
           }else if(updateProduct.rejected.match(result)){
-            console.log(result)
+
             toast(result.payload.message, {type: "error"})
           }
         })

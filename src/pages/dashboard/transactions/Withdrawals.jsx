@@ -9,7 +9,7 @@ import statusStyleCard from "../../../utils/statusCard"
 
 const Withdrawals = () => {
   const {transactions, loading} = useSelector(state => state.transaction)
-    console.log(transactions)
+
   const dispatch = useDispatch()
   useEffect(()=> {
     dispatch(getUserTransactions({type: "withdrawal"}))

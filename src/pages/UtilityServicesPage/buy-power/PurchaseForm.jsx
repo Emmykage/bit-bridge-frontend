@@ -32,7 +32,7 @@ const PowerForm = () => {
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
-            console.log(data)
+
             setLoading(false)
             dispatch(SET_LOADING(false))
 

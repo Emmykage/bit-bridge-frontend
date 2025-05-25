@@ -43,9 +43,6 @@ const DashboardCablePurchaseDetails = () => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
                     dispatch(SET_LOADING(false))
-                    console.log("first")
-                    console.log(data)
-
                     navigate(`/dashboard/utilities/cable/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
                     const data  = result.payload

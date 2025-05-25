@@ -58,7 +58,6 @@ const Ethereum = () => {
             //     ]
                 
             // }
-            // console.log(raw)
         
             dispatch (createOrder({
                 ...values,

@@ -38,9 +38,7 @@ const DashboardCableForm = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
-console.log(value)
-    
+        
       const handleFormSubmit = (values) => {
         setLoading(true)
 
@@ -74,8 +72,6 @@ console.log(value)
     useEffect(()=> {
 
             if(selectedProvider){
-                console.log("get list")
-
               const provider =  splitString(selectedProvider?.product?.provider)
     
                 dispatch(getPriceList({service_type: selectedProvider?.service_type, provider: provider}))

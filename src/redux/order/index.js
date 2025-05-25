@@ -132,7 +132,7 @@ const orderSlice = createSlice({
             loading: false
         }))
         .addCase(getBillOrder.fulfilled, (state, action) => {
-            console.log(action.payload.data)
+
             return{
                 ...state,
                 billOrder: action.payload.data,

@@ -41,7 +41,7 @@ export const repurchaseOrder = createAsyncThunk("purchase/repurchase-order", asy
 
         return result;
     } catch (error) {
-      console.log(error.response)
+
         if (error.response) {
             toast(error.response.data.message, {type: "error"})
             return rejectWithValue({ message: error.response.data.message });
@@ -92,7 +92,7 @@ export const getRescentPurchaseOrder = createAsyncThunk("purchaseOrder/get-recen
 
 
 export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId, payment_method}, {rejectWithValue}) => {
-    console.log(payment_method)
+
     try {
         const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/confirm_payment?payment_method=${payment_method}`, {
             headers: {
@@ -144,7 +144,7 @@ export const getPriceList = createAsyncThunk("payment/get-price-list", async({pr
 export const queryTransaction = createAsyncThunk("payment/query-transaction", async({id}, {rejectWithValue}) => {
 
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${id}query_transaction`, {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${id}/query_transaction`, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }

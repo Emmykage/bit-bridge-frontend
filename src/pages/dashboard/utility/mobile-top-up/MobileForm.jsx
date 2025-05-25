@@ -40,7 +40,7 @@ const DashboardMobileForm = () => {
     const dispatch = useDispatch()
         
       const handleFormSubmit = (values) => {
-        console.log("called value: ",values, value)
+
         setLoading(true)
 
         dispatch(SET_LOADING(true))

@@ -10,7 +10,7 @@ export const getConversion = createAsyncThunk("conversion/get-converted-rate", a
     return result
 
    } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
    }
 })
 

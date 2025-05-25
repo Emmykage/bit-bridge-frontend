@@ -25,8 +25,6 @@ const ViewTransaction = () => {
 
     }, [])
 
-    console.log(transaction)
-
     
   return (
 
@@ -104,7 +102,6 @@ const ViewTransaction = () => {
 
                             }else{
                                 dispatch(SET_LOADING(false))
-                                console.log(result.payload.message)
 
                                 toast(result.payload.message, {type: "error"})
 
@@ -129,7 +126,6 @@ const ViewTransaction = () => {
 
                                     }else{
                                         dispatch(SET_LOADING(false))
-                                        console.log(result.payload.message)
 
                                         toast(result.payload.message, {type: "error"})
 

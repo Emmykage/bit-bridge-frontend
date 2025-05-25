@@ -63,10 +63,8 @@ const Account = () => {
         })
 
     }
-
-    console.log(formRef.current)
     const handleWithdrawalSubmit = (values) => {
-        console.log(values)
+
         dispatch(SET_LOADING(true))
         dispatch (createTransaction({
             ...values,

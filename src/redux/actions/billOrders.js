@@ -29,8 +29,6 @@ export const getBillOrders = createAsyncThunk("bill-order/get-bill-orders", asyn
                 "Authorization": `Bearer ${fetchToken()}`
             }
         });
-        console.log(response)
-
         const result = response.data; 
 
         return result;

@@ -12,8 +12,8 @@ export const getStatistics = createAsyncThunk("app/get-statistics", async(_, {re
         });
 
         const result = response.data; 
-        console.log(result)     
 
+        
         return result;
     } catch (error) {
         if (error.response) {

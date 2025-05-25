@@ -53,7 +53,6 @@ const ProfileAccountPage = () => {
     }
 
     const handlePasswordUpdate = () => {
-        console.log(userPassword.password !== userPassword.confirm_password, userPassword.password , userPassword.confirm_password)
         if(userPassword.password !== userPassword.confirm_password){
             toast("password mismatch",{ type: "error"})
             return

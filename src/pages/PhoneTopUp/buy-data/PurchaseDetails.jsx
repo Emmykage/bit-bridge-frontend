@@ -55,10 +55,6 @@ const PurchaseDataDetails = () => {
         )
     }
 
-
-    console.log(purchaseOrder)
-
-
     useEffect(()=> {
         dispatch(getPurchaseOrder(queryId))
     },[])

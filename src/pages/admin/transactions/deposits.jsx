@@ -20,8 +20,6 @@ const AdminDepositTransactions = () => {
             dispatch(getTransactions())
     }, [])
 
-    console.log(transactions)
-
 
     const handleTransactionUpdate = (task) => {
         dispatch(updateTransaction({

@@ -38,7 +38,6 @@ const ProvisionDetails = ({selectedProvider,
         fetchBtcValue();
     }, [])
 
-    console.log(btcValue)
   return (
     <section className="px-4">
 

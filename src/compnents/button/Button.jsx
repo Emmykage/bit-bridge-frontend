@@ -2,7 +2,9 @@ import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import "./button-style.scss"
-const ClickButton = ({children,icon, btnType, size="large", onClick}) => {
+const ClickButton = ({children,
+  type,
+  icon, btnType, size="large", onClick}) => {
 
   return (
     <Button
@@ -11,7 +13,9 @@ const ClickButton = ({children,icon, btnType, size="large", onClick}) => {
      shape="round" 
      icon={icon ? <ArrowRightOutlined /> : null} 
      onClick={onClick}
-     size={size}>
+     size={size}
+     htmlType={type}
+     >
 
       {children}
 

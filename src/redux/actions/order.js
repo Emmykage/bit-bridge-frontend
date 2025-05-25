@@ -5,7 +5,7 @@ import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
 
 export const createOrder = createAsyncThunk("order/creaet-order", async(data, {rejectWithValue}) => {
-    console.log(data)
+
     const formData = new FormData()
 
     data?.order_type && formData.append("order_detail[order_type]", data.order_type)
@@ -53,7 +53,7 @@ export const getOrder = createAsyncThunk("order/get-order", async(id, {rejectWit
         });
 
         const result = response.data;   
-        console.log("get order:", result)
+
         return result;
     } catch (error) {
         if (error.response) {
@@ -92,7 +92,6 @@ export const getUserOrders = createAsyncThunk("order/get-user-orders", async(dat
         });
 
         const result = response.data;     
-        console.log(result) 
 
         return result;
     } catch (error) {
@@ -114,7 +113,6 @@ export const getUserBillOrders = createAsyncThunk("bill-order/get-user-bill-orde
         });
 
         const result = response.data;     
-        console.log(result) 
 
         return result;
     } catch (error) {

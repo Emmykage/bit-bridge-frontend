@@ -61,8 +61,8 @@ export const Signup = () => {
   
         
             )
-          // console.log(values)
-        }}
+
+          }}
       
           logo={logo}
           title={<NavLink to={"/"}> BitBridge Global</NavLink>}

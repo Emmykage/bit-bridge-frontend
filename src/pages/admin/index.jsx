@@ -112,8 +112,9 @@ const AdminHome = () => {
                         
                 </div>
 
-                <div className='lg:w-52 '>
+                <div className='lg:w-52 space-y-4 '>
                     <NavLink to={"/admin/add-product"} className='py-3 block rounded text-white text-center w-full bg-gray-900'>Add Product</NavLink>
+                    <NavLink to={"/admin/query"} className='py-3 block rounded text-white text-center w-full bg-gray-900'>Query Transaction</NavLink>
             
         </div>
             </div>

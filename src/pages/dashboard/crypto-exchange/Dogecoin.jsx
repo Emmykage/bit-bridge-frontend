@@ -17,9 +17,6 @@ const Dogecoin = () => {
 
         ( async () => {
             const conversion =  await converter({toCurr: "ngn"})
-            console.log(conversion)
-
-
             setCurrencyConversion(conversion)
         }
 

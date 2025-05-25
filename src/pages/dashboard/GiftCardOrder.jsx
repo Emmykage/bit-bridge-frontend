@@ -31,8 +31,6 @@ const GiftCardOrder = () => {
                       dispatch(updateCardToken({id: item?.id, data: {reveal: true}}))
                       .then(result => {
                         if(updateCardToken.fulfilled.match(result)){
-                        //   dispatch(getOrder(orderId))
-                        console.log("first")
                         dispatch(getUserCardTokens())
 
                           dispatch(SET_LOADING(false))

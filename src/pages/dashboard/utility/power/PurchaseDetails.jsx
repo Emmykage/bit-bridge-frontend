@@ -44,8 +44,6 @@ const DashboardPurchaseDetails = () => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
                     dispatch(SET_LOADING(false))
-                    console.log(data)
-
                     navigate(`/dashboard/utilities/buy-power/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
                     const data  = result.payload

@@ -27,7 +27,7 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         return result
     } catch (error) {
         const message = error.response.data.status.message
-        console.log(message)
+
         if(error.response){
             toast(message, {type: "error"})
             return rejectWithValue({message: message})
@@ -41,7 +41,7 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
 
 
 export const userProfileUpdate = createAsyncThunk("user/user-update", async({id, data}, {rejectWithValue}) => {
-    console.log(data)
+
     try {
         const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
             headers: {
@@ -54,8 +54,6 @@ export const userProfileUpdate = createAsyncThunk("user/user-update", async({id,
         return result
     } catch (error) {
         if(error.response){
-            console.log(error.response)
-
             const message = error.response.data?.message 
             toast(message || "Something broke", {type: "error"})
             return rejectWithValue({message: message})
@@ -68,7 +66,7 @@ export const userProfileUpdate = createAsyncThunk("user/user-update", async({id,
 
 
 export const userPasswordUpdate = createAsyncThunk("user/password-update", async({id, data}, {rejectWithValue}) => {
-    console.log(data)
+
     try {
         const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
             headers: {
@@ -107,7 +105,7 @@ export const userDelete = createAsyncThunk("user/account-delete", async(id, {rej
         return result
     } catch (error) {
         const message = error.response.data.message
-        console.log(message)
+
         if(error.response){
             toast(message, {type: "error"})
             return rejectWithValue({message: message})

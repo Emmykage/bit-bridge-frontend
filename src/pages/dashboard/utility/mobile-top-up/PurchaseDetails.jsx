@@ -38,19 +38,16 @@ const DashboardMobilePurchaseDetails = () => {
 
 
     const handleConfirmation = useCallback((payment_method) => {
-      console.log("updateed query: ",queryId)
 
+      
                 dispatch(SET_LOADING(true))
-                console.log("sent id",queryId, purchaseOrder.id)
-
-                console.log("first func test")
 
         
         dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
-                   console.log(data) 
+
                     dispatch(SET_LOADING(false))
                     navigate(`/dashboard/utilities/mobile-top-up/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
@@ -64,10 +61,9 @@ const DashboardMobilePurchaseDetails = () => {
         )
     }, [queryId, dispatch, navigate])
 
-console.log("test this")
     useEffect(()=> {
-      console.log("fetch by id:", queryId)
-        dispatch(getPurchaseOrder(queryId))
+
+      dispatch(getPurchaseOrder(queryId))
     },[])
     return (
         <>

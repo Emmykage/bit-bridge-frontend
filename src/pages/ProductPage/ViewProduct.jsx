@@ -17,8 +17,6 @@ const ProductView = () => {
 
 
     const selectedProvider = [...products]?.find(item => item.id == id)
-    console.log(selectedProvider)
-
     const serviceImage =  splitString(selectedProvider?.provider)
     
     useEffect(()=> {

@@ -1,5 +1,4 @@
 const statusStyleCard = (style) => {
-    console.log(style)
 
     const props =   {
         declined: " border-red-900 text-red-700 bg-red-100/10" ,
@@ -9,7 +8,6 @@ const statusStyleCard = (style) => {
         pending: "border-orange-900 text-orange-700 bg-orange-100/10"
     }
 
-    console.log(props[style])
 
     return props[style]
 }

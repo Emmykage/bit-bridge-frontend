@@ -11,7 +11,7 @@ import { nairaFormat } from '../../../utils/nairaFormat'
 // import OptionDropDown from '../../../compnents/optionDropDown/OPtionDropDown'
 
 const AdminWithdrawalTransactions = () => {
-    const {transactions, withdrawals} = useSelector(state => state.transaction)
+    const {withdrawals} = useSelector(state => state.transaction)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const [selectedId, setSelectedId] = useState(null)
@@ -19,8 +19,6 @@ const AdminWithdrawalTransactions = () => {
     useEffect(()=> {
             dispatch(getTransactions())
     }, [])
-
-    console.log(transactions)
 
 
     const handleTransactionUpdate = (task) => {
