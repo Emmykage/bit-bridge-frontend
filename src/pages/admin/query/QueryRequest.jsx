@@ -27,11 +27,16 @@ const QueryRequest = () => {
                 setOpenModal(true)
                 setQueryData(result.payload.data)
                 return 
-            }
+            }else{
 
-            toast(result.payload.message ?? "Query Failed", {type: "error"})
+              console.log(result)
+
+              toast(result.payload.message ?? "Query Failed", {type: "error"})
 
              dispatch(SET_LOADING(false))
+            }
+
+      
 
         })
     }

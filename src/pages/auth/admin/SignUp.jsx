@@ -94,7 +94,7 @@ export const AdminSignup = () => {
           </Tabs>
           <>
           
-            <ProFormText
+                <ProFormText
               name="email"
               fieldProps={{
                 size: 'large',

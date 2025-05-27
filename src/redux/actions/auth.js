@@ -5,6 +5,7 @@ import { fetchToken } from "../../hooks/localStorage"
 import { toast } from "react-toastify"
 
 const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWithValue}) => {
+
     try {
         const response = await axios.post(`${baseUrl}signup`, data)
         const result =  response.data
@@ -36,14 +37,15 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         return rejectWithValue({message: "something went wrong"})
 
     }
-})
+}
+)
 
 
 
 export const userProfileUpdate = createAsyncThunk("user/user-update", async({id, data}, {rejectWithValue}) => {
 
     try {
-        const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/user_update`, data, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`,
                 "Content-Type": "application/json"
@@ -68,7 +70,7 @@ export const userProfileUpdate = createAsyncThunk("user/user-update", async({id,
 export const userPasswordUpdate = createAsyncThunk("user/password-update", async({id, data}, {rejectWithValue}) => {
 
     try {
-        const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, data, {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/user_password_update`, data, {
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`,
                 "Content-Type": "application/json"

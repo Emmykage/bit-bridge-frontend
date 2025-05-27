@@ -11,6 +11,7 @@ const ProfileAccountPage = () => {
 
     const [userPassword, setUserPassword]  = useState({
         confirm_password: "",
+        old_password: "",
         password: ""
     })
     const [open, setOpen] = useState(false)
@@ -110,6 +111,8 @@ const ProfileAccountPage = () => {
 
     }
 
+    console.log(userInfo)
+
   return (
     
 
@@ -144,19 +147,19 @@ const ProfileAccountPage = () => {
 
       {/* Change Password */}
       <div className="bg-white shadow-md rounded-2xl p-6 space-y-4">
-        <h2 className="text-xl font-semibold mb-2">Change Password</h2>
+        <h2 className="text-xl font-semibold mb-2">Change Password</h2> user_password_update
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Current Password</label>
-            <input type="password" value={"serInfo?.password"} disabled className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
+            <input type="password" value={userPassword?.old_password}  onChange={(e)=> setUserPassword({...userPassword, old_password: e.target.value})}  className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">New Password</label>
-            <input type="password" onChange={(e)=> setUserPassword({...userPassword, password: e.target.value})} className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
+            <input type="password" value={userPassword?.password}  onChange={(e)=> setUserPassword({...userPassword, password: e.target.value})} className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
-            <input type="password" onChange={(e)=> setUserPassword({...userPassword, confirm_password: e.target.value})} className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
+            <input type="password" value={userPassword?.confirm_password}  onChange={(e)=> setUserPassword({...userPassword, confirm_password: e.target.value})} className="mt-1 block w-full rounded-md border border-gray-300 p-2" />
           </div>
         </div>
         <button onClick={handlePasswordUpdate} className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Update Password</button>

@@ -156,6 +156,7 @@ export const queryTransaction = createAsyncThunk("payment/query-transaction", as
         return result;
     } catch (error) {
         if (error.response) {
+            console.log(error.response.data)
             return rejectWithValue({ message: error.response.data.message });
         }
         console.error(error);

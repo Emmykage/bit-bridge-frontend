@@ -20,6 +20,7 @@ import logo from "../../assets/logos/2.png"
 import { useDispatch, useSelector } from 'react-redux';
 import { userSignUp } from '../../redux/actions/auth';
 import { SET_LOADING } from '../../redux/app';
+import { MdOutlineAlternateEmail, MdOutlinePhone } from "react-icons/md";
 
 export const Signup = () => {
   const { token } = theme.useToken();
@@ -48,7 +49,17 @@ export const Signup = () => {
         onFinish={(values) => {
           dispatch(SET_LOADING(true))
 
-          dispatch(userSignUp({user: values})).then(result =>
+          dispatch(userSignUp({user: {
+              email: values.email,
+              password: values.password,
+              confirm_password: values.confirm_password,
+              user_profile_attributes: {
+                first_name: values.first_name,
+                last_name: values.last_name,
+                phone_number: values.phone_number
+               }
+                  
+               }})).then(result =>
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
@@ -97,8 +108,8 @@ export const Signup = () => {
             <Tabs.TabPane key={'account'} tab={'Signup with email and password'} />
           </Tabs>
           <>
-            {/* <ProFormText
-              name="firstName"
+            <ProFormText
+              name="first_name"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={'prefixIcon'} />,
@@ -112,7 +123,7 @@ export const Signup = () => {
               ]}
             />
             <ProFormText
-              name="lastName"
+              name="last_name"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={'prefixIcon'} />,
@@ -124,14 +135,32 @@ export const Signup = () => {
                   message: 'Please enter your last name!',
                 },
               ]}
-            /> */}
+            />
+
+
             <ProFormText
               name="email"
               fieldProps={{
                 size: 'large',
-                prefix: <UserOutlined className={'prefixIcon'} />,
+                prefix: <MdOutlineAlternateEmail className={'prefixIcon'} />,
               }}
               placeholder={'email@example.com'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your email!',
+                },
+              ]}
+            />
+
+            
+            <ProFormText
+              name="phone_number"
+              fieldProps={{
+                size: 'large',
+                prefix: <MdOutlinePhone className={'prefixIcon'} />,
+              }}
+              placeholder={'08012345678'}
               rules={[
                 {
                   required: true,
@@ -177,6 +206,52 @@ export const Signup = () => {
                 },
               }}
               placeholder={'Password'}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your password!',
+                },
+              ]}
+            />
+
+            <ProFormText.Password
+              name="confirm_password"
+              fieldProps={{
+                size: 'large',
+                prefix: <LockOutlined className={'prefixIcon'} />,
+                strengthText:
+                  'Password should contain numbers, letters, and special characters, at least 8 characters long.',
+                statusRender: (value) => {
+                  const getStatus = () => {
+                    if (value && value.length > 12) {
+                      return 'ok';
+                    }
+                    if (value && value.length > 6) {
+                      return 'pass';
+                    }
+                    return 'poor';
+                  };
+                  const status = getStatus();
+                  if (status === 'pass') {
+                    return (
+                      <div style={{ color: token.colorWarning }}>
+                        Strength: Medium
+                      </div>
+                    );
+                  }
+                  if (status === 'ok') {
+                    return (
+                      <div style={{ color: token.colorSuccess }}>
+                        Strength: Strong
+                      </div>
+                    );
+                  }
+                  return (
+                    <div style={{ color: token.colorError }}>Strength: Weak.</div>
+                  );
+                },
+              }}
+              placeholder={'Confirm Password'}
               rules={[
                 {
                   required: true,
