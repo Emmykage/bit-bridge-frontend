@@ -86,11 +86,11 @@ export const Signup = () => {
           }}
           subTitle="Nigerians Largest trading and exchange platform"
           actions={
-            <Space>
+            <Space className='text-gray-800 font-medium text-base'>
               Already have an account? <NavLink to={"/login"}>Login</NavLink> 
-              <AlipayCircleOutlined style={iconStyles} />
+              {/* <AlipayCircleOutlined style={iconStyles} />
               <TaobaoCircleOutlined style={iconStyles} />
-              <WeiboCircleOutlined style={iconStyles} />
+              <WeiboCircleOutlined style={iconStyles} /> */}
             </Space>
           }
           submitter={{
@@ -206,52 +206,6 @@ export const Signup = () => {
                 },
               }}
               placeholder={'Password'}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please enter your password!',
-                },
-              ]}
-            />
-
-            <ProFormText.Password
-              name="confirm_password"
-              fieldProps={{
-                size: 'large',
-                prefix: <LockOutlined className={'prefixIcon'} />,
-                strengthText:
-                  'Password should contain numbers, letters, and special characters, at least 8 characters long.',
-                statusRender: (value) => {
-                  const getStatus = () => {
-                    if (value && value.length > 12) {
-                      return 'ok';
-                    }
-                    if (value && value.length > 6) {
-                      return 'pass';
-                    }
-                    return 'poor';
-                  };
-                  const status = getStatus();
-                  if (status === 'pass') {
-                    return (
-                      <div style={{ color: token.colorWarning }}>
-                        Strength: Medium
-                      </div>
-                    );
-                  }
-                  if (status === 'ok') {
-                    return (
-                      <div style={{ color: token.colorSuccess }}>
-                        Strength: Strong
-                      </div>
-                    );
-                  }
-                  return (
-                    <div style={{ color: token.colorError }}>Strength: Weak.</div>
-                  );
-                },
-              }}
-              placeholder={'Confirm Password'}
               rules={[
                 {
                   required: true,
