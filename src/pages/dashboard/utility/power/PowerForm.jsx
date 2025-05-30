@@ -49,6 +49,8 @@ const DashboardPowerForm = () => {
         }
        })
     }
+
+    console.log(biller)
     const [form] = Form.useForm();
 
     return (

@@ -21,6 +21,8 @@ const Purchases = () => {
 
   },[])
 
+  console.log(orders)
+
   const handleOrderUpdate = (task) => {
           dispatch(updateOrder({
               id: selectedId,

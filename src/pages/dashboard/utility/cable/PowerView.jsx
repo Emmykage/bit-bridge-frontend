@@ -22,7 +22,7 @@ const CableView = () => {
   return (
     <section className="px-4  py-10">
 
-    <div className="max-w-7xl text-white m-auto py-10 px-4 md:px-10">
+    <div className="max-w-7xl text-white m-auto py-10 px-0  md:px-10">
 
         <div className="flex sm:flex-row flex-col  gap-3">
             <img src={`/images/providers/${imagePic}.webp`}  alt=""  className="h-52 md:h-max sm:max-w-40 rounded-lg border border-alt p-2" />
