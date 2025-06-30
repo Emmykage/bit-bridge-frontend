@@ -16,7 +16,7 @@ import { useEffect } from 'react';
     const navigate = useNavigate()
     useEffect(()=> {
       if(token){
-        window.location.href = `https://melisports-b5453615f37a.herokuapp.com/confirmation?confirmation_token=${token}`
+        window.location.href = `https://bitbridgeglobal-fa54ecb89f7d.herokuapp.com/confirmation?confirmation_token=${token}`
 
       }
       // dispatch(userConfirmation(token)).then(result => {

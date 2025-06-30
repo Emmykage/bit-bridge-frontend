@@ -89,6 +89,7 @@ import ProfileAccountPage from './pages/dashboard/ProfilePage'
 import QueryRequest from './pages/admin/query/QueryRequest'
 import ConfirmEmail from './pages/auth/ConfirmEmail'
 import SendConfirmEmail from './pages/auth/SendConfirmationEmail'
+import ConfirmationSuccess from './pages/auth/ConfirmationSuccess'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -233,6 +234,8 @@ function App() {
     <Route path='/admin/signup' element={<ASignup/>}/>
     <Route path='/confirmation' element={<ConfirmEmail/>}/>
     <Route path='/send-confirmation' element={<SendConfirmEmail/>}/>
+    <Route path='/confirmation-success' element={<ConfirmationSuccess/>}/>
+    <Route path='/confirmation-error' element={<ConfirmationSuccess/>}/>
 
     <Route path="/admin" element={<AdminDashboardLayout/>}>
       <Route path='dashboard' element={<AdminHome/>}/>
