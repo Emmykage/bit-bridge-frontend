@@ -23,6 +23,8 @@ export const SendConfirmEmail = () => {
   const navigate = useNavigate()
 
 
+  console.log(loading)
+
 
   return (
     <ProConfigProvider hashed={false}>

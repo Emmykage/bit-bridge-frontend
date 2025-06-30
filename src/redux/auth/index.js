@@ -4,7 +4,7 @@ import { sendUserConfirmation, userLogin, userLogout, userProfile, userSignUp } 
 const initialState = {
     user: null,
     logged: false,
-    loading: true
+    loading: false
 }
 
 const AuthSlice = createSlice({
