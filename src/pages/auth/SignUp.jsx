@@ -24,11 +24,11 @@ import { MdOutlineAlternateEmail, MdOutlinePhone } from "react-icons/md";
 
 export const Signup = () => {
   const { token } = theme.useToken();
-  const {loading} = useSelector(state => state.auth)
   const [loginType, setLoginType] = useState('phone');
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+  const [loading, setLoading] = useState(false) 
 
   const iconStyles = {
     marginInlineStart: '16px',
@@ -38,15 +38,16 @@ export const Signup = () => {
     cursor: 'pointer',
   };
 
-
+console.log(loading)
 
   return (
     <ProConfigProvider hashed={false}>
       <div  style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
-          loading={loading}
+          // loading={loading}
 
         onFinish={(values) => {
+          setLoading(true)
           dispatch(SET_LOADING(true))
 
           dispatch(userSignUp({user: {
@@ -65,10 +66,12 @@ export const Signup = () => {
                 dispatch(SET_LOADING(false))
                 navigate(location.state?.from?.pathname ||"/confirmation")
               }
-              else  
-                dispatch(SET_LOADING(false))
-                              navigate(location.state?.from?.pathname ||"/confirmation")
+              else  {
 
+                dispatch(SET_LOADING(false))
+              setLoading(false)
+               navigate(location.state?.from?.pathname ||"/confirmation")
+              }
             
             }
   

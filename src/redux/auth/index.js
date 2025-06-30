@@ -53,7 +53,8 @@ const AuthSlice = createSlice({
                 loading: false
 
             }
-        }).addCase(sendUserConfirmation.fulfilled, (state, action) => {
+        })
+        .addCase(sendUserConfirmation.fulfilled, (state, action) => {
             return{
                 ...state,
                 user: action.payload.data,
