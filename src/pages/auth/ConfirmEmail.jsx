@@ -15,16 +15,19 @@ import { useEffect } from 'react';
 
     const navigate = useNavigate()
     useEffect(()=> {
-      console.log("first")
-      dispatch(userConfirmation(token)).then(result => {
-        if(userConfirmation.fulfilled.match(result)){
-          dispatch(SET_LOADING(false))
-          // navigate("/dashboard/home")
-        }else{
-          dispatch(SET_LOADING(false))
-          // navigate("/auth/signin")
-        }
-      })
+      if(token){
+        window.location.href = `https://melisports-b5453615f37a.herokuapp.com/confirmation?confirmation_token=${token}`
+
+      }
+      // dispatch(userConfirmation(token)).then(result => {
+      //   if(userConfirmation.fulfilled.match(result)){
+      //     dispatch(SET_LOADING(false))
+      //     // navigate("/dashboard/home")
+      //   }else{
+      //     dispatch(SET_LOADING(false))
+      //     // navigate("/auth/signin")
+      //   }
+      // })
     
 
 
@@ -52,7 +55,7 @@ import { useEffect } from 'react';
         >
           Continue to Dashboard 
         </button>
-        <p className='text-gray-500 text-sm'>If you have not received a confirmation email, please check your spam folder or <NavLink to="/auth/resend-confirmation" className='text-purple-200 font-semibold'>resend confirmation</NavLink>.</p>
+        <p className='text-gray-500 text-sm'>If you have not received a confirmation email, please check your spam folder or <NavLink to="/send-confirmation" className='text-purple-200 font-semibold'>resend confirmation</NavLink>.</p>
         
      
       </div>
