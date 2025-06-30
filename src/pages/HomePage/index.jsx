@@ -25,7 +25,29 @@ const Home = () => {
         <HighlightInfo/>    
         <PopularCards/>   
 
-        <ExxlusiveDeals/>    
+        <ExxlusiveDeals/>   
+
+        <section id="app" className="py-20 px-4 bg-gray-100">
+
+          <div className="max-w-4xl m-auto">
+            <h2 className="text-primary text-4xl font-semibold text-center my-4">
+              Sort bills for your loved ones on the App
+            </h2>
+          </div>
+          <div  className="flex justify-center items-center">
+            <a>
+            <img src="/images/appstore.png" alt="app store" className="h-14 " />
+
+            </a>
+            <a href={"/app/application-6a1de860-eff2-4612-b277-c24f60e205b4.apk"} download >
+                  <img src="/images/playstore.png" alt="play store" className="h-14 " />
+
+
+            </a>
+
+          </div>
+          
+          </section> 
       
     </div>
   )

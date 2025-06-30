@@ -63,10 +63,12 @@ export const Signup = () => {
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
-                navigate(location.state?.from?.pathname ||"/dashboard/home")
+                navigate(location.state?.from?.pathname ||"/confirmation")
               }
               else  
                 dispatch(SET_LOADING(false))
+                              navigate(location.state?.from?.pathname ||"/confirmation")
+
             
             }
   

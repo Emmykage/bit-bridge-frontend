@@ -30,7 +30,7 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
         const message = error.response.data.status.message
 
         if(error.response){
-            toast(message, {type: "error"})
+            toast(message || "failed to Sign up", {type: "error"})
             return rejectWithValue({message: message})
         }
 
@@ -173,6 +173,7 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
         return result;
     } catch (error) {
         if (error.response) {
+            console.log(error.response.data);
             toast(error.response.data, {type: "error"})
             return rejectWithValue({ message: error.response.data });
         }
@@ -181,6 +182,45 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
     }
 });
 
+
+
+export const userConfirmation = createAsyncThunk("user/user-confirmation", async(token, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl}confirmation?confirmation_token==${token}`,{
+          
+        });
+
+        const {data} = response.data;
+
+        toast("Email Confirmed", {type: "success"})
+
+        return data;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
+
+
+export const sendUserConfirmation = createAsyncThunk("user/send-user-confirmation", async(email, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}users/resend_confirmation_token?email=${email}`);
+
+        const data = response.data;
+        console.log(data)
+        return data;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
 
 
 export const userLogout = createAsyncThunk("logout/user-logout", async(_, {rejectWithValue}) => {

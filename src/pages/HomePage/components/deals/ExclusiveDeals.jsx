@@ -31,7 +31,7 @@ const ExclusiveDeals = () => {
 
     }]
   return (
-    <section className="bg-black my-20 px-4 text-white py-20">
+    <section className="bg-black  px-4 text-white py-20">
 
           <div className="m-auto max-w-app-layout ">
             <h2 className="text-3xl lg:text-5xl my-5">

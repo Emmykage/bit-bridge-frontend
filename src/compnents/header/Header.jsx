@@ -58,10 +58,14 @@ const Header = () => {
           {/* <SearchField className={"w-full max-w-md flex-"}/> */}
 
           <div className='flex  items-center gap-4 md:justify-end justify-between w-full md:w-max'>
-            <NavLink to={"/"} className={`${inActive}  text-center font-semibold text-alt hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl`} >
+            {/* <NavLink to={"/"} className={`${inActive}  text-center font-semibold text-alt hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl`} >
               <QuestionCircleOutlined className={`${inActive} flex text-center`}/>
               Help
-            </NavLink>
+            </NavLink> */}
+            <a href={"/#app"} className={`${inActive}  text-center font-semibold text-alt hover:bg-gray-800 hover:text-gray-200  border flex gap-3 py-2 px-4 rounded-3xl`} >
+              <QuestionCircleOutlined className={`${inActive} flex text-center`}/>
+              Get App
+            </a>
             <Badge className='badge' count={cartItems.length} showZero>
                     <Button className='bg-none' onClick={() => setOpen(true)} type="default" shape="circle" icon={<ShoppingCartOutlined className={`${inActive}`}/>} size="middle" />
           </Badge>
@@ -88,6 +92,7 @@ const Header = () => {
                           {
                             if(userLogin.fulfilled.match(result)){
                               dispatch(SET_LOADING(false))
+                              console.log(result.payload.message)
                               navigate("/dashboard/home")
                               setShowLogin(false)
 
@@ -103,6 +108,9 @@ const Header = () => {
                         <FormInput name={"email"} placeholder={"Email"}/>
                         <FormInput type='password' name={"password"} placeholder={"**********"}/>
                         <ClassicBtn htmlType={"submit"} className={"w-full"}>Sign In</ClassicBtn>
+                            <NavLink to={"/send-confirmation"} className='btn text-center block text-alt'>
+                                      Confirm Account
+                                    </NavLink>
                         </Form>
                         <NavLink to={"/signup"} className={`${inActive} block text-center`}>Sign up</NavLink>
                       </div>

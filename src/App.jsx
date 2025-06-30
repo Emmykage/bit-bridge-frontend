@@ -87,6 +87,8 @@ import AdminWithdrawalTransactions from './pages/admin/transactions/withdrawals'
 import AppRedirect from './pages/AppRedirect'
 import ProfileAccountPage from './pages/dashboard/ProfilePage'
 import QueryRequest from './pages/admin/query/QueryRequest'
+import ConfirmEmail from './pages/auth/ConfirmEmail'
+import SendConfirmEmail from './pages/auth/SendConfirmationEmail'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -229,6 +231,9 @@ function App() {
     
     <Route path='/admin/login' element={<ALogin/>}/>
     <Route path='/admin/signup' element={<ASignup/>}/>
+    <Route path='/confirmation' element={<ConfirmEmail/>}/>
+    <Route path='/send-confirmation' element={<SendConfirmEmail/>}/>
+
     <Route path="/admin" element={<AdminDashboardLayout/>}>
       <Route path='dashboard' element={<AdminHome/>}/>
       <Route path='purchases' element={<Purchases/>}/>

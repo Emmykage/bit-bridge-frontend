@@ -14,7 +14,7 @@ const PowerView = () => {
     <div className="max-w-7xl text-white m-auto py-10 px-0 md:px-10">
 
         <div className="flex sm:flex-row flex-col  gap-3">
-            <img src={selectedProvider?.image}  alt=""  className="md:h-52 h-40  sm:max-w-40 rounded-lg border border-alt p-2" />
+            <img src={selectedProvider?.image}  alt=""  className="md:h-52 h-40 w-full  sm:max-w-80 rounded-lg border border-alt p-2" />
             <div>
 
                 <div>

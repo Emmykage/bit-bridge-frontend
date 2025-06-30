@@ -31,7 +31,7 @@ import { SET_LOADING } from '../../redux/app';
   
   const LoginPage = () => {
 
-    const { logged, loading} = useSelector(state => state.auth)
+    const {user, logged, loading} = useSelector(state => state.auth)
     const [loginType, setLoginType] = useState('account');
     const dispatch = useDispatch()
     const location = useLocation()
@@ -68,6 +68,7 @@ import { SET_LOADING } from '../../redux/app';
               navigate(location.state?.from?.pathname ||"/dashboard/home")
             }
             else  if(userLogin.rejected.match(result)){
+              
               dispatch(SET_LOADING(false) )
 
             }
@@ -310,9 +311,13 @@ import { SET_LOADING } from '../../redux/app';
               marginBlockEnd: 24,
             }}
           >
-            <ProFormCheckbox noStyle name="autoLogin">
+            {/* <ProFormCheckbox noStyle name="autoLogin">
             Auto-login
-            </ProFormCheckbox>
+            </ProFormCheckbox> */}
+
+            <NavLink to={"/send-confirmation"} className='btn btn-primary'>
+              Confirm Account
+            </NavLink>
             <a
               style={{
                 float: 'right',

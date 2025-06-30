@@ -24,7 +24,7 @@ const MobileView = () => {
     <div className="max-w-7xl text-white m-auto py-10 px-4 md:px-10">
 
         <div className="flex sm:flex-row flex-col mb-4  gap-3">
-            <img src={`/images/providers/${imagePic}.webp`}  alt={selectedProvider?.product?.provider}  className="md:h-52 h-40  sm:max-w-40 rounded-lg border border-alt p-2" />
+            <img src={`/images/providers/${imagePic}.webp`}  alt={selectedProvider?.product?.provider}  className="md:h-52 h-40 w-full  sm:max-w-80  rounded-lg border border-alt p-2" />
             <div>
 
                 <div>
