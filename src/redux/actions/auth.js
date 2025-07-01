@@ -24,6 +24,9 @@ const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWi
             console.warn('Authorization header not found');
         }
 
+
+            console.log(result)
+        localStorage.setItem("email", data.user.email);
         localStorage.setItem("bitglobal", JSON.stringify(accessToken));
         return result
     } catch (error) {
@@ -186,7 +189,7 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
 
 export const userConfirmation = createAsyncThunk("user/user-confirmation", async(token, {rejectWithValue}) => {
     try {
-        const response = await axios.get(`${baseUrl}confirmation?confirmation_token==${token}`,{
+        const response = await axios.get(`${baseUrl}confirmation?confirmation_token=${token}`,{
           
         });
 

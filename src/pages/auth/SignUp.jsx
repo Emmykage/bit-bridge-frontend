@@ -1,9 +1,6 @@
 import {
-  AlipayCircleOutlined,
   LockOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import {
   LoginForm,

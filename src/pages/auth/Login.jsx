@@ -31,10 +31,11 @@ import { SET_LOADING } from '../../redux/app';
   
   const LoginPage = () => {
 
-    const {user, logged, loading} = useSelector(state => state.auth)
+    const {user, logged} = useSelector(state => state.auth)
     const [loginType, setLoginType] = useState('account');
     const dispatch = useDispatch()
     const location = useLocation()
+    const [loading, setLoading] = useState(false)
 
     const { token } = theme.useToken();
 
@@ -42,6 +43,8 @@ import { SET_LOADING } from '../../redux/app';
     useEffect(()=> {
 
     }, [])
+
+    console.log(loading)
 
 
     if(!logged){
@@ -58,17 +61,19 @@ import { SET_LOADING } from '../../redux/app';
         loading={loading}
         onFinish={(values) => {
           dispatch(SET_LOADING(true))
+          setLoading(true)
 
           dispatch(userLogin({user: values})).then(result =>
           {
             if(userLogin.fulfilled.match(result)){
               dispatch(SET_LOADING(false))
               
+            setLoading(false)
 
               navigate(location.state?.from?.pathname ||"/dashboard/home")
             }
             else  if(userLogin.rejected.match(result)){
-              
+             setLoading(false)
               dispatch(SET_LOADING(false) )
 
             }
