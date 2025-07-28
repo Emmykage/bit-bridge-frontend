@@ -83,6 +83,90 @@
 
 }
 
+.white-bg{
+    .ant-btn {
+    background: none;
+
+
+ 
+
+    &.button{
+
+
+
+    @apply text-white;
+
+    
+    
+    &:hover{
+        @apply bg-primary text-white !important;
+    }
+    &.decline{
+        background: red;
+        color: white;
+    }
+
+    &.active{
+        @apply bg-primary text-white !important;
+
+    }
+
+    &.white-bg{
+        
+    @apply text-white;
+
+    
+    
+    &:hover{
+        @apply bg-primary text-white !important;
+    }
+    &.decline{
+        background: red;
+        color: white;
+    }
+
+    &.active{
+        @apply bg-primary text-white !important;
+
+    }
+    }
+
+
+}
+&.cancel{
+    @apply text-red-500 border border-red-600;
+
+ }
+
+ &:hover{
+   @apply border-red-600;
+//    background-color: rgba(255, 0, 0, 0.363) !important;
+
+ }
+
+
+&.classic-btn{
+    @apply bg-none text-alt border-alt;
+
+    &.cancel{
+        @apply text-red-500 border border-red-600;
+        &:hover{
+            @apply border-red-600 text-white bg-red-600/20 !important;
+          }
+    
+     }
+
+    
+     
+    &:hover{
+        @apply bg-alt text-white !important;
+    }
+  
+}
+
+}
+}
+
 .navbtn{
     &.ant-btn{
         padding: 0;

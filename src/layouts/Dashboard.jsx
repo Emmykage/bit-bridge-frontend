@@ -12,6 +12,10 @@ import { getWallet } from '../redux/actions/wallet';
 import DrawerModal from '../compnents/drawer/Drawer';
 import { SET_LOADING } from '../redux/app';
 import LoaderPage from '../compnents/loader/LoaderPage';
+import AppModal from '../compnents/modal/Modal';
+import { Button, Form } from 'antd';
+import FormInput from '../compnents/formInput/FormInput';
+import { createAccount } from '../redux/actions/account';
 
 const DashboardLayout = () => {
 
@@ -25,18 +29,26 @@ const DashboardLayout = () => {
     const active = "flex text-alt justify-center items-center flex-col"
     const [showMenu, seTShowMenu] = useState(false)
     const [open, setOpen] = useState(false)
+    const [openAlert, setOpenAlert] = useState(false)
     const location = useLocation()
  
 
+    useEffect(()=> {
+        if(user && !user.account){
+            setOpenAlert(true)
+        }
+    },[user])
     // useEffect(()=> {
     //    if(!loading && !user){
 
     //     return <Navigate to="/login" state={{from: location }} replace/>
     //     // navigate('/login')
     //    }
+
     // },[user, loading])
 
 
+    console.log(user, openAlert, "user in dashboard layout")
 
   
     const closeNav = (e) => {
@@ -66,18 +78,25 @@ const DashboardLayout = () => {
         dispatch(getWallet())
     }, [])
 
+    if(loading) {
+        return <><LoaderPage/></>;
+    }
 
-  
+      
     if(!loading && !user){
-
         return <Navigate to="/login" state={{from: location }} replace/>
-       }
-    
-       if(loading) {
-        return <><LoaderPage/></>;}
-    
-    
+    }   
 
+        const handleSubmit = (values) => {
+            dispatch(SET_LOADING(true))
+            dispatch(createAccount({account: values})).unwrap().then(()=> {
+                dispatch(SET_LOADING(false))
+                setOpen(false)}).catch((error) => {
+                dispatch(SET_LOADING(false))
+                console.error("Error creating account:", error);
+            })
+            
+        }
     
 
   return (
@@ -155,6 +174,40 @@ const DashboardLayout = () => {
         </div>     
       
     </div>
+
+    <AppModal
+    title={"Create Account Number"}
+    handleCancel={() => setOpenAlert(false)}
+    isModalOpen={openAlert}>
+        <Form
+        layout='vertical'
+        initialValues={{
+            bvn: "",
+            currency: "ngn",
+            vendor: "monniepoint",
+            account_name: ""
+
+        }} 
+          onFinish={(values) =>{
+            handleSubmit({...values,
+            currency: "ngn",
+            vendor: "moniepoint",
+            })
+      }}
+      >
+          <FormInput required={true} className="add-fund" name="bvn" type='text' label={`BVN`}/>
+          
+             <Form.Item label={null}>       
+    
+                <Button className="border-alt m-auto block w-full h-20 bg-primary text-white rounded-lg  border shadow-md font-medium text-xl" type="primary" htmlType="submit">
+                    Generate Account
+                </Button>
+            </Form.Item>
+
+
+        </Form>
+
+    </AppModal>
     </div>
 
   )

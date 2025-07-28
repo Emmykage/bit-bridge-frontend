@@ -23,6 +23,21 @@
 }
 
 .ant-modal{
+    &.white-bg{
+ .ant-modal-content{
+        @apply bg-zinc-200; 
+        .ant-modal-close-x{
+            color: black;
+        }
+    }
+
+    .ant-modal-header{
+        background: none;
+    }
+    .ant-modal-title{
+        @apply text-gray-700
+    }
+    }
     .ant-modal-content{
         @apply bg-zinc-900; 
         .ant-modal-close-x{

@@ -6,7 +6,7 @@ import { nairaFormat } from '../../../utils/nairaFormat'
 import "./styles.scss"
 
 import { FaArrowLeft } from 'react-icons/fa'
-import { getUser } from '../../../redux/actions/user'
+import { getUser, userUpdate } from '../../../redux/actions/user'
 import dateFormater from '../../../utils/dateFormat'
 import statusStyle from '../../../utils/statusStyle'
 import Loading from '../../../compnents/loader/Loading'
@@ -16,7 +16,12 @@ import BreadCrunbs from '../../../compnents/Breadcrumbs/BreadCrunbs'
 import AppModal from '../../../compnents/modal/Modal'
 import { toast } from 'react-toastify'
 import { getOrders, updateOrder } from '../../../redux/actions/order'
-
+import { Button, Form } from 'antd'
+import FormInput from '../../../compnents/formInput/FormInput'
+import FormSelect from '../../../compnents/formSelect/FormSelect'
+import coinType from '../../../data/coinType.json'
+import { createTransaction } from '../../../redux/actions/transaction'
+import { SET_LOADING } from '../../../redux/app'
 
 
 const ViewUser = () => {
@@ -26,12 +31,44 @@ const ViewUser = () => {
     const {user, loading} = useSelector(state => state.user)
     const [selectedId, setSelectedId] = useState(null)
     const [open, setOpen] = useState(false)
-
+    const [openActivate, setOpenActivate] = useState(false)
+    const [openAccountModal, setOpenAccountModal] = useState(false)
+    const [transactionType, setTransactionType] = useState("deposit")
+  const [formLayout] = useState('vertical');
 
     useEffect(() => {
         dispatch(getUser(id))
 
     }, [])
+
+    console.log(user)
+    const [form] = Form.useForm();
+
+    const handleSubmit = (values) => {
+        console.log(values)
+        dispatch(SET_LOADING(true))
+        dispatch(createTransaction({...values, 
+                                   wallet_id: user.wallet.id,
+                                    coin_type: "bank",
+                                    currency: "ngn",
+                                    address: "N/A" ,
+                                    status: "approved",
+                                    transaction_type: transactionType,
+
+
+        })).unwrap().then(result => {
+            dispatch(SET_LOADING(false))
+
+            toast(result.message ?? "successful transaction", {type: "success"})
+             dispatch(getUser(id))
+
+            setOpenAccountModal(false)
+        }).catch(error => {
+            dispatch(SET_LOADING(false))
+
+            toast(error.message ?? "Transaction failed", {type: "error"})
+        })
+    }
 
     
       const handleOrderUpdate = (task) => {
@@ -50,6 +87,25 @@ const ViewUser = () => {
                   }
               })
           }
+    const handleUserstatus = () => {
+        console.log(user.active, user?.active ? false : true)
+              dispatch(userUpdate({
+                id,
+                data: { active: user?.active ? false : true}
+              })).then(result => {
+                  if(userUpdate.fulfilled.match(result)){
+                      toast(result.message, {type: "success"})
+                      dispatch(getUser(id))
+                      
+                      setOpenActivate(false)
+      
+                  }
+                  else{
+                      toast(result.message, {type: "error"})
+      
+                  }
+              })
+          }
 
 
     const no_items = 10
@@ -57,8 +113,7 @@ const ViewUser = () => {
     const [activePage, setActivePage] = useState(0)
     const fromPos = activePage * no_items
     const toPos = no_items + fromPos
-    console.log(no_items, fromPos)
-    console.log(activePage, fromPos, toPos)
+
 
   return (
 
@@ -86,7 +141,7 @@ const ViewUser = () => {
             </div>
 
             </div>
-            <div className='py-10 border-t border-b flex justify-between items-center'>
+            <div className={`${!user?.active && "bg-red-700"} px-4 py-10 border-t border-b flex justify-between items-center`}>
                 <div>
                 <p className='font-medium'>
                     Wallet ID
@@ -94,7 +149,11 @@ const ViewUser = () => {
                 <p>{user?.wallet?.id}</p>
                 </div>
 
-                <ClickButton>
+                <ClickButton onClick={() => setOpenActivate(true)}>
+                    {user?.active ? "Deactivate Account" : "Activate Account"}
+                </ClickButton>
+             <ClickButton 
+             onClick={() => setOpenAccountModal(true)}>
                     Fund Account
                 </ClickButton>
             
@@ -183,7 +242,7 @@ const ViewUser = () => {
 
                                     </td>
                                     <td className="relative whitespace-nowrap border-b border-gray-200 py-3 pr-4 pl-3 text-left font-semibold text-blue-600 text-sm sm:pr-8 lg:pr-8">
-                                        <NavLink className={`/admin/transactions/${item?.id}`}>View</NavLink>
+                                        <NavLink className="" to={`/admin/transactions/${item?.id}`}>View</NavLink>
                                         
 
                                     </td>
@@ -312,10 +371,7 @@ const ViewUser = () => {
 
                               <td className="relative z-0 whitespace-nowrap border-b text-center border-gray-200 py-3 pr-4 pl-3 text-gray-900  text-sm sm:pr-8 lg:pr-8">
                                                                     <BreadCrunbs id={item.id} setSelectedId={setSelectedId} link={`/admin/purchases/${item?.id}`}  setOpen={setOpen} open={open}/>
-                                                                    {/* <OptionDropDown id={id} handleDel={()=> {
-                                                                                                            setOpen(true)
-                                                                                                            setSelectedId(id)
-                                                                                                        }}/> */}
+                                                                
                             
                                                                 </td>
 
@@ -357,6 +413,73 @@ const ViewUser = () => {
                     btnType="decline">Decline</ClickButton>
                    <ClickButton
                    onClick={() => handleOrderUpdate("approved")}>Approve</ClickButton>
+                       
+                   </div>
+       
+       
+       
+               </AppModal>
+
+               <AppModal
+               className={"white-bg"} handleCancel={() => setOpenAccountModal(false)} isModalOpen={openAccountModal} title={`${transactionType} Transaction`}>
+                   <div className='my-6 justify-between'>
+                    <div className='flex gap-4 my-4'>
+                        <button onClick={() => setTransactionType("deposit")} className={`${transactionType == "deposit" ? "bg-alt text-primary" : "bg-primary text-white"}  px-4 py-2 rounded-lg `}>Depodit</button>
+                        <button onClick={() => setTransactionType("withdrawal")} className={`${transactionType == "withdrawal" ? "bg-alt text-primary" : "bg-primary text-white"}  px-4 py-2 rounded-lg `}>Withdrawal</button>
+                   </div>
+
+                  <Form
+                    className='add-fund w-full'
+                    layout={formLayout}
+                    onFinish={(values) =>{
+                            handleSubmit(values)
+                    }}
+                    form={form}
+                    initialValues={{
+                        amount: "",
+                        bank: "bitbridge",
+                        }}
+                    style={{
+                        color: "white",
+                        maxWidth: formLayout === 'inline' ? 'none' : 600,
+                    }}
+                    >
+                    <FormInput required={true} className="" name="amount" type='number' label={`Amount`}/>
+                    {transactionType=== "deposit"  &&  <FormInput  required={true}  className="add-fund" name="bank" disabled={true} type='text' label={"Bank"}  />}
+                    <div className='mt-10'>
+
+                 </div>
+
+                 <Form.Item label={null}>
+
+                         <Button className="border-alt m-auto block w-full h-20 bg-primary text-gray-800 rounded-lg  border shadow-md font-medium text-xl" type="primary" htmlType="submit">
+                            {transactionType === "deposit" ?  "Credit User" : "Debit User"}
+                        </Button> 
+
+                    
+                    </Form.Item>
+
+                  
+
+                    </Form>
+                       
+                   </div>
+       
+       
+       
+               </AppModal>
+
+               <AppModal
+               className={"white-bg"} handleCancel={() => setOpenActivate(false)} isModalOpen={openActivate} title={`${user?.active ? "Deactivate" : "Activate"} Account`}>
+                   <div className='flex my-6 justify-between w-full'>
+                   <ClickButton
+                   onClick={() =>setOpenActivate(false)}
+                    btnType="decline">Cancel</ClickButton>
+                   <ClickButton
+                   onClick={() => handleUserstatus("approved")}>
+                    {user?.active ? "Deactivate Account" : "Activate Account"}
+
+                   </ClickButton>
                        
                    </div>
        

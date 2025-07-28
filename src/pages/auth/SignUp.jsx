@@ -35,8 +35,6 @@ export const Signup = () => {
     cursor: 'pointer',
   };
 
-console.log(loading)
-
   return (
     <ProConfigProvider hashed={false}>
       <div  style={{ backgroundColor: token.colorBgContainer }}>
@@ -61,13 +59,12 @@ console.log(loading)
             {
               if(userSignUp.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
-                navigate(location.state?.from?.pathname ||"/confirmation")
+                navigate("/confirmation")
               }
               else  {
-
                 dispatch(SET_LOADING(false))
               setLoading(false)
-               navigate(location.state?.from?.pathname ||"/confirmation")
+              //  navigate(location.state?.from?.pathname ||"/confirmation")
               }
             
             }

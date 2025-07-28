@@ -1,7 +1,6 @@
 // import React, { useState } from 'react';
 import { Modal } from 'antd';
 import "./style.scss"
-import { CloseCircleFilled } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 const AppModal = ({
     children, 
@@ -26,13 +25,11 @@ const AppModal = ({
       maskClosable={true}
       footer={ null}
       className={className}
-      // style={{
-      //   backgroundColor: "white"
-      // }}
+     
       >
        
        
-       <div >
+       <div className='bg-' >
         {children}
 
        </div>

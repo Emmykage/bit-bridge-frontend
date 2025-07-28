@@ -45,3 +45,31 @@ export const getUser = createAsyncThunk("users/get-user", async(id, {rejectWithV
         return rejectWithValue({ message: "Something went wrong" });
     }
 });
+
+
+
+export const userUpdate = createAsyncThunk("USER/USER_UPDATE", async({id, data}, {rejectWithValue}) => {
+    try {
+        const response = await axios.patch(`${baseUrl + apiRoute}users/${id}`, {user: data}, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "application/json"
+            }
+        })
+        const result =  response.data    
+
+        console.log(result)
+
+        return result
+    } catch (error) {
+        if(error.response){
+            const message = error.response.data?.message 
+            toast(message || "Something broke", {type: "error"})
+            return rejectWithValue({message: message})
+        }
+
+        return rejectWithValue({message: "something went wrong"})
+
+    }
+})
+
