@@ -25,6 +25,8 @@ import pickColorStyle from "../../utils/slect-color"
 const HomeDashboard = () => {
     const {recentOrders} = useSelector(state => state.purchase)
     const {wallet, loading} = useSelector(state => state.wallet)
+        const {user} = useSelector(state => state.auth)
+
     const dispatch = useDispatch()
     const [open, setIsOpen] = useState(false)
     const [selectedBiller, setSelectedBillier] = useState()
@@ -114,8 +116,7 @@ const HomeDashboard = () => {
                     : 
                     <p className="md:text-5xl text-3xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
                     }
-                    {/* <p>{convertedAmount} </p> */}
-                    {/* <p className="my-3">  {nairaFormat(convertedAmount, activeCurrency)}</p> */}
+                     {user?.account?.account_number && <p className="text-sm">Account Number (Monnie Point ): <span> {user?.account?.account_number}</span></p>} 
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 
