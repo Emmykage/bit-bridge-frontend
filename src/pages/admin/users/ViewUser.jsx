@@ -18,9 +18,7 @@ import { toast } from 'react-toastify'
 import { getOrders, updateOrder } from '../../../redux/actions/order'
 import { Button, Form } from 'antd'
 import FormInput from '../../../compnents/formInput/FormInput'
-import FormSelect from '../../../compnents/formSelect/FormSelect'
-import coinType from '../../../data/coinType.json'
-import { createTransaction } from '../../../redux/actions/transaction'
+import {  createUserTransaction } from '../../../redux/actions/transaction'
 import { SET_LOADING } from '../../../redux/app'
 
 
@@ -41,13 +39,12 @@ const ViewUser = () => {
 
     }, [])
 
-    console.log(user)
     const [form] = Form.useForm();
 
     const handleSubmit = (values) => {
         console.log(values)
         dispatch(SET_LOADING(true))
-        dispatch(createTransaction({...values, 
+        dispatch(createUserTransaction({...values, 
                                    wallet_id: user.wallet.id,
                                     coin_type: "bank",
                                     currency: "ngn",
@@ -65,7 +62,7 @@ const ViewUser = () => {
             setOpenAccountModal(false)
         }).catch(error => {
             dispatch(SET_LOADING(false))
-
+ 
             toast(error.message ?? "Transaction failed", {type: "error"})
         })
     }

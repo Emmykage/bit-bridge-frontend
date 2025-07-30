@@ -29,15 +29,12 @@ const HomeDashboard = () => {
 
     const dispatch = useDispatch()
     const [open, setIsOpen] = useState(false)
+    const [openAccount, setIsOpenAccount] = useState(false)
     const [selectedBiller, setSelectedBillier] = useState()
     const navigate = useNavigate()
     const [selectedItem, setSelectedItem] = useState("Top Up")
 
 
-    // const [convertedAmount, setConvertedAmount] = useState(null)
-    // const [activeCurrency, setActiveCurrency] = useState("ngn")
-
-    
     const handleRepurchase = (id) => {
         dispatch(SET_LOADING(true))
         dispatch(repurchaseOrder(id)).then(result => {
@@ -116,7 +113,8 @@ const HomeDashboard = () => {
                     : 
                     <p className="md:text-5xl text-3xl font-semibold "> {nairaFormat(wallet?.balance, "ngn")}</p>
                     }
-                     {user?.account?.account_number && <p className="text-sm">Account Number (Monnie Point ): <span> {user?.account?.account_number}</span></p>} 
+                     {user?.account?.account_number && <p className="text-sm"> <span 
+                     onClick={() => setIsOpenAccount(true)} className="font-semibold hover:text-alt transition-all duration-200 cursor-pointer">Moniepoint</span>  : <span className="bloc text-green-200"> {user?.account?.account_number}</span></p>} 
                     <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
                  </div>
 
@@ -245,6 +243,43 @@ const HomeDashboard = () => {
             <ClassicBtn onclick={()=> setIsOpen(false)}
              type="cancel">
                 Cancel
+            </ClassicBtn>
+        </div>
+            
+        </div>
+
+    </AppModal>
+
+      <AppModal isModalOpen={openAccount}  handleCancel={()=> setIsOpenAccount(prev => !prev)}>
+        <div>
+      
+
+    <h2 className="text-xl font-bold mb-4 text-gray-200">Account Details</h2>
+       <div className="space-y-3 text-gray-200">
+      <div className="flex gap-4">
+        <span className="font-semibold">Account Name:</span>
+        <span>Bit Bridge Global - {user?.account?.account_name}</span>
+      </div>
+      <div className="flex gap-4">
+        <span className="font-semibold">Email:</span>
+        <span>{user.email}</span>
+      </div>
+      <div className="flex gap-4">
+        <span className="font-semibold">Account Number:</span>
+        <span>{user?.account?.account_number}</span>
+      </div>
+    
+      <div className="flex gap-4">
+        <span className="font-semibold">Status:</span>
+        <span className={` ${user?.active ? "text-green-600" : "text-red-600" } font-medium`}>{user.active ? "Active" : "In-Active"}</span>
+      </div>
+    </div>
+       
+        <div className="flex justify-center gap-10">
+            
+            <ClassicBtn onclick={()=> setIsOpenAccount(false)}
+             type="cancel">
+                Close
             </ClassicBtn>
         </div>
             

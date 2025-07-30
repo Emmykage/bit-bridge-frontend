@@ -4,7 +4,7 @@ import axios from "axios";
 import { fetchToken } from "../../hooks/localStorage";
 import { toast } from "react-toastify";
 
-export const createTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
+export const createTransaction = createAsyncThunk("transaction/client-deposit", async(data, {rejectWithValue}) => {
     const formData = new FormData()
 
     data.address && formData.append("transaction[address]",  data.address)

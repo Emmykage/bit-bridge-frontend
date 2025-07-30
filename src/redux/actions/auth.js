@@ -211,6 +211,10 @@ export const userConfirmation = createAsyncThunk("user/user-confirmation", async
 
 export const sendUserConfirmation = createAsyncThunk("user/send-user-confirmation", async(email, {rejectWithValue}) => {
     try {
+        if(!email){
+            return rejectWithValue({ message: "Email is required" });
+        }
+        localStorage.setItem("email", email)
         const response = await axios.get(`${baseUrl + apiRoute}users/resend_confirmation_token?email=${email}`);
 
         const data = response.data;

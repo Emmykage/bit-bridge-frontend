@@ -4,7 +4,7 @@ import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-route
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { userLogout } from '../redux/actions/auth';
+import { userLogout, userProfile } from '../redux/actions/auth';
 import DropDown from '../compnents/dropDown/DropDown';
 import logo from "../assets/logos/logo-mod.png"
 import { LuUtilityPole } from 'react-icons/lu';
@@ -78,6 +78,9 @@ const DashboardLayout = () => {
         dispatch(getWallet())
     }, [])
 
+   
+
+
     if(loading) {
         return <><LoaderPage/></>;
     }
@@ -90,13 +93,19 @@ const DashboardLayout = () => {
         const handleSubmit = (values) => {
             dispatch(SET_LOADING(true))
             dispatch(createAccount({account: values})).unwrap().then(()=> {
+                dispatch(userProfile());
                 dispatch(SET_LOADING(false))
-                setOpen(false)}).catch((error) => {
+                 setOpenAlert(false)
+
+                setOpen(false)}
+            ).catch((error) => {
                 dispatch(SET_LOADING(false))
                 console.error("Error creating account:", error);
             })
             
         }
+
+
     
 
   return (
