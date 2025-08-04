@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { publicKey } from '../../redux/baseUrl'
 import { useEffect, useRef } from 'react';
+import { initializeMonifyPayment } from '../../redux/actions/transaction';
 
 const PayMentButton = ({
     user,
@@ -27,39 +28,41 @@ const PayMentButton = ({
         }
       }, []);
     
-        const payWithMonnify = () => {
+        // const payWithMonnify = () => {
 
-            console.log("first", user,window.MonnifySDK)
-            window.MonnifySDK?.initialize({
-                amount: amount,
-                currency: "NGN",    
-                customerEmail: user.email,
-                customerName: user.email,       
-                customerPhone: user?.email,       
-                paymentDescription: "Fund Wallet",
-                reference: `BBG-${new Date().getTime()}`,
+        //     console.log("first", user,window.MonnifySDK)
+        //     window.MonnifySDK?.initialize({
+        //         amount: amount,
+        //         currency: "NGN",    
+        //         customerEmail: user.email,
+        //         customerName: user.email,       
+        //         customerPhone: user?.email,       
+        //         paymentDescription: "Fund Wallet",
+        //         reference: `BBG-${new Date().getTime()}`,
 
 
-                apiKey: publicKey,
-                // inTestMode: true,
-                contractCode: "215323810641",
-                onComplete:  (response)=> {
-                    console.log("response from paid: ", response) 
-                        if(response.status === "SUCCESS"){
-                              handleFormSubmit()   
-                            //   window.location.reload();                 
+        //         apiKey: publicKey,
+        //         // inTestMode: true,
+        //         contractCode: "215323810641",
+        //         onComplete:  (response)=> {
+        //             console.log("response from paid: ", response) 
+        //                 if(response.status === "SUCCESS"){
+        //                       handleFormSubmit()   
+        //                     //   window.location.reload();                 
       
-                          }
+        //                   }
                 
                    
-                },
-                onClose: () => {
-                    // alert("Payment Cancelled")
-                }
-            })
+        //         },
+        //         onClose: () => {
+        //             // alert("Payment Cancelled")
+        //         }
+        //     })
     
-        }
-  return (   <button type='button' onClick={payWithMonnify} 
+        // }
+
+
+  return (   <button type='button' onClick={handleFormSubmit} 
     className="border-alt m-auto block max-w-sm w-full h-20 bg-primary rounded-lg  border px-4 py-2 shadow-md text-alt font-medium text-xl">Pay with Bank</button>
 
   )

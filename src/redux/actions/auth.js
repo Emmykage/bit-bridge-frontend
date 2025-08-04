@@ -176,7 +176,25 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
         return result;
     } catch (error) {
         if (error.response) {
-            console.log(error.response.data);
+            if(error.response.data.includes("You have to confirm your email address before continuing")){
+
+                try {
+                    const response = await axios.get(`${baseUrl + apiRoute}users/resend_confirmation_token?email=${data.user.email}`);
+
+                    const result = response.data;
+                 toast( result.message ?? "Account Not Confirmed! An email confirmation has been sent to you", {type: "success"})
+                //  return rejectWithValue({ message: "Something went wrong" })
+
+                } catch (err) {
+                    toast("Error resending confirmation email:", {type: "error"});
+                 return rejectWithValue({ message: err.response.data.message });
+                    
+                }
+
+                toast(error.response.data ?? "Account Not Confirmed!", {type: "error"})
+
+                return rejectWithValue({ message: error.response.data });
+            }
             toast(error.response.data, {type: "error"})
             return rejectWithValue({ message: error.response.data });
         }

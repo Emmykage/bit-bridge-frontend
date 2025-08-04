@@ -81,6 +81,8 @@ const DashboardPurchaseDetails = () => {
       componentProps={componentProps}
       handleConfirmation={handleConfirmation}
       purchaseOrder={purchaseOrder}
+      redirect_url={`https://bitbridgeglobal.com/checkout`}
+
       />
         </>
     )

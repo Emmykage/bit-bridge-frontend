@@ -4,7 +4,7 @@ import AppModal from "../../compnents/modal/Modal"
 import { useEffect, useRef, useState } from "react";
 import AddFund from "../../compnents/addFund/AddFund";
 import { useDispatch, useSelector } from "react-redux";
-import { createTransaction } from "../../redux/actions/transaction";
+import { createTransaction, initializeMonifyPayment } from "../../redux/actions/transaction";
 import { RiUserReceived2Line } from "react-icons/ri";
 import { converter } from "../../api/currencyConverter";
 import dateFormater from "../../utils/dateFormat";
@@ -17,6 +17,8 @@ import statusStyleCard from "../../utils/statusCard";
 
 const Account = () => {
     const formRef = useRef(null)
+      const {user} = useSelector(state => state.auth)
+    
     const {wallet} = useSelector(state => state.wallet)
     const [convertedAmount, setConvertedAmount] = useState(null)
     const address = "Card Transfer"
@@ -43,18 +45,31 @@ const Account = () => {
     const dispatch = useDispatch()
     const handleSubmit = (values) => {
         dispatch(SET_LOADING(true))
-        dispatch (createTransaction({
+        dispatch (initializeMonifyPayment({
             ...values,
-            transaction_type: "deposit"
+            transaction_type: "deposit",
+            currency: "NGN",    
+            email: user.email,
+            customer_name: user.email,       
+            // customerPhone: user?.user_profile?.phone_number ?? user?.email,       
+            description: "Fund Wallet",
+            payment_purpose: "Fund Wallet",
+            redirect_url: `https://bitbridgeglobal.com/checkout`,
             
         }))
         .then(result => {
-            if(createTransaction.fulfilled.match(result)){
-                setIsModalOpen(false)
-                dispatch(SET_LOADING(false))
-                dispatch(getWallet())
-                formRef.current.resetForm()
-                // window.location.reload();
+            if(initializeMonifyPayment.fulfilled.match(result)){
+                  dispatch(SET_LOADING(true))
+
+                // setIsModalOpen(false)
+                // dispatch(SET_LOADING(false))
+                // dispatch(getWallet())
+                // formRef.current.resetForm()
+                // // window.location.reload();
+
+                window.location.href = result.payload.responseBody.checkoutUrl
+
+
 
             }else[
                 dispatch(SET_LOADING(false))

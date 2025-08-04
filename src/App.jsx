@@ -91,6 +91,7 @@ import ConfirmEmail from './pages/auth/ConfirmEmail'
 import SendConfirmEmail from './pages/auth/SendConfirmationEmail'
 import ConfirmationSuccess from './pages/auth/ConfirmationSuccess'
 import ConfirmationError from './pages/auth/ConfirmationError'
+import ConfirmPayment from './pages/checkout/ConfirmPayment'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -123,6 +124,7 @@ function App() {
     <Routes>
     <Route path='/' element={<MainLayout><Home/></MainLayout>} />
     <Route path='/app-redirect' element={<AppRedirect/>}/>
+    <Route path='/checkout' element={<ConfirmPayment/>}/>
 
     <Route path='/contact-us' element={<ContactUs/>}/>
     <Route path='/terms-conditions' element={<TermsCondintion/>}/>

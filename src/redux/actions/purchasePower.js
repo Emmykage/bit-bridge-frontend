@@ -28,6 +28,29 @@ export const createPurchaseOrder = createAsyncThunk("purchase/purchase-power", a
 });
 
 
+export const initiatePurchaseOrder = createAsyncThunk("purchase/inititate-purchase", async({params, queryId}) => {
+//    const orderParams = new URLSearchParams(params).toString()
+console.log(params)
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}bill_orders/${queryId}/initialize_confirm_payment`, {
+           params,
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });                                                                                                    
+
+        const data = response.data; 
+        return data;
+    } catch (error) {
+        if (error.response) {
+            throw  new Error(error.response.data.message)
+        }
+       
+        throw new Error( error.message || "Something went wrong")
+    }
+})
+
+
 export const repurchaseOrder = createAsyncThunk("purchase/repurchase-order", async(id, {rejectWithValue}) => {
    
     try {
@@ -166,25 +189,25 @@ export const queryTransaction = createAsyncThunk("payment/query-transaction", as
 
 
 
-// export const updateOrder = createAsyncThunk("order/update-order", async({id, data}, {rejectWithValue}) => {
-//     try {
-//         const response = await axios.patch(`${baseUrl + apiRoute}order_details/${id}`, data, {
-//             headers: {
-//                 "Authorization": `Bearer ${fetchToken()}`
-//             }
-//         });
+export const getRefOrder = createAsyncThunk("order/ref-order", async(id, {rejectWithValue}) => {
+    try {
+        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${id}/get_ref_order`, {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`
+            }
+        });
 
-//         const result = response.data;      
+        const {data} = response.data;      
 
-//         return result;
-//     } catch (error) {
-//         if (error.response) {
-//             return rejectWithValue({ message: error.response.data.message });
-//         }
-//         console.error(error);
-//         return rejectWithValue({ message: "Something went wrong" });
-//     }
-// });
+        return data;
+    } catch (error) {
+        if (error.response) {
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        console.error(error);
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
 
 
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { createPurchaseOrder, getPurchaseOrder, getRescentPurchaseOrder, queryTransaction, repurchaseOrder } from "../actions/purchasePower"
+import { createPurchaseOrder, getPurchaseOrder, getRefOrder, getRescentPurchaseOrder, queryTransaction, repurchaseOrder } from "../actions/purchasePower"
 
 const initialState = {
    purchaseOrder: {},
@@ -121,6 +121,14 @@ const purchaseSlice = createSlice({
                 ...state,
                 loading: true,
             }
+        })
+        .addCase(getRefOrder.fulfilled, (state, action) => {
+            return{
+                ...state,
+                purchaseOrder: action.payload
+
+            }
+
         })
 
         

@@ -193,7 +193,7 @@ const DashboardLayout = () => {
         initialValues={{
             bvn: "",
             currency: "ngn",
-            vendor: "monniepoint",
+            vendor: "moniepoint",
             account_name: ""
 
         }} 

@@ -42,6 +42,8 @@ const DashboardMobilePurchaseDetails = () => {
       
                 dispatch(SET_LOADING(true))
 
+                // payment_method ===  "wallet" ? 
+
         
         dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
@@ -58,7 +60,9 @@ const DashboardMobilePurchaseDetails = () => {
                     setErr(true)
                 }
             }
-        )
+        )  
+
+
     }, [queryId, dispatch, navigate])
 
     useEffect(()=> {
@@ -86,6 +90,10 @@ const DashboardMobilePurchaseDetails = () => {
       componentProps={componentProps}
       handleConfirmation={handleConfirmation}
       purchaseOrder={purchaseOrder}
+      // redirect_url={`https://www.bitbridgeglobal.com/checkout`}
+      redirect_url={`https://www.bitbridgeglobal.com/checkout`}
+
+      
       />
         </>
     )

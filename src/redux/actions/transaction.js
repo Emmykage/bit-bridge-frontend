@@ -46,6 +46,35 @@ export const createTransaction = createAsyncThunk("transaction/client-deposit", 
     }
 });
 
+export const initializeMonifyPayment = createAsyncThunk("transaction/initialize_payment", async(data, {rejectWithValue}) => {
+    
+    const transactionData = {transaction: data}
+
+    try {
+
+        const response = await axios.post(`${baseUrl + apiRoute}transactions/initialize_transaction`, 
+            transactionData
+            , {
+            headers: {
+                "Authorization": `Bearer ${fetchToken()}`,
+                "Content-Type": "application/json",
+            }
+        });
+
+        const result = response.data;   
+        toast(result.message || "Order created successfully", { type: "success" });        toast(result, {type: "success"})
+
+        return result;
+    } catch (error) {
+        if (error?.response) {
+            toast(error.response.data.message, {type: "error"})   
+
+            return rejectWithValue({ message: error.response.data.message });
+        }
+        return rejectWithValue({ message: "Something went wrong" });
+    }
+});
+
 export const createUserTransaction = createAsyncThunk("transaction/user-deposit", async(data, {rejectWithValue}) => {
     const formData = new FormData()
 
