@@ -97,7 +97,7 @@ const AuthSlice = createSlice({
         .addCase(userProfile.fulfilled, (state, action) => {
             return{
                 ...state,
-                user: action.payload.data,
+                user: action.payload?.data,
                 logged: true,
                 loading: false
             }

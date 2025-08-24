@@ -3,6 +3,10 @@ import axios from "axios"
 import { apiRoute, baseUrl } from "../baseUrl"
 import { fetchToken } from "../../hooks/localStorage"
 import { toast } from "react-toastify"
+import UserService from "../../service/user-service"
+
+
+const userService =  new UserService
 
 const userSignUp = createAsyncThunk("sign-up/user-signUp", async(data, {rejectWithValue}) => {
 
@@ -125,24 +129,24 @@ export const userDelete = createAsyncThunk("user/account-delete", async(id, {rej
 
 
 export const userProfile = createAsyncThunk("auth/user-profile", async(data, {rejectWithValue}) => {
-    try {
 
-        const response = await axios.get(`${baseUrl + apiRoute}users/user_profile`, {  
-            headers: {
-          "Authorization": `Bearer ${fetchToken()}`
-      }})
-        const result =  response.data
-
-        return result
-    } catch (error) {
-        if(error.response){
-            return rejectWithValue({message: error.response.message})
+         try {
+         const response =   await UserService.getUserProfile(data);
+         console.log(response)
+            return response
+        } catch (error) {
+            if (error.response) {
+                toast(error.response.data.message || "Failed to fetch user profile", {type: "error"});
+                return rejectWithValue({ message: error.response.data.message });
+            }
+            console.error(error);
+            return rejectWithValue({ message: "Something went wrong" });
+            
         }
 
-        return rejectWithValue({message: "something went wrong"})
-
+            
     }
-})
+)
 
 
 
@@ -155,8 +159,10 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
 
         // Access the access token from the response headers
         const authorizationHeader = response.headers.authorization;
+        const refreshRawToken =  response.headers["bit-refresh-token"]
 
         let accessToken = null;
+        let refreshtoken = refreshRawToken;
 
         // If the authorization header is present, extract the token
         if (authorizationHeader) {
@@ -169,7 +175,8 @@ const userLogin = createAsyncThunk("login/user-login", async(data, {rejectWithVa
             console.warn('Authorization header not found');
         }
 
-        localStorage.setItem("bitglobal", JSON.stringify(accessToken));
+        localStorage.setItem("bitglobal", accessToken);
+        localStorage.setItem("refresh-token", refreshtoken);
         toast(result.message, {type: "success"})
 
 

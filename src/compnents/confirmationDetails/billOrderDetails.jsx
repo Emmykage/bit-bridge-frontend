@@ -139,10 +139,10 @@ const BillOrderDetails = ({
   
 
   {
-    purchaseOrder.email && 
+    purchaseOrder?.email && 
    
 
-            <Detail label={"Email"} value={purchaseOrder.email ?? user?.emal} />
+            <Detail label={"Email"} value={purchaseOrder?.email ?? user?.emal} />
 
   }
   

@@ -22,8 +22,8 @@ const DashboardPurchaseDetails = () => {
 
         
   const componentProps = {
-    email: purchaseOrder.email ?? user?.emal,
-    amount: purchaseOrder.total_amount * 100,  
+    email: purchaseOrder?.email ?? user?.emal,
+    amount: purchaseOrder?.total_amount * 100,  
     publicKey: publicKey,
     text: 'Pay From Bank',
     onSuccess: () => {

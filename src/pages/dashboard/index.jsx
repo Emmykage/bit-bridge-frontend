@@ -95,7 +95,7 @@ const HomeDashboard = () => {
     //     fetchConversion()
     // },[wallet?.balance, activeCurrency])
 
-
+console.log(wallet)
   return (
     <>
     

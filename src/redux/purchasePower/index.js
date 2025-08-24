@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { createPurchaseOrder, getPurchaseOrder, getRefOrder, getRescentPurchaseOrder, queryTransaction, repurchaseOrder } from "../actions/purchasePower"
 
 const initialState = {
-   purchaseOrder: {},
+   purchaseOrder: null,
    purchaseOrders: [],
    recentOrders: [],
    receiptDetails: {},
