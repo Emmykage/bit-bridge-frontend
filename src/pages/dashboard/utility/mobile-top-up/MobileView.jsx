@@ -17,6 +17,7 @@ const MobileView = () => {
  
     const selectedProvider = mobileProviders?.find(item => item.id == id)
     const imagePic = splitString(selectedProvider?.product?.provider)
+    const service = "mobile-top-up"
 
   return (
     <section className="px-4  md:py-10">
@@ -38,7 +39,7 @@ const MobileView = () => {
 
         </div>
 
-        <Outlet context={[id, selectedProvider]}/>
+        <Outlet context={[id, selectedProvider, service]}/>
 
     </div>
 </section>  

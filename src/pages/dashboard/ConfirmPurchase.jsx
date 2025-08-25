@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
-import { getPurchaseOrder } from "../../../../redux/actions/purchasePower"
-import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
-import ClassicBtn from "../../../../compnents/button/ClassicButton"
-import { getWallet } from "../../../../redux/actions/wallet"
+import { getPurchaseOrder } from "../../redux/actions/purchasePower"
+import { getWallet } from "../../redux/actions/wallet"
+import BillOrderDetails from "../../compnents/confirmationDetails/billOrderDetails"
+import ClassicBtn from "../../compnents/button/ClassicButton"
 
-const DashboardMobileComfirmPurchase = () => {
+
+const DashboardComfirmPurchase = () => {
     const {purchaseOrder, message} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
@@ -46,4 +47,4 @@ const DashboardMobileComfirmPurchase = () => {
     )
 }
 
-export default DashboardMobileComfirmPurchase
+export default DashboardComfirmPurchase

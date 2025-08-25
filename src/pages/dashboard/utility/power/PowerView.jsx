@@ -5,7 +5,7 @@ const PowerView = () => {
     const {id} = useParams()
  
     const selectedProvider = powerDistributions?.find(item => item.id == id)
-
+    const service = "buy-power"
     console.log(selectedProvider)
 
   return (
@@ -29,7 +29,7 @@ const PowerView = () => {
             </div>
         </div>
 
-        <Outlet context={[id, selectedProvider?.biller]}/>
+        <Outlet context={[id, selectedProvider?.biller, service]}/>
 
     </div>
 </section>  

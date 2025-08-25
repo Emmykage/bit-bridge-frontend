@@ -62,12 +62,13 @@ export const ResetPassword = () => {
             {
               if(changePasswordReset.fulfilled.match(result)){
                 dispatch(SET_LOADING(false))
-                toast("Email sent", { type: "success"})
+                toast("password updated", { type: "success"})
+                navigate("/login")
               }
               else  {
 
                 dispatch(SET_LOADING(false))
-                toast("Email failled sent", { type: "error"})
+                toast("Email upadate failed", { type: "error"})
               }
 
             

@@ -64,22 +64,18 @@ import Utility from './pages/dashboard/utility/Utility'
 import PowerUtilities from './pages/dashboard/utility/power/PowerUtilities'
 import PowerView from './pages/dashboard/utility/power/PowerView'
 import DashboardPowerForm from './pages/dashboard/utility/power/PowerForm'
-import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDetails'
-import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
+// import DashboardPurchaseDetails from './pages/dashboard/utility/power/PurchaseDetails'
+// import DashboardComfirmPurchase from './pages/dashboard/utility/power/ConfirmPurchase'
 import MainServices from './pages/services'
 import ProductView from './pages/ProductPage/ViewProduct'
 import CableUtilities from './pages/dashboard/utility/cable/CableUtilities'
 import CableView from './pages/dashboard/utility/cable/PowerView'
 import DashboardCableForm from './pages/dashboard/utility/cable/CableForm'
-import DashboardCablePurchaseDetails from './pages/dashboard/utility/cable/PurchaseDetails'
-import DashboardCableComfirmPurchase from './pages/dashboard/utility/cable/ConfirmPurchase'
 import SiteMap from './pages/policies/SiteMap'
 import VulnerabilityDisclosure from './pages/policies/VulnerabilityDisclosure'
 import MobileTopUps from './pages/dashboard/utility/mobile-top-up/MobileTops'
 import DashboardMobileForm from './pages/dashboard/utility/mobile-top-up/MobileForm'
 import MobileView from './pages/dashboard/utility/mobile-top-up/MobileView'
-import DashboardMobilePurchaseDetails from './pages/dashboard/utility/mobile-top-up/PurchaseDetails'
-import DashboardMobileComfirmPurchase from './pages/dashboard/utility/mobile-top-up/ConfirmPurchase'
 import ViewTransaction from './pages/admin/transactions/ViewTransaction'
 import ViewUser from './pages/admin/users/ViewUser'
 import ComfirmQuickPurchase from './pages/dashboard/ConfirmQuickPurchase'
@@ -92,6 +88,8 @@ import SendConfirmEmail from './pages/auth/SendConfirmationEmail'
 import ConfirmationSuccess from './pages/auth/ConfirmationSuccess'
 import ConfirmationError from './pages/auth/ConfirmationError'
 import ConfirmPayment from './pages/checkout/ConfirmPayment'
+import DashboardPurchaseDetails from './pages/dashboard/PurchaseDetails'
+import DashboardComfirmPurchase from './pages/dashboard/ConfirmPurchase'
 
 const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
 const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
@@ -164,6 +162,7 @@ function App() {
     <Route path='/dashboard' element={<DashboardLayout/>} >
     <Route path='profile-account' element={<ProfileAccountPage/>} />
 
+
       <Route path='home' element={<HomeDashboard/>}>
         <Route path="orders-transaction" element={<OrderTransact/>}/>
       </Route>
@@ -188,8 +187,8 @@ function App() {
 
       <Route path='utilities/cable/:id' element={<CableView/>}>
       <Route path='cableform' element={<DashboardCableForm/>}/>
-      <Route path='confirm-payment' element={<DashboardCableComfirmPurchase/>}/>
-      <Route path='payment-details' element={<DashboardCablePurchaseDetails/>}/>
+      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
+      <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
 
       
 
@@ -202,11 +201,11 @@ function App() {
 
       <Route path='utilities/mobile-top-up/:id' element={<MobileView/>}>
         <Route path='mobileform' element={<DashboardMobileForm/>}/>
-        <Route path='confirm-payment' element={<DashboardMobileComfirmPurchase/>}/>
-        <Route path='payment-details' element={<DashboardMobilePurchaseDetails/>}/>
+        <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
+        <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
       </Route>
 
-      <Route path='confirm-payment' element={<DashboardMobileComfirmPurchase/>}/>
+      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
 
 
 

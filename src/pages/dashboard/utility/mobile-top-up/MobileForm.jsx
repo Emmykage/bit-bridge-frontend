@@ -15,7 +15,7 @@ import PlainSelect from "../../../../compnents/formSelect/plainSelect";
 import { splitString } from "../../../../utils";
 
 const DashboardMobileForm = () => {
-    const [id, selectedProvider] = useOutletContext()
+    const [id, selectedProvider, service] = useOutletContext()
     const {user} = useSelector(state => state.auth)
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
@@ -53,7 +53,7 @@ const DashboardMobileForm = () => {
             setLoading(false)
             dispatch(SET_LOADING(false))
 
-            navigate(`/dashboard/utilities/mobile-top-up/${id}/payment-details?transaction_id=${data.id}`)
+            navigate(`/dashboard/utilities/${service}/${id}/payment-details?transaction_id=${data.id}`)
         }
         else{
             setLoading(false)

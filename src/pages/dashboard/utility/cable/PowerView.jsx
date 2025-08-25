@@ -18,7 +18,7 @@ const CableView = () => {
  
     const selectedProvider = utilities?.find(item => item.id == id)
     const imagePic = splitString(selectedProvider?.product?.provider)
-
+    const service = "cable"
   return (
     <section className="px-4  py-10">
 
@@ -44,7 +44,7 @@ const CableView = () => {
 
         </div>
 
-        <Outlet context={[id, selectedProvider]}/>
+        <Outlet context={[id, selectedProvider, service]}/>
 
     </div>
 </section>  

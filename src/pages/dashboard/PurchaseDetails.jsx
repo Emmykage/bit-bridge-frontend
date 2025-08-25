@@ -1,30 +1,33 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
-import { SET_LOADING } from "../../../../redux/app"
-import { confirmPayment, getPurchaseOrder } from "../../../../redux/actions/purchasePower"
-import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
-import PaymentOptions from "../../../../compnents/paymentOptions/PaymentOptions"
-import { publicKey } from "../../../../redux/baseUrl"
+// import { confirmPayment, getPurchaseOrder } from "../../../../redux/actions/purchasePower"
+// import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
+// import PaymentOptions from "../../../../compnents/paymentOptions/PaymentOptions"
+// import { publicKey } from "../../../../redux/baseUrl"
+import { SET_LOADING } from "../../redux/app"
+import { publicKey } from "../../redux/baseUrl"
+import { confirmPayment, getPurchaseOrder } from "../../redux/actions/purchasePower"
+import BillOrderDetails from "../../compnents/confirmationDetails/billOrderDetails"
+import PaymentOptions from "../../compnents/paymentOptions/PaymentOptions"
 
 const DashboardPurchaseDetails = () => {
     const {user} = useSelector(state =>  state.auth)
 
     const {purchaseOrder} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
-    const [id] = useOutletContext()
- const [message, setMessage] = useState()
+    const [id, data, service] = useOutletContext()
+    const [message, setMessage] = useState()
     const [err, setErr] = useState()
     const navigate = useNavigate()
 
 
-        
   const componentProps = {
     email: purchaseOrder?.email ?? user?.emal,
     amount: purchaseOrder?.total_amount * 100,  
-    publicKey: publicKey,
+    publicKey:  publicKey,
     text: 'Pay From Bank',
     onSuccess: () => {
       handleConfirmation("card")
@@ -36,15 +39,22 @@ const DashboardPurchaseDetails = () => {
     const queryId = searchParams.get("transaction_id")
     const dispatch = useDispatch()
 
-    const handleConfirmation = (payment_method) => {
+
+    const handleConfirmation = useCallback((payment_method) => {
+
+      
                 dispatch(SET_LOADING(true))
+
+                // payment_method ===  "wallet" ? 
+
         
         dispatch(confirmPayment({queryId, payment_method})).then(
             result => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
+
                     dispatch(SET_LOADING(false))
-                    navigate(`/dashboard/utilities/buy-power/${id}/confirm-payment?transaction_id=${data?.id}`)
+                    navigate(`/dashboard/utilities/${service}/${id}/confirm-payment?transaction_id=${data?.id}`)
                 }else{
                     const data  = result.payload
                     dispatch(SET_LOADING(false))
@@ -53,12 +63,14 @@ const DashboardPurchaseDetails = () => {
                     setErr(true)
                 }
             }
-        )
-    }
+        )  
 
+
+    }, [queryId, dispatch, navigate])
 
     useEffect(()=> {
-        dispatch(getPurchaseOrder(queryId))
+
+      dispatch(getPurchaseOrder(queryId))
     },[])
     return (
         <>
@@ -81,8 +93,10 @@ const DashboardPurchaseDetails = () => {
       componentProps={componentProps}
       handleConfirmation={handleConfirmation}
       purchaseOrder={purchaseOrder}
-      redirect_url={`https://bitbridgeglobal.com/checkout`}
+      // redirect_url={`https://www.bitbridgeglobal.com/checkout`}
+      redirect_url={`https://www.bitbridgeglobal.com/checkout`}
 
+      
       />
         </>
     )
