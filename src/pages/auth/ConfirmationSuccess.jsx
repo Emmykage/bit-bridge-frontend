@@ -21,10 +21,10 @@ import { useSelector } from 'react-redux';
         {/* {user?.confirmed_at && storedToken} */}
         <button className='bg-purple-950 text-white px-4 py-2 rounded-md hover:bg-purple-800 transition-all duration-300'
         onClick={() => {
-          navigate("/login")
+          navigate("/dashboard/home")
         }}
         >
-          Continue to Dashboard 
+          Continue to Dashboard
         </button>
         
      

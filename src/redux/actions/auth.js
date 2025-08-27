@@ -136,7 +136,6 @@ export const userProfile = createAsyncThunk("auth/user-profile", async(data, {re
             return response
         } catch (error) {
             if (error.response) {
-                toast(error.response.data.message || "Failed to fetch user profile", {type: "error"});
                 return rejectWithValue({ message: error.response.data.message });
             }
             console.error(error);
@@ -218,9 +217,12 @@ export const userConfirmation = createAsyncThunk("user/user-confirmation", async
           
         });
 
-        const {data} = response.data;
+        const data = response.data;
 
         toast("Email Confirmed", {type: "success"})
+        localStorage.setItem("bitglobal", data.access_token);
+        localStorage.setItem("refresh-token", data.refresh_token);
+
 
         return data;
     } catch (error) {

@@ -72,6 +72,7 @@ const DashboardPurchaseDetails = () => {
 
       dispatch(getPurchaseOrder(queryId))
     },[])
+    // purchaseOrder 4102d9a6-0f11-4e96-ac98-958711ee40f8
     return (
         <>
         {message && 
