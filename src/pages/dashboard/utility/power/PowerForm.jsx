@@ -2,7 +2,7 @@ import { Form } from "antd";
 import PropTypes from "prop-types";
 
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { CheckCircleOutlined } from "@ant-design/icons";
@@ -18,6 +18,7 @@ const DashboardPowerForm = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
     const [err, setErr] = useState()
+    const {  user } = useSelector((state) => state.auth);
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -28,7 +29,7 @@ const DashboardPowerForm = () => {
 
         dispatch(SET_LOADING(true))
 
-       dispatch(createPurchaseOrder({...values, biller, service_type: "ELECTRICITY"})).
+       dispatch(createPurchaseOrder({...values, biller, email: user.email, phone: user?.user_profile?.phone_number,  service_type: "ELECTRICITY"})).
        then(result => {
         if(createPurchaseOrder.fulfilled.match(result)){
             const data = result.payload.data
@@ -66,7 +67,7 @@ const DashboardPowerForm = () => {
         </div>
         }
         
-        <div>
+        <div className="my-6 ">
         <Form
             onFinish={handleFormSubmit}
             form={form}
@@ -75,7 +76,6 @@ const DashboardPowerForm = () => {
                 phone: "",
                 meter_type: "",
                 billersCode: "",
-                email: ""
 
 
             }}
@@ -86,12 +86,12 @@ const DashboardPowerForm = () => {
                 <FormSelect placeholder={"Select Meter Type"} className="flex-1" label={"Meter Type"} options={[{label: "prepaid", value: "prepaid"}, { value: "postpaid", label: "Post Paid"}]} name={"meter_type"}/>
                 <FormInput className={"flex-1 w-full"} label={"Meter Number"} placeholder={"Meter Number"} name={"billersCode"}/>
             </div>
-
+            
+            {!user?.user_profile?.phone_number && 
             <div className="flex flex-col sm:flex-row sm:gap-4">
                 <FormInput className={"flex-1"} label={"Phone Number"} placeholder={"Enter Phone Number"} name={"phone"}/>
-                <FormInput className={"flex-1"} label={"Email"} placeholder={"Email Address"} name={"email"}/>
 
-            </div>
+            </div>}
             <div className="sm:w-1/2">
                 <FormInput className={"w-full"} label={"Amount"} placeholder={"Enter Amount"} type="Number" name={"amount"}/>
 

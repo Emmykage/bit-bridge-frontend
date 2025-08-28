@@ -14,7 +14,7 @@ const BillOrderDetails = ({
             case "data":
                 return "Phone Number"
             case "tv":
-            return "Decoder ID"
+              return "Decoder ID"
             case "electricity":
                 return "Meter Number"
                         

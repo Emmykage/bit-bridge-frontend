@@ -114,7 +114,7 @@ console.log(wallet)
                     }
                      {user?.account?.account_number && <p className="text-sm"> <span 
                      onClick={() => setIsOpenAccount(true)} className="font-semibold hover:text-alt transition-all duration-200 cursor-pointer">Moniepoint</span>  : <span className="bloc text-green-200"> {user?.account?.account_number}</span></p>} 
-                    <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />0.00</p>
+                    <p className="flex gap-4 my-4">  <TrophyOutlined className="text-yellow-700" />{nairaFormat(wallet?.commission ?? 0, "ngn")}</p>
                  </div>
 
                 

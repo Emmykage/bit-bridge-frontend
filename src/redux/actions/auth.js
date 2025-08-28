@@ -132,7 +132,6 @@ export const userProfile = createAsyncThunk("auth/user-profile", async(data, {re
 
          try {
          const response =   await UserService.getUserProfile(data);
-         console.log(response)
             return response
         } catch (error) {
             if (error.response) {
