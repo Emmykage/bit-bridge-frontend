@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 
 const BillOrderDetails = ({ purchaseOrder, applyCommission }) => {
   const { user } = useSelector((state) => state.auth)
-  console.log(purchaseOrder)
 
   const pickLabel = (type) => {
     switch (type) {
@@ -150,31 +149,32 @@ const Detail = ({
   hidden = false,
   applyCommission = false,
   commission,
-}) => (
-  <div className={`${hidden ? 'hidden' : 'flex'} flex-col`}>
-    <span className="text-gray-400 uppercase text-xs">{label}</span>
-    {badge ? (
-      <span
-        className={`mt-1 inline-block px-2 py-1 rounded-md text-xs font-medium ${
-          value === 'approved' || value === 'completed'
-            ? 'bg-green-600 text-white'
-            : value === 'pending'
-              ? 'bg-yellow-600 text-white'
-              : 'bg-red-600 text-white'
-        }`}
-      >
-        {value}
-      </span>
-    ) : (
-      <p className="flex gap-5">
-        <span className={`text-white mt-1 ${applyCommission && 'line-through'}`}>{value}</span>
-        {commission && applyCommission && (
-          <span className="text-white mt-1 line-">{commission}</span>
-        )}
-      </p>
-    )}
-  </div>
-)
+}) => {
+  console.log(commission, applyCommission)
+  return (
+    <div className={`${hidden ? 'hidden' : 'flex'} flex-col`}>
+      <span className="text-gray-400 uppercase text-xs">{label}</span>
+      {badge ? (
+        <span
+          className={`mt-1 inline-block px-2 py-1 rounded-md text-xs font-medium ${
+            value === 'approved' || value === 'completed'
+              ? 'bg-green-600 text-white'
+              : value === 'pending'
+                ? 'bg-yellow-600 text-white'
+                : 'bg-red-600 text-white'
+          }`}
+        >
+          {value}
+        </span>
+      ) : (
+        <p className="flex items-center gap-5 bg-red">
+          <span className={`text-white  ${applyCommission && 'line-through'}`}>{value}</span>
+          {applyCommission && <span className="text-white">{commission}</span>}
+        </p>
+      )}
+    </div>
+  )
+}
 
 Detail.propTypes = {
   label: PropTypes.string,

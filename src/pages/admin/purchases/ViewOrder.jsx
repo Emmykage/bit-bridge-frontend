@@ -12,6 +12,9 @@ import { createCardToken } from '../../../redux/actions/orderToken'
 import { toast } from 'react-toastify'
 import { getBillOrder } from '../../../redux/actions/billOrders'
 import dateFormater from '../../../utils/dateFormat'
+import { SET_LOADING } from '../../../redux/app'
+import { queryTransaction } from '../../../redux/actions/purchasePower'
+import Detail from '../../../compnents/queryDetails/Details'
 
 const ViewOrder = () => {
   const { id } = useParams()
@@ -20,6 +23,8 @@ const ViewOrder = () => {
   // const {cardToken} = useSelector(state => state.orderToken)
   const [selectedId, setSelectedId] = useState(null)
   const [open, setOpen] = useState(null)
+  const [openModal, setOpenModal] = useState(false)
+  const [data, setQueryData] = useState(null)
 
   const [form] = Form.useForm()
 
@@ -41,9 +46,37 @@ const ViewOrder = () => {
     })
   }
 
+  const handleQueryTransaction = () => {
+    dispatch(SET_LOADING(true))
+
+    dispatch(queryTransaction({ id })).then((result) => {
+      if (queryTransaction.fulfilled.match(result)) {
+        dispatch(SET_LOADING(false))
+        toast(result.payload.message ?? 'query successful', { type: 'success' })
+        setOpenModal(true)
+        setQueryData(result.payload.data)
+        return
+      } else {
+        console.log(result)
+
+        toast(result.payload.message ?? 'Query Failed', { type: 'error' })
+
+        dispatch(SET_LOADING(false))
+      }
+    })
+  }
+
   return (
     <>
       <div className="m-auto max-w-7xl my-10">
+        <Button
+          onClick={handleQueryTransaction}
+          className="border-alt m-auto my-10 block w-full h-20 bg-primary text-black rounded-lg  border shadow-md font-medium text-xl"
+          type="primary"
+        >
+          {' '}
+          Query Transaction
+        </Button>
         <div className="bg-white p-4 rounded-lg shadow ">
           <div className="flex flex-col md:flex-row justify-between">
             <div className="flex-1 ">
@@ -129,6 +162,11 @@ const ViewOrder = () => {
               </div>
             )}
           </div>
+
+          <div>
+            <p>Response Message:</p>
+            <p className="">{order?.reason ?? 'None'}</p>
+          </div>
         </div>
       </div>
 
@@ -154,6 +192,36 @@ const ViewOrder = () => {
           </Form>
         </AppModal>
       </div>
+
+      {data && (
+        <AppModal handleCancel={() => setOpenModal(false)} isModalOpen={openModal}>
+          <div className="max-w-2xl mx-auto bg-white shadow-md rounded-2xl p-6 mt-6">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Transaction Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+              <Detail label="Order ID" value={data.orderId} />
+              <Detail label="Disco" value={data.disco} />
+              <Detail label="Amount Generated" value={`₦${data.amountGenerated}`} />
+              <Detail label="Total Amount Paid" value={`₦${data.totalAmountPaid}`} />
+              <Detail label="Vend Amount" value={`₦${data.vendAmount}`} />
+              <Detail label="Units" value={data.units} />
+              <Detail label="Vend Time" value={data.vendTime} />
+              <Detail label="Token" value={data.token || 'N/A'} />
+              <Detail label="Receipt No" value={data.receiptNo} />
+              <Detail label="Response" value={data.responseMessage} />
+              <Detail label="Response Code" value={data.responseCode} />
+              <Detail label="Name" value={data.name} />
+              <Detail label="Phone No" value={data.phoneNo || 'N/A'} />
+              <Detail label="Address" value={data.address} />
+              <Detail label="Debt Amount" value={`₦${data.debtAmount}`} />
+              <Detail label="Debt Remaining" value={`₦${data.debtRemaining}`} />
+              <Detail label="Demand Category" value={data.demandCategory} />
+              <Detail label="Asset Provider" value={data.assetProvider} />
+              <Detail label="Tariff Index" value={data.tariffIndex || 'N/A'} />
+              <Detail label="Charges" value={`₦${data.charges}`} />
+            </div>
+          </div>
+        </AppModal>
+      )}
     </>
   )
 }
