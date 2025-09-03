@@ -3,18 +3,18 @@ import { useCallback, useEffect, useState } from "react"
 import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom"
 import { CheckCircleOutlined } from "@ant-design/icons"
 import { toast } from "react-toastify"
-// import { confirmPayment, getPurchaseOrder } from "../../../../redux/actions/purchasePower"
-// import BillOrderDetails from "../../../../compnents/confirmationDetails/billOrderDetails"
-// import PaymentOptions from "../../../../compnents/paymentOptions/PaymentOptions"
-// import { publicKey } from "../../../../redux/baseUrl"
+
 import { SET_LOADING } from "../../redux/app"
 import { publicKey } from "../../redux/baseUrl"
 import { confirmPayment, getPurchaseOrder } from "../../redux/actions/purchasePower"
 import BillOrderDetails from "../../compnents/confirmationDetails/billOrderDetails"
 import PaymentOptions from "../../compnents/paymentOptions/PaymentOptions"
+import { nairaFormat } from "../../utils/nairaFormat"
 
 const DashboardPurchaseDetails = () => {
     const {user} = useSelector(state =>  state.auth)
+        const {wallet, loading} = useSelector(state => state.wallet)
+        const [applyCommission, setApplyCommission] = useState(false)
 
     const {purchaseOrder} = useSelector(state =>  state.purchase)
     const [searchParams] = useSearchParams()
@@ -41,14 +41,8 @@ const DashboardPurchaseDetails = () => {
 
 
     const handleConfirmation = useCallback((payment_method) => {
-
-      
-                dispatch(SET_LOADING(true))
-
-                // payment_method ===  "wallet" ? 
-
-        
-        dispatch(confirmPayment({queryId, payment_method})).then(
+      dispatch(SET_LOADING(true))
+      dispatch(confirmPayment({queryId, data: {payment_method, use_commission: applyCommission}})).then(
             result => {
                 if(confirmPayment.fulfilled.match(result)){
                     const data  = result.payload.data 
@@ -66,15 +60,25 @@ const DashboardPurchaseDetails = () => {
         )  
 
 
-    }, [queryId, dispatch, navigate])
+    }, [queryId, dispatch, navigate, applyCommission])
 
     useEffect(()=> {
 
       dispatch(getPurchaseOrder(queryId))
     },[])
-    // purchaseOrder 4102d9a6-0f11-4e96-ac98-958711ee40f8
+
     return (
         <>
+              <div className='bg-gray-900 flex justify-between items-center rounded-lg my-10 p-4'>
+           <div>
+            <span >                {nairaFormat(wallet?.balance, "ngn")}            </span>
+                     <p className="flex gap-4 my-0"> {nairaFormat(wallet?.commission ?? 0, "ngn")}</p>
+
+</div> 
+            <button disabled={wallet.commission < 1} onClick={() => setApplyCommission(prev => !prev )} className={`${applyCommission ? "bg-alt" : " bg-primary hover:bg-alt hover:text-primary"} transition-all hover:bg-alt rounded-md duration-200 ease-linear px-4 py-2`}>
+                apply Commission
+            </button>
+        </div>
         {message && 
           <div className={`${err ? "bg-red-200" : "bg-green-200"} p-4 my-4`}>
             <p className={`${err ? "text-red-800" : "text-green-800"} items-center flex gap-2 font-semibold text-center`}>
@@ -88,7 +92,7 @@ const DashboardPurchaseDetails = () => {
       
  
 
-        <BillOrderDetails purchaseOrder={purchaseOrder}/>
+        <BillOrderDetails purchaseOrder={purchaseOrder} applyCommission={applyCommission}/>
 
       <PaymentOptions 
       componentProps={componentProps}

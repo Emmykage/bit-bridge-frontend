@@ -114,10 +114,10 @@ export const getRescentPurchaseOrder = createAsyncThunk("purchaseOrder/get-recen
 });
 
 
-export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId, payment_method}, {rejectWithValue}) => {
+export const confirmPayment = createAsyncThunk("data/buy-data-orders", async({queryId, data}, {rejectWithValue}) => {
 
     try {
-        const response = await axios.get(`${baseUrl + apiRoute}payment_processors/${queryId}/confirm_payment?payment_method=${payment_method}`, {
+        const response = await axios.patch(`${baseUrl + apiRoute}bill_orders/${queryId}/confirm_bill_payment`, {bill_order: data } ,{
             headers: {
                 "Authorization": `Bearer ${fetchToken()}`
             }

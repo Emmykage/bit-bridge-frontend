@@ -160,6 +160,8 @@ function App() {
       <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
     </Route>
     <Route path='/dashboard' element={<DashboardLayout/>} >
+      <Route index element={<HomeDashboard />} />
+   
     <Route path='profile-account' element={<ProfileAccountPage/>} />
 
 

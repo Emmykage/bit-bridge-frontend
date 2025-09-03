@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 
 const BillOrderDetails = ({
-    purchaseOrder
+    purchaseOrder,
+     applyCommission
 }) => {
     const {user} = useSelector(state =>  state.auth)
+    console.log(purchaseOrder)
 
     const pickLabel = (type) => {
 
@@ -80,7 +82,7 @@ const BillOrderDetails = ({
         //     <p className="w-60 md:w-60 border-b  border-gray-700 px-2 font-semibold">Amount</p>
         //     <p className="flex-1 border-b  border-gray-700 px-2">{nairaFormat(purchaseOrder?.amount ?? 0)}</p>
         // </div>
-                <Detail label={"Amount"} value={nairaFormat(purchaseOrder?.amount ?? 0)} />
+                <Detail label={"Amount"} applyCommission={applyCommission} commission={purchaseOrder?.bill_commission && nairaFormat(purchaseOrder?.bill_commission)} value={nairaFormat(purchaseOrder?.amount ?? 0)} />
 
 
     }
@@ -91,7 +93,7 @@ const BillOrderDetails = ({
         //     <p className="flex-1 border-b  border-gray-700 px-2">{nairaFormat(purchaseOrder?.service_charge)}</p>
         // </div>
 
-       <Detail label={"Service Charge"} value={nairaFormat(purchaseOrder?.service_charge)} />
+       <Detail label={"Service Charge"} value={nairaFormat(purchaseOrder?.service_charge)}  />
 
 
     }
@@ -103,7 +105,7 @@ const BillOrderDetails = ({
         purchaseOrder?.amount && 
         
 
-                <Detail label={"Total Payable Amount"} value={nairaFormat(Number(purchaseOrder?.total_amount))} />
+                <Detail label={"Total Payable Amount"} value={nairaFormat(Number(purchaseOrder?.total_amount))} applyCommission={applyCommission} commission={purchaseOrder?.bill_commission && nairaFormat(purchaseOrder?.bill_commission)}  />
 
 
             }
@@ -160,7 +162,7 @@ BillOrderDetails.propTypes = {
 
 
 
-const Detail = ({ label, value, badge = false, hidden = false }) => (
+const Detail = ({ label, value, badge = false, hidden = false , applyCommission=false , commission}) => (
   <div className={`${hidden ? "hidden" : "flex"} flex-col`}>
     <span className="text-gray-400 uppercase text-xs">{label}</span>
     {badge ? (
@@ -176,7 +178,13 @@ const Detail = ({ label, value, badge = false, hidden = false }) => (
         {value}
       </span>
     ) : (
-      <span className="text-white mt-1">{value}</span>
+      <p className='flex gap-5'>
+
+
+      <span className={`text-white mt-1 ${applyCommission &&  "line-through"}`}>{value}</span>
+      {commission  && applyCommission &&
+      <span className="text-white mt-1 line-">{commission}</span>}
+      </p>
     )}
   </div>
 );

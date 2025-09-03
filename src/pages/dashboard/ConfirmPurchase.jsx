@@ -6,6 +6,7 @@ import { getPurchaseOrder } from "../../redux/actions/purchasePower"
 import { getWallet } from "../../redux/actions/wallet"
 import BillOrderDetails from "../../compnents/confirmationDetails/billOrderDetails"
 import ClassicBtn from "../../compnents/button/ClassicButton"
+import { nairaFormat } from "../../utils/nairaFormat"
 
 
 const DashboardComfirmPurchase = () => {
@@ -27,6 +28,7 @@ const DashboardComfirmPurchase = () => {
 
     return (
         <>
+   
         {message && 
           <div className="bg-green-200 p-4 my-4">
             <p className="text-green-800 items-center flex gap-2 font-semibold text-center">

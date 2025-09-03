@@ -117,7 +117,7 @@ const DashboardLayout = () => {
                 setOpen(prev => !prev)}}>
             <MenuUnfoldOutlined className='text-alt text-2xl' />
             </span>
-            <NavLink className={"text-3xl text-white flex1"}>
+            <NavLink to={"/dashboard"} className={"text-3xl text-white flex1"}>
                 <img src={logo} alt='logo' className='h-10 md:14 w- object-cover border' />
             </NavLink>
         <div className='md:flex flex- w-full max-w-3xl  items-center justify-between hidden w-ful  bg-back text-gray-200  '>
