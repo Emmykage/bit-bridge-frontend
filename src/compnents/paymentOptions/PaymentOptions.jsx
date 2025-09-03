@@ -7,41 +7,36 @@ import { useEffect, useRef } from 'react'
 import { initiatePurchaseOrder } from '../../redux/actions/purchasePower'
 import { SET_LOADING } from '../../redux/app'
 
-const PaymentOptions = ({
-    handleConfirmation,
-    purchaseOrder,
-    redirect_url
-}) => {
-
+const PaymentOptions = ({ handleConfirmation, purchaseOrder, redirect_url }) => {
   const dispatch = useDispatch()
-    const {user} = useSelector(state => state.auth)
+  const { user } = useSelector((state) => state.auth)
 
-    const scriptLoadedRef = useRef(false);
-    const handleConfirmationRef = useRef(handleConfirmation);
+  const scriptLoadedRef = useRef(false)
+  const handleConfirmationRef = useRef(handleConfirmation)
 
-    // Update ref when handleConfirmation changes
-    useEffect(() => {
-      handleConfirmationRef.current = handleConfirmation;
-    }, [handleConfirmation]);
-    
+  // Update ref when handleConfirmation changes
+  useEffect(() => {
+    handleConfirmationRef.current = handleConfirmation
+  }, [handleConfirmation])
+
   // Load Monnify SDK once
   useEffect(() => {
     if (!window.MonnifySDK) {
-      const script = document.createElement("script");
-      script.src = "https://sdk.monnify.com/plugin/monnify.js";
-      script.async = true;
+      const script = document.createElement('script')
+      script.src = 'https://sdk.monnify.com/plugin/monnify.js'
+      script.async = true
       script.onload = () => {
-        scriptLoadedRef.current = true;
-        console.log("✅ Monnify SDK loaded");
-      };
+        scriptLoadedRef.current = true
+        console.log('✅ Monnify SDK loaded')
+      }
       script.onerror = () => {
-        console.error("❌ Failed to load Monnify SDK");
-      };
-      document.body.appendChild(script);
+        console.error('❌ Failed to load Monnify SDK')
+      }
+      document.body.appendChild(script)
     } else {
-      scriptLoadedRef.current = true;
+      scriptLoadedRef.current = true
     }
-  }, []);
+  }, [])
 
   // const payWithMonnify = () => {
   //   if (!window.MonnifySDK) {
@@ -77,62 +72,72 @@ const PaymentOptions = ({
   //   });
   // };
 
-
   const payWithMonnify = () => {
     dispatch(SET_LOADING(true))
-    
-    dispatch(initiatePurchaseOrder({params: {
-      payment_method: "card",
-      redirect_url},
-      queryId: purchaseOrder.id,
 
-    }   
-)).unwrap().then(res => {
-  console.log(res)
-    dispatch(SET_LOADING(false))
+    dispatch(
+      initiatePurchaseOrder({
+        params: {
+          payment_method: 'card',
+          redirect_url,
+        },
+        queryId: purchaseOrder.id,
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        console.log(res)
+        dispatch(SET_LOADING(false))
 
-  window.location.href = res.responseBody.checkoutUrl
-}).catch(err => {
-  console.log(err)
-  dispatch(SET_LOADING(false))
-
-})
-  
-  };
+        window.location.href = res.responseBody.checkoutUrl
+      })
+      .catch((err) => {
+        console.log(err)
+        dispatch(SET_LOADING(false))
+      })
+  }
 
   console.log(redirect_url)
 
   return (
     <div className="bg-gray-100/10 mt-4 flex justify-center items-center flex-col gap-6 min-h-60 p-4 md:p-8 rounded-lg">
-
-    {
-        user ?  
+      {user ? (
         <div className="w-full">
-            <button className="border-alt m-auto block max-w-sm w-full h-20 bg-alt rounded-lg  border px-4 py-2 shadow-md text-primary text-xl font-medium"
-             onClick={()=> handleConfirmation("wallet")}>Pay from Wallet</button>
+          <button
+            className="border-alt m-auto block max-w-sm w-full h-20 bg-alt rounded-lg  border px-4 py-2 shadow-md text-primary text-xl font-medium"
+            onClick={() => handleConfirmation('wallet')}
+          >
+            Pay from Wallet
+          </button>
         </div>
-        :
-
+      ) : (
         <p className="text-center font-medium text-primary  text-lg">
-            <NavLink className={"hover:text-alt"} to={"/login"}>Login</NavLink>  to pay with from your wallet
+          <NavLink className={'hover:text-alt'} to={'/login'}>
+            Login
+          </NavLink>{' '}
+          to pay with from your wallet
         </p>
-    }
-         
+      )}
 
-        {/* <div className="w-full">
+      {/* <div className="w-full">
             <PaystackButton disabled={!purchaseOrder.email} className="border-alt m-auto block max-w-sm w-full h-20 bg-primary rounded-lg  border px-4 py-2 shadow-md text-alt font-medium text-xl" {...componentProps}/>
         </div> */}
 
-         <div className="w-full">
-            <button  type='button' onClick={payWithMonnify}
-             className="border-alt m-auto block max-w-sm w-full h-20 bg-primary rounded-lg  border px-4 py-2 shadow-md text-alt font-medium text-xl">Pay with Bank?</button>
-        </div> 
-
-    </div>  )
+      <div className="w-full">
+        <button
+          type="button"
+          onClick={payWithMonnify}
+          className="border-alt m-auto block max-w-sm w-full h-20 bg-primary rounded-lg  border px-4 py-2 shadow-md text-alt font-medium text-xl"
+        >
+          Pay with Bank?
+        </button>
+      </div>
+    </div>
+  )
 }
 PaymentOptions.propTypes = {
-    handleConfirmation: PropTypes.func,
-    purchaseOrder: PropTypes.object,
-    redirect_url: PropTypes.string,
+  handleConfirmation: PropTypes.func,
+  purchaseOrder: PropTypes.object,
+  redirect_url: PropTypes.string,
 }
 export default PaymentOptions

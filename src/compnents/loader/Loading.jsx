@@ -4,9 +4,8 @@ import React from 'react'
 const Loading = () => {
   return (
     <>
-    <Spin tip="Loading...">
-   
-   </Spin></>
+      <Spin tip="Loading..."></Spin>
+    </>
   )
 }
 

@@ -3,7 +3,7 @@ import PowerComponent from '../../../../compnents/powerComponents/PowerComponent
 const PowerUtilities = () => {
   return (
     <div>
-     <PowerComponent/>
+      <PowerComponent />
     </div>
   )
 }

@@ -4,33 +4,28 @@ import {
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProConfigProvider,
-  ProFormText,
-  setAlpha,
-} from '@ant-design/pro-components';
-import enUS from "antd/es/locale/en_US"
+} from '@ant-design/icons'
+import { LoginForm, ProConfigProvider, ProFormText, setAlpha } from '@ant-design/pro-components'
+import enUS from 'antd/es/locale/en_US'
 
-import { ConfigProvider, Space, Tabs, theme } from 'antd';
-import {  useState } from 'react';
-import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
-import logo from "../../assets/logos/2.png"
-import { useDispatch, useSelector } from 'react-redux';
-import { changePasswordReset, userPasswordReset, userSignUp } from '../../redux/actions/auth';
-import { SET_LOADING } from '../../redux/app';
-import { toast } from 'react-toastify';
+import { ConfigProvider, Space, Tabs, theme } from 'antd'
+import { useState } from 'react'
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
+import logo from '../../assets/logos/2.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { changePasswordReset, userPasswordReset, userSignUp } from '../../redux/actions/auth'
+import { SET_LOADING } from '../../redux/app'
+import { toast } from 'react-toastify'
 
 export const ResetPassword = () => {
-  const { token } = theme.useToken();
+  const { token } = theme.useToken()
   const [query] = useSearchParams()
 
-  const email = query.get("email")
-  const passwordToken = query.get("password_token")
+  const email = query.get('email')
+  const passwordToken = query.get('password_token')
 
-  const {loading} = useSelector(state => state.auth)
-  const [loginType, setLoginType] = useState('phone');
+  const { loading } = useSelector((state) => state.auth)
+  const [loginType, setLoginType] = useState('phone')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -40,7 +35,7 @@ export const ResetPassword = () => {
     fontSize: '24px',
     verticalAlign: 'middle',
     cursor: 'pointer',
-  };
+  }
 
   return (
     <ProConfigProvider hashed={false}>
@@ -48,51 +43,42 @@ export const ResetPassword = () => {
         <LoginForm
           loading={loading}
           onFinish={(values) => {
-          dispatch(SET_LOADING(true))
+            dispatch(SET_LOADING(true))
 
-          dispatch(changePasswordReset({
-            user: {
-
-            email,
-            password_token: passwordToken,
-            ...values
-          }
-
-          })).then(result =>
-            {
-              if(changePasswordReset.fulfilled.match(result)){
+            dispatch(
+              changePasswordReset({
+                user: {
+                  email,
+                  password_token: passwordToken,
+                  ...values,
+                },
+              })
+            ).then((result) => {
+              if (changePasswordReset.fulfilled.match(result)) {
                 dispatch(SET_LOADING(false))
-                toast("password updated", { type: "success"})
-                navigate("/login")
-              }
-              else  {
-
+                toast('password updated', { type: 'success' })
+                navigate('/login')
+              } else {
                 dispatch(SET_LOADING(false))
-                toast("Email upadate failed", { type: "error"})
+                toast('Email upadate failed', { type: 'error' })
               }
-
-            
-            }
-  
-        
-            )
-
+            })
           }}
           logo={logo}
           title="BitBridge Global"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
             backdropFilter: 'blur(4px)',
-            height: "100vh",
-            display: "flex",
-            objectFit: "cover",
+            height: '100vh',
+            display: 'flex',
+            objectFit: 'cover',
             // width: "500px",
-            justifyContent: "center"
+            justifyContent: 'center',
           }}
           subTitle="Gift Card trading and exchange platform"
           actions={
             <Space>
-              Already have an account? <NavLink to={"/login"}>Login</NavLink> 
+              Already have an account? <NavLink to={'/login'}>Login</NavLink>
               {/* <AlipayCircleOutlined style={iconStyles} />
               <TaobaoCircleOutlined style={iconStyles} />
               <WeiboCircleOutlined style={iconStyles} /> */}
@@ -100,24 +86,16 @@ export const ResetPassword = () => {
           }
           submitter={{
             searchConfig: {
-              submitText: 'Save Password'
+              submitText: 'Save Password',
             },
           }}
-          
-
         >
-          <Tabs
-            centered
-            activeKey={loginType}
-            onChange={(activeKey) => setLoginType(activeKey)}
-          >
+          <Tabs centered activeKey={loginType} onChange={(activeKey) => setLoginType(activeKey)}>
             <Tabs.TabPane key={'account'} tab={'RESET PASSWORD'} />
           </Tabs>
           <>
-          
             <ProFormText
               name="email"
-              
               initialValue={email}
               disabled={true}
               fieldProps={{
@@ -143,31 +121,21 @@ export const ResetPassword = () => {
                 statusRender: (value) => {
                   const getStatus = () => {
                     if (value && value.length > 12) {
-                      return 'ok';
+                      return 'ok'
                     }
                     if (value && value.length > 6) {
-                      return 'pass';
+                      return 'pass'
                     }
-                    return 'poor';
-                  };
-                  const status = getStatus();
+                    return 'poor'
+                  }
+                  const status = getStatus()
                   if (status === 'pass') {
-                    return (
-                      <div style={{ color: token.colorWarning }}>
-                        Strength: Medium
-                      </div>
-                    );
+                    return <div style={{ color: token.colorWarning }}>Strength: Medium</div>
                   }
                   if (status === 'ok') {
-                    return (
-                      <div style={{ color: token.colorSuccess }}>
-                        Strength: Strong
-                      </div>
-                    );
+                    return <div style={{ color: token.colorSuccess }}>Strength: Strong</div>
                   }
-                  return (
-                    <div style={{ color: token.colorError }}>Strength: Weak.</div>
-                  );
+                  return <div style={{ color: token.colorError }}>Strength: Weak.</div>
                 },
               }}
               placeholder={'Password'}
@@ -178,25 +146,22 @@ export const ResetPassword = () => {
                 },
               ]}
             />
-           
           </>
-              <div
+          <div
             style={{
               marginBlockEnd: 24,
             }}
-          >
-           
-          </div>
+          ></div>
         </LoginForm>
       </div>
     </ProConfigProvider>
-  );
-};
+  )
+}
 
 const ResetPasswordPage = () => (
   <ConfigProvider locale={enUS}>
     <ResetPassword />
   </ConfigProvider>
-);
+)
 
-export default ResetPasswordPage;
+export default ResetPasswordPage

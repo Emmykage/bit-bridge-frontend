@@ -11,13 +11,11 @@ import MobileTopUpViewComponents from '../../components/MobileTopUpViewComponent
 const MobileTopUps = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {airtime, dataBundles, loading} = useSelector(state => state.provision)
-  useEffect(()=> {
+  const { airtime, dataBundles, loading } = useSelector((state) => state.provision)
+  useEffect(() => {
     dispatch(getProvisions())
-  },[])
-  return (
-    <MobileTopUpViewComponents/>
-  )
+  }, [])
+  return <MobileTopUpViewComponents />
 }
 
 export default MobileTopUps

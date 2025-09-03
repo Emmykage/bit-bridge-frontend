@@ -1,49 +1,46 @@
-import {  Form, Select } from 'antd';
-import PropTypes from 'prop-types';
-import "./style.scss"
+import { Form, Select } from 'antd'
+import PropTypes from 'prop-types'
+import './style.scss'
 const FormSelect = ({
-    onChange,
-    name, 
-    className, 
-    options, 
-    required=false,
-    placeholder,
-    mode,
-    disabled,
-    label}) => {
-  
+  onChange,
+  name,
+  className,
+  options,
+  required = false,
+  placeholder,
+  mode,
+  disabled,
+  label,
+}) => {
   return (
-  <>
-  
+    <>
       <Form.Item
-      className={`formInput ${className}`}
-      name={name}
-      rules={[
-        {
-          required: required,
-          message: `Please input ${label}!`,
-        },
-      ]}
-       label={label}
-       >
-        <Select
-        placeholder={placeholder}
-        className='h-12'
+        className={`formInput ${className}`}
         name={name}
-        onChange={onChange}
-        loading={true}
-        disabled={disabled}
-        mode={mode}
-        // defaultActiveFirstOption={true}
+        rules={[
+          {
+            required: required,
+            message: `Please input ${label}!`,
+          },
+        ]}
+        label={label}
+      >
+        <Select
+          placeholder={placeholder}
+          className="h-12"
+          name={name}
+          onChange={onChange}
+          loading={true}
+          disabled={disabled}
+          mode={mode}
+          // defaultActiveFirstOption={true}
 
-        
-        options={options}>
-        </Select>      
-        </Form.Item>
-
-      </>
-  );
-};
+          options={options}
+        ></Select>
+      </Form.Item>
+    </>
+  )
+}
 
 FormSelect.propTypes = {
   FormInputArea: PropTypes.string,
@@ -57,4 +54,4 @@ FormSelect.propTypes = {
   mode: PropTypes.string,
   disabled: PropTypes.bool,
 }
-export default FormSelect;
+export default FormSelect

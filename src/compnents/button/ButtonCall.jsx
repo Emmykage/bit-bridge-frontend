@@ -1,7 +1,7 @@
-import { AntDesignOutlined } from '@ant-design/icons';
-import { Button, ConfigProvider, Space } from 'antd';
-import { createStyles } from 'antd-style';
-import PropTypes from 'prop-types';
+import { AntDesignOutlined } from '@ant-design/icons'
+import { Button, ConfigProvider, Space } from 'antd'
+import { createStyles } from 'antd-style'
+import PropTypes from 'prop-types'
 const useStyle = createStyles(({ prefixCls, css }) => ({
   linearGradientButton: css`
     &.${prefixCls}-btn-primary:not([disabled]):not(.${prefixCls}-btn-dangerous) {
@@ -26,28 +26,31 @@ const useStyle = createStyles(({ prefixCls, css }) => ({
       }
     }
   `,
-}));
-const ButtonCall = ({children, handleClick}) => {
-  const { styles } = useStyle();
+}))
+const ButtonCall = ({ children, handleClick }) => {
+  const { styles } = useStyle()
   return (
     <ConfigProvider
       button={{
         className: styles.linearGradientButton,
       }}
     >
-      <Space
-      align='center'
-      >
+      <Space align="center">
         <Button
-        onClick={handleClick} type="primary" size="large" className='my-10' icon={<AntDesignOutlined />}>
-          {children ?? "Register Now"}
+          onClick={handleClick}
+          type="primary"
+          size="large"
+          className="my-10"
+          icon={<AntDesignOutlined />}
+        >
+          {children ?? 'Register Now'}
         </Button>
       </Space>
     </ConfigProvider>
-  );
-};
+  )
+}
 ButtonCall.propTypes = {
   children: PropTypes.node,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
 }
-export default ButtonCall;
+export default ButtonCall

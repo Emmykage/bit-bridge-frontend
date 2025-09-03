@@ -4,28 +4,23 @@ import {
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProConfigProvider,
-  ProFormText,
-  setAlpha,
-} from '@ant-design/pro-components';
-import enUS from "antd/es/locale/en_US"
+} from '@ant-design/icons'
+import { LoginForm, ProConfigProvider, ProFormText, setAlpha } from '@ant-design/pro-components'
+import enUS from 'antd/es/locale/en_US'
 
-import { ConfigProvider, Space, Tabs, theme } from 'antd';
-import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import logo from "../../../assets/logos/2.png"
-import { useDispatch, useSelector } from 'react-redux';
+import { ConfigProvider, Space, Tabs, theme } from 'antd'
+import { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import logo from '../../../assets/logos/2.png'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { userSignUp } from '../../../redux/actions/auth';
-import { SET_LOADING } from '../../../redux/app';
+import { userSignUp } from '../../../redux/actions/auth'
+import { SET_LOADING } from '../../../redux/app'
 
 export const AdminSignup = () => {
-  const { token } = theme.useToken();
-  const {loading} = useSelector(state => state.auth)
-  const [loginType, setLoginType] = useState('phone');
+  const { token } = theme.useToken()
+  const { loading } = useSelector((state) => state.auth)
+  const [loginType, setLoginType] = useState('phone')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -35,44 +30,37 @@ export const AdminSignup = () => {
     fontSize: '24px',
     verticalAlign: 'middle',
     cursor: 'pointer',
-  };
+  }
 
   return (
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
-                loading={loading}
-
-        onFinish={(values) => {
-          dispatch(userSignUp({user: values})).then(result =>
-            {
-              if(userSignUp.fulfilled.match(result)){
+          loading={loading}
+          onFinish={(values) => {
+            dispatch(userSignUp({ user: values })).then((result) => {
+              if (userSignUp.fulfilled.match(result)) {
                 dispatch(SET_LOADING(false))
-                navigate("/dashboard/home")
-              }
-              else  if(userSignUp.rejected.match(result)){
+                navigate('/dashboard/home')
+              } else if (userSignUp.rejected.match(result)) {
                 dispatch(SET_LOADING(false))
               }
-            }
-  
-        
-            )
-
+            })
           }}
           logo={logo}
           title="BitBridge Global"
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           containerStyle={{
             backdropFilter: 'blur(4px)',
-            height: "100vh",
-            display: "flex",
+            height: '100vh',
+            display: 'flex',
             // width: "500px",
-            justifyContent: "center"
+            justifyContent: 'center',
           }}
           subTitle="Nigerians Largest trading and exchange platform"
           actions={
             <Space>
-              Already have an account? <NavLink to={"/login"}>Login</NavLink> 
+              Already have an account? <NavLink to={'/login'}>Login</NavLink>
               <AlipayCircleOutlined style={iconStyles} />
               <TaobaoCircleOutlined style={iconStyles} />
               <WeiboCircleOutlined style={iconStyles} />
@@ -83,18 +71,12 @@ export const AdminSignup = () => {
               submitText: 'Sign Up', // Change button text to Sign Up
             },
           }}
-
         >
-          <Tabs
-            centered
-            activeKey={loginType}
-            onChange={(activeKey) => setLoginType(activeKey)}
-          >
+          <Tabs centered activeKey={loginType} onChange={(activeKey) => setLoginType(activeKey)}>
             <Tabs.TabPane key={'account'} tab={'Signup with email and password'} />
           </Tabs>
           <>
-          
-                <ProFormText
+            <ProFormText
               name="email"
               fieldProps={{
                 size: 'large',
@@ -118,31 +100,21 @@ export const AdminSignup = () => {
                 statusRender: (value) => {
                   const getStatus = () => {
                     if (value && value.length > 12) {
-                      return 'ok';
+                      return 'ok'
                     }
                     if (value && value.length > 6) {
-                      return 'pass';
+                      return 'pass'
                     }
-                    return 'poor';
-                  };
-                  const status = getStatus();
+                    return 'poor'
+                  }
+                  const status = getStatus()
                   if (status === 'pass') {
-                    return (
-                      <div style={{ color: token.colorWarning }}>
-                        Strength: Medium
-                      </div>
-                    );
+                    return <div style={{ color: token.colorWarning }}>Strength: Medium</div>
                   }
                   if (status === 'ok') {
-                    return (
-                      <div style={{ color: token.colorSuccess }}>
-                        Strength: Strong
-                      </div>
-                    );
+                    return <div style={{ color: token.colorSuccess }}>Strength: Strong</div>
                   }
-                  return (
-                    <div style={{ color: token.colorError }}>Strength: Weak.</div>
-                  );
+                  return <div style={{ color: token.colorError }}>Strength: Weak.</div>
                 },
               }}
               placeholder={'Password'}
@@ -159,19 +131,17 @@ export const AdminSignup = () => {
             style={{
               marginBlockEnd: 24,
             }}
-          >
-         
-          </div>
+          ></div>
         </LoginForm>
       </div>
     </ProConfigProvider>
-  );
-};
+  )
+}
 
 const ASignup = () => (
   <ConfigProvider locale={enUS}>
     <AdminSignup />
   </ConfigProvider>
-);
+)
 
-export default ASignup;
+export default ASignup

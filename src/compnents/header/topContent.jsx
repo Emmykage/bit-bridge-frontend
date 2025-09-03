@@ -1,12 +1,12 @@
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import InputBase from '@mui/material/InputBase'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -21,7 +21,7 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
-}));
+}))
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -31,7 +31,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -48,13 +48,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+}))
 
 export default function SearchAppBar() {
   return (
-    <Box  sx={{ flexGrow: 1 }}>
-      <AppBar  classes='bg-red-500' position="static">
-        <Toolbar classes={"bg-red-500"}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar classes="bg-red-500" position="static">
+        <Toolbar classes={'bg-red-500'}>
           <IconButton
             size="large"
             edge="start"
@@ -65,7 +65,7 @@ export default function SearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-          className='text-black font-bold'
+            className="text-black font-bold"
             variant="h5"
             noWrap
             component="div"
@@ -77,13 +77,10 @@ export default function SearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
           </Search>
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }

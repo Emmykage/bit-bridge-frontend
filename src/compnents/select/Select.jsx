@@ -1,15 +1,10 @@
-import { Select, Space } from 'antd';
-import PropTypes from 'prop-types';
+import { Select, Space } from 'antd'
+import PropTypes from 'prop-types'
 
-const SelectInput = ({
-  options,
-  placeholder, 
-  className, 
-  onChange, 
-  defaultValue}) => {
+const SelectInput = ({ options, placeholder, className, onChange, defaultValue }) => {
   return (
-    <Space wrap> 
-         <Select
+    <Space wrap>
+      <Select
         placeholder={placeholder}
         defaultValue={defaultValue}
         // variant="borderless"
@@ -22,11 +17,11 @@ const SelectInput = ({
   )
 }
 
-SelectInput.propTypes= {
-    options: PropTypes.array,
-    onChange: PropTypes.func,
-    className: PropTypes.func,
-    defaultValue: PropTypes.string
+SelectInput.propTypes = {
+  options: PropTypes.array,
+  onChange: PropTypes.func,
+  className: PropTypes.func,
+  defaultValue: PropTypes.string,
 }
 export default SelectInput
 
@@ -44,14 +39,12 @@ export default SelectInput
 //       options={options}
 //       className={`${className}  order-gray-600 rounded border w-full`}
 //       onChange={handleChange}
-     
+
 //     />
-   
+
 //   </Space>
 
-
 // );
-
 
 // SelectInput.propTypes= {
 //     options: PropTypes.array,

@@ -1,14 +1,7 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const DiscoverBtn = ({
-  link,
-  btnText = 'Discover',
-  onclick,
-  type,
-  className,
-  disabled,
-}) => (
+const DiscoverBtn = ({ link, btnText = 'Discover', onclick, type, className, disabled }) => (
   <NavLink
     to={link}
     onClick={onclick}
@@ -16,6 +9,6 @@ const DiscoverBtn = ({
   >
     {btnText}
   </NavLink>
-);
+)
 
-export default DiscoverBtn;
+export default DiscoverBtn

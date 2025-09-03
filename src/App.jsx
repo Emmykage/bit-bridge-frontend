@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from './pages/HomePage'
@@ -91,16 +90,15 @@ import ConfirmPayment from './pages/checkout/ConfirmPayment'
 import DashboardPurchaseDetails from './pages/dashboard/PurchaseDetails'
 import DashboardComfirmPurchase from './pages/dashboard/ConfirmPurchase'
 
-const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'));
-const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'));
-const GiftCardPage = lazy(() => import('./pages/GiftCardPage'));
-const UtilityServices = lazy(() => import('./pages/UtilityServicesPage'));
-const ViewGiftCard = lazy(() => import('./pages/GiftCardPage/ViewGiftCard'));
-const CryptoExchangePage = lazy(() => import('./pages/cryptoExchangePage'));
-
+const ViewMobileTopUp = lazy(() => import('./pages/PhoneTopUp/ViewMobileTopUp'))
+const PhoneTopUp = lazy(() => import('./pages/PhoneTopUp'))
+const GiftCardPage = lazy(() => import('./pages/GiftCardPage'))
+const UtilityServices = lazy(() => import('./pages/UtilityServicesPage'))
+const ViewGiftCard = lazy(() => import('./pages/GiftCardPage/ViewGiftCard'))
+const CryptoExchangePage = lazy(() => import('./pages/cryptoExchangePage'))
 
 function App() {
-  const {isLoading} = useSelector(state => state.app)
+  const { isLoading } = useSelector((state) => state.app)
 
   // useEffect(() => {
   // const script =   document.createElement('script');
@@ -111,160 +109,239 @@ function App() {
 
   userInitializeData()
 
-  
   ScrollToTop()
   return (
-    <div className='bg-gray-100 '>
-    <Suspense fallback={<LoaderPage />}>
+    <div className="bg-gray-100 ">
+      <Suspense fallback={<LoaderPage />}>
+        <AppToast />
 
-    <AppToast/>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainLayout>
+                <Home />
+              </MainLayout>
+            }
+          />
+          <Route path="/app-redirect" element={<AppRedirect />} />
+          <Route path="/checkout" element={<ConfirmPayment />} />
 
-    <Routes>
-    <Route path='/' element={<MainLayout><Home/></MainLayout>} />
-    <Route path='/app-redirect' element={<AppRedirect/>}/>
-    <Route path='/checkout' element={<ConfirmPayment/>}/>
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/terms-conditions" element={<TermsCondintion />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicies />} />
+          <Route path="/vulnerability-disclosure" element={<VulnerabilityDisclosure />} />
+          <Route path="/site-map" element={<SiteMap />} />
+          <Route path="/about-us" element={<AboutUs />} />
 
-    <Route path='/contact-us' element={<ContactUs/>}/>
-    <Route path='/terms-conditions' element={<TermsCondintion/>}/>
-    <Route path='/privacy-policy' element={<PrivacyPolicies/>}/>
-    <Route path='/vulnerability-disclosure' element={<VulnerabilityDisclosure/>}/>
-    <Route path='/site-map' element={<SiteMap/>}/>
-    <Route path='/about-us' element={<AboutUs/>}/>
+          <Route
+            path="/phone-top-up"
+            element={
+              <MainLayout>
+                <PhoneTopUp />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/phone-top-up/:id"
+            element={
+              <MainLayout>
+                <ViewMobileTopUp />
+              </MainLayout>
+            }
+          >
+            <Route path="payment-details" element={<PurchaseDataDetails />} />
+            <Route path="confirm-payment" element={<ComfirmDataPurchase />} />
+          </Route>
+          <Route
+            path="/utility-services"
+            element={
+              <MainLayout>
+                <UtilityServices />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/utility-services/:id"
+            element={
+              <MainLayout>
+                <UtilityView />
+              </MainLayout>
+            }
+          >
+            <Route path="payment-details" element={<PurchaseCableDetails />} />
+            <Route path="confirm-payment" element={<ComfirmCablePurchase />} />
+          </Route>
+          <Route
+            path="/gift-cards"
+            element={
+              <MainLayout>
+                <GiftCardPage />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/crypto-exchange"
+            element={
+              <MainLayout>
+                <CryptoExchangePage />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <MainLayout>
+                <Services />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/product/:id"
+            element={
+              <MainLayout>
+                <ProductView />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/gift-cards/:id"
+            element={
+              <MainLayout>
+                <ViewGiftCard />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/crypto-exchange/:id"
+            element={
+              <MainLayout>
+                <ViewGiftCard />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/checkout/payment-method"
+            element={
+              <MainLayout>
+                <PaymentMenthod />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/confirmation-order"
+            element={
+              <MainLayout>
+                <ConfirmOrder />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/buy-power"
+            element={
+              <MainLayout>
+                <BuyPower />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/buy-power/:id"
+            element={
+              <MainLayout>
+                <ViewBuyPower />
+              </MainLayout>
+            }
+          >
+            <Route path="payment-form" element={<PowerForm />} />
+            <Route path="payment-details" element={<PurchaseDetails />} />
+            <Route path="confirm-payment" element={<ComfirmPurchase />} />
+          </Route>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<HomeDashboard />} />
 
-    <Route path='/phone-top-up' element={<MainLayout><PhoneTopUp/></MainLayout> } />
-    <Route path='/phone-top-up/:id' element={<MainLayout><ViewMobileTopUp/></MainLayout>}>
-      <Route path='payment-details' element={<PurchaseDataDetails/>}/>
-      <Route path='confirm-payment' element={<ComfirmDataPurchase/>}/>
+            <Route path="profile-account" element={<ProfileAccountPage />} />
 
-    </Route>
-    <Route path='/utility-services' element={<MainLayout><UtilityServices/></MainLayout>} />
-    <Route path='/utility-services/:id' element={<MainLayout><UtilityView/></MainLayout>}>
-      <Route path='payment-details' element={<PurchaseCableDetails/>}/>
-      <Route path='confirm-payment' element={<ComfirmCablePurchase/>}/>
+            <Route path="home" element={<HomeDashboard />}>
+              <Route path="orders-transaction" element={<OrderTransact />} />
+            </Route>
 
+            <Route path="approved-gift-cards" element={<GiftCardOrder />} />
+            <Route path="wallet" element={<Account />} />
+            <Route path="confirm/:id" element={<ComfirmQuickPurchase />} />
 
+            <Route path="utilities" element={<Utility />} />
+            <Route path="utilities/buy-power" element={<PowerUtilities />} />
+            <Route path="utilities/buy-power/:id" element={<PowerView />}>
+              <Route path="powerform" element={<DashboardPowerForm />} />
+              <Route path="confirm-payment" element={<DashboardComfirmPurchase />} />
+              <Route path="payment-details" element={<DashboardPurchaseDetails />} />
+            </Route>
 
-    </Route>
-    <Route path='/gift-cards' element={<MainLayout><GiftCardPage/></MainLayout>} />
-    <Route path='/crypto-exchange' element={<MainLayout><CryptoExchangePage/></MainLayout>} />
-    <Route path='/services' element={<MainLayout><Services/></MainLayout>} />
-    <Route path='/product/:id' element={<MainLayout><ProductView/></MainLayout>} />
-    <Route path='/gift-cards/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
-    <Route path='/crypto-exchange/:id' element={<MainLayout><ViewGiftCard/></MainLayout>} />
-    <Route path='/checkout/payment-method' element={<MainLayout><PaymentMenthod/></MainLayout>} />
-    <Route path='/confirmation-order' element={<MainLayout><ConfirmOrder/></MainLayout>} />
-    <Route path='/buy-power' element={<MainLayout><BuyPower/></MainLayout>}/>
-    <Route path='/buy-power/:id' element={<MainLayout><ViewBuyPower/></MainLayout>}>
-      <Route path='payment-form' element={<PowerForm/>}/>
-      <Route path='payment-details' element={<PurchaseDetails/>}/>
-      <Route path='confirm-payment' element={<ComfirmPurchase/>}/>
-    </Route>
-    <Route path='/dashboard' element={<DashboardLayout/>} >
-      <Route index element={<HomeDashboard />} />
-   
-    <Route path='profile-account' element={<ProfileAccountPage/>} />
+            <Route path="utilities/cable" element={<CableUtilities />} />
 
+            <Route path="utilities/cable/:id" element={<CableView />}>
+              <Route path="cableform" element={<DashboardCableForm />} />
+              <Route path="confirm-payment" element={<DashboardComfirmPurchase />} />
+              <Route path="payment-details" element={<DashboardPurchaseDetails />} />
+            </Route>
 
-      <Route path='home' element={<HomeDashboard/>}>
-        <Route path="orders-transaction" element={<OrderTransact/>}/>
-      </Route>
-      
-      <Route path='approved-gift-cards' element={<GiftCardOrder/>} />
-      <Route path='wallet' element={<Account/>} />
-      <Route path='confirm/:id' element={<ComfirmQuickPurchase        />} />
+            {/* mobile top up  */}
+            <Route path="utilities/mobile-top-up" element={<MobileTopUps />} />
 
-      <Route path='utilities' element={<Utility/>}/>
-      <Route path='utilities/buy-power' element={<PowerUtilities/>}/>
-      <Route path='utilities/buy-power/:id' element={<PowerView/>}>
-        <Route path='powerform' element={<DashboardPowerForm/>}/>
-        <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
-        <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
+            <Route path="utilities/mobile-top-up/:id" element={<MobileView />}>
+              <Route path="mobileform" element={<DashboardMobileForm />} />
+              <Route path="confirm-payment" element={<DashboardComfirmPurchase />} />
+              <Route path="payment-details" element={<DashboardPurchaseDetails />} />
+            </Route>
 
-        
+            <Route path="confirm-payment" element={<DashboardComfirmPurchase />} />
 
-      </Route>
+            <Route path="gift-cards" element={<GiftCards />} />
+            <Route path="transactions" element={<Transactions />}>
+              <Route path="orders" element={<Orders />} />
+              <Route path="trades" element={<Trades />} />
+              <Route path="deposits" element={<Deposits />} />
+              <Route path="withdrawals" element={<Withdrawals />} />
+            </Route>
+            <Route path="crypto-sell" element={<CryptoSell />}>
+              <Route path="bitcoin" element={<Bitcoin />} />
+              <Route path="dogecoin" element={<Dogecoin />} />
+              <Route path="ethereum" element={<Ethereum />} />
+            </Route>
+          </Route>
 
-      <Route path='utilities/cable' element={<CableUtilities/>}/>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset_password" element={<ResetPasswordPage />} />
 
+          <Route path="/admin/login" element={<ALogin />} />
+          <Route path="/admin/signup" element={<ASignup />} />
+          <Route path="/confirmation" element={<ConfirmEmail />} />
+          <Route path="/send-confirmation" element={<SendConfirmEmail />} />
+          <Route path="/confirmation-success" element={<ConfirmationSuccess />} />
+          <Route path="/confirmation-error" element={<ConfirmationError />} />
 
-      <Route path='utilities/cable/:id' element={<CableView/>}>
-      <Route path='cableform' element={<DashboardCableForm/>}/>
-      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
-      <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
+          <Route path="/admin" element={<AdminDashboardLayout />}>
+            <Route path="dashboard" element={<AdminHome />} />
+            <Route path="purchases" element={<Purchases />} />
+            <Route path="query" element={<QueryRequest />} />
+            <Route path="purchases/:id" element={<ViewOrder />} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/:id" element={<ViewProduct />} />
+            <Route path="services" element={<MainServices />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="transactions" element={<AdminTransactions />} />
+            <Route path="withdrawals" element={<AdminWithdrawalTransactions />} />
+            {/* withdrawals */}
+            <Route path="transactions/:id" element={<ViewTransaction />} />
+            <Route path="users" element={<Users />} />
+            <Route path="users/:id" element={<ViewUser />} />
+          </Route>
+        </Routes>
 
-      
-
-      </Route>
-
-
-      {/* mobile top up  */}
-      <Route path='utilities/mobile-top-up' element={<MobileTopUps/>}/>
-
-
-      <Route path='utilities/mobile-top-up/:id' element={<MobileView/>}>
-        <Route path='mobileform' element={<DashboardMobileForm/>}/>
-        <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
-        <Route path='payment-details' element={<DashboardPurchaseDetails/>}/>
-      </Route>
-
-      <Route path='confirm-payment' element={<DashboardComfirmPurchase/>}/>
-
-
-
-      <Route path='gift-cards' element={<GiftCards/>} />
-      <Route path='transactions' element={<Transactions/>}>
-        <Route path='orders' element={<Orders/>} />
-        <Route path='trades' element={<Trades/>} />
-        <Route path='deposits' element={<Deposits/>} />
-        <Route path='withdrawals' element={<Withdrawals/>} />
-
-      </Route>
-      <Route path='crypto-sell' element={<CryptoSell/>}>
-      <Route path='bitcoin' element={<Bitcoin/>} />
-      <Route path='dogecoin' element={<Dogecoin/>} />
-      <Route path='ethereum' element={<Ethereum/>} /> 
-                    
-      </Route>
-    </Route>
-
-
-
-    <Route path='/login' element={<LoginPage/>}/>
-    <Route path='/signup' element={<SignUp/>}/>
-    <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
-    <Route path='/reset_password' element={<ResetPasswordPage/>}/>
-    
-    <Route path='/admin/login' element={<ALogin/>}/>
-    <Route path='/admin/signup' element={<ASignup/>}/>
-    <Route path='/confirmation' element={<ConfirmEmail/>}/>
-    <Route path='/send-confirmation' element={<SendConfirmEmail/>}/>
-    <Route path='/confirmation-success' element={<ConfirmationSuccess/>}/>
-    <Route path='/confirmation-error' element={<ConfirmationError/>}/>
-
-    <Route path="/admin" element={<AdminDashboardLayout/>}>
-      <Route path='dashboard' element={<AdminHome/>}/>
-      <Route path='purchases' element={<Purchases/>}/>
-      <Route path='query' element={<QueryRequest/>}/>
-      <Route path='purchases/:id' element={<ViewOrder/>}/>
-      <Route path='products' element={<Products/>}/>
-      <Route path='products/:id' element={<ViewProduct/>}/>
-      <Route path='services' element={<MainServices/>}/>
-      <Route path='add-product' element={<AddProduct/>}/>
-      <Route path='transactions' element={<AdminTransactions/>}/>
-      <Route path='withdrawals' element={<AdminWithdrawalTransactions/>}/>
-      {/* withdrawals */}
-      <Route path='transactions/:id' element={<ViewTransaction/>}/>
-      <Route path='users' element={<Users/>}/>
-      <Route path='users/:id' element={<ViewUser/>}/>
-    
-    
-
-    </Route>
-  </Routes>
-
-    
-    <Loader isLoaderOpen={isLoading}/>
-    </Suspense>
+        <Loader isLoaderOpen={isLoading} />
+      </Suspense>
     </div>
   )
 }

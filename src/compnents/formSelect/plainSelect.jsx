@@ -1,11 +1,7 @@
-import { Select } from 'antd';
-import PropTypes from 'prop-types';
+import { Select } from 'antd'
+import PropTypes from 'prop-types'
 import './style.scss'
-const PlainSelect = ({options,
-  placeholder="Search to Select",
-  className,
-    onChange
-}) => (
+const PlainSelect = ({ options, placeholder = 'Search to Select', className, onChange }) => (
   <Select
     showSearch
     onChange={onChange}
@@ -20,12 +16,12 @@ const PlainSelect = ({options,
     options={options}
     className={className}
   />
-);
+)
 
 PlainSelect.propTypes = {
   options: PropTypes.array,
   className: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 }
-export default PlainSelect;
+export default PlainSelect

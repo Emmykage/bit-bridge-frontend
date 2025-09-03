@@ -1,26 +1,20 @@
-.add-gift-token{
+.add-gift-token {
+  &.ant-modal {
+    .ant-modal-content {
+      background-color: white;
 
-    &.ant-modal{
-        .ant-modal-content{
-            background-color: white;
-
-            .ant-modal-close-x{
-                color: black;
-            }
-
-        }
+      .ant-modal-close-x {
+        color: black;
+      }
     }
-    // background-color: red;
+  }
+  // background-color: red;
 
-
-    .ant-form{
-
+  .ant-form {
     .ant-form-item {
-
-        .ant-input {
-            @apply text-black
-        }
-}    }
-
-
+      .ant-input {
+        @apply text-black;
+      }
+    }
+  }
 }

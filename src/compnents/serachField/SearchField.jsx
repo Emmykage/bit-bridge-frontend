@@ -1,7 +1,7 @@
-import { Input } from 'antd';
-import "./search.scss"
-import PropTypes from 'prop-types';
-const { Search } = Input;
+import { Input } from 'antd'
+import './search.scss'
+import PropTypes from 'prop-types'
+const { Search } = Input
 // const suffix = (
 //   <AudioOutlined
 //     style={{
@@ -10,16 +10,17 @@ const { Search } = Input;
 //     }}
 //   />
 // );
-const onSearch = (value, _e, info) => console.log(info?.source, value);
-const SearchField = ({
-    className
-
-}) => (
-    <Search placeholder="input search text" className={`${className} search-field`} onSearch={onSearch} enterButton />
-  
-);
+const onSearch = (value, _e, info) => console.log(info?.source, value)
+const SearchField = ({ className }) => (
+  <Search
+    placeholder="input search text"
+    className={`${className} search-field`}
+    onSearch={onSearch}
+    enterButton
+  />
+)
 
 SearchField.propTypes = {
-    className: PropTypes.string
+  className: PropTypes.string,
 }
-export default SearchField;
+export default SearchField

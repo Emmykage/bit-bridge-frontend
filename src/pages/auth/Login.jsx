@@ -1,55 +1,49 @@
 import {
-    AlipayOutlined,
-    LockOutlined,
-    MobileOutlined,
-    TaobaoOutlined,
-    UserOutlined,
-    WeiboOutlined,
-  } from '@ant-design/icons';
-  import {
-    LoginFormPage,
-    ProConfigProvider,
-    ProFormCaptcha,
-    ProFormCheckbox,
-    ProFormText,
-  } from '@ant-design/pro-components';
-  import { Button, ConfigProvider, Divider, Space, Tabs, message, theme } from 'antd';
-  import { useEffect, useState } from 'react';
-  import "./style.scss"
-  import logo from "../../assets/logos/2.png"
-  const iconStyles = {
-    color: 'rgba(0, 0, 0, 0.2)',
-    fontSize: '18px',
-    verticalAlign: 'middle',
-    cursor: 'pointer',
-  };
-  import enUS from "antd/es/locale/en_US"
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../../redux/actions/auth';
-import { SET_LOADING } from '../../redux/app';
-  
-  const LoginPage = () => {
+  AlipayOutlined,
+  LockOutlined,
+  MobileOutlined,
+  TaobaoOutlined,
+  UserOutlined,
+  WeiboOutlined,
+} from '@ant-design/icons'
+import {
+  LoginFormPage,
+  ProConfigProvider,
+  ProFormCaptcha,
+  ProFormCheckbox,
+  ProFormText,
+} from '@ant-design/pro-components'
+import { Button, ConfigProvider, Divider, Space, Tabs, message, theme } from 'antd'
+import { useEffect, useState } from 'react'
+import './style.scss'
+import logo from '../../assets/logos/2.png'
+const iconStyles = {
+  color: 'rgba(0, 0, 0, 0.2)',
+  fontSize: '18px',
+  verticalAlign: 'middle',
+  cursor: 'pointer',
+}
+import enUS from 'antd/es/locale/en_US'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from '../../redux/actions/auth'
+import { SET_LOADING } from '../../redux/app'
 
-    const {user, logged} = useSelector(state => state.auth)
-    const [loginType, setLoginType] = useState('account');
-    const dispatch = useDispatch()
-    const location = useLocation()
-    const [loading, setLoading] = useState(false)
+const LoginPage = () => {
+  const { user, logged } = useSelector((state) => state.auth)
+  const [loginType, setLoginType] = useState('account')
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const [loading, setLoading] = useState(false)
 
-    const { token } = theme.useToken();
+  const { token } = theme.useToken()
 
-    const navigate = useNavigate()
-    useEffect(()=> {
+  const navigate = useNavigate()
+  useEffect(() => {}, [])
 
-    }, [])
+  console.log(loading)
 
-    console.log(loading)
-
-
-    if(!logged){
-
-    
+  if (!logged) {
     return (
       <div
         style={{
@@ -58,47 +52,38 @@ import { SET_LOADING } from '../../redux/app';
         }}
       >
         <LoginFormPage
-        loading={loading}
-        onFinish={(values) => {
-          dispatch(SET_LOADING(true))
-          setLoading(true)
+          loading={loading}
+          onFinish={(values) => {
+            dispatch(SET_LOADING(true))
+            setLoading(true)
 
-          dispatch(userLogin({user: values})).then(result =>
-          {
-            if(userLogin.fulfilled.match(result)){
-              dispatch(SET_LOADING(false))
-              
-            setLoading(false)
+            dispatch(userLogin({ user: values })).then((result) => {
+              if (userLogin.fulfilled.match(result)) {
+                dispatch(SET_LOADING(false))
 
-              navigate(location.state?.from?.pathname ||"/dashboard/home")
-            }
-            else  if(userLogin.rejected.match(result)){
-             setLoading(false)
-              dispatch(SET_LOADING(false) )
+                setLoading(false)
 
-            }
-          }
-
-      
-          )
-
-        }}
+                navigate(location.state?.from?.pathname || '/dashboard/home')
+              } else if (userLogin.rejected.match(result)) {
+                setLoading(false)
+                dispatch(SET_LOADING(false))
+              }
+            })
+          }}
           backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
           logo={logo}
           backgroundVideoUrl="https://gw.alipayobjects.com/v/huamei_gcee1x/afts/video/jXRBRK_VAwoAAAAAAAAAAAAAK4eUAQBr"
           // title="BitBridge Global"
-          title={<NavLink to={"/"}> BitBridge Global</NavLink>}
-
+          title={<NavLink to={'/'}> BitBridge Global</NavLink>}
           containerStyle={{
             backgroundColor: 'rgba(0, 0, 0,0.65)',
             backdropFilter: 'blur(4px)',
             // color: "white"
           }}
-
-          className='login-page'
+          className="login-page"
           subTitle="Login "
           style={{
-            color: 'white'
+            color: 'white',
           }}
           activityConfig={{
             style: {
@@ -110,8 +95,8 @@ import { SET_LOADING } from '../../redux/app';
             },
             title: 'Securely Bridge Your Digital Assets',
             subTitle: 'Access your BitBridge account and seamlessly manage your digital assets.',
-            text: " Enjoy a secure, fast, and user-friendly experience while bridging assets across networks",
-            
+            text: ' Enjoy a secure, fast, and user-friendly experience while bridging assets across networks',
+
             action: (
               <Button
                 size="large"
@@ -121,7 +106,7 @@ import { SET_LOADING } from '../../redux/app';
                   color: token.colorPrimary,
                   width: 120,
                 }}
-                onClick={()=> navigate("/signup")}
+                onClick={() => navigate('/signup')}
               >
                 Sign Up
               </Button>
@@ -135,7 +120,6 @@ import { SET_LOADING } from '../../redux/app';
                 alignItems: 'center',
                 flexDirection: 'column',
               }}
-
             >
               {/* <Divider plain>
                 <span
@@ -195,11 +179,7 @@ import { SET_LOADING } from '../../redux/app';
             </div>
           }
         >
-          <Tabs
-            centered
-            activeKey={loginType}
-            onChange={(activeKey) => setLoginType(activeKey)}
-          >
+          <Tabs centered activeKey={loginType} onChange={(activeKey) => setLoginType(activeKey)}>
             <Tabs.TabPane key={'account'} tab={'Login with account'} />
             {/* <Tabs.TabPane key={'phone'} tab={'Login with phone number'} /> */}
           </Tabs>
@@ -294,9 +274,9 @@ import { SET_LOADING } from '../../redux/app';
                 placeholder={'Please enter the verification code.'}
                 captchaTextRender={(timing, count) => {
                   if (timing) {
-                    return `${count} ${'Get verification code'}`;
+                    return `${count} ${'Get verification code'}`
                   }
-                  return 'Get verification code';
+                  return 'Get verification code'
                 }}
                 name="captcha"
                 rules={[
@@ -306,7 +286,7 @@ import { SET_LOADING } from '../../redux/app';
                   },
                 ]}
                 onGetCaptcha={async () => {
-                  message.success('Verification code successfully obtained! The code is: 1234');
+                  message.success('Verification code successfully obtained! The code is: 1234')
                 }}
               />
             </>
@@ -320,14 +300,14 @@ import { SET_LOADING } from '../../redux/app';
             Auto-login
             </ProFormCheckbox> */}
 
-            <NavLink to={"/send-confirmation"} className='btn btn-primary'>
+            <NavLink to={'/send-confirmation'} className="btn btn-primary">
               Confirm Account
             </NavLink>
             <a
               style={{
                 float: 'right',
               }}
-              onClick={() => navigate("/forgot-password")}
+              onClick={() => navigate('/forgot-password')}
             >
               Forgot Password
             </a>
@@ -343,24 +323,20 @@ import { SET_LOADING } from '../../redux/app';
         </Button> */}
         </LoginFormPage>
       </div>
-    );
+    )
+  } else {
+    navigate('/dashboard/home')
   }
-  else{
-    navigate("/dashboard/home")
-  }
-  };
-  
-  export  const App =  () => {
-    return (
-      <ConfigProvider locale={enUS}>
+}
 
+export const App = () => {
+  return (
+    <ConfigProvider locale={enUS}>
       <ProConfigProvider dark>
         <LoginPage />
       </ProConfigProvider>
-      </ConfigProvider>
-
-    );
-  };
-
+    </ConfigProvider>
+  )
+}
 
 export default App

@@ -1,179 +1,133 @@
 .ant-btn {
-    background: none;
+  background: none;
 
+  &.navbtn {
+    @apply bg-alt;
+  }
 
-    &.navbtn{
-
-        @apply bg-alt;
-    }
-
-    &.button{
-
-
-
+  &.button {
     @apply text-black;
 
-    
-    
-    &:hover{
-        @apply bg-primary text-white !important;
+    &:hover {
+      @apply bg-primary text-white !important;
     }
-    &.decline{
+    &.decline {
+      background: red;
+      color: white;
+    }
+
+    &.active {
+      @apply bg-primary text-white !important;
+    }
+
+    &.white-bg {
+      @apply text-white;
+
+      &:hover {
+        @apply bg-primary text-white !important;
+      }
+      &.decline {
         background: red;
         color: white;
-    }
+      }
 
-    &.active{
+      &.active {
         @apply bg-primary text-white !important;
-
+      }
     }
-
-    &.white-bg{
-        
-    @apply text-white;
-
-    
-    
-    &:hover{
-        @apply bg-primary text-white !important;
-    }
-    &.decline{
-        background: red;
-        color: white;
-    }
-
-    &.active{
-        @apply bg-primary text-white !important;
-
-    }
-    }
-
-
-}
-&.cancel{
+  }
+  &.cancel {
     @apply text-red-500 border border-red-600;
+  }
 
- }
+  &:hover {
+    @apply border-red-600;
+    //    background-color: rgba(255, 0, 0, 0.363) !important;
+  }
 
- &:hover{
-   @apply border-red-600;
-//    background-color: rgba(255, 0, 0, 0.363) !important;
-
- }
-
-
-&.classic-btn{
+  &.classic-btn {
     @apply bg-none text-alt border-alt;
 
-    &.cancel{
-        @apply text-red-500 border border-red-600;
-        &:hover{
-            @apply border-red-600 text-white bg-red-600/20 !important;
-          }
-    
-     }
-
-    
-     
-    &:hover{
-        @apply bg-alt text-white !important;
+    &.cancel {
+      @apply text-red-500 border border-red-600;
+      &:hover {
+        @apply border-red-600 text-white bg-red-600/20 !important;
+      }
     }
-  
+
+    &:hover {
+      @apply bg-alt text-white !important;
+    }
+  }
 }
 
-}
-
-.white-bg{
-    .ant-btn {
+.white-bg {
+  .ant-btn {
     background: none;
 
+    &.button {
+      @apply text-white;
 
- 
-
-    &.button{
-
-
-
-    @apply text-white;
-
-    
-    
-    &:hover{
+      &:hover {
         @apply bg-primary text-white !important;
-    }
-    &.decline{
+      }
+      &.decline {
         background: red;
         color: white;
-    }
+      }
 
-    &.active{
+      &.active {
         @apply bg-primary text-white !important;
+      }
 
-    }
+      &.white-bg {
+        @apply text-white;
 
-    &.white-bg{
-        
-    @apply text-white;
-
-    
-    
-    &:hover{
-        @apply bg-primary text-white !important;
-    }
-    &.decline{
-        background: red;
-        color: white;
-    }
-
-    &.active{
-        @apply bg-primary text-white !important;
-
-    }
-    }
-
-
-}
-&.cancel{
-    @apply text-red-500 border border-red-600;
-
- }
-
- &:hover{
-   @apply border-red-600;
-//    background-color: rgba(255, 0, 0, 0.363) !important;
-
- }
-
-
-&.classic-btn{
-    @apply bg-none text-alt border-alt;
-
-    &.cancel{
-        @apply text-red-500 border border-red-600;
-        &:hover{
-            @apply border-red-600 text-white bg-red-600/20 !important;
-          }
-    
-     }
-
-    
-     
-    &:hover{
-        @apply bg-alt text-white !important;
-    }
-  
-}
-
-}
-}
-
-.navbtn{
-    &.ant-btn{
-        padding: 0;
-        @media (max-width: 700px) {
-            font-size: 12px;
-            padding-inline-start: 8px !important;
-            
+        &:hover {
+          @apply bg-primary text-white !important;
         }
+        &.decline {
+          background: red;
+          color: white;
+        }
+
+        &.active {
+          @apply bg-primary text-white !important;
+        }
+      }
     }
+    &.cancel {
+      @apply text-red-500 border border-red-600;
+    }
+
+    &:hover {
+      @apply border-red-600;
+      //    background-color: rgba(255, 0, 0, 0.363) !important;
+    }
+
+    &.classic-btn {
+      @apply bg-none text-alt border-alt;
+
+      &.cancel {
+        @apply text-red-500 border border-red-600;
+        &:hover {
+          @apply border-red-600 text-white bg-red-600/20 !important;
+        }
+      }
+
+      &:hover {
+        @apply bg-alt text-white !important;
+      }
+    }
+  }
+}
+
+.navbtn {
+  &.ant-btn {
+    padding: 0;
+    @media (max-width: 700px) {
+      font-size: 12px;
+      padding-inline-start: 8px !important;
+    }
+  }
 }

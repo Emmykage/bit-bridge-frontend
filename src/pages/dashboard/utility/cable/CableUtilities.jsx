@@ -10,13 +10,11 @@ import CableTvComponents from '../../components/CableTVCOmpoent'
 const CableUtilities = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {utilities} = useSelector(state => state.provision)
-  useEffect(()=> {
+  const { utilities } = useSelector((state) => state.provision)
+  useEffect(() => {
     dispatch(getProvisions())
-  },[])
-  return (
-    <CableTvComponents/>
-  )
+  }, [])
+  return <CableTvComponents />
 }
 
 export default CableUtilities
