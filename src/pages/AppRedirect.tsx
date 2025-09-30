@@ -14,7 +14,7 @@ function AppRedirect() {
     }
   }, [])
 
-  return <div>Riderecting to app</div>
+  return <div>Riderecting to app...</div>
 }
 
 export default AppRedirect

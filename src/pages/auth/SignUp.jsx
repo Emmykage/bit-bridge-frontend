@@ -1,9 +1,15 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { LoginForm, ProConfigProvider, ProFormText, setAlpha } from '@ant-design/pro-components'
+import {
+  LoginForm,
+  ProConfigProvider,
+  ProFormCheckbox,
+  ProFormText,
+  setAlpha,
+} from '@ant-design/pro-components'
 import enUS from 'antd/es/locale/en_US'
 
 import { ConfigProvider, Space, Tabs, theme } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logos/2.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,8 +22,8 @@ export const Signup = () => {
   const [loginType, setLoginType] = useState('phone')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
   const [loading, setLoading] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const iconStyles = {
     marginInlineStart: '16px',
@@ -27,12 +33,29 @@ export const Signup = () => {
     cursor: 'pointer',
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 600)
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  console.log(isMobile)
+
   return (
     <ProConfigProvider hashed={false}>
       <div style={{ backgroundColor: token.colorBgContainer }}>
         <LoginForm
-          // loading={loading}
-
+          contentStyle={{
+            maxWidth: 420, // control width
+            width: '100%',
+            margin: '0 auto',
+          }}
           onFinish={(values) => {
             setLoading(true)
             dispatch(SET_LOADING(true))
@@ -182,6 +205,24 @@ export const Signup = () => {
                 },
               ]}
             />
+
+            <ProFormCheckbox
+              name={'consent'}
+              rules={[
+                {
+                  required: true,
+                  message: 'You must consent before signing up',
+                },
+              ]}
+            >
+              <span className="text-black">
+                I hereby give my e-signature and consent to use this platform in accordance with the{' '}
+                <a href="/terms" target="_blank" className="text-blue-600 underline">
+                  Terms & Conditions
+                </a>
+                .
+              </span>
+            </ProFormCheckbox>
           </>
 
           <div

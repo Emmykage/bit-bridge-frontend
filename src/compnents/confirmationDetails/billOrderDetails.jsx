@@ -21,7 +21,7 @@ const BillOrderDetails = ({ purchaseOrder, applyCommission }) => {
   }
 
   return (
-    <div className="bg-gray-900 text-white  flex items-center justify-center p-6">
+    <div className="bg-gray-900 text-white  flex items-center justify-center p-6 mt-4">
       <div className="bg-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-7xl">
         <h2 className="text-2xl font-semibold mb-4 text-center">Billing Transaction</h2>
         <h2>

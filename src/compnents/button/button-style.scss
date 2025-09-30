@@ -131,3 +131,13 @@
     }
   }
 }
+
+.ant-switch {
+  &.ant-switch-checked {
+    // background-color: green;
+    @apply bg-alt;
+  }
+  &.switch-button {
+    // background-color: yellow;
+  }
+}

@@ -10,6 +10,7 @@ import { confirmPayment, getPurchaseOrder } from '../../redux/actions/purchasePo
 import BillOrderDetails from '../../compnents/confirmationDetails/billOrderDetails'
 import PaymentOptions from '../../compnents/paymentOptions/PaymentOptions'
 import { nairaFormat } from '../../utils/nairaFormat'
+import SwitchButton from '../../compnents/button/switchButton'
 
 const DashboardPurchaseDetails = () => {
   const { user } = useSelector((state) => state.auth)
@@ -62,25 +63,34 @@ const DashboardPurchaseDetails = () => {
     [queryId, dispatch, navigate, applyCommission]
   )
 
+  const handleCommission = (checked) => {
+    console.log(checked)
+    setApplyCommission((prev) => !prev)
+  }
+
   useEffect(() => {
     dispatch(getPurchaseOrder(queryId))
   }, [])
 
   return (
     <>
-      <div className="bg-gray-900 flex justify-between items-center rounded-lg my-10 p-4">
-        <div>
-          <span> {nairaFormat(wallet?.balance, 'ngn')} </span>
-          <p className="flex gap-4 my-0"> {nairaFormat(wallet?.commission ?? 0, 'ngn')}</p>
+      {(purchaseOrder?.service_type === 'VTU' || purchaseOrder?.service_type === 'DATA') && (
+        <div className="bg-gray-900 flex justify-between items-center rounded-lg my-10 p-4">
+          <div>
+            <span className="text-lg font-medium"> {nairaFormat(wallet?.balance, 'ngn')} </span>
+            <p className="flex gap-4 my-0"> {nairaFormat(wallet?.commission ?? 0, 'ngn')}</p>
+          </div>
+          {/* <button
+              disabled={wallet.commission < 1}
+              onClick={() => setApplyCommission((prev) => !prev)}
+              className={`${applyCommission ? 'bg-alt' : ' bg-primary hover:bg-alt hover:text-primary'} transition-all hover:bg-alt rounded-md duration-200 ease-linear px-4 py-2`}
+            >
+              apply Commission
+            </button> */}
+
+          <SwitchButton onChange={handleCommission} />
         </div>
-        <button
-          disabled={wallet.commission < 1}
-          onClick={() => setApplyCommission((prev) => !prev)}
-          className={`${applyCommission ? 'bg-alt' : ' bg-primary hover:bg-alt hover:text-primary'} transition-all hover:bg-alt rounded-md duration-200 ease-linear px-4 py-2`}
-        >
-          apply Commission
-        </button>
-      </div>
+      )}
       {message && (
         <div className={`${err ? 'bg-red-200' : 'bg-green-200'} p-4 my-4`}>
           <p
