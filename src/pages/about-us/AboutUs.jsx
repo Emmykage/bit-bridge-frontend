@@ -26,7 +26,7 @@ const AboutUs = () => {
             <div>
               <p className="text-gray-800 text-base my-4 font-normal">
                 <span className="font-semibold">✅ Fast Transactions –</span> Enjoy instant
-                processing for gift card exchanges and bill payments.
+                processing for bill payments.
               </p>
             </div>
 
@@ -36,12 +36,12 @@ const AboutUs = () => {
                 transactions are safeguarded with industry-leading security measures
               </p>
             </div>
-            <div>
+            {/* <div>
               <p className="text-gray-800 text-base my-4 font-normal">
                 <span className="font-semibold">✅ Competitive Rates –</span> Get the best market
                 value for your gift card trades
               </p>
-            </div>
+            </div> */}
             <div>
               <p className="text-gray-800 text-base my-4 font-normal">
                 <span className="font-semibold">✅ 24/7 Customer Support –</span> Our dedicated team
@@ -58,7 +58,7 @@ const AboutUs = () => {
             <div>
               <h3 className="text-2xl text-primary font-semibold"> Our Services </h3>
 
-              <div>
+              {/* <div>
                 <p className="text-gray-800 text-base my-4 font-semibold">
                   1. Trade Gift Cards for Instant Cash
                 </p>
@@ -67,10 +67,10 @@ const AboutUs = () => {
                   a wide range of gift cards, offering <bold>competitive rates</bold> and{' '}
                   <bold>instant payouts</bold>
                 </p>
-              </div>
+              </div> */}
               <div>
                 <p className="text-gray-800 text-base my-4 font-semibold">
-                  2. Pay Utility Bills with Ease
+                  1. Pay Utility Bills with Ease
                 </p>
                 <p className="text-gray-800 px-4 font-semibold">
                   Never worry about missing a payment again! With Bit Bridge Global, you can settle
@@ -91,9 +91,9 @@ const AboutUs = () => {
               <div className="my-6">
                 <p className="text-gray-700">
                   We go beyond just transactions – we are committed to providing exceptional
-                  customer service. Whether you need assistance with gift card trading, bill
-                  payments, or navigating our platform, our team of experts is here to offer
-                  personalized guidance and ensure a seamless experience.
+                  customer service. Whether you need assistance with bill payments, or navigating
+                  our platform, our team of experts is here to offer personalized guidance and
+                  ensure a seamless experience.
                 </p>
 
                 <p className="text-xl text-primary font-semibold my-4"> How It Works</p>
@@ -118,8 +118,8 @@ const AboutUs = () => {
 
                   <p className="text-base text-gray-800 my-5">
                     {' '}
-                    Experience the convenience of trading gift cards and paying your bills with *Bit
-                    Bridge Global*. Get started today!{' '}
+                    Experience the convenience of paying your bills with *Bit Bridge Global*.
+                    Get started today!{' '}
                   </p>
                 </p>
               </div>

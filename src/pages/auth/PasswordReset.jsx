@@ -75,7 +75,7 @@ export const ResetPassword = () => {
             // width: "500px",
             justifyContent: 'center',
           }}
-          subTitle="Gift Card trading and exchange platform"
+          subTitle="Utility bills payment platform"
           actions={
             <Space>
               Already have an account? <NavLink to={'/login'}>Login</NavLink>

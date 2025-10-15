@@ -20,19 +20,32 @@ import AppModal from '../../compnents/modal/Modal'
 
 import ClassicBtn from '../../compnents/button/ClassicButton'
 import pickColorStyle from '../../utils/slect-color'
+import AccountCreationWizard from '../../compnents/accountCreationWizard/AccountCreationWizard'
+import AccountNumbers from '../../compnents/accountComponents/AccountComponents'
+import { createAccount, getAccounts } from '../../redux/actions/account'
+import { userProfile } from '../../redux/actions/auth'
+import { Button, Form } from 'antd'
+import FormInput from '../../compnents/formInput/FormInput'
 // import ClickButton from "../../compnents/button/Button"
 
 const HomeDashboard = () => {
   const { recentOrders } = useSelector((state) => state.purchase)
   const { wallet, loading } = useSelector((state) => state.wallet)
   const { user } = useSelector((state) => state.auth)
+  const { accounts, loading: accountLoading } = useSelector((state) => state.account)
 
   const dispatch = useDispatch()
   const [open, setIsOpen] = useState(false)
+  const [openMonify, setIsOpenMonify] = useState(false)
+  const [isAncorModal, setIsAncorModal] = useState(false)
   const [openAccount, setIsOpenAccount] = useState(false)
   const [selectedBiller, setSelectedBillier] = useState()
   const navigate = useNavigate()
   const [selectedItem, setSelectedItem] = useState('Top Up')
+  const [current, setCurrent] = useState(1)
+
+  const [formData, setFormData] = useState({})
+  const [accountDetails, setAccountDetails] = useState(null)
 
   const handleRepurchase = (id) => {
     dispatch(SET_LOADING(true))
@@ -49,9 +62,33 @@ const HomeDashboard = () => {
     })
   }
 
+  const handleSubmit = (values) => {
+    dispatch(SET_LOADING(true))
+    dispatch(createAccount({ account: values }))
+      .unwrap()
+      .then(() => {
+        dispatch(userProfile())
+        dispatch(SET_LOADING(false))
+        setOpenAlert(false)
+
+        setOpen(false)
+      })
+      .catch((error) => {
+        dispatch(SET_LOADING(false))
+        console.error('Error creating account:', error)
+      })
+  }
+
   useEffect(() => {
     dispatch(getRescentPurchaseOrder())
   }, [])
+
+  useEffect(() => {
+    console.log('Call accounts')
+    dispatch(getAccounts())
+  }, [])
+
+  console.log(accountLoading, accounts)
 
   const items = [
     {
@@ -86,7 +123,18 @@ const HomeDashboard = () => {
   //     fetchConversion()
   // },[wallet?.balance, activeCurrency])
 
-  console.log(wallet)
+  console.log(user)
+
+  const handleGenerate = (i, data = {}) => {
+    if (i === 0) {
+      setIsOpenMonify(true)
+    } else {
+      console.log(1, data)
+      setFormData(data)
+      setCurrent(data?.status === 'verifying' ? 2 : data?.status === 'unverified' ? 1 : 0)
+      setIsAncorModal(true)
+    }
+  }
   return (
     <>
       <div className="homeDashboard text-white w-full">
@@ -109,7 +157,7 @@ const HomeDashboard = () => {
                   {nairaFormat(wallet?.balance, 'ngn')}
                 </p>
               )}
-              {user?.account?.account_number && (
+              {user?.accounts[0]?.account_number && (
                 <p className="text-sm">
                   {' '}
                   <span
@@ -118,7 +166,8 @@ const HomeDashboard = () => {
                   >
                     Moniepoint
                   </span>{' '}
-                  : <span className="bloc text-green-200"> {user?.account?.account_number}</span>
+                  :{' '}
+                  <span className="bloc text-green-200"> {user?.account?.[0]?.account_number}</span>
                 </p>
               )}
               <p className="flex gap-4 my-4">
@@ -165,7 +214,21 @@ const HomeDashboard = () => {
         </div> */}
         </div>
 
-        <div className="bg-black p-4 lg:p-10 lg:pt-0 min-h-96">
+        <AccountNumbers
+          accounts={accounts}
+          generate={handleGenerate}
+          onView={(i, data) => {
+            console.log(i)
+            if (i == 0) {
+              setAccountDetails(data)
+            } else {
+              setAccountDetails(data)
+            }
+            setIsOpenAccount(true)
+          }}
+        />
+
+        <div className="bg-black p-4 lg:p-10 rounded-lg min-h-96">
           <div className="bg-black px-0 mb-10">
             <h5 className="mb-4 text-xl">Recent Transactions</h5>
 
@@ -242,20 +305,22 @@ const HomeDashboard = () => {
           <div className="space-y-3 text-gray-200">
             <div className="flex gap-4">
               <span className="font-semibold">Account Name:</span>
-              <span>Bit Bridge Global - {user?.account?.account_name}</span>
+              <span>{accountDetails?.bank_name} </span>
             </div>
             <div className="flex gap-4">
-              <span className="font-semibold">Email:</span>
-              <span>{user.email}</span>
+              <span className="font-semibold">Name:</span>
+              <span>{accountDetails?.account_name}</span>
             </div>
             <div className="flex gap-4">
               <span className="font-semibold">Account Number:</span>
-              <span>{user?.account?.account_number}</span>
+              <span>{accountDetails?.account_number}</span>
             </div>
 
             <div className="flex gap-4">
               <span className="font-semibold">Status:</span>
-              <span className={` ${user?.active ? 'text-green-600' : 'text-red-600'} font-medium`}>
+              <span
+                className={` ${accountDetails?.active ? 'text-green-600' : 'text-red-600'} font-medium`}
+              >
                 {user.active ? 'Active' : 'In-Active'}
               </span>
             </div>
@@ -267,6 +332,53 @@ const HomeDashboard = () => {
             </ClassicBtn>
           </div>
         </div>
+      </AppModal>
+
+      <AppModal
+        title={'Generate Account'}
+        isModalOpen={isAncorModal}
+        handleCancel={() => setIsAncorModal((prev) => !prev)}
+      >
+        <AccountCreationWizard
+          setFormData={setFormData}
+          formData={formData}
+          current={current}
+          setCurrent={setCurrent}
+          setIsOpenAccount={setIsOpenAccount}
+          openAccount={openAccount}
+          setIsAncorModal={setIsAncorModal}
+        />
+      </AppModal>
+
+      <AppModal
+        title={'Create Account Number'}
+        handleCancel={() => setIsOpenMonify(false)}
+        isModalOpen={openMonify}
+      >
+        <Form
+          layout="vertical"
+          initialValues={{
+            bvn: '',
+            currency: 'ngn',
+            vendor: 'moniepoint',
+            account_name: '',
+          }}
+          onFinish={(values) => {
+            handleSubmit({ ...values, currency: 'ngn', vendor: 'moniepoint' })
+          }}
+        >
+          <FormInput required={true} className="add-fund" name="bvn" type="text" label={`BVN`} />
+
+          <Form.Item label={null}>
+            <Button
+              className="border-alt m-auto block w-full h-20 bg-primary text-white rounded-lg  border shadow-md font-medium text-xl"
+              type="primary"
+              htmlType="submit"
+            >
+              Generate Account
+            </Button>
+          </Form.Item>
+        </Form>
       </AppModal>
     </>
   )

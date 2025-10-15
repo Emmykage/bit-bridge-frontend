@@ -2,12 +2,12 @@ import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
 import './button-style.scss'
-const ClickButton = ({ children, type, icon, btnType, size = 'large', onClick }) => {
+const AppButton = ({ className, children, type, icon, btnType, size = 'large', onClick }) => {
   return (
     <Button
       //  type="primary"
-      className={`bg-alt ${btnType} text-black hover:bg-alt border-none button`}
-      shape="round"
+      className={`bg-alt ${btnType} ${className} border px-6 border-alt text-black hover:bg-alt border-non button`}
+      shape="default"
       icon={icon ? <ArrowRightOutlined /> : null}
       onClick={onClick}
       size={size}
@@ -18,7 +18,7 @@ const ClickButton = ({ children, type, icon, btnType, size = 'large', onClick })
   )
 }
 
-ClickButton.propTypes = {
+AppButton.propTypes = {
   children: PropTypes.node.isRequired, // `children` must be provided
   size: PropTypes.oneOf(['small', 'middle', 'large']), // Allowable values
   onClick: PropTypes.func, // Optional callback function
@@ -28,4 +28,4 @@ ClickButton.propTypes = {
 //   size: "large",
 //   onClick: () => {}, // Default is a no-op
 // };
-export default ClickButton
+export default AppButton

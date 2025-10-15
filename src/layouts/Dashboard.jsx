@@ -45,8 +45,6 @@ const DashboardLayout = () => {
 
   // },[user, loading])
 
-  console.log(user, openAlert, 'user in dashboard layout')
-
   const closeNav = (e) => {
     if (
       sideNavRef.current &&
@@ -236,37 +234,6 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
-
-      <AppModal
-        title={'Create Account Number'}
-        handleCancel={() => setOpenAlert(false)}
-        isModalOpen={openAlert}
-      >
-        <Form
-          layout="vertical"
-          initialValues={{
-            bvn: '',
-            currency: 'ngn',
-            vendor: 'moniepoint',
-            account_name: '',
-          }}
-          onFinish={(values) => {
-            handleSubmit({ ...values, currency: 'ngn', vendor: 'moniepoint' })
-          }}
-        >
-          <FormInput required={true} className="add-fund" name="bvn" type="text" label={`BVN`} />
-
-          <Form.Item label={null}>
-            <Button
-              className="border-alt m-auto block w-full h-20 bg-primary text-white rounded-lg  border shadow-md font-medium text-xl"
-              type="primary"
-              htmlType="submit"
-            >
-              Generate Account
-            </Button>
-          </Form.Item>
-        </Form>
-      </AppModal>
     </div>
   )
 }

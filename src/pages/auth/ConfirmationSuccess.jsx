@@ -1,11 +1,19 @@
 import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const ConfirmationSuccess = () => {
   // const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/dashboard/home')
+    }, 200)
+    return () => clearTimeout(timer)
+  }, [navigate])
 
   return (
     <div className="h-screen bg-gray-900 w-full flex flex-col justify-center items-center gap-4">

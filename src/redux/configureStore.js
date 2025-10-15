@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
+  accountReducer,
   AppReducer,
   AuthReducer,
   OrderReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   billPurchase: paymentReducer,
   user: userReducer,
   stat: statisticsReducer,
+  account: accountReducer,
 })
 
 const store = configureStore({ reducer: rootReducer }, applyMiddleware(thunk, logger))
