@@ -5,7 +5,7 @@ export const apiRoute = 'api/v1/'
 // export const publicKey = "pk_live_cf58dea557ed8f09065e58365b6d104ce1280fa1"
 // export const  publicKey= "pk_test_f833f603b86e23ffa37f40f2e90056de9b928bf7"
 
-// Monnify
+// Monnifytest keys
 // export const  publicKey= "MK_TEST_CQV87G8H1W"
 export const publicKey = 'MK_PROD_AH8EL53JW8'
 
