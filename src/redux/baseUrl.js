@@ -1,5 +1,5 @@
-export const baseUrl = 'http://localhost:3000/'
-// export const baseUrl = import.meta.env.VITE_APP_DEV_BASE_URL ?? 'http://localhost:3000/'
+export const baseUrl =
+  import.meta.env.VITE_APP_DEV_BASE_URL ?? 'https://bitbridgeglobal-fa54ecb89f7d.herokuapp.com/'
 // export const baseUrl = 'https://bitbridgeglobal-fa54ecb89f7d.herokuapp.com/'
 export const apiRoute = 'api/v1/'
 // export const publicKey = "pk_live_cf58dea557ed8f09065e58365b6d104ce1280fa1"
