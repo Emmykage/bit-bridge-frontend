@@ -1,10 +1,10 @@
 import { HomeOutlined, LoginOutlined, MenuUnfoldOutlined, WalletOutlined } from '@ant-design/icons'
 import PropTypes from 'prop-types'
-import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom'
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
-import { userLogout, userProfile } from '../redux/actions/auth'
+import { userLogout } from '../redux/actions/auth'
 import DropDown from '../compnents/dropDown/DropDown'
 import logo from '../assets/logos/logo-mod.png'
 import { LuUtilityPole } from 'react-icons/lu'
@@ -12,10 +12,6 @@ import { getWallet } from '../redux/actions/wallet'
 import DrawerModal from '../compnents/drawer/Drawer'
 import { SET_LOADING } from '../redux/app'
 import LoaderPage from '../compnents/loader/LoaderPage'
-import AppModal from '../compnents/modal/Modal'
-import { Button, Form } from 'antd'
-import FormInput from '../compnents/formInput/FormInput'
-import { createAccount } from '../redux/actions/account'
 
 const DashboardLayout = () => {
   const dispatch = useDispatch()
@@ -23,27 +19,11 @@ const DashboardLayout = () => {
   const menuRef = useRef(null)
   // const {wallet} = useSelector(state => state.wallet)
   const { user, loading } = useSelector((state) => state.auth)
-  const navigate = useNavigate()
   const normal = 'flex justify-center items-center flex-col'
   const active = 'flex text-alt justify-center items-center flex-col'
   const [showMenu, seTShowMenu] = useState(false)
   const [open, setOpen] = useState(false)
-  const [openAlert, setOpenAlert] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    if (user && !user.account) {
-      setOpenAlert(true)
-    }
-  }, [user])
-  // useEffect(()=> {
-  //    if(!loading && !user){
-
-  //     return <Navigate to="/login" state={{from: location }} replace/>
-  //     // navigate('/login')
-  //    }
-
-  // },[user, loading])
 
   const closeNav = (e) => {
     if (
@@ -77,23 +57,6 @@ const DashboardLayout = () => {
 
   if (!loading && !user) {
     return <Navigate to="/login" state={{ from: location }} replace />
-  }
-
-  const handleSubmit = (values) => {
-    dispatch(SET_LOADING(true))
-    dispatch(createAccount({ account: values }))
-      .unwrap()
-      .then(() => {
-        dispatch(userProfile())
-        dispatch(SET_LOADING(false))
-        setOpenAlert(false)
-
-        setOpen(false)
-      })
-      .catch((error) => {
-        dispatch(SET_LOADING(false))
-        console.error('Error creating account:', error)
-      })
   }
 
   return (

@@ -1,12 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
-
-import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getProvisions } from '../../../redux/actions/provision'
 import ProductCard from '../../../compnents/product-card/ProductCard'
 
-const CableTvComponents = () => {
-  const navigate = useNavigate()
+const CableTvComponent = () => {
   const dispatch = useDispatch()
   const { utilities } = useSelector((state) => state.provision)
   useEffect(() => {
@@ -34,4 +31,4 @@ const CableTvComponents = () => {
   )
 }
 
-export default CableTvComponents
+export default CableTvComponent

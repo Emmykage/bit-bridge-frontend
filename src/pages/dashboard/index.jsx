@@ -2,20 +2,17 @@ import { TrophyOutlined } from '@ant-design/icons'
 import { nairaFormat } from '../../utils/nairaFormat'
 import './style.scss'
 import NavButton from '../../compnents/button/NavButton'
-// import { converter } from "../../api/currencyConverter"
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import SelectInput from "../../compnents/select/Select"
 
 import Loading from '../../compnents/loader/Loading'
 import PowerComponent from '../../compnents/powerComponents/PowerComponent'
 import MobileTopUpViewComponents from './components/MobileTopUpViewComponent'
-import CableTvComponents from './components/CableTVCOmpoent'
 import { MdAddCard, MdOutlineSell } from 'react-icons/md'
 import { PiHandWithdraw } from 'react-icons/pi'
 import { getRescentPurchaseOrder, repurchaseOrder } from '../../redux/actions/purchasePower'
 import { SET_LOADING } from '../../redux/app'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import AppModal from '../../compnents/modal/Modal'
 
 import ClassicBtn from '../../compnents/button/ClassicButton'
@@ -26,7 +23,7 @@ import { createAccount, getAccounts } from '../../redux/actions/account'
 import { userProfile } from '../../redux/actions/auth'
 import { Button, Form } from 'antd'
 import FormInput from '../../compnents/formInput/FormInput'
-// import ClickButton from "../../compnents/button/Button"
+import CableTvComponent from './components/CableTVCOmpoent'
 
 const HomeDashboard = () => {
   const { recentOrders } = useSelector((state) => state.purchase)
@@ -69,9 +66,7 @@ const HomeDashboard = () => {
       .then(() => {
         dispatch(userProfile())
         dispatch(SET_LOADING(false))
-        setOpenAlert(false)
-
-        setOpen(false)
+        setIsOpenMonify(false)
       })
       .catch((error) => {
         dispatch(SET_LOADING(false))
@@ -106,7 +101,7 @@ const HomeDashboard = () => {
     {
       label: 'Subscribe Cable Tv',
       name: 'TV Subscription',
-      render: <CableTvComponents />,
+      render: <CableTvComponent />,
       btn: 'Tv Subscription',
     },
   ]
