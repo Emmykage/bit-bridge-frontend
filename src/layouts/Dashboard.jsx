@@ -94,7 +94,6 @@ const DashboardLayout = () => {
                   <span>Wallet</span>
                 </NavLink>
               </li>
-              {/* <li><NavLink to={"/dashboard/gift-cards"} className={({isActive})=>  isActive ? active : normal}><GiftOutlined className='text-2xl'/> Gift Card</NavLink></li> */}
               <li>
                 <NavLink
                   to={'/dashboard/utilities'}

@@ -23,7 +23,7 @@ import { createAccount, getAccounts } from '../../redux/actions/account'
 import { userProfile } from '../../redux/actions/auth'
 import { Button, Form } from 'antd'
 import FormInput from '../../compnents/formInput/FormInput'
-import CableTvComponent from './components/CableTVCompoent'
+import CableTvComponent from './components/cable-tv-compoent'
 
 const HomeDashboard = () => {
   const { recentOrders } = useSelector((state) => state.purchase)

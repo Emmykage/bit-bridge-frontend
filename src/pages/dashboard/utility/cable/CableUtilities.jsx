@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getProvisions } from '../../../../redux/actions/provision'
-import CableTvComponents from '../../components/CableTVCOmpoent'
+import CableTvComponent from '../../components/cable-tv-compoent'
 
 const CableUtilities = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getProvisions())
   }, [])
-  return <CableTvComponents />
+  return <CableTvComponent />
 }
 
 export default CableUtilities
