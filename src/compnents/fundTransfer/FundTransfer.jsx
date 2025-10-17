@@ -68,6 +68,7 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
         console.log(res)
         setStep(1)
         setIsfundTransferOpen(false)
+        toast('Transfer Successful', { type: 'success' })
         setFormData(null)
       })
       .catch((err) => {
