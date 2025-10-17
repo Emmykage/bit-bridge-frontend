@@ -34,7 +34,6 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
   const fetchAccountName = () => {
     if (formData?.account_number?.length < 10 || !formData?.bank_code) return
     setLoading(true)
-    console.log('Call api')
 
     dispatch(verifyAccountUser({ account: formData }))
       .unwrap()
@@ -67,8 +66,7 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
       .unwrap()
       .then((res) => {
         console.log(res)
-
-        alert('✅ Transfer successful!')
+        setStep(1)
         setIsfundTransferOpen(false)
         setFormData(null)
       })
