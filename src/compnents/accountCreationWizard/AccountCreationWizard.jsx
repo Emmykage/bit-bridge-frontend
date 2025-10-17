@@ -3,13 +3,19 @@ import { Form, message, Steps, Progress, Button, DatePicker } from 'antd'
 import { motion, AnimatePresence } from 'framer-motion'
 import './style.scss'
 import { useDispatch } from 'react-redux'
-import { createBankAccount, createDepositAccount, verifyKYC } from '../../redux/actions/account'
+import {
+  createBankAccount,
+  createDepositAccount,
+  getAccounts,
+  verifyKYC,
+} from '../../redux/actions/account'
 import { toast } from 'react-toastify'
 import FormInput from '../formInput/FormInput'
 import ClickButton from '../button/Button'
 import AppButton from '../button/Button'
 import FormSelect from '../formSelect/FormSelect'
 import dayjs from 'dayjs'
+import { SET_LOADING } from '../../redux/app'
 const { Step } = Steps
 
 const AccountCreationWizard = ({ formData, setFormData, current, setCurrent, setIsAncorModal }) => {
@@ -21,12 +27,68 @@ const AccountCreationWizard = ({ formData, setFormData, current, setCurrent, set
     Object.values(formData).length > 0 && form.setFieldsValue(formData)
   }, [formData, form])
 
-  console.log(formData)
-  //   useEffect(() => {
-  //     setAccountDetails()
-  //   }, [])
   const dispatch = useDispatch()
+
+  const onboardUser = (values) => {
+    dispatch(
+      createBankAccount({
+        account: { vendor: 'anchor', ...values },
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        setCurrent((prev) => prev + 1)
+        dispatch(getAccounts())
+      })
+      .catch((err) => {
+        toast(err?.message ?? 'failed to initiate action', { type: 'error' })
+      })
+      .finally(() => {
+        dispatch(SET_LOADING(false))
+      })
+  }
+
+  const verifyKyc = (values) => {
+    dispatch(
+      verifyKYC({
+        account: { vendor: 'anchor', ...values },
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        setCurrent((prev) => prev + 1)
+        dispatch(getAccounts())
+      })
+      .catch((err) => {
+        toast(err?.message ?? 'failed to initiate action', { type: 'error' })
+      })
+      .finally(() => {
+        dispatch(SET_LOADING(false))
+      })
+  }
+
+  const accountCreation = (values) => {
+    dispatch(
+      createDepositAccount({
+        account: formData,
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        console.log(res)
+        // setAccountDetails(res?.data)
+        setCurrent((prev) => prev + 1)
+        dispatch(getAccounts())
+      })
+      .catch((err) => {
+        toast(err?.message ?? 'failed to initiate action', { type: 'error' })
+      })
+      .finally(() => {
+        dispatch(SET_LOADING(false))
+      })
+  }
   const next = async () => {
+    dispatch(SET_LOADING(true))
     try {
       const values = await form.validateFields()
 
@@ -34,52 +96,18 @@ const AccountCreationWizard = ({ formData, setFormData, current, setCurrent, set
 
       if (current === 0) {
         console.log('first', values)
-
-        dispatch(
-          createBankAccount({
-            account: { vendor: 'anchor', ...values },
-          })
-        )
-          .unwrap()
-          .then((res) => {
-            setCurrent((prev) => prev + 1)
-          })
-          .catch((err) => {
-            toast(err?.message ?? 'failed to initiate action', { type: 'error' })
-          })
+        onboardUser(values)
+        return
       }
 
       if (current === 1) {
-        dispatch(
-          verifyKYC({
-            account: { vendor: 'anchor', ...values },
-          })
-        )
-          .unwrap()
-          .then((res) => {
-            setCurrent((prev) => prev + 1)
-          })
-          .catch((err) => {
-            toast(err?.message ?? 'failed to initiate action', { type: 'error' })
-          })
+        verifyKyc(values)
+        return
       }
 
       if (current === 2) {
-        console.log(current)
-        dispatch(
-          createDepositAccount({
-            account: formData,
-          })
-        )
-          .unwrap()
-          .then((res) => {
-            console.log(res)
-            setAccountDetails(res?.data)
-            setCurrent((prev) => prev + 1)
-          })
-          .catch((err) => {
-            toast(err?.message ?? 'failed to initiate action', { type: 'error' })
-          })
+        accountCreation(values)
+        return
       }
       //   setCurrent((prev) => prev + 1)
       // form.resetFields()
@@ -151,11 +179,6 @@ const AccountCreationWizard = ({ formData, setFormData, current, setCurrent, set
               )
             })}
           </div>
-          <div className="text-center mt-6">
-            <Button size="large" className="text-alt" onClick={next}>
-              Create Account
-            </Button>
-          </div>
         </div>
       ),
     },
@@ -212,9 +235,9 @@ const AccountCreationWizard = ({ formData, setFormData, current, setCurrent, set
 
       <div className="flex justify-between mt-10 items-center">
         {current > 0 && (
-          <ClickButton onClick={prev} className=" !text-alt">
+          <AppButton disabled={true} onClick={prev} className=" !text-alt">
             Previous
-          </ClickButton>
+          </AppButton>
         )}
         {current < steps.length - 1 ? (
           <AppButton className=" !text-alt" onClick={next}>

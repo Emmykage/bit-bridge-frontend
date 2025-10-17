@@ -8,11 +8,12 @@ import { createTransaction, initializeMonifyPayment } from '../../redux/actions/
 import { RiUserReceived2Line } from 'react-icons/ri'
 import { converter } from '../../api/currencyConverter'
 import dateFormater from '../../utils/dateFormat'
-import statusStyle from '../../utils/statusStyle'
 import { getWallet } from '../../redux/actions/wallet'
 import { SET_LOADING } from '../../redux/app'
 import PropTypes from 'prop-types'
 import statusStyleCard from '../../utils/statusCard'
+import MoneyTransferFlow from '../../compnents/fundTransfer/FundTransfer'
+import { getBankList } from '../../redux/actions/account'
 
 const Account = () => {
   const formRef = useRef(null)
@@ -36,8 +37,13 @@ const Account = () => {
   }, [wallet?.balance])
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isfundTransferOpen, setIsfundTransferOpen] = useState(false)
   const [isWithdrawModalOpened, setIsWithdrawalModalOpen] = useState(false)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getBankList())
+  }, [])
   const handleSubmit = (values) => {
     dispatch(SET_LOADING(true))
     dispatch(
@@ -113,6 +119,7 @@ const Account = () => {
           <div className="bg-black my-10 rounded-lg md:p-10 block md:hidden flex-col justify-between">
             <div className="min-h-[200px] bg-red- py-10 sticky top-3 flex justify-between flex-col">
               <TransactionComp
+                setIsfundTransferOpen={setIsfundTransferOpen}
                 setIsModalOpen={setIsModalOpen}
                 setIsWithdrawalModalOpen={setIsWithdrawalModalOpen}
               />
@@ -200,6 +207,7 @@ const Account = () => {
         <div className="bg-black rounded-lg md:p-10 md:flex hidden flex-col justify-between">
           <div className="min-h-[500px] bg-red- py-10 sticky top-3 flex justify-between flex-col">
             <TransactionComp
+              setIsfundTransferOpen={setIsfundTransferOpen}
               setIsModalOpen={setIsModalOpen}
               setIsWithdrawalModalOpen={setIsWithdrawalModalOpen}
             />
@@ -244,36 +252,48 @@ const Account = () => {
           />
         </div>
       </AppModal>
+
+      <AppModal
+        handleCancel={() => setIsfundTransferOpen(false)}
+        title={'Send Money'}
+        isModalOpen={isfundTransferOpen}
+      >
+        <MoneyTransferFlow setIsfundTransferOpen={setIsfundTransferOpen} />
+      </AppModal>
     </>
   )
 }
 
-const TransactionComp = ({ setIsModalOpen, setIsWithdrawalModalOpen }) => {
+const TransactionComp = ({ setIsModalOpen, setIsWithdrawalModalOpen, setIsfundTransferOpen }) => {
   return (
     <div className="text-white flex justify-between bg--100 px-6">
-      <div
+      <button
         onClick={() => setIsModalOpen(true)}
         className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center"
       >
         <WalletOutlined />
         <span className="text-center">Add Funds</span>
-      </div>
-      <div
+      </button>
+      <button
         onClick={() => setIsWithdrawalModalOpen(true)}
-        className="flex flex-col items-center justify-center"
+        className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center"
       >
         <RiUserReceived2Line />
         <span className="text-center">Withdraw Funds</span>
-      </div>
-      <div className="flex flex-col items-center justify-center">
+      </button>
+      <button
+        onClick={() => setIsfundTransferOpen((prev) => !prev)}
+        className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center"
+      >
         <TransactionOutlined />
         <span className="text-center">Transfer Funds</span>
-      </div>
+      </button>
     </div>
   )
 }
 TransactionComp.propTypes = {
   setIsModalOpen: PropTypes.func,
   setIsWithdrawalModalOpen: PropTypes.func,
+  setIsfundTransferOpen: PropTypes.func,
 }
 export default Account

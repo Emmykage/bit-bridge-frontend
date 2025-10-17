@@ -19,11 +19,13 @@ import ClassicBtn from '../../compnents/button/ClassicButton'
 import pickColorStyle from '../../utils/slect-color'
 import AccountCreationWizard from '../../compnents/accountCreationWizard/AccountCreationWizard'
 import AccountNumbers from '../../compnents/accountComponents/AccountComponents'
-import { createAccount, getAccounts } from '../../redux/actions/account'
+import { createAccount, getAccounts, getUserAccount } from '../../redux/actions/account'
 import { userProfile } from '../../redux/actions/auth'
 import { Button, Form } from 'antd'
 import FormInput from '../../compnents/formInput/FormInput'
 import CableTvComponent from './components/cable-tv-compoent'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { use } from 'react'
 
 const HomeDashboard = () => {
   const { recentOrders } = useSelector((state) => state.purchase)
@@ -40,9 +42,11 @@ const HomeDashboard = () => {
   const navigate = useNavigate()
   const [selectedItem, setSelectedItem] = useState('Top Up')
   const [current, setCurrent] = useState(1)
-
+  const [showAccountNumber, setShowAccountNumber] = useState(false)
   const [formData, setFormData] = useState({})
   const [accountDetails, setAccountDetails] = useState(null)
+
+  console.log(accountDetails, accounts)
 
   const handleRepurchase = (id) => {
     dispatch(SET_LOADING(true))
@@ -58,6 +62,11 @@ const HomeDashboard = () => {
       }
     })
   }
+
+  useEffect(() => {
+    console.log('Call accounts')
+    dispatch(getUserAccount())
+  }, [])
 
   const handleSubmit = (values) => {
     dispatch(SET_LOADING(true))
@@ -82,8 +91,6 @@ const HomeDashboard = () => {
     console.log('Call accounts')
     dispatch(getAccounts())
   }, [])
-
-  console.log(accountLoading, accounts)
 
   const items = [
     {
@@ -118,13 +125,10 @@ const HomeDashboard = () => {
   //     fetchConversion()
   // },[wallet?.balance, activeCurrency])
 
-  console.log(user)
-
   const handleGenerate = (i, data = {}) => {
     if (i === 0) {
       setIsOpenMonify(true)
     } else {
-      console.log(1, data)
       setFormData(data)
       setCurrent(data?.status === 'verifying' ? 2 : data?.status === 'unverified' ? 1 : 0)
       setIsAncorModal(true)
@@ -213,7 +217,6 @@ const HomeDashboard = () => {
           accounts={accounts}
           generate={handleGenerate}
           onView={(i, data) => {
-            console.log(i)
             if (i == 0) {
               setAccountDetails(data)
             } else {
@@ -306,9 +309,20 @@ const HomeDashboard = () => {
               <span className="font-semibold">Name:</span>
               <span>{accountDetails?.account_name}</span>
             </div>
-            <div className="flex gap-4">
-              <span className="font-semibold">Account Number:</span>
-              <span>{accountDetails?.account_number}</span>
+            <div className="flex gap-4 justify-between items-center">
+              <div>
+                <span className="font-semibold">Account Number:</span>
+                <span>{accountDetails?.account_number}</span>
+              </div>
+
+              <div>
+                <span
+                  onClick={() => setShowAccountNumber((prev) => !prev)}
+                  className="cursor-pointer text-xl"
+                >
+                  {showAccountNumber ? <FaRegEyeSlash /> : <FaRegEye />}
+                </span>
+              </div>
             </div>
 
             <div className="flex gap-4">
