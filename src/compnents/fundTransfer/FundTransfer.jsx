@@ -81,7 +81,6 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
       })
   }
 
-  console.log(formData.account_name)
   return (
     <div className="flex flex-col items-center justify-center bg-gray-950 text-gray-100 p-6">
       <div className="w-full max-w-md bg-gray-900 rounded-2xl shadow-xl border border-gray-800 p-6 space-y-6">
@@ -209,11 +208,11 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
 
             <AppButton
               onClick={handleConfirm}
-              disabled={formData?.pin?.length !== 4}
+              disabled={formData?.pin?.length !== 4 || loading}
               className={`w-full py-2 rounded-lg font-semibold transition-colors ${
                 formData?.pin.length === 4
-                  ? 'bg-green-600 hover:bg-green-500 text-white'
-                  : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                  ? '!bg-green-600 hover:bg-blue-500 '
+                  : 'bg-gray-700 !text-gray-400 '
               }`}
             >
               Confirm Transfer
