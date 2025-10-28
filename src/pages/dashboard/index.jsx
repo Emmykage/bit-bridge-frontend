@@ -31,7 +31,13 @@ const HomeDashboard = () => {
   const { recentOrders } = useSelector((state) => state.purchase)
   const { wallet, loading } = useSelector((state) => state.wallet)
   const { user } = useSelector((state) => state.auth)
-  const { accounts, loading: accountLoading } = useSelector((state) => state.account)
+  const {
+    accounts,
+    account,
+    altBank,
+    altAccountNumber,
+    loading: accountLoading,
+  } = useSelector((state) => state.account)
 
   const dispatch = useDispatch()
   const [open, setIsOpen] = useState(false)
@@ -125,6 +131,10 @@ const HomeDashboard = () => {
   //     fetchConversion()
   // },[wallet?.balance, activeCurrency])
 
+  const getAccountDetails = () => {
+    dispatch(getUserAccount())
+  }
+
   const handleGenerate = (i, data = {}) => {
     if (i === 0) {
       setIsOpenMonify(true)
@@ -134,6 +144,8 @@ const HomeDashboard = () => {
       setIsAncorModal(true)
     }
   }
+
+  console.log(accountDetails)
   return (
     <>
       <div className="homeDashboard text-white w-full">
@@ -328,14 +340,34 @@ const HomeDashboard = () => {
             <div className="flex gap-4">
               <span className="font-semibold">Status:</span>
               <span
-                className={` ${accountDetails?.active ? 'text-green-600' : 'text-red-600'} font-medium`}
+                className={` ${accountDetails?.active || accountDetails?.status === 'completed' ? 'text-green-600' : 'text-red-600'} font-medium`}
               >
                 {user.active ? 'Active' : 'In-Active'}
               </span>
             </div>
+
+            {altBank && (
+              <div className="border-t py-4 space-y-4 border-gray-300">
+                <div className="flex gap-4">
+                  <span className="font-semibold">Bank:</span>
+                  <span>{altBank}</span>
+                </div>
+                <div>
+                  <span className="font-semibold">Account Number:</span>
+                  <span>{altAccountNumber}</span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-center gap-10">
+            <ClassicBtn
+              className={'!text-green-300 border !border-green-400'}
+              onclick={getAccountDetails}
+              type="cancel"
+            >
+              View More Details
+            </ClassicBtn>
             <ClassicBtn onclick={() => setIsOpenAccount(false)} type="cancel">
               Close
             </ClassicBtn>

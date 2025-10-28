@@ -4,6 +4,7 @@ import { initiateTransfer, verifyAccountUser } from '../../redux/actions/account
 import AppButton from '../button/Button'
 import { nairaFormat } from '../../utils/nairaFormat'
 import { toast } from 'react-toastify'
+import { getWallet } from '../../redux/actions/wallet'
 
 export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
   const [loading, setLoading] = useState(false)
@@ -29,7 +30,7 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
     setFormData({ ...formData, [name]: value })
   }
 
-  console.log(formData)
+  console.log(formData, step)
 
   const fetchAccountName = () => {
     if (formData?.account_number?.length < 10 || !formData?.bank_code) return
@@ -68,6 +69,8 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
         console.log(res)
         setStep(1)
         setIsfundTransferOpen(false)
+        dispatch(getWallet())
+
         toast('Transfer Successful', { type: 'success' })
         setFormData(null)
       })
@@ -209,7 +212,7 @@ export default function MoneyTransferFlow({ setIsfundTransferOpen }) {
               onClick={handleConfirm}
               disabled={formData?.pin?.length !== 4 || loading}
               className={`w-full py-2 rounded-lg font-semibold transition-colors ${
-                formData?.pin.length === 4
+                formData?.pin?.length === 4
                   ? '!bg-green-600 hover:bg-blue-500 '
                   : 'bg-gray-700 !text-gray-400 '
               }`}

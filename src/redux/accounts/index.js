@@ -37,10 +37,23 @@ const AccountSlice = createSlice({
         }
       })
       .addCase(getUserAccount.fulfilled, (state, action) => {
+        const response = action.payload.data
+        console.log('account details')
+
+        const providusInfo = response?.included?.find(
+          (item) => item.type === 'AccountNumber' && item.attributes.bank.provider === 'providus'
+        )
+
+        const bankName = providusInfo?.attributes.bank.name
+        const accountNumber = providusInfo?.attributes.accountNumber
+
+        console.log(bankName, accountNumber, response)
         return {
           ...state,
           account: action.payload.data,
           loading: false,
+          altBank: bankName,
+          altAccountNumber: accountNumber,
         }
       })
       .addCase(getUserAccount.rejected, (state, action) => {

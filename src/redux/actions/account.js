@@ -133,7 +133,7 @@ export const getAccounts = createAsyncThunk(
 )
 
 export const getUserAccount = createAsyncThunk(
-  'account/get-account',
+  'account/get_USER_account',
   async (_, { rejectWithValue }) => {
     console.log('first')
     try {
