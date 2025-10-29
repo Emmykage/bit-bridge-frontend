@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Button } from 'antd'
 import states from '../../data/states.json'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserCard, registerCardHolder } from '../../redux/actions/account'
+import { createCard, getUserCard, registerCardHolder } from '../../redux/actions/account'
 
 // Dark-themed single-file React component using TailwindCSS
 // Default export so it can be previewed in the canvas
@@ -39,6 +39,7 @@ export default function VirtualCardApplication() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(null)
+  const [successCreate, setSuccessCreate] = useState(null)
   const designs = [
     { id: 'midnight', label: 'Midnight' },
     { id: 'aurora', label: 'Aurora' },
@@ -72,11 +73,16 @@ export default function VirtualCardApplication() {
         address: card?.address,
         house_no: card?.house_no,
         postal_code: card?.postal_code,
+        card_brand: 'Mastercard',
+        amount: '',
+        card_currency: 'USD',
+        card_type: 'Virtual',
+        card_limit: 5000,
       })
     }
   }, [card])
 
-  console.log(formData)
+  console.log(formData, submitting, card)
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target
@@ -91,6 +97,39 @@ export default function VirtualCardApplication() {
     return null
   }
 
+  async function handleSubmitCard(e) {
+    e.preventDefault()
+
+    console.log('first')
+
+    setSubmitting(true)
+    setSuccessCreate(null)
+
+    // Simulate async request
+    // await new Promise((r) => setTimeout(r, 900))
+    dispatch(
+      createCard({
+        card: formData,
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        setSuccessCreate({ ok: true, message: `Application submitted for a ${cardType} card.` })
+      })
+      .catch((err) => {
+        console.log(err)
+        setSuccessCreate({
+          ok: false,
+          message: `Application failed  ${cardType} card.${err.message}`,
+        })
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
+
+    // setSubmitting(false)
+    // setSuccess({ ok: true, message: `Application submitted for a ${cardType} card.` })
+  }
   async function handleSubmit(e) {
     e.preventDefault()
     const err = validate()
@@ -123,7 +162,7 @@ export default function VirtualCardApplication() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-950 text-gray-100 p-6 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-950 text-gray-100 p-6  items-center justify-center">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left - Form */}
         <div className="bg-gray-850/40 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-800">
@@ -460,6 +499,185 @@ export default function VirtualCardApplication() {
               Virtual cards are instant and usable online. Physical cards take 5–10 business days to
               deliver.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="min-h-screen  mt-10 text-gray-100 flex items-center justify-center">
+        <div className=" w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left: Form */}
+          <div className="bg-gray-850/40 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-800">
+            <h2 className="text-2xl font-semibold mb-2">CREATE CARD</h2>
+            <p className="text-sm text-gray-400 mb-6">
+              Fill the form to create a virtual or physical card.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Cardholder ID */}
+              {/* <div>
+                <label className="block text-sm mb-1">Cardholder ID</label>
+                <input
+                  type="text"
+                  name="cardholder_id"
+                  value={formData.cardholder_id}
+                  placeholder="Enter Cardholder ID"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                  required
+                  disabled
+                />
+              </div> */}
+
+              {/* Card Type */}
+              <div>
+                <label className="block text-sm mb-1">Card Type</label>
+                <select
+                  disabled
+                  name="card_type"
+                  value={formData.card_type}
+                  onChange={handleChange}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                >
+                  <option value="virtual" selected>
+                    Virtual
+                  </option>
+                  <option value="physical">Physical</option>
+                </select>
+              </div>
+
+              {/* Brand + Currency */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm mb-1">Brand</label>
+                  <input
+                    disabled
+                    type="text"
+                    name="card_brand"
+                    value={formData.card_brand}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm mb-1">Currency</label>
+                  <input
+                    disabled
+                    type="text"
+                    name="card_currency"
+                    value={formData.card_currency}
+                    onChange={handleChange}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                  />
+                </div>
+              </div>
+
+              {/* Limit & Funding */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm mb-1">Card Limit</label>
+                  <input
+                    disabled
+                    type="number"
+                    name="card_limit"
+                    value={formData.card_limit}
+                    onChange={handleChange}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm mb-1">Funding Amount</label>
+                  <input
+                    type="number"
+                    name="amount"
+                    value={formData.amount}
+                    onChange={handleChange}
+                    className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                  />
+                </div>
+              </div>
+
+              {/* Pin */}
+              <div>
+                <label className="block text-sm mb-1">PIN (Enter PIN)</label>
+                <input
+                  type="password"
+                  name="pin"
+                  value={formData.pin}
+                  maxLength="4"
+                  onChange={handleChange}
+                  placeholder="Enter PIN (encrypted in backend)"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md p-2"
+                />
+              </div>
+
+              {/* Buttons */}
+              <div className="flex gap-3">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  onClick={handleSubmitCard}
+                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md font-semibold disabled:opacity-60"
+                >
+                  {submitting ? 'Creating...' : 'Create Card'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData({
+                      amount: '',
+                      pin: '',
+                    })
+                  }
+                  className="px-4 py-2 bg-gray-800 rounded-md text-sm"
+                >
+                  Reset
+                </button>
+              </div>
+
+              {successCreate && (
+                <div
+                  className={`mt-4 p-3 rounded-md ${
+                    successCreate.ok
+                      ? 'bg-green-900/60 border border-green-700'
+                      : 'bg-red-900/60 border border-red-700'
+                  }`}
+                >
+                  <p className="text-sm">{successCreate.message}</p>
+                </div>
+              )}
+            </form>
+          </div>
+
+          {/* Right: Preview */}
+          <div className="bg-gray-900/40 rounded-2xl p-6 border border-gray-800">
+            <h3 className="text-lg font-medium mb-4">Card Preview</h3>
+
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-xl bg-gradient-to-br from-indigo-900 to-gray-900 text-white p-6 min-h-[160px]"
+            >
+              <div className="flex justify-between items-start">
+                <div className="text-sm font-semibold opacity-90">BitBridge Global</div>
+                <div className="text-xs opacity-80">{formData?.card_currency}</div>
+              </div>
+
+              <div className="mt-6 text-2xl tracking-wide font-mono">
+                {/* **** **** **** {String(formData.card_limit).slice(-4)} */}
+                **** **** **** 5000
+              </div>
+              <div className="mt-4 flex justify-between items-center">
+                <div>
+                  <div className="text-xs text-gray-200">Cardholder ID</div>
+                  <div className="font-medium">{card?.cardholder_id || '—'}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-200">Type</div>
+                  <div className="font-medium">{formData.card_type}</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="mt-4 text-sm text-gray-400">The preview updates as you type.</div>
           </div>
         </div>
       </div>

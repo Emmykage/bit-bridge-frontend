@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import {
+  createCard,
   getAccounts,
   getBankList,
   getUserAccount,
@@ -134,6 +135,28 @@ const AccountSlice = createSlice({
         }
       })
       .addCase(getUserCard.pending, (state) => {
+        return {
+          ...state,
+          loading: true,
+        }
+      })
+
+      .addCase(createCard.fulfilled, (state, action) => {
+        return {
+          ...state,
+          card: action.payload.data,
+          loading: false,
+        }
+      })
+      .addCase(createCard.rejected, (state, action) => {
+        console.log('first')
+        return {
+          ...state,
+          message: action.payload?.message,
+          loading: false,
+        }
+      })
+      .addCase(createCard.pending, (state) => {
         return {
           ...state,
           loading: true,

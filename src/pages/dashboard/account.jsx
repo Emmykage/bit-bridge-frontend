@@ -14,6 +14,7 @@ import PropTypes from 'prop-types'
 import statusStyleCard from '../../utils/statusCard'
 import MoneyTransferFlow from '../../compnents/fundTransfer/FundTransfer'
 import { getBankList } from '../../redux/actions/account'
+import { NavLink } from 'react-router-dom'
 
 const Account = () => {
   const formRef = useRef(null)
@@ -279,7 +280,9 @@ const TransactionComp = ({ setIsModalOpen, setIsWithdrawalModalOpen, setIsfundTr
         className="flex text-purple-300 hover:text-alt cursor-pointer flex-col items-center justify-center"
       >
         <RiUserReceived2Line />
-        <span className="text-center">Withdraw Funds</span>
+        <NavLink to={'/dashboard/virtual-account'} className="text-center">
+          Virtual Card
+        </NavLink>
       </button>
       <button
         onClick={() => setIsfundTransferOpen((prev) => !prev)}
