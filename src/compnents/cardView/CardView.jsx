@@ -1,15 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Button } from 'antd'
+import states from '../../data/states.json'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserCard, registerCardHolder } from '../../redux/actions/account'
 
 // Dark-themed single-file React component using TailwindCSS
 // Default export so it can be previewed in the canvas
 
 export default function VirtualCardApplication() {
+  const { user, loading } = useSelector((state) => state.auth)
+  const { card, loading: isLoading } = useSelector((state) => state.account)
+
+  console.log(user, card)
   const [cardType, setCardType] = useState('virtual') // 'virtual' or 'physical'
-  const [form, setForm] = useState({
-    fullName: '',
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    phone: '',
+    email_address: '',
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    postal_code: '',
+    house_no: '',
+    id_type: 'NIGERIAN_BVN_VERIFICATION',
+    bvn: '',
+    selfie_image: '',
+    meta_data: {
+      any_key: '',
+    },
     email: '',
-    limit: 50000,
+    limit: 5000,
     deliveryAddress: '',
     design: 'midnight',
     agreeTos: false,
@@ -22,17 +45,49 @@ export default function VirtualCardApplication() {
     { id: 'graphite', label: 'Graphite' },
   ]
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserCard())
+  }, [])
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      first_name: user.user_profile.first_name,
+      last_name: user.user_profile.last_name,
+      phone: user.user_profile.phone_number,
+      email_address: user.email,
+      country: 'Nigeria',
+    })
+  }, [user])
+
+  useEffect(() => {
+    if (card) {
+      setFormData({
+        ...formData,
+        city: card?.city,
+        state: card?.state,
+        bvn: card?.bvn,
+        address: card?.address,
+        house_no: card?.house_no,
+        postal_code: card?.postal_code,
+      })
+    }
+  }, [card])
+
+  console.log(formData)
+
   function handleChange(e) {
     const { name, value, type, checked } = e.target
-    setForm((s) => ({ ...s, [name]: type === 'checkbox' ? checked : value }))
+    setFormData((s) => ({ ...s, [name]: type === 'checkbox' ? checked : value }))
   }
 
   function validate() {
-    if (!form.fullName.trim()) return 'Please enter your full name.'
-    if (!form.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) return 'Please enter a valid email.'
-    if (cardType === 'physical' && !form.deliveryAddress.trim())
-      return 'Please provide a delivery address for a physical card.'
-    if (!form.agreeTos) return 'You must agree to the terms.'
+    // if (!formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) return 'Please enter a valid email.'
+    // if (cardType === 'physical' && !formData.deliveryAddress.trim())
+    //   return 'Please provide a delivery address for a physical card.'
+    if (!formData.agreeTos) return 'You must agree to the terms.'
     return null
   }
 
@@ -45,10 +100,26 @@ export default function VirtualCardApplication() {
     setSuccess(null)
 
     // Simulate async request
-    await new Promise((r) => setTimeout(r, 900))
+    // await new Promise((r) => setTimeout(r, 900))
+    dispatch(
+      registerCardHolder({
+        card: formData,
+      })
+    )
+      .unwrap()
+      .then((res) => {
+        setSuccess({ ok: true, message: `Application submitted for a ${cardType} card.` })
+      })
+      .catch((err) => {
+        console.log(err)
+        setSuccess({ ok: false, message: `Application failed  ${cardType} card.${err.message}` })
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
 
-    setSubmitting(false)
-    setSuccess({ ok: true, message: `Application submitted for a ${cardType} card.` })
+    // setSubmitting(false)
+    // setSuccess({ ok: true, message: `Application submitted for a ${cardType} card.` })
   }
 
   return (
@@ -75,6 +146,7 @@ export default function VirtualCardApplication() {
             </button>
 
             <button
+              disabled={true}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
                 cardType === 'physical'
                   ? 'bg-indigo-600 text-white shadow'
@@ -88,47 +160,147 @@ export default function VirtualCardApplication() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm text-gray-300 mb-1">Full name</label>
+            <div className="grid grid-cols-2 gap-4">
               <input
-                name="fullName"
-                value={form.fullName}
+                name="first_name"
+                value={formData.first_name}
                 onChange={handleChange}
-                className="w-full bg-gray-900 border border-gray-800 rounded-md p-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Jane Doe"
+                placeholder="First Name"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled={user?.user_profile}
+              />
+              <input
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Last Name"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled={user?.user_profile}
+              />
+              <input
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled={user?.user_profile}
+              />
+              <input
+                name="email_address"
+                value={formData.email_address}
+                onChange={handleChange}
+                placeholder="Email Address"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled={user?.user_profile}
               />
             </div>
-
-            <div>
-              <label className="block text-sm text-gray-300 mb-1">Email</label>
+            <h3 className="text-lg font-semibold mt-4">Address</h3>
+            <div className="grid grid-cols-2 gap-4">
               <input
-                name="email"
-                value={form.email}
+                name="address"
+                value={formData.address}
                 onChange={handleChange}
-                className="w-full bg-gray-900 border border-gray-800 rounded-md p-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="you@example.com"
-                type="email"
+                placeholder="Street Address"
+                className="p-2 rounded bg-gray-700 w-full"
+                required
+              />
+              <input
+                name="house_no"
+                value={formData.house_no}
+                onChange={handleChange}
+                placeholder="House No"
+                className="p-2 rounded bg-gray-700 w-full"
+                required
+              />
+              <input
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="City"
+                className="p-2 rounded bg-gray-700 w-full"
+                required
+              />
+              <select
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                placeholder="State"
+                className="p-2 rounded bg-gray-700 w-full"
+                required
+              >
+                {states.map((state) => (
+                  <option key={state} value={state}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <input
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Country"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled
+              />
+              <input
+                name="postal_code"
+                value={formData.postal_code}
+                onChange={handleChange}
+                placeholder="Postal Code"
+                className="p-2 rounded bg-gray-700 w-full"
               />
             </div>
-
+            <h3 className="text-lg font-semibold mt-4">Identity</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <input
+                name="id_type"
+                value={formData.id_type}
+                onChange={handleChange}
+                placeholder="ID Type"
+                className="p-2 rounded bg-gray-700 w-full"
+                disabled={user?.user_profile}
+              />
+              <input
+                name="bvn"
+                value={formData.bvn}
+                onChange={handleChange}
+                placeholder="BVN"
+                className="p-2 rounded bg-gray-700 w-full"
+              />
+              {/* <input
+                name="identity.selfie_image"
+                value={formData.identity.selfie_image}
+                onChange={handleChange}
+                placeholder="Selfie Image URL"
+                className="col-span-2 p-2 rounded bg-gray-700 w-full"
+              /> */}
+            </div>
+            <h3 className="text-lg font-semibold mt-4">Meta Data</h3>
+            <input
+              name="meta_data.any_key"
+              value={formData.meta_data.any_key}
+              onChange={handleChange}
+              placeholder="Any Key"
+              className="p-2 rounded bg-gray-700 w-full"
+            />
             <div>
-              <label className="block text-sm text-gray-300 mb-1">Daily spend limit (NGN)</label>
+              <label className="block text-sm text-gray-300 mb-1">Daily spend limit (USD)</label>
               <input
                 name="limit"
-                value={form.limit}
+                value={formData?.limit}
                 onChange={handleChange}
                 type="number"
                 min={1000}
+                disabled
                 className="w-full bg-gray-900 border border-gray-800 rounded-md p-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-
             {cardType === 'physical' && (
               <div>
                 <label className="block text-sm text-gray-300 mb-1">Delivery address</label>
                 <textarea
                   name="deliveryAddress"
-                  value={form.deliveryAddress}
+                  value={formData?.address}
                   onChange={handleChange}
                   className="w-full bg-gray-900 border border-gray-800 rounded-md p-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   rows={3}
@@ -136,20 +308,19 @@ export default function VirtualCardApplication() {
                 />
               </div>
             )}
-
             <div>
               <label className="block text-sm text-gray-300 mb-1">Card design</label>
               <div className="flex gap-2">
                 {designs.map((d) => (
                   <label
                     key={d.id}
-                    className={`flex items-center gap-2 p-2 rounded-md cursor-pointer border ${form.design === d.id ? 'border-indigo-500' : 'border-gray-800'}`}
+                    className={`flex items-center gap-2 p-2 rounded-md cursor-pointer border ${formData?.design === d.id ? 'border-indigo-500' : 'border-gray-800'}`}
                   >
                     <input
                       type="radio"
                       name="design"
                       value={d.id}
-                      checked={form.design === d.id}
+                      checked={formData.design === d.id}
                       onChange={handleChange}
                       className="sr-only"
                     />
@@ -161,22 +332,17 @@ export default function VirtualCardApplication() {
                 ))}
               </div>
             </div>
-
-            <div className="flex items-start gap-3">
-              <input
-                id="tos"
-                name="agreeTos"
-                type="checkbox"
-                checked={form.agreeTos}
-                onChange={handleChange}
-                className="mt-1 h-4 w-4 rounded border-gray-700 text-indigo-600 bg-gray-800"
-              />
-              <label htmlFor="tos" className="text-sm text-gray-400">
-                I agree to the{' '}
-                <span className="text-indigo-400 underline">terms and conditions</span>
-              </label>
-            </div>
-
+            <input
+              id="tos"
+              name="agreeTos"
+              type="checkbox"
+              checked={formData.agreeTos}
+              onChange={handleChange}
+              className="mt-1 h-4 w-4 rounded border-gray-700 text-indigo-600 bg-gray-800"
+            />
+            <label htmlFor="tos" className="text-sm text-gray-400">
+              I agree to the <span className="text-indigo-400 underline">terms and conditions</span>
+            </label>
             <div className="flex items-center gap-3">
               <button
                 type="submit"
@@ -191,11 +357,9 @@ export default function VirtualCardApplication() {
               <button
                 type="button"
                 onClick={() => {
-                  setForm({
-                    fullName: '',
-                    email: '',
+                  setFormData({
                     limit: 50000,
-                    deliveryAddress: '',
+                    address: '',
                     design: 'midnight',
                     agreeTos: false,
                   })
@@ -206,14 +370,13 @@ export default function VirtualCardApplication() {
                 Reset
               </button>
             </div>
-
             {success && (
               <div
                 className={`mt-4 p-3 rounded-md ${success.ok ? 'bg-green-900/60 border border-green-700' : 'bg-red-900/60 border border-red-700'}`}
               >
                 <p className="text-sm">{success.message}</p>
               </div>
-            )}
+            )}{' '}
           </form>
         </div>
 
@@ -233,20 +396,22 @@ export default function VirtualCardApplication() {
               className="w-full max-w-md mx-auto"
             >
               <div
-                className={`relative rounded-xl p-6 min-h-[160px] ${form.design === 'midnight' ? 'bg-gradient-to-br from-indigo-900 to-gray-900' : form.design === 'aurora' ? 'bg-gradient-to-br from-emerald-700 to-indigo-900' : 'bg-gradient-to-br from-gray-800 to-black'} text-white`}
+                className={`relative rounded-xl p-6 min-h-[160px] ${formData.design === 'midnight' ? 'bg-gradient-to-br from-indigo-900 to-gray-900' : formData.design === 'aurora' ? 'bg-gradient-to-br from-emerald-700 to-indigo-900' : 'bg-gradient-to-br from-gray-800 to-black'} text-white`}
               >
                 <div className="flex justify-between items-start">
-                  <div className="text-sm font-semibold opacity-90">Your Bank</div>
-                  <div className="text-xs opacity-80">NGN</div>
+                  <div className="text-sm font-semibold opacity-90">BitBridge Global</div>
+                  <div className="text-xs opacity-80">USD</div>
                 </div>
 
                 <div className="mt-6 text-2xl tracking-wide font-mono">
-                  **** **** **** {String(form.limit).slice(-4)}
+                  **** **** **** {String(formData.limit).slice(-4)}
                 </div>
                 <div className="mt-4 flex justify-between items-center">
                   <div>
                     <div className="text-xs text-gray-200">Cardholder</div>
-                    <div className="font-medium">{form.fullName || 'Full Name'}</div>
+                    <div className="font-medium">
+                      {`${formData?.first_name}  ${formData?.last_name}` || 'Full Name'}
+                    </div>
                   </div>
 
                   <div className="text-right">
@@ -258,7 +423,7 @@ export default function VirtualCardApplication() {
                 </div>
 
                 <div className="absolute right-4 bottom-4 text-xs opacity-80">
-                  {form.design.toUpperCase()}
+                  {formData.design.toUpperCase()}
                 </div>
               </div>
             </motion.div>
@@ -273,17 +438,17 @@ export default function VirtualCardApplication() {
                 <strong>Type:</strong> {cardType === 'virtual' ? 'Virtual' : 'Physical'}
               </li>
               <li>
-                <strong>Holder:</strong> {form.fullName || '—'}
+                <strong>Holder:</strong> {`${formData?.first_name}  ${formData?.last_name}` || '—'}
               </li>
               <li>
-                <strong>Email:</strong> {form.email || '—'}
+                <strong>Email:</strong> {formData.email_address || '—'}
               </li>
               <li>
-                <strong>Limit:</strong> NGN {form.limit.toLocaleString()}
+                <strong>Limit:</strong> USD {formData.limit.toLocaleString()}
               </li>
               {cardType === 'physical' && (
                 <li>
-                  <strong>Delivery:</strong> {form.deliveryAddress || '—'}
+                  <strong>Delivery:</strong> {formData.deliveryAddress || '—'}
                 </li>
               )}
             </ul>

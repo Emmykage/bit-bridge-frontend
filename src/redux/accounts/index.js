@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { getAccounts, getBankList, getUserAccount } from '../actions/account'
+import {
+  getAccounts,
+  getBankList,
+  getUserAccount,
+  getUserCard,
+  registerCardHolder,
+} from '../actions/account'
 
 const initialState = {
   accounts: [],
@@ -8,6 +14,7 @@ const initialState = {
   loading: true,
   banks: [],
   message: '',
+  card: null,
 }
 
 const AccountSlice = createSlice({
@@ -85,6 +92,48 @@ const AccountSlice = createSlice({
         }
       })
       .addCase(getBankList.pending, (state) => {
+        return {
+          ...state,
+          loading: true,
+        }
+      })
+      .addCase(registerCardHolder.fulfilled, (state, action) => {
+        return {
+          ...state,
+          card: action.payload.data,
+          loading: false,
+        }
+      })
+      .addCase(registerCardHolder.rejected, (state, action) => {
+        console.log('first')
+        return {
+          ...state,
+          message: action.payload?.message,
+          loading: false,
+        }
+      })
+      .addCase(registerCardHolder.pending, (state) => {
+        return {
+          ...state,
+          loading: true,
+        }
+      })
+
+      .addCase(getUserCard.fulfilled, (state, action) => {
+        return {
+          ...state,
+          card: action.payload.data,
+          loading: false,
+        }
+      })
+      .addCase(getUserCard.rejected, (state, action) => {
+        return {
+          ...state,
+          message: action.payload?.message,
+          loading: false,
+        }
+      })
+      .addCase(getUserCard.pending, (state) => {
         return {
           ...state,
           loading: true,
