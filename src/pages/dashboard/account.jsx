@@ -25,9 +25,6 @@ const Account = () => {
   const address = 'Card Transfer'
   const coinType = 'bank'
 
-  const resetForm = () => {}
-  // const currency = "ngn"
-
   useEffect(() => {
     const fetchConversion = async () => {
       const result = await converter({ fromCurr: 'usd', toCurr: 'usd', amount: wallet?.balance })

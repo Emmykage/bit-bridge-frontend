@@ -51,7 +51,9 @@ const ExclusiveDeals = () => {
                 <p>{item.offer}</p>
               </div>
 
-              <ClickButton onClick={() => navigate(item.link)}>Grab the Deal </ClickButton>
+              <ClickButton className={'!text-white'} onClick={() => navigate(item.link)}>
+                Grab the Deal{' '}
+              </ClickButton>
             </div>
           ))}
         </div>
