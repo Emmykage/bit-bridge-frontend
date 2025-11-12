@@ -43,10 +43,13 @@ const Home = () => {
           </h2>
         </div>
         <div className="flex justify-center items-center">
-          <a>
+          <a target="_blank" href="https://apps.apple.com/ng/app/bitbridge-utility/id6749049356 ">
             <img src="/images/appstore.png" alt="app store" className="h-14 " />
           </a>
-          <a href={'/app/application-6a1de860-eff2-4612-b277-c24f60e205b4.apk'} download>
+          <a
+            target="_blank"
+            href={'https://play.google.com/store/apps/details?id=com.vortech.bitbridgeapp'}
+          >
             <img src="/images/playstore.png" alt="play store" className="h-14 " />
           </a>
         </div>
